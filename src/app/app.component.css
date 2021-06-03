@@ -1,0 +1,9 @@
+#BodyDiv {
+  width: 100vw;
+  height: 110vh;
+  background-image: url("../assets/backgroundUse2.png");
+  background-size: cover;
+  background-position: top right;
+  position: fixed;
+  z-index: 0;
+}
