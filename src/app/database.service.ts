@@ -10,7 +10,7 @@ export class DatabaseService {
 
   userinfomation = {} as UserDbInfomation;
   project = {} as D_Projects;
-  hostAddress = "http://40.87.150.15:5000";
+  hostAddress = "http://40.87.150.15:27385";
   signelProject = {} as D_Project;
 
   constructor() { }
@@ -22,8 +22,8 @@ export class DatabaseService {
  *
  * @param name name to use to find projects in databse
  * @returns a projectList for the specfide name.*/
-  public GetProjects(name : string) : D_Projects {
-    this.userinfomation.setDbname(name);
+  public GetProjects() : D_Projects {
+    // this.userinfomation.setDbname(name);
     grpc.unary(GrpcDatabaseProject.GetProjects, {
       request: this.userinfomation,
       host: this.hostAddress,
