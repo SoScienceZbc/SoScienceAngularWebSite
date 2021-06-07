@@ -14,7 +14,7 @@ export class LoginPageComponent implements OnInit {
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   respon: any
-  constructor(private login:LoginService) {
+  constructor(private login:LoginService,private dataServer:DatabaseService) {
 
    }
    getErrorMessage() {
@@ -32,9 +32,16 @@ export class LoginPageComponent implements OnInit {
   public Login(name:string,password:string){
     this.login.CheckLogin(name,password);
   }
+
   public BtnPush(event : Event){
-    console.log(this.login.CheckLogin("alex303a",""))
+    console.log(this.login.CheckLogin("andi0137","Idna!dna2375"))
     //return true;
+  }
+
+  public BtnPushDatabase(event:Event)
+  {
+    console.log(this.dataServer.GetProjects());
+
   }
 
 }

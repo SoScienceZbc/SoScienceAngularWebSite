@@ -10,12 +10,13 @@ import { Observable, of } from 'rxjs';
 export class LoginService {
 
   hostAddress = "http://40.87.150.18:27385";
+  // hostAddress = "http://10.111.162.18:27385";
   constructor() { }
 
   userlogin = {} as LoginRepley;
 
 
-  public CheckLogin(usernam:string,passwor:string) : LoginRepley{
+  public CheckLogin(usernam:string,passwor:string): LoginRepley{
     let response = {} as LoginRepley;
     const user = new LoginRequset();
     user.setUsername(usernam);
