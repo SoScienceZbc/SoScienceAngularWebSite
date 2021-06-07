@@ -30,12 +30,11 @@ export class LoginPageComponent implements OnInit {
   }
 
   public Login(name:string,password:string){
-    this.login.CheckLogin(name,password);
+    console.log(this.login.CheckLogin(name,password));
   }
 
   public BtnPush(event : Event){
-    console.log(this.login.CheckLogin("andi0137","Idna!dna2375"))
-    //return true;
+    return true;
   }
 
   public BtnPushDatabase(event:Event)
