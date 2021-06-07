@@ -12,7 +12,7 @@
               <tr>
                 <td>
                   <mat-form-field class="example-full-width">
-                  <input matInput  placeholder="Brugernavn/Email" required>
+                  <input matInput placeholder="Brugernavn/Email" #username required>
                   <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Not Valid</mat-error>
                   <mat-error *ngIf="emailFormControl.hasError('required')"></mat-error>
                   </mat-form-field>
@@ -20,7 +20,7 @@
               </tr>
               <tr>
               <td><mat-form-field class="example-full-width">
-                <input matInput type="password" placeholder="Kodeord" required>
+                <input matInput type="password" placeholder="Kodeord" #password required>
                 <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Not Valid</mat-error>
                 <mat-error *ngIf="emailFormControl.hasError('required')"></mat-error>
               </mat-form-field></td>
@@ -28,7 +28,7 @@
           </form>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary">Log ind</button>
+          <button mat-raised-button color="primary" (click)="Login(username.value,password.value)">Log ind</button>
         </mat-card-actions>
       </mat-card>
     </div>
