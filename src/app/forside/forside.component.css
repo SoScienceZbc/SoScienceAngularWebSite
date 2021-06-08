@@ -1,0 +1,48 @@
+/*------------GENERAL------------*/
+.center {
+  margin: auto;
+  align-self: center;
+}
+
+.container{
+  height: 40vh;
+}
+
+.VectorArt{
+    position:absolute;
+    top: 28vh;
+}
+
+.matCard{
+  background-color: rgba(255,255,255,0.3);
+  box-shadow: none !important;
+}
+/*-------------TEXT------------------*/
+
+.titlePosition{
+  padding-top: 35vh;
+  text-align: center;
+  /* max-height: 35vh; */
+  /* margin-left: 0vw; THIS ONE */
+  /* padding-top: 5vh im !important; */
+  margin: auto;
+}
+
+p{
+  margin-left: 35vw;
+  margin-top: 2vh;
+  color: #05A1A6;
+
+}
+
+h6 {
+  line-height: 1.7;
+}
+
+.white-text{
+  color:white !important;
+  text-align: center;
+  margin: auto;
+}
+
+

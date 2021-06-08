@@ -15,20 +15,24 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { GuidelineComponent } from '../app/guideline/guideline.component';
 import { grpc } from '@improbable-eng/grpc-web';
 import { GrpcCoreModule } from '@ngx-grpc/core';
 import { ImprobableEngGrpcWebClientModule } from '@ngx-grpc/improbable-eng-grpc-web-client';
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
 import { LoginService } from './login.service';
+/*-----------------Pages-----------------*/
+import { LoginPageComponent } from './login-page/login-page.component';
+import { GuidelineComponent } from '../app/guideline/guideline.component';
+import { ForsideComponent } from '../app/forside/forside.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    GuidelineComponent
+    GuidelineComponent,
+    ForsideComponent
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,7 @@ export class DatabaseService {
 
   userinfomation = {} as UserDbInfomation;
   project = {} as D_Projects;
-  hostAddress = "http://40.87.150.15:27385";
+  hostAddress = "http://40.87.150.18:27385";
   signelProject = {} as D_Project;
 
   constructor() { }
@@ -22,23 +22,27 @@ export class DatabaseService {
  *
  * @param name name to use to find projects in databse
  * @returns a projectList for the specfide name.*/
-  public GetProjects() : D_Projects {
-    // this.userinfomation.setDbname(name);
+  public GetProjects(name:string) : D_Projects {
+    var userinformation = new UserDbInfomation();
+    var projects = new D_Projects();
+    userinformation.setDbname(name);
     grpc.unary(GrpcDatabaseProject.GetProjects, {
-      request: this.userinfomation,
+      request: userinformation,
       host: this.hostAddress,
       onEnd: res => {
         const { status, message } = res;
         if (status === grpc.Code.OK && message) {
-          this.project = message.toObject() as D_Projects;
+          projects = message.toObject() as D_Projects;
         }
         return null;
       }
     });
-    return this.project;
+    return projects;
   }
   public GetProject(name : string) : D_Project {
-    this.userinfomation.setDbname(name);
+    var userinformation = new UserDbInfomation();
+    var project = new D_Project();
+    userinformation.setDbname(name);
     grpc.unary(GrpcDatabaseProject.GetProject, {
       request: this.userinfomation,
       host: this.hostAddress,

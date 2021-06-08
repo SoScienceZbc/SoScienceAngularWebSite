@@ -34,12 +34,13 @@ export class LoginPageComponent implements OnInit {
   }
 
   public BtnPush(event : Event){
+    this.dataServer.GetProject("alex303a");
     return true;
   }
 
   public BtnPushDatabase(event:Event)
   {
-    console.log(this.dataServer.GetProjects());
+    console.log(this.dataServer.GetProjects("alex303a"));
 
   }
 
