@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { grpc } from "@improbable-eng/grpc-web";
 import { LoginServcie } from "../app/generated/AdLookupProto/AdLookupProto_pb_service";
 import { LoginRequset, LoginRepley } from "../app/generated/AdLookupProto/AdLookupProto_pb";
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,12 @@ import { Observable, of } from 'rxjs';
 export class LoginService {
 
   hostAddress = "http://40.87.150.18:27385";
-  // hostAddress = "http://10.111.162.18:27385";
-  constructor() { }
-
+  LoginCheakBehavierSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   userlogin = {} as LoginRepley;
 
+  constructor() { }
 
-  public CheckLogin(usernam:string,passwor:string): LoginRepley{
+  public CheckLogin(usernam:string,passwor:string){
     let response = {} as LoginRepley;
     const user = new LoginRequset();
     user.setUsername(usernam);
@@ -27,15 +26,11 @@ export class LoginService {
       onEnd: res => {
         const { status, message } = res;
         if (status === grpc.Code.OK && message) {
-          this.userlogin=
-          message.toObject() as LoginRepley;
+          this.LoginCheakBehavierSubject$.next((message.toObject() as LoginRepley.AsObject).loginsucsefull);
         }
-        return false;
       }
 
     });
-
-      return this.userlogin;
   }
 
 }

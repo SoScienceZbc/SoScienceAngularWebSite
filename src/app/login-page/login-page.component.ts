@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { isNull } from '@angular/compiler/src/output/output_ast';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Value } from '@ngx-grpc/well-known-types';
+import { Observable, Subscriber } from 'rxjs';
 import { DatabaseService } from '../database.service';
-import { D_Project } from '../generated/DataBaseProto/DatabaseProto_pb';
+import { D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoginService } from '../login.service';
 
 
@@ -10,14 +13,31 @@ import { LoginService } from '../login.service';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  respon: any
-  constructor(private login:LoginService,private dataServer:DatabaseService) {
+  testlogin: boolean = false;
+  projects: D_Projects = new D_Projects;
 
-   }
-   getErrorMessage() {
+  constructor(private login: LoginService, private dataServer: DatabaseService) {
+    this.login.LoginCheakBehavierSubject$.subscribe(x => {
+      // this.testlogin = x;
+      //TODO: Start Spinder/Loading loag
+      if (x !== this.testlogin) {
+        this.testlogin = x;
+        console.log(this.testlogin);
+      }
+    });
+    // this.dataServer.behavProject$.subscribe(x => {
+    //   this.projects = x;
+
+    // });
+
+  }
+  ngOnDestroy(): void {
+    this.login.LoginCheakBehavierSubject$.unsubscribe();
+  }
+  getErrorMessage() {
     if (this.emailFormControl.hasError('required')) {
       return 'You must enter a value';
     }
@@ -26,22 +46,9 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
-  public Login(name:string,password:string){
-    console.log(this.login.CheckLogin(name,password));
+  public Login(name: string, password: string) {
+    this.login.CheckLogin(name, password);
   }
-
-  public BtnPush(event : Event){
-    this.dataServer.GetProject("alex303a");
-    return true;
-  }
-
-  public BtnPushDatabase(event:Event)
-  {
-    console.log(this.dataServer.GetProjects("alex303a"));
-
-  }
-
 }
