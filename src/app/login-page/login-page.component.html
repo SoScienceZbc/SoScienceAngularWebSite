@@ -1,38 +1,75 @@
-  <div class="grid-container">
-    <div class="grid-item"> </div>
+<div class="grid-container">
+  <div class="grid-item"></div>
 
-    <div class="grid-item">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <mat-card-title>Login</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <form class="example-form">
-            <table class="example-full-width" cellspacing="10">
-              <tr>
-                <td>
-                  <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Brugernavn/Email" #username required>
-                  <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Not Valid</mat-error>
-                  <mat-error *ngIf="emailFormControl.hasError('required')"></mat-error>
-                  </mat-form-field>
-                </td>
-              </tr>
-              <tr>
-              <td><mat-form-field class="example-full-width">
-                <input matInput type="password" placeholder="Kodeord" #password required>
-                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">Not Valid</mat-error>
-                <mat-error *ngIf="emailFormControl.hasError('required')"></mat-error>
-              </mat-form-field></td>
-            </tr></table>
-          </form>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button color="primary" (click)="Login(username.value,password.value)">Log ind</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-
-    <div class="grid-item"> </div>
+  <div class="grid-item">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="example-form">
+          <table class="example-full-width" cellspacing="10">
+            <tr>
+              <td>
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    placeholder="Brugernavn/Email"
+                    #username
+                    required
+                  />
+                  <mat-error
+                    *ngIf="
+                      emailFormControl.hasError('email') &&
+                      !emailFormControl.hasError('required')
+                    "
+                    >Not Valid</mat-error
+                  >
+                  <mat-error
+                    *ngIf="emailFormControl.hasError('required')"
+                  ></mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <mat-form-field class="example-full-width">
+                  <input
+                    matInput
+                    type="password"
+                    placeholder="Kodeord"
+                    #password
+                    required
+                  />
+                  <mat-error
+                    *ngIf="
+                      emailFormControl.hasError('email') &&
+                      !emailFormControl.hasError('required')
+                    "
+                    >Not Valid</mat-error
+                  >
+                  <mat-error
+                    *ngIf="emailFormControl.hasError('required')"
+                  ></mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          *ngIf="!this.testlogin"
+          color="primary"
+          (click)="Login(username.value, password.value)"
+        >
+          Log ind
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+<!-- Loading indication test -->
+<mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;" [mode]="'indeterminate'" *ngIf="loading$ | async"></mat-progress-spinner>
+<div class="grid-item"></div>
 </div>
-

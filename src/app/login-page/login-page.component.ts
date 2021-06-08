@@ -5,6 +5,7 @@ import { Value } from '@ngx-grpc/well-known-types';
 import { Observable, Subscriber } from 'rxjs';
 import { DatabaseService } from '../database.service';
 import { D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
+import { LoadingService } from '../loading.service';
 import { LoginService } from '../login.service';
 
 
@@ -19,14 +20,15 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   testlogin: boolean = false;
   projects: D_Projects = new D_Projects;
 
-  constructor(private login: LoginService, private dataServer: DatabaseService) {
+  loading$ = this.spinner.loading$;
+
+  constructor(private login: LoginService, private dataServer: DatabaseService, public spinner: LoadingService) {
     this.login.LoginCheakBehavierSubject$.subscribe(x => {
-      // this.testlogin = x;
-      //TODO: Start Spinder/Loading loag
       if (x !== this.testlogin) {
         this.testlogin = x;
         console.log(this.testlogin);
       }
+      this.spinner.hide();
     });
     // this.dataServer.behavProject$.subscribe(x => {
     //   this.projects = x;
@@ -47,8 +49,13 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
   }
-
+/**
+ * this cheaks if the user can login and emits a boolian.
+ * @param name the unilogin
+ * @param password the passward for the unilogin
+ */
   public Login(name: string, password: string) {
     this.login.CheckLogin(name, password);
+    this.spinner.show();
   }
 }

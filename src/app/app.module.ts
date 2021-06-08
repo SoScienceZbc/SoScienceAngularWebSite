@@ -19,10 +19,15 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { GuidelineComponent } from '../app/guideline/guideline.component';
 import { grpc } from '@improbable-eng/grpc-web';
 import { GrpcCoreModule } from '@ngx-grpc/core';
-import { ImprobableEngGrpcWebClientModule } from '@ngx-grpc/improbable-eng-grpc-web-client';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatToolbarModule} from '@angular/material/toolbar'
+
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
 import { LoginService } from './login.service';
+import { ImprobableEngGrpcWebClientModule } from '@ngx-grpc/improbable-eng-grpc-web-client';
+import { from } from 'rxjs';
+import { LoadingService } from './loading.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +46,8 @@ import { LoginService } from './login.service';
     MatPaginatorModule,
     MatInputModule,
     MatSortModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     MatExpansionModule,
     MatTabsModule,
@@ -53,7 +60,7 @@ import { LoginService } from './login.service';
     }),
   ],
   providers: [DatabaseService,
-  LoginService],
+  LoginService,LoadingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
