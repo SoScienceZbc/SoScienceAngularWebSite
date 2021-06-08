@@ -28,13 +28,17 @@ import { LoginService } from './login.service';
 import { ImprobableEngGrpcWebClientModule } from '@ngx-grpc/improbable-eng-grpc-web-client';
 import { from } from 'rxjs';
 import { LoadingService } from './loading.service';
+/*-----------------CkEditor-----------------*/
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { TextEditorComponent } from './TextEditor/TextEditor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    GuidelineComponent
-  ],
+    GuidelineComponent,
+      TextEditorComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -45,19 +49,21 @@ import { LoadingService } from './loading.service';
     MatTableModule,
     MatPaginatorModule,
     MatInputModule,
+    CKEditorModule,
     MatSortModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     MatExpansionModule,
     MatTabsModule,
+    /*---Grpc---*/
     GrpcCoreModule.forRoot(),
     ImprobableEngGrpcWebClientModule.forRoot({
       settings: {
         host: 'http://40.87.150.18:27385',
         transport: grpc.CrossBrowserHttpTransport({}),
       },
-    }),
+    }),/*--End Grpc-*/
   ],
   providers: [DatabaseService,
   LoginService,LoadingService],

@@ -1,0 +1,11 @@
+<mat-card class="CardPos">
+  <div id="editor" >
+    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+    <script>
+      ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
+        console.error(error);
+      });
+    </script>
+    <ckeditor style="min-block-size: 100%;" [editor]="Editor" data="<p>Hello, world!</p>"></ckeditor>
+  </div>
+</mat-card>
