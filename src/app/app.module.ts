@@ -18,7 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { grpc } from '@improbable-eng/grpc-web';
 import { GrpcCoreModule } from '@ngx-grpc/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatToolbarModule} from '@angular/material/toolbar'
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
@@ -29,13 +29,20 @@ import { LoadingService } from './loading.service';
 /*-----------------CkEditor-----------------*/
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TextEditorComponent } from './TextEditor/TextEditor.component';
+/*-----------------Pages-----------------*/
 
+import {ForsideComponent} from '../app/forside/forside.component'
+import {GuidelineComponent} from '../app/guideline/guideline.component'
+import {LoginPageComponent} from '../app/login-page/login-page.component'
+import { ArchiveComponent } from './archive/archive.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     GuidelineComponent,
-      TextEditorComponent
+    ForsideComponent,
+      TextEditorComponent,
+      ArchiveComponent
    ],
   imports: [
     BrowserModule,
