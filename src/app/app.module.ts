@@ -19,6 +19,8 @@ import { grpc } from '@improbable-eng/grpc-web';
 import { GrpcCoreModule } from '@ngx-grpc/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {MatIconModule} from '@angular/material/icon'
 
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
@@ -61,6 +63,9 @@ import { ArchiveComponent } from './archive/archive.component';
     MatSelectModule,
     MatExpansionModule,
     MatTabsModule,
+    MatIconModule,
+    MatNativeDateModule,
+    MatRippleModule,
     /*---Grpc---*/
     GrpcCoreModule.forRoot(),
     ImprobableEngGrpcWebClientModule.forRoot({

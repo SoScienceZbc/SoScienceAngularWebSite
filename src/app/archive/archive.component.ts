@@ -11,24 +11,24 @@ import { D_Document, D_Project, D_Projects } from '../generated/DataBaseProto/Da
 /**
  * @title Table with expandable rows
  */
- @Component({
+@Component({
   selector: 'app-archive',
   templateUrl: './archive.component.html',
   styleUrls: ['./archive.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
-export class ArchiveComponent implements OnInit,OnDestroy,AfterViewInit {
+export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns = ["id", "name","completed","lastedited","endDate"];
+  displayedColumns = ["Id", "name", "completed", "lastedited", "endDate"];
   projects: D_Projects = new D_Projects();
   public dataSource: Array<D_Project> = new Array<D_Project>();
   matdatascoure = new MatTableDataSource<D_Project>(this.dataSource);
@@ -44,12 +44,13 @@ export class ArchiveComponent implements OnInit,OnDestroy,AfterViewInit {
         this.matdatascoure.data = this.projects.getDProjectList();
       }
     });
+    this.onsortChange();
     // this.matdatascoure.sort = this.sort;
   }
-   ngAfterViewInit(): void {
-     this.matdatascoure.paginator = this.paginator;
-     this.matdatascoure.sort = this.sort;
-   }
+  ngAfterViewInit(): void {
+    this.matdatascoure.paginator = this.paginator;
+    this.matdatascoure.sort = this.sort;
+  }
   ngOnDestroy(): void {
     this.dataserve.simpleProjectArray$?.unsubscribe();
     this.dataserve.behavProject$.unsubscribe();
@@ -61,4 +62,23 @@ export class ArchiveComponent implements OnInit,OnDestroy,AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.matdatascoure.filter = filterValue.trim().toLowerCase();
   }
+
+  AddNewProject() {
+    this.dataserve.AddProject("alex303a",new D_Project());
+  }
+
+  onsortChange() {
+
+    this.matdatascoure.sortingDataAccessor = (item, property) => {
+      switch(property) {
+        case 'name': return item.getName();
+        case 'Id': return item.getId();
+        case 'Completed':return ""+item.getCompleted()+"";
+        case 'lastedited':return item.getLastedited();
+        case 'endDate':return item.getEnddate();
+        default: return "";
+      }
+    };
+  }
+
 }
