@@ -1,13 +1,11 @@
 .centering{
   justify-content: center;
 }
-/*
 .example-card{
   min-width: 50vw;
   min-height: 50vh;
 position: relative;
 }
-*/
 .grid-container {
   justify-content: center;
   margin-top: 35vh;
@@ -15,11 +13,10 @@ position: relative;
   grid-template-columns: auto auto auto;
   text-align: center;
 }
-/*
 .example-form{
   position: absolute;
 }
-*/
+
 .loginbox-header-text {
   margin: 0 -5px !important;
 }

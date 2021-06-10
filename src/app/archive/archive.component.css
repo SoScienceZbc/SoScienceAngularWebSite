@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 25%;
+}
+.matcard-Center-Datatable{
+  max-width: 75%;
+  /* max-height: 75%; */
+}

@@ -31,18 +31,19 @@ import { LoadingService } from './loading.service';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TextEditorComponent } from './TextEditor/TextEditor.component';
 /*-----------------Pages-----------------*/
-import { ForsideComponent } from '../app/forside/forside.component';
-import { GuidelineComponent } from '../app/guideline/guideline.component';
-import { LoginPageComponent } from '../app/login-page/login-page.component';
 
-
+import {ForsideComponent} from '../app/forside/forside.component'
+import {GuidelineComponent} from '../app/guideline/guideline.component'
+import {LoginPageComponent} from '../app/login-page/login-page.component'
+import { ArchiveComponent } from './archive/archive.component';
 @NgModule({
   declarations: [
     AppComponent,
     ForsideComponent,
     GuidelineComponent,
-    LoginPageComponent,
-    TextEditorComponent
+    ForsideComponent,
+      TextEditorComponent,
+      ArchiveComponent
    ],
   imports: [
     BrowserModule,
