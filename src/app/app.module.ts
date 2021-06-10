@@ -42,8 +42,9 @@ import { ArchiveComponent } from './archive/archive.component';
     ForsideComponent,
     GuidelineComponent,
     ForsideComponent,
-      TextEditorComponent,
-      ArchiveComponent
+    TextEditorComponent,
+    ArchiveComponent,
+    LoginPageComponent
    ],
   imports: [
     BrowserModule,
