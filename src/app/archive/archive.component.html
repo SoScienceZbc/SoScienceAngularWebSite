@@ -1,11 +1,11 @@
-<mat-card style="max-width: 75%; max-height: 75%">
+<mat-card class="matcard-Center-Datatable">
   <div>
     <mat-form-field>
-      <mat-label>Filter</mat-label>
+      <mat-label style="font-size: large;" >Filter/Søg</mat-label>
       <input
         matInput
         (keyup)="applyFilter($event)"
-        placeholder="filter"
+        placeholder="Filter/Søg"
         #input
       />
     </mat-form-field>
@@ -24,11 +24,10 @@
           [attr.colspan]="displayedColumns.length"
         >
           <div
-            class="example-element-detail"
             [@detailExpand]="element == Docoments ? 'expanded' : 'collapsed'"
           >
-            <div class="example-element-diagram">
-              <div class="example-element-position">{{ element.getId() }}</div>
+            <div>
+              <div >{{ element.getId() }}</div>
             </div>
           </div>
         </td>
