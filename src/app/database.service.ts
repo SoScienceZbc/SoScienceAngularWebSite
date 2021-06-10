@@ -109,6 +109,27 @@ export class DatabaseService {
     return subject;
   }
 
+  AddProject(name:string,projectToAdd:D_Project){
+
+    // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
+    const projectuserInfomation = new ProjectUserInfomation();
+    projectuserInfomation.setProject(projectToAdd);
+    const userDbInfomation = new UserDbInfomation();
+    userDbInfomation.setDbname(name);
+    projectuserInfomation.setUser(userDbInfomation);
+    grpc.invoke(GrpcDatabaseProject.AddProject,{
+      request:projectuserInfomation,
+      host:this.hostAddress,
+      onMessage:(Message:intger) =>{
+
+        console.log(Message);
+        // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
+      },onEnd:res =>{
+        // console.log("It have endes")
+      }
+    })
+  }
+
   /*-------------------Documents-------------------*/
 
   /*-------------------RemoteFiles-------------------*/

@@ -1,7 +1,19 @@
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+/>
 <mat-card class="matcard-Center-Datatable">
   <div>
+    <div>
+      <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button>
+        <mat-icon >add</mat-icon>
+      </button>
+      <h4 class="bouttenTextMatIcon">tilføje nyt project</h4>
+    </div>
+    <br />
+    <br />
     <mat-form-field>
-      <mat-label style="font-size: large;" >Filter/Søg</mat-label>
+      <mat-label style="font-size: large">Filter/Søg</mat-label>
       <input
         matInput
         (keyup)="applyFilter($event)"
@@ -9,7 +21,6 @@
         #input
       />
     </mat-form-field>
-
     <table
       mat-table
       class="mat-elevation-z8"
@@ -27,14 +38,14 @@
             [@detailExpand]="element == Docoments ? 'expanded' : 'collapsed'"
           >
             <div>
-              <div >{{ element.getId() }}</div>
+              <div>{{ element.getId() }}</div>
             </div>
           </div>
         </td>
       </ng-container>
 
       <!-- id Column -->
-      <ng-container matColumnDef="id">
+      <ng-container matColumnDef="Id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
         <td mat-cell *matCellDef="let element">{{ element.getId() }}</td>
       </ng-container>

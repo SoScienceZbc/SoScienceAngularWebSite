@@ -1,4 +1,5 @@
 table {
+  column-rule-color: hotpink;
   width: 100%;
 }
 
@@ -6,7 +7,31 @@ table {
   font-size: 14px;
   width: 25%;
 }
-.matcard-Center-Datatable{
+.mat-column-id{
+  column-rule-color: hotpink;
+}
+.mat-column-name{
+
+}
+.mat-column-completed{
+
+}
+.mat-column-lastedited{
+
+}
+.mat-column-endDate{
+
+}
+.matcard-Center-Datatable {
   max-width: 75%;
   /* max-height: 75%; */
+}
+.bouttenTextMatIcon {
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  margin-left: 2.5rem;
+}
+.maticonBounten {
+  float: left;
+  background-color: rebeccapurple;
 }
