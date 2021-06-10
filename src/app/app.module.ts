@@ -17,8 +17,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { grpc } from '@improbable-eng/grpc-web';
 import { GrpcCoreModule } from '@ngx-grpc/core';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatToolbarModule} from '@angular/material/toolbar'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
@@ -60,6 +61,7 @@ import { LoginPageComponent } from '../app/login-page/login-page.component';
     MatSelectModule,
     MatExpansionModule,
     MatTabsModule,
+    MatIconModule,
     /*---Grpc---*/
     GrpcCoreModule.forRoot(),
     ImprobableEngGrpcWebClientModule.forRoot({
