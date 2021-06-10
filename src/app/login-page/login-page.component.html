@@ -4,10 +4,10 @@
   <div class="grid-item">
     <mat-card class="example-card">
       <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
+        <mat-card-title  class="loginbox-header-text">Login</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form class="example-form">
+        <form class="example-form" (keydown.enter)="Login(username.value, password.value)">
           <table class="example-full-width" cellspacing="10">
             <tr>
               <td>
@@ -64,7 +64,8 @@
           color="primary"
           (click)="Login(username.value, password.value)"
         >
-          Log ind
+        Log ind
+        <img src="../../assets/Icons/LoginButton.png" class="login-button-image">
         </button>
       </mat-card-actions>
     </mat-card>

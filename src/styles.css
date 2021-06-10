@@ -1,11 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-image: url(./assets/backgroundUse2.png);
-  background-size: cover;
-  background-repeat: no-repeat;
 
+  /* You can add global styles to this file, and also import other style files */
+body {
+  background: url(./assets/backgroundUse2.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 

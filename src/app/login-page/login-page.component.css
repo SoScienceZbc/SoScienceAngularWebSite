@@ -1,11 +1,13 @@
-/* #BodyDiv {
-  background-image: url(../../assets/BackgroundUse2.png);
-  background-size: cover;
-} */
 .centering{
   justify-content: center;
 }
-
+/*
+.example-card{
+  min-width: 50vw;
+  min-height: 50vh;
+position: relative;
+}
+*/
 .grid-container {
   justify-content: center;
   margin-top: 35vh;
@@ -13,15 +15,17 @@
   grid-template-columns: auto auto auto;
   text-align: center;
 }
-
+/*
+.example-form{
+  position: absolute;
+}
+*/
 .loginbox-header-text {
   margin: 0 -5px !important;
 }
-
-
-
-
-
+.login-button-image{
+  margin-top:-2.7px;
+}
 
 
 
@@ -34,46 +38,37 @@
     width: 100%;
     padding-left: 2vw;
 }
-
 #inputPassword{
     background-color: rgba(255, 255, 255, 0.2);
     border-color: transparent;
     color: white;
     padding-left: 2vw;
 }
-
 .center {
   margin: auto;
   width: 50%;
   text-align: center;
 }
-
 .invalid{
   box-shadow: 0px 0px 10px red;
-
 }
-
 .formcontainer {
   margin-top: 10vh;
 }
-
 .username-input{
   margin: auto;
   width: 80%;
   padding-bottom: 2.5vh;
 }
-
 .password-input{
   margin: auto;
   width: 80%;
   padding-bottom: 0.5vh;
 }
-
 .btn{
   margin: auto;
   width: 80%;
 }
-
 .title{
   font-size: 2.5rem;
   color: white;
@@ -81,14 +76,12 @@
   padding-top: 3vh;
   padding-bottom: 2vh;
 }
-
 .undertitle{
   font-size: 1.25rem;
   color: white;
   font-weight: 400;
   padding-bottom: 5vh;
 }
-
 #forgotPassword{
     margin: auto;
     color: white;
@@ -99,11 +92,9 @@
     padding-bottom: 5vh;
     white-space: nowrap
 }
-
 .form-control {
       border-radius: 5rem;
 }
-
 .form-signin .btn {
   font-size: 80%;
   border-radius: 5rem;

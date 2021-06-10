@@ -29,13 +29,19 @@ import { LoadingService } from './loading.service';
 /*-----------------CkEditor-----------------*/
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TextEditorComponent } from './TextEditor/TextEditor.component';
+/*-----------------Pages-----------------*/
+import { ForsideComponent } from '../app/forside/forside.component';
+import { GuidelineComponent } from '../app/guideline/guideline.component';
+import { LoginPageComponent } from '../app/login-page/login-page.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPageComponent,
+    ForsideComponent,
     GuidelineComponent,
-      TextEditorComponent
+    LoginPageComponent,
+    TextEditorComponent
    ],
   imports: [
     BrowserModule,
