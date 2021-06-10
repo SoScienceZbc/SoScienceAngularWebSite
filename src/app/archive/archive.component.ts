@@ -1,32 +1,64 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
+import { AfterViewInit, ChangeDetectorRef, Component, Injectable, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
 import { DatabaseService } from '../database.service';
-import { D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
+import { D_Document, D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
 
 /**
  * @title Table with expandable rows
  */
-@Component({
+ @Component({
   selector: 'app-archive',
   templateUrl: './archive.component.html',
   styleUrls: ['./archive.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
-export class ArchiveComponent implements OnInit {
-  displayedColumns = ["Id", "Name"];
-  public dataSource: Array<D_Project.AsObject> = new Array<D_Project.AsObject>();
+export class ArchiveComponent implements OnInit,OnDestroy,AfterViewInit {
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  displayedColumns = ["id", "name","completed","lastedited","endDate"];
+  projects: D_Projects = new D_Projects();
+  public dataSource: Array<D_Project> = new Array<D_Project>();
+  matdatascoure = new MatTableDataSource<D_Project>(this.dataSource);
+  length = this.matdatascoure.data.length;
+  Docoments: D_Document | null | undefined;
 
   constructor(private dataserve: DatabaseService) {
-    this.dataserve.GetProjectsAsArray("alex303a");
-    this.dataserve.simpleProjectArray$?.subscribe((x) => {
-      if (x != this.dataSource) {
-        console.log("Argh!!")
-        this.dataSource = x;
+    this.dataserve.GetProjectsTheRigthWay("alex303a");
+    this.dataserve.behavProject$.asObservable().subscribe(x => {
+      if (x != this.projects) {
+        this.projects = x;
+        this.dataSource = this.projects.getDProjectList();
+        this.matdatascoure.data = this.projects.getDProjectList();
       }
-    })
+    });
+    // this.matdatascoure.sort = this.sort;
   }
-  unsubscripe() {
+   ngAfterViewInit(): void {
+     this.matdatascoure.paginator = this.paginator;
+     this.matdatascoure.sort = this.sort;
+   }
+  ngOnDestroy(): void {
     this.dataserve.simpleProjectArray$?.unsubscribe();
+    this.dataserve.behavProject$.unsubscribe();
   }
   ngOnInit() {
     // this.dataserve.GetProjects("alex303a");
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.matdatascoure.filter = filterValue.trim().toLowerCase();
   }
 }
