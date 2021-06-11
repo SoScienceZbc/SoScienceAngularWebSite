@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { DatabaseService } from '../database.service';
-import { D_Document, D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
+import { D_Document, D_Documents, D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
 
 /**
  * @title Table with expandable rows
@@ -33,7 +33,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   public dataSource: Array<D_Project> = new Array<D_Project>();
   matdatascoure = new MatTableDataSource<D_Project>(this.dataSource);
   length = this.matdatascoure.data.length;
-  Docoments: D_Document | null | undefined;
+  Docoments: D_Documents = new D_Documents();
 
   constructor(private dataserve: DatabaseService) {
     this.dataserve.GetProjectsTheRigthWay("alex303a");
@@ -64,21 +64,32 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   AddNewProject() {
-    this.dataserve.AddProject("alex303a",new D_Project());
+    // this.dataserve.AddProject("alex303a",new D_Project());
   }
 
   onsortChange() {
 
     this.matdatascoure.sortingDataAccessor = (item, property) => {
-      switch(property) {
+      switch (property) {
         case 'name': return item.getName();
         case 'Id': return item.getId();
-        case 'Completed':return ""+item.getCompleted()+"";
-        case 'lastedited':return item.getLastedited();
-        case 'endDate':return item.getEnddate();
+        case 'Completed': return "" + item.getCompleted() + "";
+        case 'lastedited': return item.getLastedited();
+        case 'endDate': return item.getEnddate();
         default: return "";
       }
     };
+  }
+
+  TestExpanding() {
+    // this.dataserve.GetDocuments("alex303a",45);
+    // this.dataserve.GetDocument("alex303a",45);
+    this.dataserve.GetProject2("andi0137",151);
+    // for (let index = 0; index < 250; index++) {
+    //   this.dataserve.GetDocuments("alex303a", index);
+    // }
+  }
+  addnewdoc() {
   }
 
 }

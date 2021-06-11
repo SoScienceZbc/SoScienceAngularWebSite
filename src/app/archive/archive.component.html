@@ -6,7 +6,7 @@
   <div>
     <div>
       <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button>
-        <mat-icon >add</mat-icon>
+        <mat-icon>add</mat-icon>
       </button>
       <h4 class="bouttenTextMatIcon">tilføje nyt project</h4>
     </div>
@@ -23,28 +23,12 @@
     </mat-form-field>
     <table
       mat-table
-      class="mat-elevation-z8"
       [dataSource]="matdatascoure"
+      multiTemplateDataRows
+      class="mat-elevation-z8"
       matSort
     >
-      <!-- Expande detilas -->
-      <ng-container matColumnDef="expandedDetail">
-        <td
-          mat-cell
-          *matCellDef="let element"
-          [attr.colspan]="displayedColumns.length"
-        >
-          <div
-            [@detailExpand]="element == Docoments ? 'expanded' : 'collapsed'"
-          >
-            <div>
-              <div>{{ element.getId() }}</div>
-            </div>
-          </div>
-        </td>
-      </ng-container>
-
-      <!-- id Column -->
+      <!-- Name Column -->
       <ng-container matColumnDef="Id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
         <td mat-cell *matCellDef="let element">{{ element.getId() }}</td>
@@ -75,7 +59,37 @@
         <td mat-cell *matCellDef="let element">{{ element.getEnddate() }}</td>
       </ng-container>
 
-      <!-- Docoments -->
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [attr.colspan]="displayedColumns.length"
+        >
+          <div
+            class="example-element-detail"
+            [@detailExpand]="element == Docoments ? 'expanded' : 'collapsed'"
+          >
+            <div class="example-element-diagram">
+              <div class="example-element-position">
+                {{ element.getDocumentsList() }}
+              </div>
+              <div class="example-element-symbol">
+                {{ element.getProjectid }}
+              </div>
+              <div class="example-element-name">{{ element.getTitle }}</div>
+              <div class="example-element-weight">{{ element.getType }}</div>
+              <div>{{ element.getData }}</div>
+            </div>
+            <div class="example-element-description">
+              {{ element.description }}
+              <span class="example-element-description-attribution"
+                ><app-TextEditor></app-TextEditor
+              ></span>
+            </div>
+          </div>
+        </td>
+      </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr
@@ -85,14 +99,17 @@
         [class.example-expanded-row]="Docoments === element"
         (click)="Docoments = Docoments === element ? null : element"
       ></tr>
-
-      <!-- Row shown when there is no matching data. -->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">
-          No data matching the filter "{{ input.value }}"
-        </td>
-      </tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="example-detail-row"
+      ></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+    <!-- Test Table End -->
+
+    <mat-paginator [pageSizeOptions]="[10, 15, 25, 100]"></mat-paginator>
   </div>
+  <button (click)="TestExpanding()">test docs</button>
+  <button (click)="addnewdoc()">add new docs</button>
 </mat-card>
