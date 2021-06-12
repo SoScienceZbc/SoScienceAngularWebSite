@@ -2,6 +2,8 @@
   justify-content: center;
 }
 .example-card{
+  margin-top: 50%;
+  margin-left: 50%;
   min-width: 50vw;
   min-height: 50vh;
 position: relative;

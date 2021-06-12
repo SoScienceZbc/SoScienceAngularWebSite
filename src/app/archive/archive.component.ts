@@ -1,5 +1,4 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { AfterViewInit, ChangeDetectorRef, Component, Injectable, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -35,8 +34,11 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   length = this.matdatascoure.data.length;
   Docoments: D_Documents = new D_Documents();
 
+  isExpansionDetailRow = (id:number, row: any|D_Documents) => this.isExpansionDetailRows(id,row);
+canExpand: boolean = false;
+
   constructor(private dataserve: DatabaseService) {
-    this.dataserve.GetProjectsTheRigthWay("alex303a");
+    this.dataserve.GetProjectsTheRigthWay("andi0137");
     this.dataserve.behavProject$.asObservable().subscribe(x => {
       if (x != this.projects) {
         this.projects = x;
@@ -52,7 +54,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.matdatascoure.sort = this.sort;
   }
   ngOnDestroy(): void {
-    this.dataserve.simpleProjectArray$?.unsubscribe();
     this.dataserve.behavProject$.unsubscribe();
   }
   ngOnInit() {
@@ -84,12 +85,45 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   TestExpanding() {
     // this.dataserve.GetDocuments("alex303a",45);
     // this.dataserve.GetDocument("alex303a",45);
-    this.dataserve.GetProject2("andi0137",151);
+    this.dataserve.GetProject2("andi0137", 151);
     // for (let index = 0; index < 250; index++) {
     //   this.dataserve.GetDocuments("alex303a", index);
     // }
   }
   addnewdoc() {
+  }
+  GetDocoments(element: D_Project) : D_Documents {
+    this.dataserve.GetDocuments("alex303a", (element as D_Project).getId()).subscribe(x => {
+      if (x.getDDocumentsList().length > 0 && x != this.Docoments){
+        this.Docoments = x;
+        this.canExpand = true;
+
+        console.log(this.Docoments);
+
+      }
+    });
+    return this.Docoments;
+    // console.log(this.Docoments === element ? null : element);
+  }
+
+  isExpansionDetailRows(i: number, row: D_Project): boolean{
+// This waits for the data to be alivalbe befor any rows can be expanded..
+//Note: perhasp this is the way to go, but look after a other way to do this.
+    // this.dataserve.GetDocuments("alex303a", (row as D_Project).getId()).subscribe(x => {
+    //   if (x.getDDocumentsList().length > 0 && x != this.Docoments){
+    //     this.Docoments = x;
+    //     //this.canExpand = true;
+
+    //     console.log(this.Docoments);
+
+    //   }
+    // });
+    if(row.hasOwnProperty('ProjectId') && this.Docoments.getDDocumentsList().length > 0){
+      console.log("isExpansionDetailRow is now true")
+      this.canExpand = true;
+      return this.canExpand
+    }
+    return this.canExpand;
   }
 
 }

@@ -8,22 +8,16 @@ import { BehaviorSubject, Observable, of, Subject, zip } from 'rxjs';
   providedIn: 'root'
 })
 export class DatabaseService {
-
-  userinfomation = {} as UserDbInfomation;
   project = {} as D_Projects;
   hostAddress = "http://40.87.150.18:27385";
-  obsProjects: D_Project = new D_Project;
-  signelProject$: BehaviorSubject<D_Project> = new BehaviorSubject<D_Project>(this.obsProjects);
-  simpleProjectArray$?: BehaviorSubject<Array<D_Project.AsObject>> = new BehaviorSubject<Array<D_Project.AsObject>>(new Array<D_Project.AsObject>());
-
-  projects: D_Projects = new D_Projects;
-  behavProject$: BehaviorSubject<D_Projects> = new BehaviorSubject<D_Projects>(this.projects);
+  signelProject$: BehaviorSubject<D_Project> = new BehaviorSubject<D_Project>(new D_Project);
+  behavProject$: BehaviorSubject<D_Projects> = new BehaviorSubject<D_Projects>(new D_Projects);
 
   constructor() {
-    this.projects = new D_Projects();
   }
 
 
+  //#region Project
   /*-------------------Projects-------------------*/
   /**
    * this call the grpc function the rigth way..
@@ -51,27 +45,26 @@ export class DatabaseService {
    * @param name the name to getproject for(note the id is the thing that is useing)
    * @returns
    */
-  public GetProject(name: string): Observable<D_Project> {
-    this.userinfomation = new UserDbInfomation();
-    this.userinfomation.setDbname(name);
-    let subject = {} as Subject<D_Project>;
-    grpc.unary(GrpcDatabaseProject.GetProject, {
-      request: this.userinfomation,
+  public GetProject(name: string, id: number) {
+    const userDbInfomation = new UserDbInfomation();
+    userDbInfomation.setDbname(name);
+    userDbInfomation.setId(id);
+    grpc.invoke(GrpcDatabaseProject.GetProject, {
+      request: userDbInfomation,
       host: this.hostAddress,
-      onEnd: res => {
-        const { status, message } = res;
-        if (status === grpc.Code.OK && message) {
-          this.signelProject$.next((message?.toObject() as D_Project));
-        }
-        return null;
+      onMessage: (Message: D_Project) => {
+        this.signelProject$.next(Message);
+      }, onEnd: res => {
+        // console.log("It have endes")
       }
-    });
-    return subject;
+    })
   }
-
+  /**
+   * This adds a D_prject to the database.
+   * @param name the project owner name.
+   * @param projectToAdd a D_Project to add to the database.
+   */
   AddProject(name: string, projectToAdd: D_Project) {
-
-    // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
     const projectuserInfomation = new ProjectUserInfomation();
     projectuserInfomation.setProject(projectToAdd);
     const userDbInfomation = new UserDbInfomation();
@@ -81,18 +74,17 @@ export class DatabaseService {
       request: projectuserInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
-
-        console.log(Message);
-        // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
+        console.log("entris change: " + Message.getNumber());
       }, onEnd: res => {
-        // console.log("It have endes")
       }
     })
   }
-
-  public GetProject2(name: string,id:number) {
-
-    // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
+  /**
+   * //TODO: Struction Documents => call getdocoment => getData() (getData() is not return in the first call and you have to call getdoument to get the data back(its in html form.))
+   * @param name
+   * @param id
+   */
+  public GetProject2(name: string, id: number) {
     const userDbInfomation = new UserDbInfomation();
     userDbInfomation.setDbname(name);
     userDbInfomation.setId(id);
@@ -106,7 +98,6 @@ export class DatabaseService {
           console.log("From dataService (GetDocoments) with name: " + name);
           console.log(Message.getDocumentsList()[0].getId());
           console.log(Message.getDocumentsList()[0].getData());
-          //TODO: Struction Documents => call getdocoment => getData() (getData() is not return in the first call and you have to call getdoument to get the data back(its in html form.))
         }
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       }, onEnd: res => {
@@ -114,7 +105,8 @@ export class DatabaseService {
       }
     })
   }
-
+  //#endregion
+  //#region Documents
   /*-------------------Documents-------------------*/
   public AddDocument(name: string) {
 
@@ -136,38 +128,41 @@ export class DatabaseService {
     })
   }
 
-  public GetDocuments(name: string, id: number) {
+  public GetDocuments(name: string, id: number): Observable<D_Documents> {
 
     // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
     const userDbInfomation = new UserDbInfomation();
     userDbInfomation.setDbname(name);
     userDbInfomation.setId(id);
+    const docmoments: BehaviorSubject<D_Documents> = new BehaviorSubject<D_Documents>(new D_Documents);
     grpc.invoke(GrpcDatabaseProject.GetDocuments, {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: D_Documents) => {
         // this.behavProject$.next(Message);
-        if (Message.getDDocumentsList().length > 0) {
-
-          console.log("From dataService (GetDocoments) with name: " + name);
-          console.log(Message.getDDocumentsList()[0].getId());
-          console.log(Message.getDDocumentsList()[0].getProjectid())
+        docmoments.next(Message);
 
 
-        }
+        // console.log("From dataService (GetDocoments) with name: " + name);
+        console.log(Message.getDDocumentsList()[0].getId());
+        console.log(Message.getDDocumentsList()[0].getProjectid())
+
+
+
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       }, onEnd: res => {
+        console.log(res.toString());
         // console.log("It have endes")
       }
     })
+    return docmoments;
   }
 
-  public GetDocument(name: string, id: number) {
-
-    // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
+  public GetDocument(name: string, id: number): Observable<D_Document> {
     const userDbInfomation = new UserDbInfomation();
     userDbInfomation.setDbname(name);
     userDbInfomation.setId(id);
+    let docoment: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
     grpc.invoke(GrpcDatabaseProject.GetDocument, {
       request: userDbInfomation,
       host: this.hostAddress,
@@ -176,15 +171,17 @@ export class DatabaseService {
         // console.log("From dataService (GetDocoment) with name: " + name);
         console.log(Message.getId());
         console.log(Message.getProjectid())
+        docoment.next(Message);
 
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       }, onEnd: res => {
         // console.log("It have endes")
       }
     })
+    return docoment;
   }
 
-
+  //#endregion
   /*-------------------RemoteFiles-------------------*/
 }
 
