@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-<mat-card class="matcard-Center-Datatable">
+<mat-card class="matcard-Center-Datatable  matTableCard">
   <div>
     <div>
       <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button>
@@ -13,7 +13,7 @@
       <mat-label style="font-size: large">Filter/Søg</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Filter/Søg" #input />
     </mat-form-field>
-    <table mat-table [dataSource]="matdatascoure" multiTemplateDataRows class="mat-elevation-z8" matSort>
+    <table mat-table [dataSource]="matdatascoure" multiTemplateDataRows mat-ripple class="mat-elevation-z8" matSort>
       <!-- Name Column -->
       <ng-container matColumnDef="Id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
@@ -55,7 +55,6 @@
               </div>
               <div class="example-element-symbol">
                 normail this vil show the textedtior
-                <app-TextEditor></app-TextEditor>
 
                 <!-- {{ element.getProjectid() }} -->
               </div>
@@ -85,7 +84,7 @@
           <!-- Expanded Content Column - The detail row is made up of this one column -->
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"  class="example-element-row"
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; when: isExpansionDetailRow"  class="example-element-row"
       [class.example-expanded-row]="Docoments === row"
       (click)="Docoments = GetDocoments(row) == row ? null: row"></tr>
       <!-- (click)="Docoments = Docoments === element ? null : element"></tr> -->

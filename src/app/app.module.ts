@@ -41,7 +41,7 @@ import {GuidelineComponent} from '../app/guideline/guideline.component'
 import {LoginPageComponent} from '../app/login-page/login-page.component'
 import { ArchiveComponent } from './archive/archive.component';
 import { AuthGuardGuard } from './auth-guard.guard';
-import { NavBarComponent } from './nav-bar/nav-bar/nav-bar.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 @NgModule({
   declarations: [
     AppComponent,

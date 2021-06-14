@@ -109,6 +109,7 @@ canExpand: boolean = false;
   isExpansionDetailRows(i: number, row: D_Project): boolean{
 // This waits for the data to be alivalbe befor any rows can be expanded..
 //Note: perhasp this is the way to go, but look after a other way to do this.
+return true;
     // this.dataserve.GetDocuments("alex303a", (row as D_Project).getId()).subscribe(x => {
     //   if (x.getDDocumentsList().length > 0 && x != this.Docoments){
     //     this.Docoments = x;
