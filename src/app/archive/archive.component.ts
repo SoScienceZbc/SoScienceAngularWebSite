@@ -1,12 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { AfterViewInit, ChangeDetectorRef, Component, Injectable, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { DatabaseService } from '../database.service';
-import { D_Document, D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
+import { D_Document, D_Documents, D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
 
 /**
  * @title Table with expandable rows
@@ -33,10 +32,13 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   public dataSource: Array<D_Project> = new Array<D_Project>();
   matdatascoure = new MatTableDataSource<D_Project>(this.dataSource);
   length = this.matdatascoure.data.length;
-  Docoments: D_Document | null | undefined;
+  Docoments: D_Documents = new D_Documents();
+
+  isExpansionDetailRow = (id:number, row: any|D_Documents) => this.isExpansionDetailRows(id,row);
+canExpand: boolean = false;
 
   constructor(private dataserve: DatabaseService) {
-    this.dataserve.GetProjectsTheRigthWay("alex303a");
+    this.dataserve.GetProjectsTheRigthWay("andi0137");
     this.dataserve.behavProject$.asObservable().subscribe(x => {
       if (x != this.projects) {
         this.projects = x;
@@ -52,7 +54,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.matdatascoure.sort = this.sort;
   }
   ngOnDestroy(): void {
-    this.dataserve.simpleProjectArray$?.unsubscribe();
     this.dataserve.behavProject$.unsubscribe();
   }
   ngOnInit() {
@@ -64,21 +65,65 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   AddNewProject() {
-    this.dataserve.AddProject("alex303a",new D_Project());
+    // this.dataserve.AddProject("alex303a",new D_Project());
   }
 
   onsortChange() {
 
     this.matdatascoure.sortingDataAccessor = (item, property) => {
-      switch(property) {
+      switch (property) {
         case 'name': return item.getName();
         case 'Id': return item.getId();
-        case 'Completed':return ""+item.getCompleted()+"";
-        case 'lastedited':return item.getLastedited();
-        case 'endDate':return item.getEnddate();
+        case 'Completed': return "" + item.getCompleted() + "";
+        case 'lastedited': return item.getLastedited();
+        case 'endDate': return item.getEnddate();
         default: return "";
       }
     };
+  }
+
+  TestExpanding() {
+    // this.dataserve.GetDocuments("alex303a",45);
+    // this.dataserve.GetDocument("alex303a",45);
+    this.dataserve.GetProject2("andi0137", 151);
+    // for (let index = 0; index < 250; index++) {
+    //   this.dataserve.GetDocuments("alex303a", index);
+    // }
+  }
+  addnewdoc() {
+  }
+  GetDocoments(element: D_Project) : D_Documents {
+    this.dataserve.GetDocuments("alex303a", (element as D_Project).getId()).subscribe(x => {
+      if (x.getDDocumentsList().length > 0 && x != this.Docoments){
+        this.Docoments = x;
+        this.canExpand = true;
+
+        console.log(this.Docoments);
+
+      }
+    });
+    return this.Docoments;
+    // console.log(this.Docoments === element ? null : element);
+  }
+
+  isExpansionDetailRows(i: number, row: D_Project): boolean{
+// This waits for the data to be alivalbe befor any rows can be expanded..
+//Note: perhasp this is the way to go, but look after a other way to do this.
+    // this.dataserve.GetDocuments("alex303a", (row as D_Project).getId()).subscribe(x => {
+    //   if (x.getDDocumentsList().length > 0 && x != this.Docoments){
+    //     this.Docoments = x;
+    //     //this.canExpand = true;
+
+    //     console.log(this.Docoments);
+
+    //   }
+    // });
+    if(row.hasOwnProperty('ProjectId') && this.Docoments.getDDocumentsList().length > 0){
+      console.log("isExpansionDetailRow is now true")
+      this.canExpand = true;
+      return this.canExpand
+    }
+    return this.canExpand;
   }
 
 }
