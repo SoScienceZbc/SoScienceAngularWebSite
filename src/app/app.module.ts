@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 /*-----------------Materials-----------------*/
 import { MatButtonModule } from "@angular/material/button";
@@ -21,6 +22,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon'
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
@@ -37,6 +40,8 @@ import {ForsideComponent} from '../app/forside/forside.component'
 import {GuidelineComponent} from '../app/guideline/guideline.component'
 import {LoginPageComponent} from '../app/login-page/login-page.component'
 import { ArchiveComponent } from './archive/archive.component';
+import { AuthGuardGuard } from './auth-guard.guard';
+import { NavBarComponent } from './nav-bar/nav-bar/nav-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +50,8 @@ import { ArchiveComponent } from './archive/archive.component';
     ForsideComponent,
     TextEditorComponent,
     ArchiveComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    NavBarComponent
    ],
   imports: [
     BrowserModule,
@@ -67,6 +73,9 @@ import { ArchiveComponent } from './archive/archive.component';
     MatIconModule,
     MatNativeDateModule,
     MatRippleModule,
+    MatSidenavModule,
+    MatListModule,
+    FlexLayoutModule,
     /*---Grpc---*/
     GrpcCoreModule.forRoot(),
     ImprobableEngGrpcWebClientModule.forRoot({
@@ -77,7 +86,8 @@ import { ArchiveComponent } from './archive/archive.component';
     }),/*--End Grpc-*/
   ],
   providers: [DatabaseService,
-  LoginService,LoadingService],
+  LoginService,LoadingService,AuthGuardGuard,
+  MatSidenav],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
