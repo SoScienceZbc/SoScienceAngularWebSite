@@ -24,6 +24,7 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon'
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog'
 
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
@@ -43,6 +44,7 @@ import { ArchiveComponent } from './archive/archive.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SettingsComponent } from './settings/settings.component';
+import {  TextEditorDilogBoxComponent} from "../app/archive/TextEditorDilogBox/TextEditorDilogBox.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +55,8 @@ import { SettingsComponent } from './settings/settings.component';
     ArchiveComponent,
     LoginPageComponent,
     NavBarComponent,
-    SettingsComponent
+    SettingsComponent,
+    TextEditorDilogBoxComponent
    ],
   imports: [
     BrowserModule,
@@ -78,6 +81,7 @@ import { SettingsComponent } from './settings/settings.component';
     MatSidenavModule,
     MatListModule,
     FlexLayoutModule,
+    MatDialogModule,
     /*---Grpc---*/
     GrpcCoreModule.forRoot(),
     ImprobableEngGrpcWebClientModule.forRoot({
