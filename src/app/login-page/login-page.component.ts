@@ -30,8 +30,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private login: LoginService,
-    private dataServer: DatabaseService,
-    public spinner: LoadingService,
+        public spinner: LoadingService,
     private route: Router
   ) {
     this.login.LoginCheakBehavierSubject$.subscribe((x) => {
