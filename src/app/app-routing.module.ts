@@ -4,6 +4,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { GuidelineComponent } from './guideline/guideline.component';
 import { ForsideComponent } from './forside/forside.component';
 import { ArchiveComponent } from './archive/archive.component';
+import { SettingsComponent } from './settings/settings.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'forside', component: ForsideComponent,canActivate:[AuthGuardGuard] },
   { path: 'guideline', component: GuidelineComponent,canActivate:[AuthGuardGuard] },
   { path: 'arkiv', component: ArchiveComponent,canActivate:[AuthGuardGuard] },
+  { path: 'indstillinger', component:SettingsComponent,canActivate:[AuthGuardGuard]},
 ];
 
 @NgModule({
