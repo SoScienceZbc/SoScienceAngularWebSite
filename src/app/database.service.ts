@@ -129,8 +129,6 @@ export class DatabaseService {
   }
 
   public GetDocuments(name: string, id: number): Observable<D_Documents> {
-
-    // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
     const userDbInfomation = new UserDbInfomation();
     userDbInfomation.setDbname(name);
     userDbInfomation.setId(id);
@@ -139,20 +137,8 @@ export class DatabaseService {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: D_Documents) => {
-        // this.behavProject$.next(Message);
         docmoments.next(Message);
-
-
-        // console.log("From dataService (GetDocoments) with name: " + name);
-        console.log(Message.getDDocumentsList()[0].getId());
-        console.log(Message.getDDocumentsList()[0].getProjectid())
-
-
-
-        // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       }, onEnd: res => {
-        console.log(res.toString());
-        // console.log("It have endes")
       }
     })
     return docmoments;
