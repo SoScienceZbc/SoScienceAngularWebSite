@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
 <mat-card class="matcard-Center-Datatable  matTableCard">
   <div>
     <div>
@@ -63,15 +63,15 @@
                   <tr>
                     <td>{{item.getId()}}</td>
                     <td>{{item.getTitle()}}</td>
-                    <td><button mat-icon-button><mat-icon>edit</mat-icon></button></td>
+                    <td><app-TextEditorDilogBox [DocomentToEdite]="item"></app-TextEditorDilogBox>
+                    </td>
                   </tr>
                 </tbody>
 
               </table><div style="padding-top: 1rem; padding-bottom: 1rem;">
                   <hr>
-                <button mat-ripple mat-mini-fab><mat-icon>add</mat-icon></button>
+                <button mat-ripple mat-mini-fab><mat-icon >add</mat-icon></button>
                 <a style="margin: 5px;">new Docoment</a>
-
               </div>
             </div>
           </div>
@@ -81,8 +81,8 @@
 
       <!-- Expanded Content Column - The detail row is made up of this one column -->
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns" style="overflow: hidden;"></tr>
-      <tr mat-ripple mat-row *matRowDef="let row; columns: displayedColumns; when:isExpansionDetailRow"
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; when:isExpansionDetailRow"
         class="example-element-row" [class.example-expanded-row]="Docoments == row"
         (click)="Docoments = Docoments  == row ? null: row" (click)="StartSpinner(row)"style="overflow: hidden;">
       </tr>
@@ -94,4 +94,5 @@
   </div>
   <mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;"
     [mode]="'indeterminate'" *ngIf="loading$ |async"></mat-progress-spinner>
-</mat-card>
+  </mat-card>
+

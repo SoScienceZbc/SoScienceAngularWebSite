@@ -153,10 +153,6 @@ export class DatabaseService {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: D_Document) => {
-        // this.behavProject$.next(Message);
-        // console.log("From dataService (GetDocoment) with name: " + name);
-        console.log(Message.getId());
-        console.log(Message.getProjectid())
         docoment.next(Message);
 
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
@@ -165,6 +161,27 @@ export class DatabaseService {
       }
     })
     return docoment;
+  }
+
+  public GetDocomentHtml(name:string,id:number): Observable<D_Document>{
+    const userDbInfomation = new UserDbInfomation();
+    userDbInfomation.setDbname(name);
+    userDbInfomation.setId(id);
+    let docoment: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
+    grpc.invoke(GrpcDatabaseProject.GetDocument, {
+      request: userDbInfomation,
+      host: this.hostAddress,
+      onMessage: (Message: D_Document) => {
+        console.log("Data from GetDocomentHtml ",Message.getData());
+        docoment.next(Message);
+
+        // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
+      }, onEnd: res => {
+        // console.log("It have endes")
+      }
+    })
+    return docoment.asObservable();
+
   }
 
   //#endregion

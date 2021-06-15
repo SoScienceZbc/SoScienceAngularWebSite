@@ -1,14 +1,7 @@
-table {
-  column-rule-color: hotpink;
-  width: 100%;
-}
 
 .mat-form-field {
   font-size: 14px;
   width: 25%;
-}
-.mat-column-id{
-  column-rule-color: hotpink;
 }
 .mat-column-name{
   z-index: 5;
@@ -80,8 +73,8 @@ tr.example-element-row:not(.example-expanded-row):active {
   opacity: 0.5;
 }
 .matTableCard{
-  position: absolute;
+  /* position: absolute; */
   margin-left: 10rem;
-  top: 5rem;
+  top: 8px;
   /* left: 10rem; */
 }
