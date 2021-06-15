@@ -23,4 +23,8 @@ export class NavBarComponent implements OnInit {
   toggle(){
 
   }
+  checkLogin(){
+    //console.log(sessionStorage.length);
+    return (sessionStorage.getItem("loggedIn") == "true") ? false: true
+  }
 }

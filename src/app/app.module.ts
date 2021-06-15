@@ -42,6 +42,7 @@ import {LoginPageComponent} from '../app/login-page/login-page.component'
 import { ArchiveComponent } from './archive/archive.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { SettingsComponent } from './settings/settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     TextEditorComponent,
     ArchiveComponent,
     LoginPageComponent,
-    NavBarComponent
+    NavBarComponent,
+    SettingsComponent
    ],
   imports: [
     BrowserModule,

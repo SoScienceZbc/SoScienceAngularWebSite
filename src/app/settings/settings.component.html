@@ -1,0 +1,83 @@
+
+        <mat-accordion>
+          <!--Sprog-->
+          <mat-expansion-panel (opened)="panelOpenState1 = true" (closed)="panelOpenState1 = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="mat-panel-title">
+                Sprog
+              </mat-panel-title>
+              <mat-panel-description>
+                Klik her for at {{panelOpenState1 ? 'lukke' : 'udvide'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-form-field appearance="outline">
+            <mat-label>Vælg sprog</mat-label>
+            <mat-select style="right: auto;" >
+              <mat-option *ngFor="let language of languages" [value]="language.value">
+                {{language.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          </mat-expansion-panel>
+          <!-- Guideline Design -->
+          <mat-expansion-panel (opened)="panelOpenState2 = true" (closed)="panelOpenState2 = false" >
+            <mat-expansion-panel-header>
+              <mat-panel-title class="mat-panel-title">
+                Guideline Design
+              </mat-panel-title>
+              <mat-panel-description>
+                Klik her for at {{panelOpenState2 ? 'lukke' : 'udvide'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>Her skal være guideline design indstillinger</p>
+          </mat-expansion-panel>
+          <!-- Something -->
+          <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false" >
+            <mat-expansion-panel-header>
+              <mat-panel-title class="mat-panel-title">
+                Test
+              </mat-panel-title>
+              <mat-panel-description>
+                Klik her for at {{panelOpenState3 ? 'lukke' : 'udvide'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>Test test test 1 2 3</p>
+          </mat-expansion-panel>
+          <!-- Something -->
+          <mat-expansion-panel (opened)="panelOpenState4 = true" (closed)="panelOpenState4 = false" >
+            <mat-expansion-panel-header>
+              <mat-panel-title class="mat-panel-title">
+                Test
+              </mat-panel-title>
+              <mat-panel-description>
+                Klik her for at {{panelOpenState4 ? 'lukke' : 'udvide'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>Test test test 1 2 3</p>
+          </mat-expansion-panel>
+          <!-- Something -->
+          <mat-expansion-panel (opened)="panelOpenState5 = true" (closed)="panelOpenState5 = false" >
+            <mat-expansion-panel-header>
+              <mat-panel-title class="mat-panel-title">
+                Test
+              </mat-panel-title>
+              <mat-panel-description>
+                Klik her for at {{panelOpenState5 ? 'lukke' : 'udvide'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>Test test test 1 2 3</p>
+          </mat-expansion-panel>
+          <!-- Something -->
+          <mat-expansion-panel (opened)="panelOpenState6 = true" (closed)="panelOpenState6 = false" >
+            <mat-expansion-panel-header>
+              <mat-panel-title class="mat-panel-title">
+                Test
+              </mat-panel-title>
+              <mat-panel-description>
+                Klik her for at {{panelOpenState6 ? 'lukke' : 'udvide'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>Test test test 1 2 3</p>
+          </mat-expansion-panel>
+        </mat-accordion>
+
