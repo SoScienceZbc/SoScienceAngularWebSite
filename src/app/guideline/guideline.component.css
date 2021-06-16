@@ -34,4 +34,6 @@ margin: 0 !important;
 
 .mat-panel-title {
 min-width: 40% !important;
+font-size: large;
+font-weight: bold;
 }

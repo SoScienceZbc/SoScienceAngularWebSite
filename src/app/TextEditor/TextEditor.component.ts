@@ -5,7 +5,7 @@ import { provideRoutes } from '@angular/router';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Any } from '@ngx-grpc/well-known-types';
-import { BehaviorSubject, observable, Observable } from 'rxjs';
+import { BehaviorSubject, observable, Observable, of } from 'rxjs';
 import { DatabaseService } from '../database.service';
 import { D_Document } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
@@ -18,7 +18,7 @@ import { LoadingService } from '../loading.service';
 })
 export class TextEditorComponent implements OnInit {
   localDDocoment: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
-  localHtmltext: string = "";
+  localHtmltext:BehaviorSubject<string> = new BehaviorSubject<string>("<p>old data</p>");
   spinner: LoadingService = new LoadingService();
   loadingText$ = this.spinner.loading$;
   title: string | any;
@@ -31,20 +31,20 @@ export class TextEditorComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.localDDocoment.subscribe(x => {
       this.title = x.getTitle();
-      console.log("data", x.getData())
+      // console.log("data", x.getData())
       if (x.getData().length > 0) {
         console.log(x.getData());
-        this.localHtmltext = x.getData();
-        this.localHtmltext += "<h1>ARgh!!</h1>"
+        this.localHtmltext.next("<p>" + x.getData() +"</p>");
+        // this.localHtmltext += "<h1>ARgh!!</h1>"
         // this.localHtmltext = x.getData();
         // console.log(this.Editor.getData());
         this.spinner.hide();
       }
     })
     this.spinner.show();
-
     // console.log("This is from ckeditor",this.data)
   }
   public onChange(editor: ChangeEvent) {
