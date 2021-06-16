@@ -14,7 +14,7 @@
 }
 
 .matCard{
-  background-color: rgba(4, 219, 201, 0.9);
+  background-color: rgb(63,81,181,0.9);
   margin-top: 1vh;
   flex: 1 0;
   /*box-shadow: none !important;*/
