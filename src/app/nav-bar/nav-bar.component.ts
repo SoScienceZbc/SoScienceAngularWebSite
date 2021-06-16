@@ -19,6 +19,7 @@ export class NavBarComponent implements OnInit {
 
   logout(){
     sessionStorage.clear();
+    window.location.reload();
   }
   toggle(){
 

@@ -8,21 +8,17 @@
       </button>
       <span>
       </span>
-      <!--
-
-        <button href="/forside">
-          <img style="max-width: 170px;max-height: 100px;" src="../../assets/SoScience2.png"/>
-        </button>
-       -->
       <input class="homeButton" type="image" src="../../assets/SoScience2.png" onclick="location.href='/forside';"/>
-      <span class="menu-spacer"></span>
       <div fxShow="true" fxHide.lt-md>
-        <a href="/forside" mat-button mat-ripple>Forside</a>
+        <a href="/forside" mat-button>Forside</a>
         <a href="/guideline" mat-button>Guidelines</a>
         <a href="/arkiv" mat-button>Arkiv</a>
-        <a href="/indstillinger" mat-button>Indstillinger</a>
+        <!-- <a href="/indstillinger" mat-button>Indstillinger</a> -->
         <a target="_blank" href="https://moodle.zbc.dk/login/index.php" mat-button>Moodle</a>
       </div>
+      <span class="menu-spacer"></span>
+      <button mat-icon-button (click)="logout()" style="float: right !important;"><mat-icon>logout</mat-icon></button>
+      <button mat-icon-button onclick="location.href='/indstillinger';" style="float: right !important;"><mat-icon>settings</mat-icon></button>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
@@ -33,12 +29,12 @@
         <a href="/forside" mat-list-item>Forside</a>
         <a href="/guideline" mat-list-item>Guidelines</a>
         <a href="/arkiv" mat-list-item>Arkiv</a>
-        <a href="/indstillinger" mat-list-item>Indstillinger</a>
+        <!-- <a href="/indstillinger" mat-list-item>Indstillinger</a> -->
         <a target="_blank" href="https://moodle.zbc.dk/login/index.php" mat-list-item>Moodle</a>
 
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content style="padding:8px">
+    <mat-sidenav-content style="padding:2rem">
       <router-outlet>
       </router-outlet>
     </mat-sidenav-content>
