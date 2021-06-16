@@ -3,8 +3,9 @@
   <div>
     <div>
       <!-- <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button> -->
-        <h4 >tilføje nyt project</h4>
-        <button (click)="AddNewProject()" mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button>
+
+        <h4 >Tilføj nyt projekt</h4>
+        <app-add-project-dialog-box></app-add-project-dialog-box>
     </div>
     <br />
     <br />
@@ -34,7 +35,7 @@
 
       <!-- lastedited Column -->
       <ng-container matColumnDef="lastedited">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sidste Rette</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sidst rettet</th>
         <td mat-cell *matCellDef="let element">
           {{ element.getLastedited() }}
         </td>
@@ -57,7 +58,7 @@
                     <th>Navn/Title</th>
                     <span></span>
                     <span></span>
-                    <th>Ret</th>
+                    <th>Rediger</th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let item of GetDocomentsAsObject(element).getDocumentsList()">
@@ -73,8 +74,10 @@
 
               </table><div style="padding-top: 1rem; padding-bottom: 1rem;">
                   <hr>
+
+                  <!-- getting removed -->
                 <button mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button>
-                <a style="margin: 5px;">new Docoment</a>
+                <a style="margin: 5px;">Tilføj nyt dokument</a>
               </div>
             </div>
           </div>

@@ -43,8 +43,11 @@ import { ArchiveComponent } from './archive/archive.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SettingsComponent } from './settings/settings.component';
-import {  TextEditorDilogBoxComponent} from "../app/archive/TextEditorDilogBox/TextEditorDilogBox.component";
+import { TextEditorDilogBoxComponent } from "../app/archive/TextEditorDilogBox/TextEditorDilogBox.component";
+import { AddProjectDialogBoxComponent } from './archive/add-project-dialog-box/add-project-dialog-box.component';
 import { CustomMatPaginatorIntl } from './archive/CustomMatPageinatorIntl';
+import { ProjectFormComponent } from './archive/project-form/project-form.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +58,9 @@ import { CustomMatPaginatorIntl } from './archive/CustomMatPageinatorIntl';
     LoginPageComponent,
     NavBarComponent,
     SettingsComponent,
-    TextEditorDilogBoxComponent
+    TextEditorDilogBoxComponent,
+    AddProjectDialogBoxComponent,
+    ProjectFormComponent,
    ],
   imports: [
     BrowserModule,
