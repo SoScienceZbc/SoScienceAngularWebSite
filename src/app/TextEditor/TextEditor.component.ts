@@ -9,6 +9,8 @@ import { BehaviorSubject, observable, Observable, of } from 'rxjs';
 import { DatabaseService } from '../database.service';
 import { D_Document } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
+// import ObservableMixin from '@ckeditor/ckeditor5-utils/src/observablemixin';
+// import mix from '@ckeditor/ckeditor5-utils/src/mix';
 
 
 @Component({
