@@ -8,7 +8,7 @@
           console.error(error)
         });
       </script>
-      <ckeditor style="min-block-size: 100%;" [editor]="Editor" cdkScrollable="false" [data]="localHtmltext"></ckeditor>
+      <ckeditor style="min-block-size: 100%;" [editor]="Editor" cdkScrollable="false"  (data)="localHtmltext.next"></ckeditor>
     </div>
   </mat-card>
 
