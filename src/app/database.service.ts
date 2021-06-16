@@ -163,7 +163,7 @@ export class DatabaseService {
     return docoment;
   }
 
-  public GetDocomentHtml(name:string,id:number): Observable<D_Document>{
+  public GetDocomentHtml(name:string,id:number): BehaviorSubject<D_Document>{
     const userDbInfomation = new UserDbInfomation();
     userDbInfomation.setDbname(name);
     userDbInfomation.setId(id);
@@ -173,14 +173,16 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: D_Document) => {
         console.log("Data from GetDocomentHtml ",Message.getData());
-        docoment.next(Message);
+        // docoment.next(Message);
+        docoment.next(Message)
+        // docoment = Message;
 
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       }, onEnd: res => {
         // console.log("It have endes")
       }
     })
-    return docoment.asObservable();
+    return docoment;
 
   }
 

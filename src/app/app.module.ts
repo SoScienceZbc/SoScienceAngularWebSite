@@ -45,6 +45,7 @@ import { AuthGuardGuard } from './auth-guard.guard';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SettingsComponent } from './settings/settings.component';
 import {  TextEditorDilogBoxComponent} from "../app/archive/TextEditorDilogBox/TextEditorDilogBox.component";
+import { CustomMatPaginatorIntl } from './archive/CustomMatPageinatorIntl';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +94,7 @@ import {  TextEditorDilogBoxComponent} from "../app/archive/TextEditorDilogBox/T
   ],
   providers: [DatabaseService,
   LoginService,LoadingService,AuthGuardGuard,
-  MatSidenav],
+  MatSidenav,CustomMatPaginatorIntl],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
