@@ -1,15 +1,9 @@
  .ckedtiorCard{
   background-color: white;
-  min-height: 75%;
-  min-width: 75%;
+  /* min-height: 75%;
+  min-width: 75%; */
 
 }
-/*
-.CardPos{
-  position: absolute;
-  top: 25%;
-  left: 25%;
-} */
 
 /* This controls the hetig and width of the editor */
 :host ::ng-deep .ck-editor__editable_inline {

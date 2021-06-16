@@ -1,14 +1,87 @@
-<mat-card class="CardPos">
-  <mat-card-title>{{title}}</mat-card-title>
-  <div id="editor" >
-    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
-    <script>
-      ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
-        console.error(error)
-      });
-    </script>
-    <ckeditor style="min-block-size: 100%;" [editor]="Editor" cdkScrollable="false" [data]="localHtmltext"></ckeditor>
-  </div>
-</mat-card>
-<mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;"
-[mode]="'indeterminate'" *ngIf="loadingText$ |async"></mat-progress-spinner>
+<div style="display: flex;">
+  <mat-card class="CardPos">
+    <mat-card-title>{{title}}</mat-card-title>
+    <div id="editor">
+      <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+      <script>
+        ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
+          console.error(error)
+        });
+      </script>
+      <ckeditor style="min-block-size: 100%;" [editor]="Editor" cdkScrollable="false" [data]="localHtmltext"></ckeditor>
+    </div>
+  </mat-card>
+
+  <!-- Cheack box -->
+  <mat-card>
+    <mat-card-title>Liste</mat-card-title>
+    <div class="col-2 white" id="checkListe">
+      <div class="CategoryBox">
+        <p>Check færdige Kategorier</p>
+        <hr id="topHR">
+      </div>
+      <div class="CategoryBox">
+        <!-- old teams events (change)="onCheck($event)"  [checked]="check('Forside')"-->
+        <input type="checkbox" id="Forside" name="Forside" value="Forside">
+        <label for="Forside">Forside</label>
+        <hr>
+      </div>
+      <div class="CategoryBox">
+        <input type="checkbox" id="Formaal" name="Formål" value="Formaal">
+        <label for="Formaal">Formål</label>
+        <hr>
+      </div>
+      <div class="CategoryBox">
+        <input type="checkbox" id="Materiale" name="Materiale" value="Materiale">
+        <label for="Materiale">Materiale</label>
+        <hr>
+      </div>
+      <div class="CategoryBox">
+        <input type="checkbox" id="Forsoegsopstilling" name="Forsoegsopstilling" value="Forsoegsopstilling">
+        <label for="Forsoegsopstilling">Forsøgsopstilling</label>
+        <hr>
+      </div>
+      <div class="CategoryBox">
+        <input type="checkbox" id="Sikkerhed" name="Sikkerhed" value="Sikkerhed">
+        <label for="Sikkerhed">Sikkerhed</label>
+        <hr>
+      </div>
+      <div class="CategoryBox">
+        <input type="checkbox" id="Teori" name="Teori" value="Teori">
+        <label for="Teori">Teori</label>
+        <hr>
+      </div>
+      <div class="CategoryBox">
+        <input type="checkbox" id="Resultater" name="Resultater" value="Resultater">
+        <label for="Resultater">Resultater</label>
+        <hr>
+      </div>
+      <div class="CategoryBox">
+        <input type="checkbox" id="Diskussion" name="Diskussion" value="Diskussion">
+        <label for="Diskussion">Diskussion</label>
+        <hr>
+      </div>
+      <div class="CategoryBox">
+        <input type="checkbox" id="Fejlkilder" name="Fejlkilder" value="Fejlkilder">
+        <label for="Fejlkilder">Fejlkilder</label>
+        <hr>
+      </div>
+      <div class="CategoryBox">
+        <input type="checkbox" id="Konklusion" name="Konklusion" value="Konklusion">
+        <label for="Konklusion">Konklusion</label>
+        <hr>
+      </div>
+      <div class="CategoryBox">
+        <input type="checkbox" id="Kilder" name="Kilder" value="Kilder">
+        <label for="Kilder">Kilder</label>
+      </div>
+
+    </div>
+  </mat-card>
+
+  <button mat-icon-button  (click)="closeDialogBox()" aria-label="luk og gem" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;"
+    [mode]="'indeterminate'" *ngIf="loadingText$ |async"></mat-progress-spinner>
+</div>

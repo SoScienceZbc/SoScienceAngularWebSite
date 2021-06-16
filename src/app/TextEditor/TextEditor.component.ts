@@ -1,6 +1,6 @@
 import { ProviderAst } from '@angular/compiler';
 import { Component, Inject, Injectable, Input, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { provideRoutes } from '@angular/router';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -25,7 +25,7 @@ export class TextEditorComponent implements OnInit {
 
   public Editor = ClassicEditor;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private datasevice: DatabaseService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private datasevice: DatabaseService, private dialog: MatDialog) {
     this.localDDocoment = this.datasevice.GetDocomentHtml(sessionStorage.getItem("username") as string, (this.data.docoment as D_Document).getId());
 
   }
@@ -50,6 +50,12 @@ export class TextEditorComponent implements OnInit {
   public onChange(editor: ChangeEvent) {
     editor.editor.setData("<p>This is from onchange</p>")
     console.log(editor.editor.getData())
+
+  }
+
+  closeDialogBox() {
+
+    this.dialog.closeAll()
 
   }
 

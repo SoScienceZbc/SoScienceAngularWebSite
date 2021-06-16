@@ -14,6 +14,7 @@ export class TextEditorDilogBoxComponent implements OnInit {
 
   @Input('DocomentToEdite') datas!:D_Document
   loading$ = this.spinner.loading$;
+  isShow = false;
   constructor( private dilog: MatDialog , private spinner:LoadingService) {
    }
 
@@ -27,7 +28,9 @@ export class TextEditorDilogBoxComponent implements OnInit {
       data:{
         docoment: this.datas
       }
+
     });
+    this.isShow = true;
     t.backdropClick().subscribe(x => {console.log("User click on backdrop")})
   }
 
