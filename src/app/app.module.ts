@@ -24,7 +24,8 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon'
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import {MatDialogModule} from '@angular/material/dialog'
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressBarModule} from '@angular/material/progress-bar'
 
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
@@ -81,6 +82,7 @@ import { CustomMatPaginatorIntl } from './archive/CustomMatPageinatorIntl';
     MatListModule,
     FlexLayoutModule,
     MatDialogModule,
+    MatProgressBarModule,
     /*---Grpc---*/
     GrpcCoreModule.forRoot(),
     ImprobableEngGrpcWebClientModule.forRoot({

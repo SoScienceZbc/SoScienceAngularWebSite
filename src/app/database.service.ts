@@ -108,13 +108,10 @@ export class DatabaseService {
   //#endregion
   //#region Documents
   /*-------------------Documents-------------------*/
-  public AddDocument(name: string) {
+  public AddDocument(name: string,docomentToAdd:D_Document) {
 
     // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
-    const userDbInfomation = new D_Document();
-    userDbInfomation.setProjectid(151);
-    userDbInfomation.setTitle("Test Docoment");
-    userDbInfomation.setData("test word stuff");
+    const userDbInfomation = docomentToAdd;
     grpc.invoke(GrpcDatabaseProject.AddDocument, {
       request: userDbInfomation,
       host: this.hostAddress,
@@ -162,7 +159,12 @@ export class DatabaseService {
     })
     return docoment;
   }
-
+/**
+ *
+ * @param name The docoment owners name
+ * @param id the docoment id
+ * @returns a behaviorsubject of type D_document.
+ */
   public GetDocomentHtml(name:string,id:number): BehaviorSubject<D_Document>{
     const userDbInfomation = new UserDbInfomation();
     userDbInfomation.setDbname(name);
@@ -172,18 +174,34 @@ export class DatabaseService {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: D_Document) => {
-        console.log("Data from GetDocomentHtml ",Message.getData());
-        // docoment.next(Message);
         docoment.next(Message)
-        // docoment = Message;
-
-        // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       }, onEnd: res => {
-        // console.log("It have endes")
       }
     })
     return docoment;
 
+  }
+
+  /**
+ *
+ * @param name The docoment owners name
+ * @param docomentToUpdate the document to update in database.
+ * @returns a behaviorsubject of type D_document.
+ */
+  public UpdateDocoment(name:string,docomentToUpdate:D_Document){
+
+    const userDbInfomation = docomentToUpdate;
+    grpc.invoke(GrpcDatabaseProject.UpdateDocument, {
+      request: userDbInfomation,
+      host: this.hostAddress,
+      onMessage: (Message: intger) => {
+        if(Message.getNumber() == 0)
+        {
+          console.log("No entrys have been updated in database.");
+        }
+      }, onEnd: res => {
+      }
+    })
   }
 
   //#endregion

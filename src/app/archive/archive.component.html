@@ -1,21 +1,24 @@
-
 <mat-card>
   <div>
-    <div>
+    <div style="display: flex;;">
       <!-- <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button> -->
-        <h4 >tilføje nyt project</h4>
-        <button (click)="AddNewProject()" mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button>
+      <button (click)="AddNewProject()" mat-ripple mat-mini-fab style="background-color:#3f51b5;">
+        <mat-icon>add</mat-icon>
+      </button>
+      <h4 style="position: relative; margin-top: 0.5rem; margin-left: 0.5rem;">tilføje nyt project</h4>
     </div>
     <br />
     <br />
     <mat-form-field>
-      <mat-label style="font-size: large">Filter/Søg</mat-label>
+      <mat-label style="font-size: large">
+        <mat-icon>search</mat-icon>
+      </mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Filter/Søg" #input />
     </mat-form-field>
     <table mat-table [dataSource]="matdatascoure" multiTemplateDataRows class="mat-elevation-z8" matSort>
 
       <!-- Name Column -->
-      <ng-container matColumnDef="Id" >
+      <ng-container matColumnDef="Id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
         <td mat-cell *matCellDef="let element">{{ element.getId() }}</td>
       </ng-container>
@@ -58,6 +61,7 @@
                     <span></span>
                     <span></span>
                     <th>Ret</th>
+                    <th>Progresse</th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let item of GetDocomentsAsObject(element).getDocumentsList()">
@@ -66,14 +70,21 @@
                     <span></span>
                     <td>{{item.getTitle()}}</td>
                     <span></span>
-                    <td><app-TextEditorDilogBox [DocomentToEdite]="item"></app-TextEditorDilogBox>
+                    <td>
+                      <app-TextEditorDilogBox [DocomentToEdite]="item"></app-TextEditorDilogBox>
+                    </td>
+                    <td>
+                      <mat-progress-bar style="min-width: 150px;" mode="determinate" (value)='item.getCompletedcount()'></mat-progress-bar>
                     </td>
                   </tr>
                 </tbody>
 
-              </table><div style="padding-top: 1rem; padding-bottom: 1rem;">
-                  <hr>
-                <button mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button>
+              </table>
+              <div style="padding-top: 1rem; padding-bottom: 1rem;">
+                <hr>
+                <button mat-ripple mat-mini-fab style="background-color:#3f51b5;">
+                  <mat-icon>add</mat-icon>
+                </button>
                 <a style="margin: 5px;">new Docoment</a>
               </div>
             </div>
@@ -85,11 +96,12 @@
       <!-- Expanded Content Column - The detail row is made up of this one column -->
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns; when:isExpansionDetailRow"
-        class="example-element-row" [class.example-expanded-row]="Docoments == row"
-        (click)="Docoments = Docoments  == row ? null: row" (click)="StartSpinner(row)"style="overflow: hidden;">
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; when:isExpansionDetailRow" class="example-element-row"
+        [class.example-expanded-row]="Docoments == row" (click)="Docoments = Docoments  == row ? null: row"
+        (click)="StartSpinner(row)" style="overflow: hidden;">
       </tr>
-      <tr style="overflow: hidden;" mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      <tr style="overflow: hidden;" mat-row *matRowDef="let row; columns: ['expandedDetail']"
+        class="example-detail-row"></tr>
     </table>
 
 
@@ -97,4 +109,4 @@
   </div>
   <mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;"
     [mode]="'indeterminate'" *ngIf="loading$ |async"></mat-progress-spinner>
-  </mat-card>
+</mat-card>

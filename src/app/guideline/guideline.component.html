@@ -1,1 +1,157 @@
-<button mat-button>Action</button>
+<mat-accordion>
+  <!--Sprog-->
+  <mat-expansion-panel (opened)="panelOpenState1 = true" (closed)="panelOpenState1 = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="mat-panel-title">
+        Forside
+      </mat-panel-title>
+      <mat-panel-description>
+        Klik her for at {{panelOpenState1 ? 'lukke' : 'udvide'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <span>Indeholder navn på forsøget, dit fulde navn og klasse-nr. samt dato</span>
+
+  </mat-expansion-panel>
+  <!-- Formål Design -->
+  <mat-expansion-panel (opened)="panelOpenState2 = true" (closed)="panelOpenState2 = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="mat-panel-title">
+        Formål
+      </mat-panel-title>
+      <mat-panel-description>
+        Klik her for at {{panelOpenState2 ? 'lukke' : 'udvide'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <span>hvad er det du gerne vil vise med forsøget?</span>
+  </mat-expansion-panel>
+
+  <!-- Materiale -->
+  <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="mat-panel-title">
+        Materiale
+      </mat-panel-title>
+      <mat-panel-description>
+        Klik her for at {{panelOpenState3 ? 'lukke' : 'udvide'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <span>hvilke materialer bruger du?</span>
+  </mat-expansion-panel>
+
+  <!-- Forsøgsopstilling -->
+  <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="mat-panel-title">
+        Forsøgsopstilling
+      </mat-panel-title>
+      <mat-panel-description>
+        Klik her for at {{panelOpenState3 ? 'lukke' : 'udvide'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <span>her kan du lægge et foto af din opstilling ind - husk at skrive kommentarer til dine billeder!
+    </span>
+  </mat-expansion-panel>
+  <!-- Sikerhed -->
+
+  <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="mat-panel-title">
+        Sikerhed
+      </mat-panel-title>
+      <mat-panel-description>
+        Klik her for at {{panelOpenState3 ? 'lukke' : 'udvide'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <span>hvad skal du være opmærksom på af sikkerhedsmæssige foranstaltninger (kemikalier, gas, ild osv.)</span>
+  </mat-expansion-panel>
+
+  <!-- Teori -->
+  <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="mat-panel-title">
+        Teori
+      </mat-panel-title>
+      <mat-panel-description>
+        Klik her for at {{panelOpenState3 ? 'lukke' : 'udvide'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <span>Beskriv hvad du har læst og lært af den teori, der knytter sig til forsøget.</span>
+    <br>
+    <br>
+    <span>Formler og modeller kan også vises her. Dette afsnit skal fylde ca. 1/4 af rapporten!</span>
+  </mat-expansion-panel>
+  <!-- Resultater -->
+  <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="mat-panel-title">
+        Resultater
+      </mat-panel-title>
+      <mat-panel-description>
+        Klik her for at {{panelOpenState3 ? 'lukke' : 'udvide'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <span class="col-8-sm">Beskriv dine resultater grundigt. Hvis du har målinger er det en fordel af benytte et
+      skema.</span>
+  </mat-expansion-panel>
+  <!-- Diskussion -->
+  <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="mat-panel-title">
+        Diskussion
+      </mat-panel-title>
+      <mat-panel-description>
+        Klik her for at {{panelOpenState3 ? 'lukke' : 'udvide'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <span>Lykkedes forsøget? - Hvis ja, passer det så med din teori og hvis nej, hvad gik galt?</span>
+    <br>
+    <br>
+    <span>Kunne du ændre på noget, hvis forsøget skulle laves om?</span>
+  </mat-expansion-panel>
+
+  <!-- feljkilder -->
+  <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="mat-panel-title">
+        feljkilder
+      </mat-panel-title>
+      <mat-panel-description>
+        Klik her for at {{panelOpenState3 ? 'lukke' : 'udvide'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <span>Er der nogle faktorer, der har indflydelse på dine resultater? </span>
+  </mat-expansion-panel>
+  <!-- Konklusion -->
+  <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="mat-panel-title">
+        Konklusion
+      </mat-panel-title>
+      <mat-panel-description>
+        Klik her for at {{panelOpenState3 ? 'lukke' : 'udvide'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <span>Her kommer du med det endelige svar/resultat på det du ville undersøge/vise. Man kan sige, at
+      du stiller en opgave i punktet Formål og besvarer det her i din konklusion.</span>
+    <br>
+    <br>
+    <span>Ofte har du allerede svaret i forbindelse med resultatafsnittet og i dine beregninger. Hvis det er tilfældet
+      bruger du bare
+      dette punkt til en opsumering af de vigtigste resultater. </span>
+  </mat-expansion-panel>
+
+  <!-- Kilder -->
+  <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title class="mat-panel-title">
+        Kilder
+      </mat-panel-title>
+      <mat-panel-description>
+        Klik her for at {{panelOpenState3 ? 'lukke' : 'udvide'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <span>Hvor har du fundet din teori og andet materiale, som du har brugt i rapporten?</span>
+  </mat-expansion-panel>
+
+</mat-accordion>
