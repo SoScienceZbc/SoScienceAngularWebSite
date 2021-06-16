@@ -47,8 +47,8 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private dataserve: DatabaseService, private spinner: LoadingService) {
 
-    // this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
-    this.dataserve.GetProjectsTheRigthWay("alex303a");
+    this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
+    // this.dataserve.GetProjectsTheRigthWay("alex303a");
     this.dataserve.behavProject$.asObservable().subscribe(x => {
       if (x != this.projects) {
         this.projects = x;
