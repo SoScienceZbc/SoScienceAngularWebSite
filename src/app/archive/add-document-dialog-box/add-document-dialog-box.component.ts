@@ -4,24 +4,26 @@ import { D_Document } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from 'src/app/loading.service';
 import { TextEditorComponent } from 'src/app/TextEditor/TextEditor.component';
 import { expandingD_Docs } from '../archive.component';
+import { DocumentAddComponent } from '../document-add/document-add.component';
 import { ProjectFormComponent } from '../project-form/project-form.component';
-@Component({
-  selector: 'app-add-project-dialog-box',
-  templateUrl: './add-project-dialog-box.component.html',
-  styleUrls: ['./add-project-dialog-box.component.css']
-})
-export class AddProjectDialogBoxComponent implements OnInit {
 
-  @Input('projectid') projectid!:number
+@Component({
+  selector: 'app-add-document-dialog-box',
+  templateUrl: './add-document-dialog-box.component.html',
+  styleUrls: ['./add-document-dialog-box.component.css']
+})
+export class AddDocumentDialogBoxComponent implements OnInit {
+
+
+  @Input('projectid') projectid!:D_Document
   loading$ = this.spinner.loading$;
   constructor( private dilog: MatDialog , private spinner:LoadingService) {
    }
 
   ngOnInit(): void {
   }
-
   testDialog() {
-    let t = this.dilog.open(ProjectFormComponent,{
+    let t = this.dilog.open(DocumentAddComponent,{
       data:{
         projectid: this.projectid
       }

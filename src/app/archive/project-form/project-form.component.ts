@@ -17,11 +17,23 @@ export class ProjectFormComponent implements OnInit {
   AddNewProject(titel:string){
     if(titel.length > 5){
 
+      const event = new Date(Date.now());
       let d = new D_Project();
+      let name = sessionStorage.getItem("username");
+
       d.setName(titel);
-      this.dataservice.AddProject(sessionStorage.getItem("username")!,d);
+      d.setCompleted(false);
+      d.setEnddate(event.toLocaleString('en-GB', { timeZone: 'GMT' }));
+      d.setLastedited(event.toLocaleString('en-GB', { timeZone: 'GMT' }));
+
+      console.log(event.toLocaleString('en-GB', { timeZone: 'GMT' }));
+
+      this.dataservice.AddProject((name as string),d);
       this.dialog.closeAll();
-      console.log("ja")
+
+
+      //console.log(Date.now().toLocaleString('en-GB'));
+
     }
   }
 }

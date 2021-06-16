@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-card-content>
+    <mat-form-field class="form-element" type="submit">
+      <input #titel matInput placeholder="Titel">
+    </mat-form-field>
+    <hr>
+    <button (click)="addNewDocoment(titel.value)" mat-icon-button><mat-icon>create_new_file</mat-icon></button>
+  </mat-card-content>
+</mat-card>

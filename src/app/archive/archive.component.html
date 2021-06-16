@@ -3,8 +3,8 @@
     <div style="display: flex;;">
       <!-- <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button> -->
 
-        <h4 >Tilføj nyt projekt</h4>
         <app-add-project-dialog-box></app-add-project-dialog-box>
+        <h4 >Tilføj nyt projekt</h4>
     </div>
     <br />
     <br />
@@ -82,7 +82,8 @@
                   <hr>
 
                   <!-- getting removed -->
-                <button mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button>
+                  <app-add-document-dialog-box [projectid]="element.getId()" ></app-add-document-dialog-box>
+                <!-- <button mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button> -->
                 <a style="margin: 5px;">Tilføj nyt dokument</a>
               </div>
             </div>

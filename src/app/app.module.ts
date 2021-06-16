@@ -48,6 +48,8 @@ import { TextEditorDilogBoxComponent } from "../app/archive/TextEditorDilogBox/T
 import { AddProjectDialogBoxComponent } from './archive/add-project-dialog-box/add-project-dialog-box.component';
 import { CustomMatPaginatorIntl } from './archive/CustomMatPageinatorIntl';
 import { ProjectFormComponent } from './archive/project-form/project-form.component';
+import { AddDocumentDialogBoxComponent } from './archive/add-document-dialog-box/add-document-dialog-box.component';
+import { DocumentAddComponent } from './archive/document-add/document-add.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { ProjectFormComponent } from './archive/project-form/project-form.compon
     TextEditorDilogBoxComponent,
     AddProjectDialogBoxComponent,
     ProjectFormComponent,
+    AddDocumentDialogBoxComponent,
+    DocumentAddComponent,
    ],
   imports: [
     BrowserModule,
