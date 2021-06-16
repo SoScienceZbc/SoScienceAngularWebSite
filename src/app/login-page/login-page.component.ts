@@ -1,15 +1,6 @@
-import { isNull } from '@angular/compiler/src/output/output_ast';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Value } from '@ngx-grpc/well-known-types';
-import { Observable, Subscriber } from 'rxjs';
-import { DatabaseService } from '../database.service';
-import { ForsideComponent } from '../forside/forside.component';
-import {
-  D_Project,
-  D_Projects,
-} from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 import { LoginService } from '../login.service';
 
@@ -24,7 +15,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     Validators.email,
   ]);
   testlogin: boolean = false;
-  projects: D_Projects = new D_Projects();
 
   loading$ = this.spinner.loading$;
 

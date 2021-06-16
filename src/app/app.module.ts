@@ -37,20 +37,19 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { TextEditorComponent } from './TextEditor/TextEditor.component';
 /*-----------------Pages-----------------*/
 
-import {ForsideComponent} from '../app/forside/forside.component'
+import { FrontpageComponent } from './frontpage/frontpage.component'
 import {GuidelineComponent} from '../app/guideline/guideline.component'
 import {LoginPageComponent} from '../app/login-page/login-page.component'
 import { ArchiveComponent } from './archive/archive.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SettingsComponent } from './settings/settings.component';
-import {  TextEditorDilogBoxComponent} from "../app/archive/TextEditorDilogBox/TextEditorDilogBox.component";
+import { TextEditorDilogBoxComponent} from "../app/archive/TextEditorDilogBox/TextEditorDilogBox.component";
 @NgModule({
   declarations: [
     AppComponent,
-    ForsideComponent,
+    FrontpageComponent,
     GuidelineComponent,
-    ForsideComponent,
     TextEditorComponent,
     ArchiveComponent,
     LoginPageComponent,
