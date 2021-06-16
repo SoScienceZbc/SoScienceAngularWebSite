@@ -30,7 +30,6 @@ import {MatDialogModule} from '@angular/material/dialog'
 import { DatabaseService } from './database.service';
 import { LoginService } from './login.service';
 import { ImprobableEngGrpcWebClientModule } from '@ngx-grpc/improbable-eng-grpc-web-client';
-import { from } from 'rxjs';
 import { LoadingService } from './loading.service';
 /*-----------------CkEditor-----------------*/
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -96,4 +95,4 @@ import { CustomMatPaginatorIntl } from './archive/CustomMatPageinatorIntl';
   MatSidenav,CustomMatPaginatorIntl],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
