@@ -1,11 +1,12 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatabaseService } from '../database.service';
 import { D_Document, D_Documents, D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
+import { CustomMatPaginatorIntl } from './CustomMatPageinatorIntl';
 
 /**
  * @title Table with expandable rows
@@ -23,6 +24,11 @@ import { LoadingService } from '../loading.service';
   ],
 })
 export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageEvent: PageEvent = new PageEvent();
+
   /*--------------ViewChilds--------------*/
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -35,15 +41,14 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   /*--------------DataTable Values--------------*/
   displayedColumns = ["Id", "name", "completed", "lastedited", "endDate"];
   matdatascoure = new MatTableDataSource<expandingD_Project>(this.dataSource);
-  length = this.matdatascoure.data.length;
   Docoments: expandingD_Docs = new expandingD_Docs();
   expandingelement: expandingD_Docs = new expandingD_Docs();
   isExpansionDetailRow = (id: number, row: any | expandingD_Docs) => this.isExpansionDetailRows(id, row);
 
   constructor(private dataserve: DatabaseService, private spinner: LoadingService) {
 
-    this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
-    // this.dataserve.GetProjectsTheRigthWay("andi0137");
+    // this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
+    this.dataserve.GetProjectsTheRigthWay("alex303a");
     this.dataserve.behavProject$.asObservable().subscribe(x => {
       if (x != this.projects) {
         this.projects = x;
@@ -84,9 +89,9 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   AddNewProject() {
     // this.dataserve.AddProject("alex303a",new D_Project());
   }
-/**
- * This sets up the sorting logic for the table.
- */
+  /**
+   * This sets up the sorting logic for the table.
+   */
   onsortChange() {
 
     this.matdatascoure.sortingDataAccessor = (item, property) => {
@@ -100,13 +105,13 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     };
   }
-/**
- *
- * @param element a single D_prject to fecth docoments for.
- * @returns docoments for the giving project(Note on the surface data is returded here. eg the title and dates but not the main data.)
- */
+  /**
+   *
+   * @param element a single D_prject to fecth docoments for.
+   * @returns docoments for the giving project(Note on the surface data is returded here. eg the title and dates but not the main data.)
+   */
   GetDocoments(element: expandingD_Project): expandingD_Docs {
-    console.log(element);
+    // console.log(element);
     this.dataserve.GetDocuments("", element.getId()).subscribe(x => {
       // console.log('x', x.toArray()[0].length > 0)
       if (x.toArray()[0].length >= 1 && x != this.Docoments) {
@@ -122,12 +127,12 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     });
     return this.Docoments;
   }
-/**
- * This is a control cheack to control wheter or not any giving row at any giving time can/allowed to be render.
- * @param i the row id number
- * @param row the row
- * @returns boolean indication wheter or not the row can be expandede/rednder.
- */
+  /**
+   * This is a control cheack to control wheter or not any giving row at any giving time can/allowed to be render.
+   * @param i the row id number
+   * @param row the row
+   * @returns boolean indication wheter or not the row can be expandede/rednder.
+   */
   isExpansionDetailRows(i: number, row: expandingD_Project): boolean {
     console.log("Cheaking if row can be expanded");
     return true;
@@ -150,7 +155,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   StartSpinner(row: expandingD_Project) {
   }
-
 }
 
 export class expandingD_Docs extends D_Documents {
