@@ -2,7 +2,7 @@ import { ProviderAst } from '@angular/compiler';
 import { Component, Inject, Injectable, Input, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { provideRoutes } from '@angular/router';
-import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Any } from '@ngx-grpc/well-known-types';
 import { BehaviorSubject, observable, Observable, of } from 'rxjs';
@@ -29,24 +29,22 @@ export class TextEditorComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private datasevice: DatabaseService, private dialog: MatDialog) {
     this.localDDocoment = this.datasevice.GetDocomentHtml(sessionStorage.getItem("username") as string, (this.data.docoment as D_Document).getId());
-
+    this.spinner.show();
   }
 
   ngOnInit() {
 
     this.localDDocoment.subscribe(x => {
       this.title = x.getTitle();
-      // console.log("data", x.getData())
+      console.log("data", x.getData())
       if (x.getData().length > 0) {
-        console.log(x.getData());
-        this.localHtmltext.next("<p>" + x.getData() +"</p>");
-        // this.localHtmltext += "<h1>ARgh!!</h1>"
-        // this.localHtmltext = x.getData();
-        // console.log(this.Editor.getData());
         this.spinner.hide();
+      }else if(x.getTitle().length > 3){
+        this.spinner.hide();
+
       }
     })
-    this.spinner.show();
+
     // console.log("This is from ckeditor",this.data)
   }
   public onChange(editor: ChangeEvent) {
@@ -56,7 +54,7 @@ export class TextEditorComponent implements OnInit {
   }
 
   closeDialogBox() {
-
+    // this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(),);
     this.dialog.closeAll()
 
   }

@@ -3,8 +3,9 @@
     <div style="display: flex;;">
       <!-- <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button> -->
 
-        <app-add-project-dialog-box></app-add-project-dialog-box>
-        <h4 >Tilføj nyt projekt</h4>
+      <app-add-project-dialog-box #tooltip="matTooltip"
+      matTooltip="Tilføj nyt projekt" matTooltipHideDelay="100" ></app-add-project-dialog-box>
+      <!-- <h4>Tilføj nyt projekt</h4> -->
     </div>
     <br />
     <br />
@@ -18,25 +19,25 @@
 
       <!-- Name Column -->
       <ng-container matColumnDef="Id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
         <td mat-cell *matCellDef="let element">{{ element.getId() }}</td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Navn/Title</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Navn/Titel</th>
         <td mat-cell *matCellDef="let element">{{ element.getName() }}</td>
       </ng-container>
 
       <!-- completed Column -->
       <ng-container matColumnDef="completed">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Færdig</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Færdigjort</th>
         <td mat-cell *matCellDef="let element">{{ element.getCompleted() ? "Ja" : "Nej" }}</td>
       </ng-container>
 
       <!-- lastedited Column -->
       <ng-container matColumnDef="lastedited">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sidst rettet</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sidst redigeret</th>
         <td mat-cell *matCellDef="let element">
           {{ element.getLastedited() }}
         </td>
@@ -55,36 +56,45 @@
               <table *ngIf="GetDocomentsAsObject(element).getDocumentsList()[0].getId() != 0">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Navn/Title</th>
-                    <span></span>
-                    <span></span>
-                    <th>Ret</th>
-                    <th>Progresse</th>
+                    <!-- <th style=" text-align: left">Id</th> -->
+                    <th style=" text-align: left;">Navn/Titel</th>
+                    <th style=" text-align: left;">Rediger</th>
+                    <th style=" text-align: left;">Fremdrift</th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let item of GetDocomentsAsObject(element).getDocumentsList()">
                   <tr>
-                    <td>{{item.getId()}}</td>
-                    <span></span>
+                    <!-- <td>{{item.getId()}}</td> -->
                     <td>{{item.getTitle()}}</td>
-                    <span></span>
                     <td>
                       <app-TextEditorDilogBox [DocomentToEdite]="item"></app-TextEditorDilogBox>
                     </td>
                     <td>
-                      <mat-progress-bar style="min-width: 150px;" mode="determinate" (value)='item.getCompletedcount()'></mat-progress-bar>
+                      <button mat-icon-button (click)="DeleteDocoment(item)"><mat-icon>delete</mat-icon></button>
+                    </td>
+                    <td>
+                      <mat-progress-bar style="min-width: 150px;" mode="determinate"  [value]='((item.getCompletedcount() /11)*100)'>
+                      </mat-progress-bar>
                     </td>
                   </tr>
                 </tbody>
 
-              </table><div style="padding-top: 1rem; padding-bottom: 1rem;">
-                  <hr>
-
-                  <!-- getting removed -->
-                  <app-add-document-dialog-box [projectid]="element.getId()" ></app-add-document-dialog-box>
+              </table>
+              <div style="padding-top: 1rem; z-index: 10; padding-bottom: 1rem;">
+                <hr>
+                <app-add-document-dialog-box [projectid]="element.getId()" #tooltip="matTooltip"
+                matTooltip="Tilføj nyt document" matTooltipHideDelay="100" style="margin-left: 5px;"></app-add-document-dialog-box>
                 <!-- <button mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button> -->
-                <a style="margin: 5px;">Tilføj nyt dokument</a>
+                <!-- <a style="margin: 5px;">Tilføj nyt dokument</a> -->
+                <span></span>
+                <button mat-mini-fab style="background-color:#3f51b5; margin-left: 5px;" #tooltip="matTooltip"
+                  matTooltip="Optage lyd" matTooltipHideDelay="100">
+                  <mat-icon>mic</mat-icon>
+                </button>
+                <button mat-mini-fab style="background-color:#3f51b5; margin-left: 5px;"  #tooltip="matTooltip"
+                matTooltip="Optage Video" matTooltipHideDelay="100">
+                  <mat-icon>videocam</mat-icon>
+                </button>
               </div>
             </div>
           </div>

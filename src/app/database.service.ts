@@ -75,6 +75,8 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         console.log("entris change: " + Message.getNumber());
+        this.behavProject$.value.addDProject(projectToAdd);
+        this.behavProject$.next(this.behavProject$.value);
       }, onEnd: res => {
       }
     })
@@ -108,7 +110,7 @@ export class DatabaseService {
   //#endregion
   //#region Documents
   /*-------------------Documents-------------------*/
-  public AddDocument(name: string,docomentToAdd:D_Document) {
+  public AddDocument(name: string, docomentToAdd: D_Document) {
 
     // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
     const userDbInfomation = docomentToAdd;
@@ -159,13 +161,13 @@ export class DatabaseService {
     })
     return docoment;
   }
-/**
- *
- * @param name The docoment owners name
- * @param id the docoment id
- * @returns a behaviorsubject of type D_document.
- */
-  public GetDocomentHtml(name:string,id:number): BehaviorSubject<D_Document>{
+  /**
+   *
+   * @param name The docoment owners name
+   * @param id the docoment id
+   * @returns a behaviorsubject of type D_document.
+   */
+  public GetDocomentHtml(name: string, id: number): BehaviorSubject<D_Document> {
     const userDbInfomation = new UserDbInfomation();
     userDbInfomation.setDbname(name);
     userDbInfomation.setId(id);
@@ -188,15 +190,14 @@ export class DatabaseService {
  * @param docomentToUpdate the document to update in database.
  * @returns a behaviorsubject of type D_document.
  */
-  public UpdateDocoment(name:string,docomentToUpdate:D_Document){
+  public UpdateDocoment(name: string, docomentToUpdate: D_Document) {
 
     const userDbInfomation = docomentToUpdate;
     grpc.invoke(GrpcDatabaseProject.UpdateDocument, {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
-        if(Message.getNumber() == 0)
-        {
+        if (Message.getNumber() == 0) {
           console.log("No entrys have been updated in database.");
         }
       }, onEnd: res => {
@@ -204,6 +205,25 @@ export class DatabaseService {
     })
   }
 
+  public RemoveDocoment(docomnet: D_Document, projectID: number) {
+    const userDbInfomation = new ProjectUserInfomation();
+    //Removedocoment usese userinfomation as the docoment id..
+    //BadFix but Create new Project and add the docoment into that and send that to the database.
+    //and ofcufse remeber to set the projectid from the parm"projectID"
+    let tempproject = new D_Project;
+    tempproject.addDocuments(docomnet);
+    tempproject.setId(projectID);
+    userDbInfomation.setProject(tempproject)
+    grpc.invoke(GrpcDatabaseProject.RemoveDocument, {
+      request: userDbInfomation,
+      host: this.hostAddress,
+      onMessage: (Message: intger) => {
+        console.log("This have been change in database.")
+      }, onEnd: res => {
+      }
+    })
+
+  }
   //#endregion
   /*-------------------RemoteFiles-------------------*/
 }

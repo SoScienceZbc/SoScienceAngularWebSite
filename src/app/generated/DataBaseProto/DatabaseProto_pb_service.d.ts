@@ -1,7 +1,7 @@
 // package: DatabaseGRPC
 // file: src/app/protos/DatabaseProto.proto
 
-import * as src_app_protos_DatabaseProto_pb from "../DataBaseProto/DatabaseProto_pb";
+import * as src_app_protos_DatabaseProto_pb from "../../generated/DataBaseProto/DatabaseProto_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
 type GrpcDatabaseProjectGetProject = {
@@ -90,7 +90,7 @@ type GrpcDatabaseProjectRemoveDocument = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.ProjectUserInfomation;
   readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
 };
 
@@ -272,12 +272,12 @@ export class GrpcDatabaseProjectClient {
     callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
   ): UnaryResponse;
   removeDocument(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    requestMessage: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
     metadata: grpc.Metadata,
     callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
   ): UnaryResponse;
   removeDocument(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    requestMessage: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
     callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
   ): UnaryResponse;
   addRemoteFile(

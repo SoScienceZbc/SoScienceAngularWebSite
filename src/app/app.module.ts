@@ -26,7 +26,7 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressBarModule} from '@angular/material/progress-bar'
-
+import {MatTooltipModule} from '@angular/material/tooltip'
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
 import { LoginService } from './login.service';
@@ -92,6 +92,7 @@ import { DocumentAddComponent } from './archive/document-add/document-add.compon
     FlexLayoutModule,
     MatDialogModule,
     MatProgressBarModule,
+    MatTooltipModule,
     /*---Grpc---*/
     GrpcCoreModule.forRoot(),
     ImprobableEngGrpcWebClientModule.forRoot({

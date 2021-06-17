@@ -1,7 +1,7 @@
 // package: DatabaseGRPC
 // file: src/app/protos/DatabaseProto.proto
 
-var src_app_protos_DatabaseProto_pb = require("../DataBaseProto/DatabaseProto_pb");
+var src_app_protos_DatabaseProto_pb = require("../../../src/app/protos/DatabaseProto_pb");
 var grpc = require("@improbable-eng/grpc-web").grpc;
 
 var GrpcDatabaseProject = (function () {
@@ -96,7 +96,7 @@ GrpcDatabaseProject.RemoveDocument = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+  requestType: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
   responseType: src_app_protos_DatabaseProto_pb.intger
 };
 

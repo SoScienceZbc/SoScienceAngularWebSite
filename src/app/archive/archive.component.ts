@@ -112,7 +112,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   GetDocoments(element: expandingD_Project): expandingD_Docs {
     // console.log(element);
-    this.dataserve.GetDocuments("", element.getId()).subscribe(x => {
+    this.dataserve.GetDocuments(sessionStorage.getItem("username")!.toString(), element.getId()).subscribe(x => {
       // console.log('x', x.toArray()[0].length > 0)
       if (x.toArray()[0].length >= 1 && x != this.Docoments) {
         this.Docoments = x.clone() as expandingD_Docs;
@@ -122,6 +122,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
           element.addDocuments(item, args);
         })
         this.spinner.hide();
+        // console.log(element);
       }
       element.Loading = true;
     });
@@ -154,6 +155,11 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
   StartSpinner(row: expandingD_Project) {
+  }
+  DeleteDocoment(docoment:D_Document){
+    console.log("Now deleting docoment", docoment);
+    this.dataserve.RemoveDocoment(docoment,docoment.getProjectid());
+
   }
 }
 
