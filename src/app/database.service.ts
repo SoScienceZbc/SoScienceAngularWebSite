@@ -13,6 +13,7 @@ export class DatabaseService {
   signelProject$: BehaviorSubject<D_Project> = new BehaviorSubject<D_Project>(new D_Project);
   behavProject$: BehaviorSubject<D_Projects> = new BehaviorSubject<D_Projects>(new D_Projects);
   listOfProjects$: BehaviorSubject<D_Project[]> = new BehaviorSubject<D_Project[]>([]);
+  EditorDocoment$: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
 
   constructor() {
   }
@@ -154,6 +155,7 @@ export class DatabaseService {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: D_Document) => {
+        this.EditorDocoment$.next(Message);
         docoment.next(Message);
 
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));

@@ -22,19 +22,30 @@ export class TextEditorComponent implements OnInit {
   spinner: LoadingService = new LoadingService();
   loadingText$ = this.spinner.loading$;
   title: string | any;
+  public model = {
+    editorData: "<p>dasfv</p>"
+  }
 
   public Editor = ClassicEditor;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private datasevice: DatabaseService, private dialog: MatDialog) {
     this.localDDocoment = this.datasevice.GetDocomentHtml(sessionStorage.getItem("username") as string, (this.data.docoment as D_Document).getId());
+    this.datasevice.EditorDocoment$.subscribe(x => {
+      if (this.model.editorData != x.getData()) {
+        console.log(x);
+        this.model.editorData = (x.getData());
+
+      }
+    })
     this.spinner.show();
   }
 
   ngOnInit() {
 
+    this.model.editorData = ("<p>argh warms</p>");
     this.localDDocoment.subscribe(x => {
       this.title = x.getTitle();
-      console.log("data", x.getData())
+      // this.model.editorData.next(x.getData())
       if (x.getData().length > 0) {
         this.spinner.hide();
       } else if (x.getTitle().length > 3) {

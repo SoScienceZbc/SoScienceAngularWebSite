@@ -51,6 +51,7 @@ import { AddProjectDialogBoxComponent } from './archive/AddProject/add-project-d
 import { ProjectFormComponent } from './archive/AddProject/project-form/project-form.component';
 import { AddDocumentDialogBoxComponent } from './archive/AddDocument/add-document-dialog-box/add-document-dialog-box.component';
 import { DocumentAddComponent } from './archive/AddDocument/document-add/document-add.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { DocumentAddComponent } from './archive/AddDocument/document-add/documen
    ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatFormFieldModule,

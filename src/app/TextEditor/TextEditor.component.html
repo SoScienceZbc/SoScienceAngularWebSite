@@ -8,7 +8,42 @@
           console.error(error)
         });
       </script>
-      <ckeditor style="min-block-size: 100%;" [editor]="Editor" cdkScrollable="false"  (data)="localHtmltext.next"></ckeditor>
+      <script>
+        var app = angular.module("CKEditorExample", ["ngCkeditor"]);
+        app.directive("ckEditor", function () {
+          return {
+            require: "?ngModel",
+            link: function (scope, elm, attr, ngModel) {
+              var ck = CKEDITOR.replace(elm[0]);
+              if (!ngModel) return;
+              ck.on("instanceReady", function () {
+                ck.setData(ngModel.$viewValue);
+              });
+              function updateModel() {
+                scope.$apply(function () {
+                  ngModel.$setViewValue(ck.getData());
+                });
+              }
+              ck.on("change", updateModel);
+              ck.on("key", updateModel);
+              ck.on("dataReady", updateModel);
+
+              ngModel.$render = function (value) {
+                ck.setData(ngModel.$viewValue);
+              };
+            }
+          };
+        });
+
+        app.controller("MainCtrl", [
+          "$scope",
+          function ($scope) {
+            $scope.content = "<p> this is custom directive </p>";
+            $scope.content_two = "<p> this is ng-ckeditor directive </p>";
+          }
+        ]);
+      </script>
+      <ckeditor style="min-block-size: 100%;" [(ngModel)]="model.editorData" [editor]="Editor"></ckeditor>
     </div>
   </mat-card>
 
@@ -37,7 +72,8 @@
         <hr>
       </div>
       <div class="CategoryBox">
-        <input type="checkbox" id="Forsoegsopstilling" name="Forsoegsopstilling" [checked]="check('Forsoegsopstilling')" value="Forsoegsopstilling">
+        <input type="checkbox" id="Forsoegsopstilling" name="Forsoegsopstilling" [checked]="check('Forsoegsopstilling')"
+          value="Forsoegsopstilling">
         <label for="Forsoegsopstilling">Forsøgsopstilling</label>
         <hr>
       </div>
@@ -79,7 +115,7 @@
     </div>
   </mat-card>
 
-  <button mat-icon-button  (click)="closeDialogBox()" aria-label="luk og gem" mat-dialog-close>
+  <button mat-icon-button (click)="closeDialogBox()" aria-label="luk og gem" mat-dialog-close>
     <mat-icon>close</mat-icon>
   </button>
   <mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;"
