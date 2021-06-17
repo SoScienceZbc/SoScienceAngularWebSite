@@ -1,10 +1,8 @@
-import { ProviderAst } from '@angular/compiler';
+
 import { Component, Inject, Injectable, Input, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { provideRoutes } from '@angular/router';
 import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { Any } from '@ngx-grpc/well-known-types';
 import { BehaviorSubject, observable, Observable, of } from 'rxjs';
 import { DatabaseService } from '../database.service';
 import { D_Document } from '../generated/DataBaseProto/DatabaseProto_pb';
@@ -20,7 +18,7 @@ import { LoadingService } from '../loading.service';
 })
 export class TextEditorComponent implements OnInit {
   localDDocoment: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
-  localHtmltext:BehaviorSubject<string> = new BehaviorSubject<string>("<p>old data</p>");
+  localHtmltext: BehaviorSubject<string> = new BehaviorSubject<string>("<p>old data</p>");
   spinner: LoadingService = new LoadingService();
   loadingText$ = this.spinner.loading$;
   title: string | any;
@@ -39,7 +37,7 @@ export class TextEditorComponent implements OnInit {
       console.log("data", x.getData())
       if (x.getData().length > 0) {
         this.spinner.hide();
-      }else if(x.getTitle().length > 3){
+      } else if (x.getTitle().length > 3) {
         this.spinner.hide();
 
       }
@@ -57,6 +55,16 @@ export class TextEditorComponent implements OnInit {
     // this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(),);
     this.dialog.closeAll()
 
+  }
+  check(value: string): boolean {
+    let state = false;
+    this.localDDocoment.value.getCompletedList().forEach(element => {
+      if (value.toLowerCase() == element.toLowerCase()) {
+        return state = true;
+      }
+      return state = false;
+    });
+    return state;
   }
 
 }

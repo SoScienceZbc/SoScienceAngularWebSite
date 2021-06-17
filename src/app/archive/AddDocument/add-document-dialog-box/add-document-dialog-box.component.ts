@@ -15,7 +15,7 @@ import { ProjectFormComponent } from '../../AddProject/project-form/project-form
 export class AddDocumentDialogBoxComponent implements OnInit {
 
 
-  @Input('projectid') projectid!:D_Document
+  @Input('projectid') projectid!:number
   loading$ = this.spinner.loading$;
   constructor( private dilog: MatDialog , private spinner:LoadingService) {
    }
