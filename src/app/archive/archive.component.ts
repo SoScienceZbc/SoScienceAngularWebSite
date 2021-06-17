@@ -49,18 +49,19 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
     // this.dataserve.GetProjectsTheRigthWay("alex303a");
+
     this.dataserve.behavProject$.asObservable().subscribe(x => {
-      if (x != this.projects && !(x.getDProjectList().length >= this.projects.getDProjectList().length)) {
-        console.log("behavproject$ value: ",this.dataserve.behavProject$.value);
+      if (x != this.projects && (x.getDProjectList().length >= this.projects.getDProjectList().length)) {
+        // console.log("behavproject$ value: ",this.dataserve.behavProject$.value);
         this.projects = x;
         this.dataSource = this.projects.getDProjectList() as Array<expandingD_Project>;
-        this.dataSource.forEach(element => {
-          this.GetDocoments(element);
-          console.log(element);
+        // this.dataSource.forEach(element => {
+          // this.GetDocoments(element);
+          // console.log(element);
 
-        });
+        // });
         this.matdatascoure.data = this.projects.getDProjectList() as Array<expandingD_Project>;
-        // this.spinner.hide();
+        this.spinner.hide();
       }
     }, (a) => { console.log(a) });
     this.onsortChange();
@@ -124,6 +125,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
         this.Docoments.getDDocumentsList().forEach((item, args) => {
           element.addDocuments(item, args);
         })
+        // console.log(this.dataserve.behavProject$.value)
         this.spinner.hide();
         // console.log(element);
       }
@@ -138,7 +140,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
    * @returns boolean indication wheter or not the row can be expandede/rednder.
    */
   isExpansionDetailRows(i: number, row: expandingD_Project): boolean {
-    console.log("Cheaking if row can be expanded");
+    // console.log("Cheaking if row can be expanded");
     return true;
   }
 
@@ -160,8 +162,13 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   StartSpinner(row: expandingD_Project) {
   }
   DeleteDocoment(docoment:D_Document){
-    console.log("Now deleting docoment", docoment);
+    // console.log("Now deleting docoment", docoment);
     this.dataserve.RemoveDocoment(docoment,docoment.getProjectid());
+
+  }
+  DeleteProject(element:D_Project){
+    console.log("Now deleting project.",element);
+    this.dataserve.DeleteProject(element,sessionStorage.getItem("username")!.toString());
 
   }
 }

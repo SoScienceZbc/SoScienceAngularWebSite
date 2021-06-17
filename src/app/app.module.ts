@@ -24,6 +24,7 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon'
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressBarModule} from '@angular/material/progress-bar'
 import {MatTooltipModule} from '@angular/material/tooltip'
@@ -87,6 +88,7 @@ import { DocumentAddComponent } from './archive/document-add/document-add.compon
     MatIconModule,
     MatNativeDateModule,
     MatRippleModule,
+    MatMenuModule,
     MatSidenavModule,
     MatListModule,
     FlexLayoutModule,

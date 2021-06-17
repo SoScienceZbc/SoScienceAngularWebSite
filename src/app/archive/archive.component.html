@@ -3,8 +3,8 @@
     <div style="display: flex;;">
       <!-- <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button> -->
 
-      <app-add-project-dialog-box #tooltip="matTooltip"
-      matTooltip="Tilføj nyt projekt" matTooltipHideDelay="100" ></app-add-project-dialog-box>
+      <app-add-project-dialog-box #tooltip="matTooltip" matTooltip="Tilføj nyt projekt" matTooltipHideDelay="100">
+      </app-add-project-dialog-box>
       <!-- <h4>Tilføj nyt projekt</h4> -->
     </div>
     <br />
@@ -45,7 +45,19 @@
       <!-- endDate Column -->
       <ng-container matColumnDef="endDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Slut Dato</th>
-        <td mat-cell *matCellDef="let element">{{ element.getEnddate() }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.getEnddate() }}<a style="z-index: 10;">
+
+
+
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="DeleteProject(element)">ja</button>
+              <button mat-menu-item>nej</button>
+            </mat-menu>
+          </a>
+        </td>
       </ng-container>
 
       <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
@@ -70,10 +82,13 @@
                       <app-TextEditorDilogBox [DocomentToEdite]="item"></app-TextEditorDilogBox>
                     </td>
                     <td>
-                      <button mat-icon-button (click)="DeleteDocoment(item)"><mat-icon>delete</mat-icon></button>
+                      <button mat-icon-button (click)="DeleteDocoment(item)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
                     </td>
                     <td>
-                      <mat-progress-bar style="min-width: 150px;" mode="determinate"  [value]='((item.getCompletedcount() /11)*100)'>
+                      <mat-progress-bar style="min-width: 150px;" mode="determinate"
+                        [value]='((item.getCompletedcount() /11)*100)'>
                       </mat-progress-bar>
                     </td>
                   </tr>
@@ -83,7 +98,8 @@
               <div style="padding-top: 1rem; z-index: 10; padding-bottom: 1rem;">
                 <hr>
                 <app-add-document-dialog-box [projectid]="element.getId()" #tooltip="matTooltip"
-                matTooltip="Tilføj nyt document" matTooltipHideDelay="100" style="margin-left: 5px;"></app-add-document-dialog-box>
+                  matTooltip="Tilføj nyt document" matTooltipHideDelay="100" style="margin-left: 5px;">
+                </app-add-document-dialog-box>
                 <!-- <button mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button> -->
                 <!-- <a style="margin: 5px;">Tilføj nyt dokument</a> -->
                 <span></span>
@@ -91,8 +107,8 @@
                   matTooltip="Optage lyd" matTooltipHideDelay="100">
                   <mat-icon>mic</mat-icon>
                 </button>
-                <button mat-mini-fab style="background-color:#3f51b5; margin-left: 5px;"  #tooltip="matTooltip"
-                matTooltip="Optage Video" matTooltipHideDelay="100">
+                <button mat-mini-fab style="background-color:#3f51b5; margin-left: 5px;" #tooltip="matTooltip"
+                  matTooltip="Optage Video" matTooltipHideDelay="100">
                   <mat-icon>videocam</mat-icon>
                 </button>
               </div>
@@ -107,7 +123,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns; when:isExpansionDetailRow" class="example-element-row"
         [class.example-expanded-row]="Docoments == row" (click)="Docoments = Docoments  == row ? null: row"
-        (click)="StartSpinner(row)" style="overflow: hidden;">
+        style="overflow: hidden;">
       </tr>
       <tr style="overflow: hidden;" mat-row *matRowDef="let row; columns: ['expandedDetail']"
         class="example-detail-row"></tr>

@@ -224,6 +224,22 @@ export class DatabaseService {
     })
 
   }
+
+  public DeleteProject(project:D_Project,name:string){
+    const userDbInfomation = new ProjectUserInfomation();
+    const userinfomation = new UserDbInfomation();
+    userinfomation.setDbname(name);
+    userDbInfomation.setProject(project);
+    userDbInfomation.setUser(userinfomation);
+    grpc.invoke(GrpcDatabaseProject.RemoveProject, {
+      request: userDbInfomation,
+      host: this.hostAddress,
+      onMessage: (Message: intger) => {
+        console.log("This have been change in database.",Message.getNumber())
+      }, onEnd: res => {
+      }
+    })
+  }
   //#endregion
   /*-------------------RemoteFiles-------------------*/
 }
