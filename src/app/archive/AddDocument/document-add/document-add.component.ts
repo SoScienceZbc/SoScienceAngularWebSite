@@ -16,20 +16,24 @@ export class DocumentAddComponent implements OnInit {
   addNewDocoment(title:string){
     if(title.length > 5){
     let newdoc = new D_Document();
+    let name = sessionStorage.getItem("username");
+
+
     newdoc.setProjectid(this.projectid.projectid);
     console.log(this.projectid.projectid)
     newdoc.setTitle(title);
-    newdoc.setData("<p>skriv noget tjekket og awsome. og tro på den vindeskablig fremgangs måde</p>")
-    newdoc.addCompleted("sikkerhed");
-    // newdoc.addCompleted("forside");
+    //newdoc.setData("<p>skriv noget tjekket og awsome. og tro på den vindeskablig fremgangs måde</p>")
+    //newdoc.addCompleted("sikkerhed");
+     //newdoc.addCompleted("forside");
     // newdoc.addCompleted("Materiale");
     // newdoc.addCompleted("Forsøgopstilling");
-    // newdoc.addCompleted("Formål");
+     newdoc.addCompleted("Formål");
     // newdoc.addCompleted("Teori");
     // newdoc.addCompleted("Resultater");
-    // newdoc.addCompleted("Diskussion");
+     newdoc.addCompleted("Diskussion");
+    newdoc.setCompletedcount(2);
 
-    this.databaseserve.AddDocument(sessionStorage.getItem("username")!.toString(),newdoc);
+    this.databaseserve.AddDocument((name as string),newdoc);
 
       console.log(this.projectid);
       this.dialog.closeAll();

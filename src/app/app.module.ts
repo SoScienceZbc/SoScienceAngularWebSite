@@ -45,11 +45,11 @@ import { AuthGuardGuard } from './auth-guard.guard';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TextEditorDilogBoxComponent } from "../app/archive/TextEditorDilogBox/TextEditorDilogBox.component";
-import { AddProjectDialogBoxComponent } from './archive/add-project-dialog-box/add-project-dialog-box.component';
 import { CustomMatPaginatorIntl } from './archive/CustomMatPageinatorIntl';
-import { ProjectFormComponent } from './archive/project-form/project-form.component';
-import { AddDocumentDialogBoxComponent } from './archive/add-document-dialog-box/add-document-dialog-box.component';
-import { DocumentAddComponent } from './archive/document-add/document-add.component';
+import { AddProjectDialogBoxComponent } from './archive/AddProject/add-project-dialog-box/add-project-dialog-box.component';
+import { ProjectFormComponent } from './archive/AddProject/project-form/project-form.component';
+import { AddDocumentDialogBoxComponent } from './archive/AddDocument/add-document-dialog-box/add-document-dialog-box.component';
+import { DocumentAddComponent } from './archive/AddDocument/document-add/document-add.component';
 
 @NgModule({
   declarations: [
