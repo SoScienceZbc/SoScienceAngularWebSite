@@ -16,6 +16,9 @@ export class DocumentAddComponent implements OnInit {
   addNewDocoment(title:string){
 
     let newdoc = new D_Document();
+    let name = sessionStorage.getItem("username");
+
+
     newdoc.setProjectid(this.projectid.projectid);
     console.log(this.projectid.projectid)
     newdoc.setTitle(title);
@@ -27,9 +30,10 @@ export class DocumentAddComponent implements OnInit {
     // newdoc.addCompleted("Formaal");
     // newdoc.addCompleted("Teori");
     // newdoc.addCompleted("Resultater");
-    // newdoc.addCompleted("Diskussion");
+     newdoc.addCompleted("Diskussion");
+    newdoc.setCompletedcount(2);
 
-    this.databaseserve.AddDocument(sessionStorage.getItem("username")!.toString(),newdoc);
+    this.databaseserve.AddDocument((name as string),newdoc);
 
       // console.log(this.projectid);
       this.dialog.closeAll();
