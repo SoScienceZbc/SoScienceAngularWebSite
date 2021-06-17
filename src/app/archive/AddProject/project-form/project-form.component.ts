@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
 import { D_Project } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
+import { LoadingService } from 'src/app/loading.service';
 
 @Component({
   selector: 'app-project-form',
@@ -10,7 +11,7 @@ import { D_Project } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
 })
 export class ProjectFormComponent implements OnInit {
 
-  constructor(private dataservice:DatabaseService,private dialog:MatDialog) { }
+  constructor(private dataservice:DatabaseService,private dialog:MatDialog,private spinner:LoadingService) { }
 
   ngOnInit(): void {
   }
@@ -30,6 +31,7 @@ export class ProjectFormComponent implements OnInit {
 
       this.dataservice.AddProject((name as string),d);
       this.dialog.closeAll();
+      this.spinner.show();
 
 
       //console.log(Date.now().toLocaleString('en-GB'));
