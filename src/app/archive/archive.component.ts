@@ -1,4 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ObserversModule } from '@angular/cdk/observers';
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -35,7 +36,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   /*--------------Spinner--------------*/
   loading$ = this.spinner.loading$;
   /*--------------SimpleDataObjects--------------*/
-  projects: D_Projects = new D_Projects();
   public dataSource: Array<expandingD_Project> = new Array<expandingD_Project>();
   canExpand: boolean = false;
   /*--------------DataTable Values--------------*/
@@ -48,24 +48,12 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private dataserve: DatabaseService, private spinner: LoadingService) {
 
     this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
-    // this.dataserve.GetProjectsTheRigthWay("alex303a");
 
-    this.dataserve.behavProject$.asObservable().subscribe(x => {
-      if (x != this.projects && (x.getDProjectList().length >= this.projects.getDProjectList().length)) {
-        // console.log("behavproject$ value: ",this.dataserve.behavProject$.value);
-        this.projects = x;
-        this.dataSource = this.projects.getDProjectList() as Array<expandingD_Project>;
-        // this.dataSource.forEach(element => {
-          // this.GetDocoments(element);
-          // console.log(element);
-
-        // });
-        this.matdatascoure.data = this.projects.getDProjectList() as Array<expandingD_Project>;
-        this.spinner.hide();
-      }
-    }, (a) => { console.log(a) });
+    this.dataserve.listOfProjects$.subscribe(x => {
+      this.matdatascoure.data = (x as expandingD_Project[]);
+      this.spinner.hide();
+    });
     this.onsortChange();
-    // this.matdatascoure._updateChangeSubscription();
   }
 
   ngAfterViewInit(): void {
@@ -86,18 +74,11 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.matdatascoure.filter = filterValue.trim().toLowerCase();
   }
 
-  /**
-   * This adds a new project to the database in the users name.
-   * TODO: create a better ui for the user.
-   */
-  AddNewProject() {
-    // this.dataserve.AddProject("alex303a",new D_Project());
-  }
+
   /**
    * This sets up the sorting logic for the table.
    */
   onsortChange() {
-
     this.matdatascoure.sortingDataAccessor = (item, property) => {
       switch (property) {
         case 'name': return item.getName();
@@ -114,25 +95,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
    * @param element a single D_prject to fecth docoments for.
    * @returns docoments for the giving project(Note on the surface data is returded here. eg the title and dates but not the main data.)
    */
-  GetDocoments(element: expandingD_Project): expandingD_Docs {
-    // console.log(element);
-    this.dataserve.GetDocuments(sessionStorage.getItem("username")!.toString(), element.getId()).subscribe(x => {
-      // console.log('x', x.toArray()[0].length > 0)
-      if (x.toArray()[0].length >= 1 && x != this.Docoments) {
-        this.Docoments = x.clone() as expandingD_Docs;
-        this.Docoments.expanding = true;
-        element.clearDocumentsList();
-        this.Docoments.getDDocumentsList().forEach((item, args) => {
-          element.addDocuments(item, args);
-        })
-        // console.log(this.dataserve.behavProject$.value)
-        this.spinner.hide();
-        // console.log(element);
-      }
-      element.Loading = true;
-    });
-    return this.Docoments;
-  }
+
   /**
    * This is a control cheack to control wheter or not any giving row at any giving time can/allowed to be render.
    * @param i the row id number
@@ -159,16 +122,14 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     return mockup;
 
   }
-  StartSpinner(row: expandingD_Project) {
-  }
-  DeleteDocoment(docoment:D_Document){
-    // console.log("Now deleting docoment", docoment);
-    this.dataserve.RemoveDocoment(docoment,docoment.getProjectid());
+  DeleteDocoment(docoment: D_Document) {
+    this.spinner.show();
+    this.dataserve.RemoveDocoment(docoment, docoment.getProjectid());
 
   }
-  DeleteProject(element:D_Project){
-    console.log("Now deleting project.",element);
-    this.dataserve.DeleteProject(element,sessionStorage.getItem("username")!.toString());
+  DeleteProject(element: D_Project) {
+    this.spinner.show();
+    this.dataserve.DeleteProject(element, sessionStorage.getItem("username")!.toString());
 
   }
 }

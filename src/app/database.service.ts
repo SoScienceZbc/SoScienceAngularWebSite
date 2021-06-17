@@ -12,6 +12,7 @@ export class DatabaseService {
   hostAddress = "http://40.87.150.18:27385";
   signelProject$: BehaviorSubject<D_Project> = new BehaviorSubject<D_Project>(new D_Project);
   behavProject$: BehaviorSubject<D_Projects> = new BehaviorSubject<D_Projects>(new D_Projects);
+  listOfProjects$: BehaviorSubject<D_Project[]> = new BehaviorSubject<D_Project[]>([]);
 
   constructor() {
   }
@@ -32,7 +33,8 @@ export class DatabaseService {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: D_Projects) => {
-        this.behavProject$.next(Message);
+        this.listOfProjects$.next(Message.getDProjectList())
+        // this.behavProject$.next(Message);
         // console.log(Message);
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       }, onEnd: res => {
@@ -75,8 +77,7 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         console.log("entris change: " + Message.getNumber());
-        this.behavProject$.value.addDProject(projectToAdd);
-        this.behavProject$.next(this.behavProject$.value);
+        this.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString());
       }, onEnd: res => {
       }
     })
@@ -120,6 +121,7 @@ export class DatabaseService {
       onMessage: (Message: intger) => {
         // this.behavProject$.next(Message);
         console.log(Message);
+        this.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString());
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       }, onEnd: res => {
         // console.log("It have endes")
@@ -218,6 +220,7 @@ export class DatabaseService {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
+        this.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString());
         console.log("This have been change in database.")
       }, onEnd: res => {
       }
@@ -235,6 +238,7 @@ export class DatabaseService {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
+        this.GetProjectsTheRigthWay(name);
         console.log("This have been change in database.",Message.getNumber())
       }, onEnd: res => {
       }
