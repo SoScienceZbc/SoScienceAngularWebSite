@@ -50,18 +50,21 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
     // this.dataserve.GetProjectsTheRigthWay("alex303a");
     this.dataserve.behavProject$.asObservable().subscribe(x => {
-      if (x != this.projects) {
+      if (x != this.projects && x.getDProjectList().length >= 1) {
+        console.log("behavproject$ value: ",this.dataserve.behavProject$.value);
         this.projects = x;
         this.dataSource = this.projects.getDProjectList() as Array<expandingD_Project>;
-        this.projects.getDProjectList().every((item, args) => {
-          this.GetDocoments(item as expandingD_Project);
+        this.dataSource.forEach(element => {
+          this.GetDocoments(element);
+          console.log(element);
+
         });
         this.matdatascoure.data = this.projects.getDProjectList() as Array<expandingD_Project>;
         // this.spinner.hide();
       }
     }, (a) => { console.log(a) });
     this.onsortChange();
-    this.matdatascoure._updateChangeSubscription();
+    // this.matdatascoure._updateChangeSubscription();
   }
 
   ngAfterViewInit(): void {
