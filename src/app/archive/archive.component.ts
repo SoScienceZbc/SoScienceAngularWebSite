@@ -50,7 +50,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
     // this.dataserve.GetProjectsTheRigthWay("alex303a");
     this.dataserve.behavProject$.asObservable().subscribe(x => {
-      if (x != this.projects && x.getDProjectList().length >= 1) {
+      if (x != this.projects && !(x.getDProjectList().length >= this.projects.getDProjectList().length)) {
         console.log("behavproject$ value: ",this.dataserve.behavProject$.value);
         this.projects = x;
         this.dataSource = this.projects.getDProjectList() as Array<expandingD_Project>;
