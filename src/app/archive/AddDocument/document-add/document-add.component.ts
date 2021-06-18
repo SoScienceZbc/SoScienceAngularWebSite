@@ -23,8 +23,8 @@ export class DocumentAddComponent implements OnInit {
     newdoc.setProjectid(this.projectid.projectid);
     console.log(this.projectid.projectid)
     newdoc.setTitle(title);
-    newdoc.setData("<p>skriv noget tjekket og awsome. og tro på den vindeskablig fremgangs måde</p>")
-    newdoc.setCompletedcount(2);
+    // newdoc.setData("<p>skriv noget tjekket og awsome. og tro på den vindeskablig fremgangs måde</p>")
+    // newdoc.setCompletedcount(2);
 
     this.databaseserve.AddDocument((name as string),newdoc);
     this.spinner.show();

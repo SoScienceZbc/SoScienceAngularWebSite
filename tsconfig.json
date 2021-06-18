@@ -14,17 +14,17 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
     /*--CkEditor-*/
     "allowJs": true,
+    "target": "es2015",
+    "module": "es2020",
 
     "lib": [
       "es2018",
       "dom",
-    /*---*/  ]
-  },
-  "angularCompilerOptions": {
+      /*---*/  ]
+    },
+    "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,

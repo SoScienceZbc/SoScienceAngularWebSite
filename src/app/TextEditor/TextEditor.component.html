@@ -2,14 +2,15 @@
   <mat-card class="CardPos">
     <mat-card-title>{{title}}</mat-card-title>
     <div id="editor">
-      <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+      <!-- <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script> -->
+      <script src="../ckedtitor/build/ckeditor.js"></script>
       <script>
-        ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
+         customEditor.create(document.querySelector("#editor")).catch((error) => {
           console.error(error)
         });
       </script>
-      <ckeditor style="min-block-size: 100%;" [(ngModel)]="dataModel.editorData" [config]="ckeConfig"
-        (ngModelChange)="onChange($event)" [editor]="Editor"></ckeditor>
+      <ckeditor #editor placeholder="begynde at skriv" style="min-block-size: 100%;" [(ngModel)]="dataModel.editorData"
+        [config]="ckeConfig" (ngModelChange)="onChange($event)" [editor]="Editor"></ckeditor>
     </div>
   </mat-card>
 
@@ -20,7 +21,7 @@
       <div>
         <p>Check færdige Kategorier</p>
         <hr>
-        <mat-selection-list >
+        <mat-selection-list>
 
 
           <mat-checkbox #Forside [checked]='check(Forside.value)' (click)="SetCategoro(Forside.value)" value="Forside">

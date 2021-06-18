@@ -1,14 +1,15 @@
 
-import { Component, Inject, Injectable, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, Injectable, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { BehaviorSubject, observable, Observable, of } from 'rxjs';
+import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+// import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { BehaviorSubject} from 'rxjs';
 import { DatabaseService } from '../database.service';
 import { D_Document } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
-// import ObservableMixin from '@ckeditor/ckeditor5-utils/src/observablemixin';
-// import mix from '@ckeditor/ckeditor5-utils/src/mix';
+// import * as customEditor from '../ckedtitor/build/ckeditor'
+import { CKSource } from '../ckedtitor/build/ckeditor';
+// from '../ckedtitor/build/ckeditor';
 
 
 @Component({
@@ -16,9 +17,21 @@ import { LoadingService } from '../loading.service';
   templateUrl: './TextEditor.component.html',
   styleUrls: ['./TextEditor.component.css']
 })
-export class TextEditorComponent implements OnInit {
+export class TextEditorComponent implements OnInit, AfterViewInit {
 
-  @ViewChild("myckeditor") ckeditor: any;
+
+  CreateEditor() {
+    // this.ckeditor.editor?.create(CKSource,this.ckeConfig)
+    // .create(document.querySelector('#editor'))
+    //   .then((editor: any) => {
+    //     console.log('Editor was initialized', editor);
+    //   })
+    //   .catch((error: { stack: any; }) => {
+    //     console.error(error.stack);
+    //   });
+  }
+
+  @ViewChild("editor") ckeditor!: CKEditorComponent;
 
   localDDocoment$: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
   localDDocoment: D_Document = this.localDDocoment$.value;
@@ -26,6 +39,7 @@ export class TextEditorComponent implements OnInit {
   spinner: LoadingService = new LoadingService();
   loadingText$ = this.spinner.loading$;
   title: string | any;
+  public Editor = new CKSource;
   ckeConfig: any;
 
   public dataModel = {
@@ -47,9 +61,9 @@ export class TextEditorComponent implements OnInit {
     Kilder: false,
   }
 
-  public Editor = ClassicEditor;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private datasevice: DatabaseService, private dialog: MatDialog) {
+    this.CreateEditor();
     this.localDDocoment$ = this.datasevice.GetDocomentHtml(sessionStorage.getItem("username") as string, (this.data.docoment as D_Document).getId());
     this.datasevice.EditorDocoment$.subscribe(x => {
       if (this.dataModel.editorData != x.getData()) {
@@ -58,6 +72,7 @@ export class TextEditorComponent implements OnInit {
       }
       this.spinner.hide();
     })
+
     this.ckeConfig = {
       allowedContent: true,
       forcePasteAsPlainText: true
@@ -65,9 +80,14 @@ export class TextEditorComponent implements OnInit {
 
     this.spinner.show();
   }
+  ngAfterViewInit(): void {
+    // console.log(this.ckeditor.editorInstance?.getData());
+  }
 
   ngOnInit() {
+
   }
+
   public onChange(editor: ChangeEvent | any) {
 
     // console.log("editor.event", editor)
@@ -82,13 +102,10 @@ export class TextEditorComponent implements OnInit {
   }
 
   closeDialogBox() {
-    // this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(),);
     this.dialog.closeAll()
 
   }
   check(value: string): boolean {
-
-
     switch (value) {
       case 'Forside':
         this.datamodel.Forside = true;
@@ -124,7 +141,6 @@ export class TextEditorComponent implements OnInit {
         this.datamodel.Kilder = true;
         break;
 
-
     }
 
 
@@ -145,6 +161,8 @@ export class TextEditorComponent implements OnInit {
   SetCategoro(event: string) {
     if (!this.localDDocoment$.value.getCompletedList().includes(event)) {
       this.localDDocoment$.value.addCompleted(event);
+      this.datasevice.UpdateDocoment("", this.localDDocoment$.value);
+      console.log("setcat was true", event)
     } else {
       console.log(event)
       // console.log("Find",this.localDDocoment$.value.getCompletedList().find(e=>e==event))
@@ -152,5 +170,4 @@ export class TextEditorComponent implements OnInit {
     }
 
   }
-
 }
