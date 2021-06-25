@@ -3,12 +3,12 @@
     <mat-card-title>{{title}}</mat-card-title>
     <div id="editor">
       <!-- <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script> -->
-      <script src="../ckedtitor/build/ckeditor.js"></script>
-      <script>
-         customEditor.create(document.querySelector("#editor")).catch((error) => {
+      <!-- <script src="../ckedtitor/build/ckeditor.js"></script> -->
+      <!--<script>
+         Editor.create(document.querySelector("#editor")).catch((error) => {
           console.error(error)
         });
-      </script>
+      </script> -->
       <ckeditor #editor placeholder="begynde at skriv" style="min-block-size: 100%;" [(ngModel)]="dataModel.editorData"
         [config]="ckeConfig" (ngModelChange)="onChange($event)" [editor]="Editor"></ckeditor>
     </div>

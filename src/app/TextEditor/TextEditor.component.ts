@@ -1,15 +1,12 @@
 
-import { AfterViewInit, Component, Inject, Injectable, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
-// import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { BehaviorSubject} from 'rxjs';
 import { DatabaseService } from '../database.service';
 import { D_Document } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
-// import * as customEditor from '../ckedtitor/build/ckeditor'
-import { CKSource } from '../ckedtitor/build/ckeditor';
-// from '../ckedtitor/build/ckeditor';
+import *  as customEditor from '../ckedtitor/build/ckeditor';
 
 
 @Component({
@@ -19,19 +16,7 @@ import { CKSource } from '../ckedtitor/build/ckeditor';
 })
 export class TextEditorComponent implements OnInit, AfterViewInit {
 
-
-  CreateEditor() {
-    // this.ckeditor.editor?.create(CKSource,this.ckeConfig)
-    // .create(document.querySelector('#editor'))
-    //   .then((editor: any) => {
-    //     console.log('Editor was initialized', editor);
-    //   })
-    //   .catch((error: { stack: any; }) => {
-    //     console.error(error.stack);
-    //   });
-  }
-
-  @ViewChild("editor") ckeditor!: CKEditorComponent;
+  @ViewChild("editor") ckeditor!: any;
 
   localDDocoment$: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
   localDDocoment: D_Document = this.localDDocoment$.value;
@@ -39,12 +24,11 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
   spinner: LoadingService = new LoadingService();
   loadingText$ = this.spinner.loading$;
   title: string | any;
-  public Editor = new CKSource;
+  public Editor = customEditor.CKSource;
   ckeConfig: any;
 
   public dataModel = {
     editorData: "<p>Standart modal</p>",
-
   }
 
   public datamodel = {
@@ -63,7 +47,6 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private datasevice: DatabaseService, private dialog: MatDialog) {
-    this.CreateEditor();
     this.localDDocoment$ = this.datasevice.GetDocomentHtml(sessionStorage.getItem("username") as string, (this.data.docoment as D_Document).getId());
     this.datasevice.EditorDocoment$.subscribe(x => {
       if (this.dataModel.editorData != x.getData()) {
