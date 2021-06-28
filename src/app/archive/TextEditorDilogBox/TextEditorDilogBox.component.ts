@@ -12,7 +12,7 @@ import { expandingD_Docs } from '../archive.component';
 })
 export class TextEditorDilogBoxComponent implements OnInit {
 
-  @Input('DocomentToEdite') datas!:D_Document
+  @Input('DocomentToEdite') datas?:D_Document
   loading$ = this.spinner.loading$;
   isShow = false;
   constructor( private dilog: MatDialog , private spinner:LoadingService) {

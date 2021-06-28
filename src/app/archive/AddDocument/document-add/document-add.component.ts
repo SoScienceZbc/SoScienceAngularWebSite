@@ -2,6 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
 import { D_Document } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
+import { LoadingService } from 'src/app/loading.service';
 
 @Component({
   selector: 'app-document-add',
@@ -9,7 +10,7 @@ import { D_Document } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
   styleUrls: ['./document-add.component.css']
 })
 export class DocumentAddComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public projectid: any,private databaseserve:DatabaseService,private dialog:MatDialog) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public projectid: any,private databaseserve:DatabaseService,private dialog:MatDialog,private spinner:LoadingService) { }
 
   ngOnInit(): void {
   }
@@ -23,19 +24,13 @@ export class DocumentAddComponent implements OnInit {
     console.log(this.projectid.projectid)
     newdoc.setTitle(title);
     // newdoc.setData("<p>skriv noget tjekket og awsome. og tro på den vindeskablig fremgangs måde</p>")
-    newdoc.addCompleted("Sikkerhed");
-    // newdoc.addCompleted("Forside");
-    // newdoc.addCompleted("Materiale");
-    // newdoc.addCompleted("Forsoegsopstilling");
-    // newdoc.addCompleted("Formaal");
-    // newdoc.addCompleted("Teori");
-    // newdoc.addCompleted("Resultater");
-     newdoc.addCompleted("Diskussion");
-    newdoc.setCompletedcount(2);
+    // newdoc.setCompletedcount(2);
 
     this.databaseserve.AddDocument((name as string),newdoc);
+    this.spinner.show();
 
       // console.log(this.projectid);
+
       this.dialog.closeAll();
 
   }

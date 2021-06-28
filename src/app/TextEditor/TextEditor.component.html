@@ -1,85 +1,66 @@
+<link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.core.css">
 <div style="display: flex;">
   <mat-card class="CardPos">
     <mat-card-title>{{title}}</mat-card-title>
-    <div id="editor">
-      <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
-      <script>
-        ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
-          console.error(error)
-        });
-      </script>
-      <ckeditor style="min-block-size: 100%;" [editor]="Editor" cdkScrollable="false"  (data)="localHtmltext.next"></ckeditor>
+    <div #editor>
+      <!-- <quill-editor #editor  (onEditorChanged)="changedEditor($event)" [modules]="modules" [(ngModel)]="dataModel.editorData" (ngModelChange)="onChange($event)"></quill-editor> -->
+
     </div>
+
+      <!-- <ckeditor #editor placeholder="begynde at skriv" style="min-block-size: 100%;" [(ngModel)]="dataModel.editorData"
+        [config]="ckeConfig" (ngModelChange)="onChange($event)" [editor]="Editor"></ckeditor> -->
   </mat-card>
 
   <!-- Cheack box -->
   <mat-card>
     <mat-card-title>Liste</mat-card-title>
-    <div class="col-2 white" id="checkListe">
-      <div class="CategoryBox">
+    <div>
+      <div>
         <p>Check færdige Kategorier</p>
-        <hr id="topHR">
-      </div>
-      <div class="CategoryBox">
-        <!-- old teams events (change)="onCheck($event)"  [checked]="check('Forside')"-->
-        <input type="checkbox" id="Forside" name="Forside" [checked]="check('forside')" value="Forside">
-        <label for="Forside">Forside</label>
         <hr>
-      </div>
-      <div class="CategoryBox">
-        <input type="checkbox" id="Formaal" name="Formål" [checked]="check('Formaal')" value="Formaal">
-        <label for="Formaal">Formål</label>
-        <hr>
-      </div>
-      <div class="CategoryBox">
-        <input type="checkbox" id="Materiale" name="Materiale" [checked]="check('Materiale')" value="Materiale">
-        <label for="Materiale">Materiale</label>
-        <hr>
-      </div>
-      <div class="CategoryBox">
-        <input type="checkbox" id="Forsoegsopstilling" name="Forsoegsopstilling" [checked]="check('Forsoegsopstilling')" value="Forsoegsopstilling">
-        <label for="Forsoegsopstilling">Forsøgsopstilling</label>
-        <hr>
-      </div>
-      <div class="CategoryBox">
-        <input type="checkbox" id="Sikkerhed" name="Sikkerhed" [checked]="check('Sikkerhed')" value="Sikkerhed">
-        <label for="Sikkerhed">Sikkerhed</label>
-        <hr>
-      </div>
-      <div class="CategoryBox">
-        <input type="checkbox" id="Teori" name="Teori" [checked]="check('Teori')" value="Teori">
-        <label for="Teori">Teori</label>
-        <hr>
-      </div>
-      <div class="CategoryBox">
-        <input type="checkbox" id="Resultater" name="Resultater" [checked]="check('Resultater')" value="Resultater">
-        <label for="Resultater">Resultater</label>
-        <hr>
-      </div>
-      <div class="CategoryBox">
-        <input type="checkbox" id="Diskussion" name="Diskussion" [checked]="check('Diskussion')" value="Diskussion">
-        <label for="Diskussion">Diskussion</label>
-        <hr>
-      </div>
-      <div class="CategoryBox">
-        <input type="checkbox" id="Fejlkilder" name="Fejlkilder" [checked]="check('Fejlkilder')" value="Fejlkilder">
-        <label for="Fejlkilder">Fejlkilder</label>
-        <hr>
-      </div>
-      <div class="CategoryBox">
-        <input type="checkbox" id="Konklusion" name="Konklusion" [checked]="check('Konklusion')" value="Konklusion">
-        <label for="Konklusion">Konklusion</label>
-        <hr>
-      </div>
-      <div class="CategoryBox">
-        <input type="checkbox" id="Kilder" name="Kilder" [checked]="check('Kilder')" value="Kilder">
-        <label for="Kilder">Kilder</label>
-      </div>
+        <mat-selection-list>
 
+
+          <mat-checkbox #Forside [checked]='check(Forside.value)' (click)="SetCategoro(Forside.value)" value="Forside">
+            Forside</mat-checkbox>
+          <hr>
+          <mat-checkbox #Formaal [checked]="check(Formaal.value)" (click)="SetCategoro(Formaal.value)" value="Formaal">
+            Formaal</mat-checkbox>
+          <hr>
+          <mat-checkbox #Materiale [checked]="check(Materiale.value)" (click)="SetCategoro(Materiale.value)"
+            value="Materiale">Materiale</mat-checkbox>
+          <hr>
+          <mat-checkbox #Forsoegsopstilling [checked]="check(Forside.value)"
+            (click)="SetCategoro(Forsoegsopstilling.value)" value="Forsoegsopstilling">Forsoegsopstilling</mat-checkbox>
+          <hr>
+          <mat-checkbox #Sikkerhed [checked]="check(Sikkerhed.value)" (click)="SetCategoro(Sikkerhed.value)"
+            value="Sikkerhed">Sikkerhed</mat-checkbox>
+          <hr>
+          <mat-checkbox #Teori [checked]="check(Teori.value)" (click)="SetCategoro(Teori.value)" value="Teori">Teori
+          </mat-checkbox>
+          <hr>
+          <mat-checkbox #Resultater [checked]="check(Resultater.value)" (click)="SetCategoro(Resultater.value)"
+            value="Resultater">Resultater</mat-checkbox>
+          <hr>
+          <mat-checkbox #Diskussion [checked]="check(Diskussion.value)" (click)="SetCategoro(Diskussion.value)"
+            value="Diskussion">Diskussion</mat-checkbox>
+          <hr>
+          <mat-checkbox #Fejlkilder [checked]="check(Fejlkilder.value)" (click)="SetCategoro(Fejlkilder.value)"
+            value="Fejlkilder">Fejlkilder</mat-checkbox>
+          <hr>
+          <mat-checkbox #Konklusion [checked]="check(Konklusion.value)" (click)="SetCategoro(Konklusion.value)"
+            value="Konklusion">Konklusion</mat-checkbox>
+          <hr>
+          <mat-checkbox #Kilder [checked]="datamodel.Kilder" (click)="SetCategoro(Kilder.value)" value="Kilder">
+            Kilder
+          </mat-checkbox>
+        </mat-selection-list>
+
+      </div>
     </div>
   </mat-card>
 
-  <button mat-icon-button  (click)="closeDialogBox()" aria-label="luk og gem" mat-dialog-close>
+  <button mat-icon-button (click)="closeDialogBox()" mat-dialog-close>
     <mat-icon>close</mat-icon>
   </button>
   <mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;"
