@@ -1,12 +1,12 @@
 
-import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+import Quill from 'quill';
 import { BehaviorSubject} from 'rxjs';
 import { DatabaseService } from '../database.service';
 import { D_Document } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
-import *  as customEditor from '../ckedtitor/build/ckeditor';
+// import *  as customEditor from '../ckedtitor/build/ckeditor';
 
 
 @Component({
@@ -14,9 +14,9 @@ import *  as customEditor from '../ckedtitor/build/ckeditor';
   templateUrl: './TextEditor.component.html',
   styleUrls: ['./TextEditor.component.css']
 })
-export class TextEditorComponent implements OnInit, AfterViewInit {
+export class TextEditorComponent {
 
-  @ViewChild("editor") ckeditor!: any;
+  @ViewChild("editor") editor!: any;
 
   localDDocoment$: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
   localDDocoment: D_Document = this.localDDocoment$.value;
@@ -24,8 +24,32 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
   spinner: LoadingService = new LoadingService();
   loadingText$ = this.spinner.loading$;
   title: string | any;
-  public Editor = customEditor.CKSource;
-  ckeConfig: any;
+
+  modules = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['blockquote', 'code-block'],
+
+      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [{ 'direction': 'rtl' }],                         // text direction
+
+      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+
+      ['clean'],                                         // remove formatting button
+
+      ['link', 'image', 'video']                         // link and image, video
+    ]
+  };
+
+
 
   public dataModel = {
     editorData: "<p>Standart modal</p>",
@@ -56,22 +80,10 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
       this.spinner.hide();
     })
 
-    this.ckeConfig = {
-      allowedContent: true,
-      forcePasteAsPlainText: true
-    };
-
     this.spinner.show();
   }
-  ngAfterViewInit(): void {
-    // console.log(this.ckeditor.editorInstance?.getData());
-  }
 
-  ngOnInit() {
-
-  }
-
-  public onChange(editor: ChangeEvent | any) {
+  public onChange(editor: Event  | any) {
 
     // console.log("editor.event", editor)
     // this.dataModel.editorData = this.dataModel.editorData;
@@ -152,5 +164,9 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
       // console.log("FindIndex",this.localDDocoment$.value.getCompletedList().findIndex(e => e === event));
     }
 
+  }
+  changedEditor(event:any){
+    this.editor = event;
+console.log("Test oncreate",event);
   }
 }
