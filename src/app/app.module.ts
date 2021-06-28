@@ -50,7 +50,7 @@ import { AddProjectDialogBoxComponent } from './archive/AddProject/add-project-d
 import { ProjectFormComponent } from './archive/AddProject/project-form/project-form.component';
 import { AddDocumentDialogBoxComponent } from './archive/AddDocument/add-document-dialog-box/add-document-dialog-box.component';
 import { DocumentAddComponent } from './archive/AddDocument/document-add/document-add.component';
-import { QuillModule } from 'ngx-quill';
+import { QuillEditorComponent, QuillModule } from 'ngx-quill';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -103,12 +103,37 @@ import { FormsModule } from '@angular/forms';
         host: 'http://40.87.150.18:27385',
         transport: grpc.CrossBrowserHttpTransport({}),
       },
-    }),/*--End Grpc-*/
-    QuillModule.forRoot(),
+    }),
+    /*--End Grpc-*/
+    QuillModule.forRoot({
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+          ['blockquote', 'code-block'],
+
+          [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+          [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+          [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+          [{ 'direction': 'rtl' }],                         // text direction
+
+          [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+          [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+          [{ 'font': [] }],
+          [{ 'align': [] }],
+
+          ['clean'],                                         // remove formatting button
+
+          ['link', 'image', 'video']                         // link and image, video
+        ]
+
+      }
+    })
   ],
-  providers: [DatabaseService,
-    LoginService, LoadingService, AuthGuardGuard,
-    MatSidenav, CustomMatPaginatorIntl],
+  providers: [DatabaseService, LoginService, LoadingService, AuthGuardGuard,
+    MatSidenav, CustomMatPaginatorIntl,TextEditorDilogBoxComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

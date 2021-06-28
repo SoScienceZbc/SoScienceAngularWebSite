@@ -1,4 +1,9 @@
 <mat-card>
+  <button (click)="OpenTestEditor(null)"></button>
+  <!-- <div>
+    <app-TextEditorDilogBox [DocomentToEdite]='TestDocoment'></app-TextEditorDilogBox>
+
+  </div> -->
   <div>
     <div style="display: flex;;">
       <!-- <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button> -->
@@ -66,11 +71,11 @@
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
           <div class="example-element-detail" [@detailExpand]="(element === Docoments) ? 'expanded' : 'collapsed'">
             <div>
-              <table *ngIf="GetDocomentsAsObject(element).getDocumentsList()[0].getId() != 0">
+              <table>
                 <thead>
                   <tr>
                     <!-- <th style=" text-align: left">Id</th> -->
-                    <th style=" text-align: left;">Navn/Titel</th>
+                    <th mat-header-cell style=" text-align: left;">Navn/Titel</th>
                     <th style=" text-align: left;">Rediger</th>
                     <th style=" text-align: left;">Fremdrift</th>
                   </tr>
@@ -79,11 +84,12 @@
                   <tr>
                     <!-- <td>{{item.getId()}}</td> -->
                     <td>{{item.getTitle()}}</td>
-                    <td>
-                      <app-TextEditorDilogBox [DocomentToEdite]='item'></app-TextEditorDilogBox>
+                    <td id="testid">
+                      <button mat-ripple (click)="OpenTestEditor(item)" >Test</button>
+                      <!-- <app-TextEditorDilogBox ngForm [DocomentToEdite]='item'></app-TextEditorDilogBox> -->
                     </td>
                     <td>
-                      <button mat-icon-button  (click)="DeleteDocoment(item)">
+                      <button mat-ripple (click)="DeleteDocoment(item)">
                         <mat-icon>delete</mat-icon>
                       </button>
                     </td>

@@ -121,7 +121,7 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         // this.behavProject$.next(Message);
-        console.log(Message);
+        // console.log(Message);
         this.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString());
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       }, onEnd: res => {
@@ -181,7 +181,7 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: D_Document) => {
         this.EditorDocoment$.next(Message)
-        console.log("Data from database in html form.",Message.getData())
+        // console.log("Data from database in html form.",Message.getData())
         docoment.next(Message)
       }, onEnd: res => {
       }

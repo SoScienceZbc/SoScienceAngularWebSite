@@ -1,22 +1,23 @@
-
-import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import Quill from 'quill';
-import { BehaviorSubject} from 'rxjs';
+import { Component, Inject, Injectable, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { QuillEditorBase, QuillEditorComponent, QuillModule, QuillService } from 'ngx-quill';
+import { Quill } from 'quill';
+import { BehaviorSubject } from 'rxjs';
 import { DatabaseService } from '../database.service';
 import { D_Document } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 // import *  as customEditor from '../ckedtitor/build/ckeditor';
 
 
+@Injectable({providedIn:'root'})
 @Component({
   selector: 'app-TextEditor',
   templateUrl: './TextEditor.component.html',
   styleUrls: ['./TextEditor.component.css']
 })
-export class TextEditorComponent {
+export class TextEditorComponent implements OnInit {
 
-  @ViewChild("editor") editor!: any;
+  @ViewChild('editor') editor?: any;
 
   localDDocoment$: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
   localDDocoment: D_Document = this.localDDocoment$.value;
@@ -25,29 +26,29 @@ export class TextEditorComponent {
   loadingText$ = this.spinner.loading$;
   title: string | any;
 
-  modules = {
-    toolbar: [
-      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-      ['blockquote', 'code-block'],
+  // modules = {
+  //   toolbar: [
+  //     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+  //     ['blockquote', 'code-block'],
 
-      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-      [{ 'direction': 'rtl' }],                         // text direction
+  //     [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  //     [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+  //     [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+  //     [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+  //     [{ 'direction': 'rtl' }],                         // text direction
 
-      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  //     [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  //     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
 
-      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-      [{ 'font': [] }],
-      [{ 'align': [] }],
+  //     [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  //     [{ 'font': [] }],
+  //     [{ 'align': [] }],
 
-      ['clean'],                                         // remove formatting button
+  //     ['clean'],                                         // remove formatting button
 
-      ['link', 'image', 'video']                         // link and image, video
-    ]
-  };
+  //     ['link', 'image', 'video']                         // link and image, video
+  //   ]
+  // };
 
 
 
@@ -82,8 +83,10 @@ export class TextEditorComponent {
 
     this.spinner.show();
   }
+  ngOnInit(): void {
+  }
 
-  public onChange(editor: Event  | any) {
+  public onChange(editor: Event | any) {
 
     // console.log("editor.event", editor)
     // this.dataModel.editorData = this.dataModel.editorData;
@@ -165,8 +168,8 @@ export class TextEditorComponent {
     }
 
   }
-  changedEditor(event:any){
+  changedEditor(event: any) {
     this.editor = event;
-console.log("Test oncreate",event);
+    console.log("Test oncreate", event);
   }
 }

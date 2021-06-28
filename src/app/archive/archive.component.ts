@@ -1,13 +1,14 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ObserversModule } from '@angular/cdk/observers';
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatabaseService } from '../database.service';
 import { D_Document, D_Documents, D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
-import { CustomMatPaginatorIntl } from './CustomMatPageinatorIntl';
+import { TextEditorComponent } from '../TextEditor/TextEditor.component';
+import { TextEditorDilogBoxComponent } from './TextEditorDilogBox/TextEditorDilogBox.component';
 
 /**
  * @title Table with expandable rows
@@ -45,8 +46,8 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   expandingelement: expandingD_Docs = new expandingD_Docs();
   isExpansionDetailRow = (id: number, row: any | expandingD_Docs) => this.isExpansionDetailRows(id, row);
 
-  constructor(private dataserve: DatabaseService, private spinner: LoadingService) {
 
+  constructor(private dataserve: DatabaseService, private spinner: LoadingService, private dilog: MatDialog, private Test: TextEditorDilogBoxComponent) {
     this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
 
     this.dataserve.listOfProjects$.subscribe(x => {
@@ -74,6 +75,21 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.matdatascoure.filter = filterValue.trim().toLowerCase();
   }
 
+  OpenTestEditor(event: any) {
+
+    this.dilog.open(TextEditorComponent, {
+
+      data: {docoment: event}
+      ,autoFocus:false,
+      restoreFocus:true
+
+
+    })._containerInstance
+    // console.log(event)
+    //  this.Test.datas = this.matdatascoure.data[0].getDocumentsList()[0];
+    // this.Test.OpenDialogBox();
+    // this.Test.isShow = true;
+  }
 
   /**
    * This sets up the sorting logic for the table.
@@ -123,7 +139,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
   DeleteDocoment(docoment: D_Document) {
-    this.spinner.show();
+    // this.spinner.show();
     this.dataserve.RemoveDocoment(docoment, docoment.getProjectid());
 
   }
