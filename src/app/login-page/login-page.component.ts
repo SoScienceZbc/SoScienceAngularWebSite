@@ -26,7 +26,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.login.LoginCheakBehavierSubject$.subscribe((x) => {
       if (x !== this.testlogin) {
         this.testlogin = x;
-        //this.route.navigate("");
         sessionStorage.setItem('loggedIn', '' + this.testlogin + '');
         if (this.testlogin) {
           this.route.navigateByUrl('/forside');
@@ -35,10 +34,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       }
       this.spinner.hide();
     });
-    // this.dataServer.behavProject$.subscribe(x => {
-    //   this.projects = x;
-
-    // });
   }
   ngOnDestroy(): void {
     this.login.LoginCheakBehavierSubject$.unsubscribe();
