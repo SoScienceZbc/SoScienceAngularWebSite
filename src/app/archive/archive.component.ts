@@ -9,6 +9,7 @@ import { D_Document, D_Documents, D_Project, D_Projects } from '../generated/Dat
 import { LoadingService } from '../loading.service';
 import { TextEditorComponent } from '../TextEditor/TextEditor.component';
 import { TextEditorDilogBoxComponent } from './TextEditorDilogBox/TextEditorDilogBox.component';
+import quill from 'quill'
 
 /**
  * @title Table with expandable rows
@@ -76,7 +77,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   OpenTestEditor(event: any) {
-
+    quill.register(TextEditorComponent,true);
     this.dilog.open(TextEditorComponent, {
 
       data: {docoment: event}
@@ -139,7 +140,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
   DeleteDocoment(docoment: D_Document) {
-    // this.spinner.show();
+    this.spinner.show();
     this.dataserve.RemoveDocoment(docoment, docoment.getProjectid());
 
   }

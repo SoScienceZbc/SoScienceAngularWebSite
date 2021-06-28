@@ -1,9 +1,4 @@
 <mat-card>
-  <button (click)="OpenTestEditor(null)"></button>
-  <!-- <div>
-    <app-TextEditorDilogBox [DocomentToEdite]='TestDocoment'></app-TextEditorDilogBox>
-
-  </div> -->
   <div>
     <div style="display: flex;;">
       <!-- <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button> -->
@@ -71,10 +66,9 @@
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
           <div class="example-element-detail" [@detailExpand]="(element === Docoments) ? 'expanded' : 'collapsed'">
             <div>
-              <table>
+              <table *ngIf="GetDocomentsAsObject(element).getDocumentsList()[0].getId() != 0">
                 <thead>
                   <tr>
-                    <!-- <th style=" text-align: left">Id</th> -->
                     <th mat-header-cell style=" text-align: left;">Navn/Titel</th>
                     <th style=" text-align: left;">Rediger</th>
                     <th style=" text-align: left;">Fremdrift</th>
@@ -85,13 +79,33 @@
                     <!-- <td>{{item.getId()}}</td> -->
                     <td>{{item.getTitle()}}</td>
                     <td id="testid">
-                      <button mat-ripple (click)="OpenTestEditor(item)" >Test</button>
-                      <!-- <app-TextEditorDilogBox ngForm [DocomentToEdite]='item'></app-TextEditorDilogBox> -->
+                      <button mat-ripple (click)="OpenTestEditor(item)"
+                        style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
+                        <mat-icon>edit</mat-icon>
+                      </button>
                     </td>
                     <td>
-                      <button mat-ripple (click)="DeleteDocoment(item)">
+
+                      <!-- <button>
+                        <mat-icon>edit</mat-icon>
+                        <mat-select>
+                          <option>Ja</option>
+                          <option>Nej</option>
+                        </mat-select>
+                      </button> -->
+
+                      <button [matMenuTriggerFor]="deleteDocomentMenu">
                         <mat-icon>delete</mat-icon>
                       </button>
+                      <mat-menu #deleteDocomentMenu="matMenu">
+                        <button (click)="DeleteDocoment(item)">ja</button>
+                        <button>nej</button>
+                      </mat-menu>
+
+                      <!--
+                      <button mat-ripple (click)="DeleteDocoment(item)" style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
+                        <mat-icon>delete</mat-icon>
+                      </button> -->
                     </td>
                     <td>
                       <mat-progress-bar style="min-width: 150px;" mode="determinate"
