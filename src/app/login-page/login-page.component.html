@@ -6,34 +6,34 @@
         <mat-card-title class="loginbox-header-text">Login</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form class="example-form" (keydown.enter)="Login(username.value, password.value)">
+        <form class="example-form" (Submit)="Login(UserName.value, password.value)" [formGroup]="LoginFormGruop">
           <table class="example-full-width" cellspacing="10">
             <tr>
               <td>
                 <mat-form-field>
-                  <input matInput placeholder="Brugernavn/Email" #username required />
+                  <input matInput #UserName placeholder="Brugernavn/Email" [formControl]="LoginFormControl" required>
+                  <mat-error *ngIf="LoginFormControl.hasError">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
               </td>
             </tr>
             <tr>
               <td>
                 <mat-form-field class="example-full-width">
-                  <input matInput type="password" placeholder="Kodeord" #password required />
+                  <input matInput type="password" placeholder="Kodeord" [formControl]="PasswordFormControl" #password required>
+                  <mat-error *ngIf="PasswordFormControl.hasError">{{getErrorPasswordMessage()}}</mat-error>
                 </mat-form-field>
               </td>
             </tr>
           </table>
-        </form>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button *ngIf="!this.testlogin" color="primary"
-          (click)="Login(username.value, password.value)">
+          <button type="submit" [disabled]="LoginFormGruop.invalid" mat-raised-button color="primary"
+          (click)="Login(UserName.value, password.value)">
           <a>
             Log ind
           </a>
           <mat-icon>login</mat-icon>
         </button>
-      </mat-card-actions>
+        </form>
+      </mat-card-content>
     </mat-card>
   </div>
   <!-- Loading indication test -->
