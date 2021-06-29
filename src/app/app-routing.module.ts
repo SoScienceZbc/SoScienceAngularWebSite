@@ -6,8 +6,6 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthGuardGuard } from './auth-guard.guard';
-import { TextEditorDilogBoxComponent } from './archive/TextEditorDilogBox/TextEditorDilogBox.component';
-import { DatabaseService } from './database.service';
 import { TextEditorComponent } from './TextEditor/TextEditor.component';
 
 const routes: Routes = [
@@ -16,7 +14,6 @@ const routes: Routes = [
   { path: 'guideline', component: GuidelineComponent, canActivate: [AuthGuardGuard] },
   { path: 'arkiv', component: ArchiveComponent, canActivate: [AuthGuardGuard] },
   { path: 'indstillinger', component: SettingsComponent, canActivate: [AuthGuardGuard] },
-  { path: "Dialog", component: TextEditorDilogBoxComponent, canActivateChild: [AuthGuardGuard] },
   { path: "TextEditor", component: TextEditorComponent },
 ];
 

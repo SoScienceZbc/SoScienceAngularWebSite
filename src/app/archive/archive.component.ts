@@ -8,7 +8,6 @@ import { DatabaseService } from '../database.service';
 import { D_Document, D_Documents, D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 import { TextEditorComponent } from '../TextEditor/TextEditor.component';
-import { TextEditorDilogBoxComponent } from './TextEditorDilogBox/TextEditorDilogBox.component';
 import quill from 'quill'
 
 /**
@@ -48,7 +47,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   isExpansionDetailRow = (id: number, row: any | expandingD_Docs) => this.isExpansionDetailRows(id, row);
 
 
-  constructor(private dataserve: DatabaseService, private spinner: LoadingService, private dilog: MatDialog, private Test: TextEditorDilogBoxComponent) {
+  constructor(private dataserve: DatabaseService, private spinner: LoadingService, private dilog: MatDialog) {
     this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
 
     this.dataserve.listOfProjects$.subscribe(x => {
@@ -62,9 +61,11 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.matdatascoure.paginator = this.paginator;
     this.matdatascoure.sort = this.sort;
   }
+
   ngOnDestroy(): void {
     this.dataserve.behavProject$.unsubscribe();
   }
+
   ngOnInit() {
     this.spinner.show();
   }
@@ -76,20 +77,14 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.matdatascoure.filter = filterValue.trim().toLowerCase();
   }
 
-  OpenTestEditor(event: any) {
-    quill.register(TextEditorComponent,true);
+  OpenQuilEditor(event: any) {
+    quill.register(TextEditorComponent, true);
+
     this.dilog.open(TextEditorComponent, {
-
-      data: {docoment: event}
-      ,autoFocus:false,
-      restoreFocus:true
-
-
-    })._containerInstance
-    // console.log(event)
-    //  this.Test.datas = this.matdatascoure.data[0].getDocumentsList()[0];
-    // this.Test.OpenDialogBox();
-    // this.Test.isShow = true;
+      data: { docoment: event }
+      , autoFocus: true,
+      restoreFocus: true
+    })
   }
 
   /**
@@ -107,11 +102,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     };
   }
-  /**
-   *
-   * @param element a single D_prject to fecth docoments for.
-   * @returns docoments for the giving project(Note on the surface data is returded here. eg the title and dates but not the main data.)
-   */
 
   /**
    * This is a control cheack to control wheter or not any giving row at any giving time can/allowed to be render.

@@ -204,7 +204,6 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         if (Message.getNumber() == 0) {
-          console.log("No entrys have been updated in database.");
           console.log("D_DocomentId",docomentToUpdate.getId());
           console.log("Title",docomentToUpdate.getTitle());
           console.log("Data",docomentToUpdate.getData());

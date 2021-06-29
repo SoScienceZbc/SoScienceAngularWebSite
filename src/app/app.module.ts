@@ -44,13 +44,12 @@ import { ArchiveComponent } from './archive/archive.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SettingsComponent } from './settings/settings.component';
-import { TextEditorDilogBoxComponent } from "../app/archive/TextEditorDilogBox/TextEditorDilogBox.component";
 import { CustomMatPaginatorIntl } from './archive/CustomMatPageinatorIntl';
 import { AddProjectDialogBoxComponent } from './archive/AddProject/add-project-dialog-box/add-project-dialog-box.component';
 import { ProjectFormComponent } from './archive/AddProject/project-form/project-form.component';
 import { AddDocumentDialogBoxComponent } from './archive/AddDocument/add-document-dialog-box/add-document-dialog-box.component';
 import { DocumentAddComponent } from './archive/AddDocument/document-add/document-add.component';
-import { QuillEditorComponent, QuillModule } from 'ngx-quill';
+import { QuillModule } from 'ngx-quill';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -63,7 +62,6 @@ import { FormsModule } from '@angular/forms';
     LoginPageComponent,
     NavBarComponent,
     SettingsComponent,
-    TextEditorDilogBoxComponent,
     AddProjectDialogBoxComponent,
     ProjectFormComponent,
     AddDocumentDialogBoxComponent,
@@ -133,7 +131,7 @@ import { FormsModule } from '@angular/forms';
     })
   ],
   providers: [DatabaseService, LoginService, LoadingService, AuthGuardGuard,
-    MatSidenav, CustomMatPaginatorIntl,TextEditorDilogBoxComponent],
+    MatSidenav, CustomMatPaginatorIntl],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -79,21 +79,12 @@
                     <!-- <td>{{item.getId()}}</td> -->
                     <td>{{item.getTitle()}}</td>
                     <td id="testid">
-                      <button mat-ripple (click)="OpenTestEditor(item)"
+                      <button mat-ripple (click)="OpenQuilEditor(item)"
                         style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
                         <mat-icon>edit</mat-icon>
                       </button>
                     </td>
                     <td>
-
-                      <!-- <button>
-                        <mat-icon>edit</mat-icon>
-                        <mat-select>
-                          <option>Ja</option>
-                          <option>Nej</option>
-                        </mat-select>
-                      </button> -->
-
                       <button [matMenuTriggerFor]="deleteDocomentMenu">
                         <mat-icon>delete</mat-icon>
                       </button>
