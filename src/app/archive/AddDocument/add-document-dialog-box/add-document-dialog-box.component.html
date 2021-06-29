@@ -1,3 +1,3 @@
-<button mat-ripple (click)="testDialog()" mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button>
+<button (click)="testDialog()" mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button>
 <mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;"
 [mode]="'indeterminate'" *ngIf="loading$ |async"></mat-progress-spinner>
