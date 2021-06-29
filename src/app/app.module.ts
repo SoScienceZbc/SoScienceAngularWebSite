@@ -28,6 +28,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { FormsModule } from '@angular/forms';
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
 import { LoginService } from './login.service';
@@ -35,6 +37,7 @@ import { ImprobableEngGrpcWebClientModule } from '@ngx-grpc/improbable-eng-grpc-
 import { LoadingService } from './loading.service';
 /*-----------------Quill Editor-----------------*/
 import { TextEditorComponent } from './TextEditor/TextEditor.component';
+import { QuillModule } from 'ngx-quill';
 /*-----------------Pages-----------------*/
 
 import { FrontpageComponent } from './frontpage/frontpage.component'
@@ -49,8 +52,6 @@ import { AddProjectDialogBoxComponent } from './archive/AddProject/add-project-d
 import { ProjectFormComponent } from './archive/AddProject/project-form/project-form.component';
 import { AddDocumentDialogBoxComponent } from './archive/AddDocument/add-document-dialog-box/add-document-dialog-box.component';
 import { DocumentAddComponent } from './archive/AddDocument/document-add/document-add.component';
-import { QuillModule } from 'ngx-quill';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatProgressBarModule,
     MatTooltipModule,
+    FlexLayoutModule,
     /*---Grpc---*/
     GrpcCoreModule.forRoot(),
     ImprobableEngGrpcWebClientModule.forRoot({

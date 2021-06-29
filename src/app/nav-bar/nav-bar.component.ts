@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 
-
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -21,9 +20,7 @@ export class NavBarComponent implements OnInit {
     sessionStorage.clear();
     window.location.reload();
   }
-  toggle(){
 
-  }
   checkLogin(){
     return (sessionStorage.getItem("loggedIn") == "true") ? false: true
   }
