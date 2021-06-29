@@ -1,9 +1,13 @@
 <mat-card>
   <mat-card-content>
-    <mat-form-field class="form-element" type="submit">
-      <input #titel matInput placeholder="Titel">
-    </mat-form-field>
-    <hr>
-    <button (click)="addNewDocoment(titel.value)" mat-icon-button><mat-icon>create_new_file</mat-icon></button>
+    <form (submit)="addNewDocoment(titel.value)" [formGroup]="addDocuFormGroup">
+
+      <mat-form-field class="form-element" type="submit">
+        <input #titel matInput placeholder="Titel" [formControl]="addDocuFormControl">
+        <mat-error *ngIf="addDocuFormControl.hasError">{{getError()}}</mat-error>
+      </mat-form-field>
+      <hr>
+      <button [disabled]="addDocuFormGroup.invalid" type="submit" mat-icon-button><mat-icon>create_new_file</mat-icon></button>
+    </form>
   </mat-card-content>
 </mat-card>

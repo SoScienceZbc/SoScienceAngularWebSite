@@ -3,6 +3,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
 import { D_Document } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from 'src/app/loading.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-document-add',
@@ -12,12 +13,32 @@ import { LoadingService } from 'src/app/loading.service';
 export class DocumentAddComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public projectid: any,private databaseserve:DatabaseService,private dialog:MatDialog,private spinner:LoadingService) { }
 
+  addDocuFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(4),
+    Validators.maxLength(30)
+  ]);
+  addDocuFormGroup = new FormGroup({
+    formcontrol: this.addDocuFormControl,
+  })
+
   ngOnInit(): void {
+  }
+
+  getError(){
+    if(this.addDocuFormControl.hasError('minlength')){
+      return "Titel for kort"
+    }
+    else if(this.addDocuFormControl.hasError('maxlength')){
+      return "Titel for lang"
+    }
+    return "Mangler titel";
   }
   addNewDocoment(title:string){
 
     let newdoc = new D_Document();
     let name = sessionStorage.getItem("username");
+
 
 
     newdoc.setProjectid(this.projectid.projectid);
