@@ -44,7 +44,6 @@ import { ArchiveComponent } from './archive/archive.component';
 import { AuthGuardGuard } from './auth-guard.guard';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SettingsComponent } from './settings/settings.component';
-import { TextEditorDilogBoxComponent } from "../app/archive/TextEditorDilogBox/TextEditorDilogBox.component";
 import { CustomMatPaginatorIntl } from './archive/CustomMatPageinatorIntl';
 import { AddProjectDialogBoxComponent } from './archive/AddProject/add-project-dialog-box/add-project-dialog-box.component';
 import { ProjectFormComponent } from './archive/AddProject/project-form/project-form.component';
@@ -63,7 +62,6 @@ import { FormsModule } from '@angular/forms';
     LoginPageComponent,
     NavBarComponent,
     SettingsComponent,
-    TextEditorDilogBoxComponent,
     AddProjectDialogBoxComponent,
     ProjectFormComponent,
     AddDocumentDialogBoxComponent,
@@ -103,11 +101,36 @@ import { FormsModule } from '@angular/forms';
         host: 'http://40.87.150.18:27385',
         transport: grpc.CrossBrowserHttpTransport({}),
       },
-    }),/*--End Grpc-*/
-    QuillModule.forRoot(),
+    }),
+    /*--End Grpc-*/
+    QuillModule.forRoot({
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+          ['blockquote', 'code-block'],
+
+          [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+          [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+          [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+          [{ 'direction': 'rtl' }],                         // text direction
+
+          [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+          [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+          [{ 'font': [] }],
+          [{ 'align': [] }],
+
+          ['clean'],                                         // remove formatting button
+
+          ['link', 'image', 'video']                         // link and image, video
+        ]
+
+      }
+    })
   ],
-  providers: [DatabaseService,
-    LoginService, LoadingService, AuthGuardGuard,
+  providers: [DatabaseService, LoginService, LoadingService, AuthGuardGuard,
     MatSidenav, CustomMatPaginatorIntl],
   bootstrap: [AppComponent]
 })

@@ -1,14 +1,10 @@
-<link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.core.css">
 <div style="display: flex;">
   <mat-card class="CardPos">
     <mat-card-title>{{title}}</mat-card-title>
-    <div #editor>
-      <!-- <quill-editor #editor  (onEditorChanged)="changedEditor($event)" [modules]="modules" [(ngModel)]="dataModel.editorData" (ngModelChange)="onChange($event)"></quill-editor> -->
+    <div >
+      <quill-editor #editor [(ngModel)]="dataModel.editorData" oncanplaythrough="true" (ngModelChange)="onChange($event)" ></quill-editor>
 
     </div>
-
-      <!-- <ckeditor #editor placeholder="begynde at skriv" style="min-block-size: 100%;" [(ngModel)]="dataModel.editorData"
-        [config]="ckeConfig" (ngModelChange)="onChange($event)" [editor]="Editor"></ckeditor> -->
   </mat-card>
 
   <!-- Cheack box -->

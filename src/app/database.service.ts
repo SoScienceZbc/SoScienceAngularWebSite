@@ -121,7 +121,7 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         // this.behavProject$.next(Message);
-        console.log(Message);
+        // console.log(Message);
         this.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString());
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       }, onEnd: res => {
@@ -181,7 +181,7 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: D_Document) => {
         this.EditorDocoment$.next(Message)
-        console.log("Data from database in html form.",Message.getData())
+        // console.log("Data from database in html form.",Message.getData())
         docoment.next(Message)
       }, onEnd: res => {
       }
@@ -204,7 +204,6 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         if (Message.getNumber() == 0) {
-          console.log("No entrys have been updated in database.");
           console.log("D_DocomentId",docomentToUpdate.getId());
           console.log("Title",docomentToUpdate.getTitle());
           console.log("Data",docomentToUpdate.getData());

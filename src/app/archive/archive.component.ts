@@ -1,13 +1,14 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ObserversModule } from '@angular/cdk/observers';
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatabaseService } from '../database.service';
 import { D_Document, D_Documents, D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
-import { CustomMatPaginatorIntl } from './CustomMatPageinatorIntl';
+import { TextEditorComponent } from '../TextEditor/TextEditor.component';
+import quill from 'quill'
 
 /**
  * @title Table with expandable rows
@@ -45,8 +46,8 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   expandingelement: expandingD_Docs = new expandingD_Docs();
   isExpansionDetailRow = (id: number, row: any | expandingD_Docs) => this.isExpansionDetailRows(id, row);
 
-  constructor(private dataserve: DatabaseService, private spinner: LoadingService) {
 
+  constructor(private dataserve: DatabaseService, private spinner: LoadingService, private dilog: MatDialog) {
     this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
 
     this.dataserve.listOfProjects$.subscribe(x => {
@@ -60,9 +61,11 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.matdatascoure.paginator = this.paginator;
     this.matdatascoure.sort = this.sort;
   }
+
   ngOnDestroy(): void {
     this.dataserve.behavProject$.unsubscribe();
   }
+
   ngOnInit() {
     this.spinner.show();
   }
@@ -74,6 +77,15 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.matdatascoure.filter = filterValue.trim().toLowerCase();
   }
 
+  OpenQuilEditor(event: any) {
+    quill.register(TextEditorComponent, true);
+
+    this.dilog.open(TextEditorComponent, {
+      data: { docoment: event }
+      , autoFocus: true,
+      restoreFocus: true
+    })
+  }
 
   /**
    * This sets up the sorting logic for the table.
@@ -90,11 +102,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     };
   }
-  /**
-   *
-   * @param element a single D_prject to fecth docoments for.
-   * @returns docoments for the giving project(Note on the surface data is returded here. eg the title and dates but not the main data.)
-   */
 
   /**
    * This is a control cheack to control wheter or not any giving row at any giving time can/allowed to be render.
