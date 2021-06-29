@@ -9,7 +9,7 @@ import { LoadingService } from '../loading.service';
 // import *  as customEditor from '../ckedtitor/build/ckeditor';
 
 
-@Injectable({providedIn:'root'})
+// @Injectable({ providedIn: 'root' })
 @Component({
   selector: 'app-TextEditor',
   templateUrl: './TextEditor.component.html',
@@ -21,7 +21,7 @@ export class TextEditorComponent implements OnInit {
 
   localDDocoment$: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
   localDDocoment: D_Document = this.localDDocoment$.value;
-  localHtmltext: BehaviorSubject<string> = new BehaviorSubject<string>("<p>old data</p>");
+  localHtmltext: BehaviorSubject<string> = new BehaviorSubject<string>("");
   spinner: LoadingService = new LoadingService();
   loadingText$ = this.spinner.loading$;
   title: string | any;
@@ -52,11 +52,12 @@ export class TextEditorComponent implements OnInit {
 
 
 
-  public dataModel = {
-    editorData: "<p>Standart modal</p>",
+  public QuilData = {
+    editorData: "",
+    Title: "",
   }
 
-  public datamodel = {
+  public Progress = {
     Forside: false,
     Formaal: false,
     Materiale: false,
@@ -74,90 +75,111 @@ export class TextEditorComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private datasevice: DatabaseService, private dialog: MatDialog) {
     this.localDDocoment$ = this.datasevice.GetDocomentHtml(sessionStorage.getItem("username") as string, (this.data.docoment as D_Document).getId());
     this.datasevice.EditorDocoment$.subscribe(x => {
-      if (this.dataModel.editorData != x.getData()) {
-        this.title = x.getTitle();
-        this.dataModel.editorData = (x.getData());
+      if (this.QuilData.editorData != x.getData()) {
+        this.QuilData.Title = x.getTitle();
+        this.QuilData.editorData = (x.getData());
+        x.getCompletedList().forEach((x, y) => {
+          console.log("CompleteList ",x,y);
+          this.check(x);
+        });
       }
       this.spinner.hide();
     })
 
     this.spinner.show();
   }
+
   ngOnInit(): void {
+    this.Progress = {
+      Forside: false,
+      Formaal: false,
+      Materiale: false,
+      Forsoegsopstilling: false,
+      Sikkerhed: false,
+      Teori: false,
+      Resultater: false,
+      Diskussion: false,
+      Fejlkilder: false,
+      Konklusion: false,
+      Kilder: false,
+    }
+    this.QuilData.Title = "";
+    this.QuilData.editorData = "";
   }
 
   public onChange(editor: Event | any) {
 
     // console.log("editor.event", editor)
-    // this.dataModel.editorData = this.dataModel.editorData;
+    // this.QuilData.editorData = this.QuilData.editorData;
     if (this.localDDocoment$.value.getId() > 0) {
-
+      this.localDDocoment$.value.setTitle(this.QuilData.Title);
       // console.log("localdocoment", this.localDDocoment$.value);
       this.localDDocoment$.value.setData(editor);
+      this.localDDocoment$.value.setCompletedcount(0);
+      console.log(this.localDDocoment$.value.getCompletedcount());
       this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
     }
 
   }
 
   closeDialogBox() {
+    this.localDDocoment$.value.setTitle(this.QuilData.Title);
+    this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
     this.dialog.closeAll()
 
   }
+
   check(value: string): boolean {
+
     switch (value) {
       case 'Forside':
-        this.datamodel.Forside = true;
-        break;
+        console.log("Length of compltede list",this.localDDocoment$.value.getCompletedList());
+        return this.Progress.Forside = true;
       case 'Formaal':
-        this.datamodel.Formaal = true;
-        break;
-      case 'Forside':
-        this.datamodel.Materiale = true;
-        break;
-      case 'Forside':
-        this.datamodel.Forsoegsopstilling = true;
-        break;
-      case 'Forside':
-        this.datamodel.Sikkerhed = true;
-        break;
-      case 'Forside':
-        this.datamodel.Teori = true;
-        break;
-      case 'Forside':
-        this.datamodel.Resultater = true;
-        break;
-      case 'Forside':
-        this.datamodel.Diskussion = true;
-        break;
-      case 'Forside':
-        this.datamodel.Fejlkilder = true;
-        break;
-      case 'Forside':
-        this.datamodel.Konklusion = true;
-        break;
-      case 'Forside':
-        this.datamodel.Kilder = true;
-        break;
+        return this.Progress.Formaal = true;
+      case 'Materiale':
+        return this.Progress.Materiale = true;
+      case 'Forsoegsopstilling':
+        return this.Progress.Forsoegsopstilling = true;
+      case 'Sikkerhed':
+        return this.Progress.Sikkerhed = true;
+      case 'Teori':
+        return this.Progress.Teori = true;
+      case 'Resultater':
+        return this.Progress.Resultater = true;
+      case 'Diskussion':
+        return this.Progress.Diskussion = true;
+      case 'Fejlkilder':
+        return this.Progress.Fejlkilder = true;
+      case 'Konklusion':
+        return this.Progress.Konklusion = true;
+      case 'Kilder':
+        return this.Progress.Kilder = true;
+      default:
+        return false;
+
 
     }
 
 
-    return this.localDDocoment$.value.getCompletedList().includes(value);
-    let state = false;
-    this.localDDocoment$.value.getCompletedList().forEach(element => {
-      if (value.toLowerCase() === element.toLowerCase()) {
-        state = true;
-        return
-      } else {
+    // return this.localDDocoment$.value.getCompletedList().includes(value, 0);
+    // let state = false;
+    // this.localDDocoment$.value.getCompletedList().forEach(element => {
+    //   if (value.toLowerCase() === element.toLowerCase()) {
+    //     state = true;
+    //     return
+    //   } else {
 
-        state = false;
-      }
-    });
-    return state;
+    //     state = false;
+    //   }
+    // });
+    // return state;
   }
 
   SetCategoro(event: string) {
     if (!this.localDDocoment$.value.getCompletedList().includes(event)) {
+      this.localDDocoment$.value.clearCompletedList();
+      this.localDDocoment$.value.setCompletedcount(this.localDDocoment$.value.getCompletedList().length);
       this.localDDocoment$.value.addCompleted(event);
       this.datasevice.UpdateDocoment("", this.localDDocoment$.value);
       console.log("setcat was true", event)
@@ -167,9 +189,5 @@ export class TextEditorComponent implements OnInit {
       // console.log("FindIndex",this.localDDocoment$.value.getCompletedList().findIndex(e => e === event));
     }
 
-  }
-  changedEditor(event: any) {
-    this.editor = event;
-    console.log("Test oncreate", event);
   }
 }
