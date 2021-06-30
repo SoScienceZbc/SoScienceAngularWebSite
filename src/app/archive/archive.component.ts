@@ -83,7 +83,9 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dilog.open(TextEditorComponent, {
       data: { docoment: event }
       , autoFocus: true,
-      restoreFocus: true
+      restoreFocus: true,
+      maxHeight:'50vh',
+
     })
   }
 

@@ -2,3 +2,17 @@
 /* @import '~quill/dist/quill.bubble.css'; */
 @import '~quill/dist/quill.snow.css';
 
+
+.ql-toolbar .ql-stroke {
+  fill: none !important;
+  stroke: hotpink !important;
+}
+
+.ql-toolbar .ql-fill {
+  fill: hotpink !important;
+  stroke: none !important;
+}
+
+.ql-toolbar .ql-picker {
+  color: hotpink !important;
+}
