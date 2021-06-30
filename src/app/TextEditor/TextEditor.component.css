@@ -4,15 +4,22 @@
 
 
 .ql-toolbar .ql-stroke {
-  fill: none !important;
+  fill: white !important;
   stroke: hotpink !important;
 }
 
 .ql-toolbar .ql-fill {
+  filter: invert(1);
   fill: hotpink !important;
   stroke: none !important;
 }
 
-.ql-toolbar .ql-picker {
+.ql-toolbar .ql-picker-label {
   color: hotpink !important;
+}
+.ql-size .ql-picker{
+  background-color:white !important;
+}
+.ql-formats{
+  background: white !important;
 }
