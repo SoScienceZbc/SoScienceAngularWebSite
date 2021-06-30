@@ -110,11 +110,9 @@ export class TextEditorComponent implements OnInit {
   closeDialogBox() {
     this.onChange(null);
     this.localDDocoment$.value.setTitle(this.QuilData.Title);
-    this.dialog.openDialogs[0].beforeClosed().subscribe(()=>{
-      this.onChange(null);
-    })
     // console.log("UpdateDockument", this.localDDocoment$.value)
     // this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
+    this.datasevice.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString())
     this.dialog.closeAll()
 
   }
