@@ -1,9 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog/'
-import { D_Document } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from 'src/app/loading.service';
-import { TextEditorComponent } from 'src/app/TextEditor/TextEditor.component';
-import { expandingD_Docs } from '../../archive.component';
 import { ProjectFormComponent } from '../project-form/project-form.component';
 @Component({
   selector: 'app-add-project-dialog-box',
@@ -21,12 +18,11 @@ export class AddProjectDialogBoxComponent implements OnInit {
   }
 
   testDialog() {
-    let t = this.dilog.open(ProjectFormComponent,{
+    this.dilog.open(ProjectFormComponent,{
       data:{
         projectid: this.projectid
       }
 
     });
-    t.backdropClick().subscribe(x => {console.log("User click on backdrop")})
   }
 }
