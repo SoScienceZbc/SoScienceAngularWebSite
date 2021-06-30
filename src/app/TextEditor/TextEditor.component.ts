@@ -26,22 +26,26 @@ export class TextEditorComponent implements OnInit {
   loadingText$ = this.spinner.loading$;
   title: string | any;
 
+  ProgressEnum: Array<completedPartsAngular> = [{
+    ComppletedPartName: "Forside", isCompleted: false
+  },
+  { ComppletedPartName: "Formaal", isCompleted: false },
+  { ComppletedPartName: "Materiale", isCompleted: false },
+  { ComppletedPartName: "Forsoegsopstilling", isCompleted: false },
+  { ComppletedPartName: "Sikkerhed", isCompleted: false },
+  { ComppletedPartName: "Teori", isCompleted: false },
+  { ComppletedPartName: "Resultater", isCompleted: false },
+  { ComppletedPartName: "Diskussion", isCompleted: false },
+  { ComppletedPartName: "Fejlkilder", isCompleted: false },
+  { ComppletedPartName: "Konklusion", isCompleted: false },
+  { ComppletedPartName: "Kilder", isCompleted: false },
+
+  ]
+
   public QuilData = {
     editorData: "",
     Title: "",
-    compltedList: {
-      Forside: false,
-      Formaal: false,
-      Materiale: false,
-      Forsoegsopstilling: false,
-      Sikkerhed: false,
-      Teori: false,
-      Resultater: false,
-      Diskussion: false,
-      Fejlkilder: false,
-      Konklusion: false,
-      Kilder: false,
-    }
+    compltedList: this.ProgressEnum
   }
 
 
@@ -63,46 +67,54 @@ export class TextEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.QuilData.compltedList = {
-      Forside: false,
-      Formaal: false,
-      Materiale: false,
-      Forsoegsopstilling: false,
-      Sikkerhed: false,
-      Teori: false,
-      Resultater: false,
-      Diskussion: false,
-      Fejlkilder: false,
-      Konklusion: false,
-      Kilder: false,
-    }
     this.QuilData.Title = "";
     this.QuilData.editorData = "";
   }
 
   public onChange(editor: Event | any) {
-
-    // console.log("editor.event", editor)
-    // this.QuilData.editorData = this.QuilData.editorData;
     if (this.localDDocoment$.value.getId() > 0) {
       this.localDDocoment$.value.setTitle(this.QuilData.Title);
-      if (!this.localDDocoment$.value.getCompletedList().includes("Forside")) {
-        this.localDDocoment$.value.addCompleted("Forside")
+      this.localDDocoment$.value.clearCompletedList();
+
+      //#region checkList
+      if (this.QuilData.compltedList[0].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[0].ComppletedPartName)
+      } if (this.QuilData.compltedList[1].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[1].ComppletedPartName)
+      } if (this.QuilData.compltedList[2].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[2].ComppletedPartName)
+      } if (this.QuilData.compltedList[3].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[3].ComppletedPartName)
+      } if (this.QuilData.compltedList[4].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[4].ComppletedPartName)
+      } if (this.QuilData.compltedList[5].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[5].ComppletedPartName)
+      } if (this.QuilData.compltedList[6].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[6].ComppletedPartName)
+      } if (this.QuilData.compltedList[7].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[7].ComppletedPartName)
+      } if (this.QuilData.compltedList[8].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[8].ComppletedPartName)
+      } if (this.QuilData.compltedList[9].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[9].ComppletedPartName)
+      } if (this.QuilData.compltedList[10].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[10].ComppletedPartName)
       }
+      //#endregion
       this.localDDocoment$.value.setData(editor);
-      this.localDDocoment$.value.setCompletedcount(0);
-      console.log(this.localDDocoment$.value.getCompletedcount());
       this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
     }
 
   }
 
   closeDialogBox() {
+    this.onChange(null);
     this.localDDocoment$.value.setTitle(this.QuilData.Title);
-    this.localDDocoment$.value.setCompletedcount(0);
-    this.localDDocoment$.value.clearCompletedList();
-    this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
+    this.dialog.openDialogs[0].beforeClosed().subscribe(()=>{
+      this.onChange(null);
+    })
+    // console.log("UpdateDockument", this.localDDocoment$.value)
+    // this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
     this.dialog.closeAll()
 
   }
@@ -111,33 +123,27 @@ export class TextEditorComponent implements OnInit {
 
     switch (value) {
       case 'Forside':
-        this.localDDocoment$.value.getCompletedList().forEach(x => {
-          if (x !== value) {
-            this.localDDocoment$.value.addCompleted('Forside');
-
-          }
-        })
-        return this.QuilData.compltedList.Forside = true;
+        return this.QuilData.compltedList[0].isCompleted = true;
       case 'Formaal':
-        return this.QuilData.compltedList.Formaal = true;
+        return this.QuilData.compltedList[1].isCompleted = true;
       case 'Materiale':
-        return this.QuilData.compltedList.Materiale = true;
+        return this.QuilData.compltedList[2].isCompleted = true;
       case 'Forsoegsopstilling':
-        return this.QuilData.compltedList.Forsoegsopstilling = true;
+        return this.QuilData.compltedList[3].isCompleted = true;
       case 'Sikkerhed':
-        return this.QuilData.compltedList.Sikkerhed = true;
+        return this.QuilData.compltedList[4].isCompleted = true;
       case 'Teori':
-        return this.QuilData.compltedList.Teori = true;
+        return this.QuilData.compltedList[5].isCompleted = true;
       case 'Resultater':
-        return this.QuilData.compltedList.Resultater = true;
+        return this.QuilData.compltedList[6].isCompleted = true;
       case 'Diskussion':
-        return this.QuilData.compltedList.Diskussion = true;
+        return this.QuilData.compltedList[7].isCompleted = true;
       case 'Fejlkilder':
-        return this.QuilData.compltedList.Fejlkilder = true;
+        return this.QuilData.compltedList[8].isCompleted = true;
       case 'Konklusion':
-        return this.QuilData.compltedList.Konklusion = true;
+        return this.QuilData.compltedList[9].isCompleted = true;
       case 'Kilder':
-        return this.QuilData.compltedList.Kilder = true;
+        return this.QuilData.compltedList[10].isCompleted = true;
       default:
         return false;
 
@@ -173,4 +179,9 @@ export class TextEditorComponent implements OnInit {
     }
 
   }
+}
+
+export interface completedPartsAngular {
+  ComppletedPartName: string
+  isCompleted: boolean
 }
