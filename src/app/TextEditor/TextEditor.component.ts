@@ -108,6 +108,7 @@ export class TextEditorComponent implements OnInit {
   }
 
   closeDialogBox() {
+    this.spinner.show();
     this.onChange(null);
     this.localDDocoment$.value.setTitle(this.QuilData.Title);
     // console.log("UpdateDockument", this.localDDocoment$.value)
