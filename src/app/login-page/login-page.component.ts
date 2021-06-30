@@ -82,7 +82,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   public Login(name: string, password: string) {
     this.login.CheckLogin(name, password);
     this.spinner.show();
-    sessionStorage.setItem('username', name)
+    var tempName = name.split("@",1);
+    sessionStorage.setItem('username', tempName.toString())
     if (this.testlogin) {
     }
   }
