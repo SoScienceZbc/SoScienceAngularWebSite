@@ -1,7 +1,7 @@
 <div style="display: flex;">
-  <mat-card class="quillEditorSize" style ="color: white; overflow-y: auto;">
+  <mat-card class="quillEditorSize" style ="overflow-y: auto;">
     <mat-card-title><input matInput type="text" [(ngModel)]="QuilData.Title"></mat-card-title>
-      <quill-editor color="primary"  #editor [(ngModel)]="QuilData.editorData" (ngModelChange)="onChange($event)" ></quill-editor>
+      <quill-editor color="primary" style="color: currentColor;"  #editor [(ngModel)]="QuilData.editorData" (ngModelChange)="onChange($event)" ></quill-editor>
   </mat-card>
 
   <!-- Cheack box -->
