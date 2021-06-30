@@ -85,18 +85,10 @@
                       </button>
                     </td>
                     <td>
-                      <button [matMenuTriggerFor]="deleteDocomentMenu">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                      <mat-menu #deleteDocomentMenu="matMenu">
-                        <button (click)="DeleteDocoment(item)">ja</button>
-                        <button>nej</button>
-                      </mat-menu>
 
-                      <!--
                       <button mat-ripple (click)="DeleteDocoment(item)" style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
                         <mat-icon>delete</mat-icon>
-                      </button> -->
+                      </button>
                     </td>
                     <td>
                       <mat-progress-bar style="min-width: 150px;" mode="determinate"
