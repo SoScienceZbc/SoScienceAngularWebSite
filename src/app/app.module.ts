@@ -30,6 +30,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet'
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
 import { LoginService } from './login.service';
@@ -52,6 +53,7 @@ import { AddProjectDialogBoxComponent } from './archive/AddProject/add-project-d
 import { ProjectFormComponent } from './archive/AddProject/project-form/project-form.component';
 import { AddDocumentDialogBoxComponent } from './archive/AddDocument/add-document-dialog-box/add-document-dialog-box.component';
 import { DocumentAddComponent } from './archive/AddDocument/document-add/document-add.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import { DocumentAddComponent } from './archive/AddDocument/document-add/documen
     ProjectFormComponent,
     AddDocumentDialogBoxComponent,
     DocumentAddComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +101,7 @@ import { DocumentAddComponent } from './archive/AddDocument/document-add/documen
     MatProgressBarModule,
     MatTooltipModule,
     FlexLayoutModule,
+    MatBottomSheetModule,
     /*---Grpc---*/
     GrpcCoreModule.forRoot(),
     ImprobableEngGrpcWebClientModule.forRoot({
