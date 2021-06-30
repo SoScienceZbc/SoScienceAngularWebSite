@@ -45,7 +45,7 @@ export class ProjectFormComponent implements OnInit {
   }
 
   AddNewProject(titel:string){
-    if(titel.length > 5){
+    if(titel.length >= 4){
 
       const event = new Date(Date.now());
       let d = new D_Project();

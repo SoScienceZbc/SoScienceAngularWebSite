@@ -1,23 +1,39 @@
 import { Injectable } from '@angular/core';
-import { grpc } from "@improbable-eng/grpc-web";
-import { GrpcDatabaseProject, GrpcDatabaseProjectClient } from "./generated/DataBaseProto/DatabaseProto_pb_service";
-import { UserDbInfomation, ProjectUserInfomation, intger, D_Project, D_Projects, D_Documents, D_Document } from "./generated/DataBaseProto/DatabaseProto_pb";
+import { grpc } from '@improbable-eng/grpc-web';
+import {
+  GrpcDatabaseProject,
+  GrpcDatabaseProjectClient,
+} from './generated/DataBaseProto/DatabaseProto_pb_service';
+import {
+  UserDbInfomation,
+  ProjectUserInfomation,
+  intger,
+  D_Project,
+  D_Projects,
+  D_Documents,
+  D_Document,
+} from './generated/DataBaseProto/DatabaseProto_pb';
 import { BehaviorSubject, Observable, of, Subject, zip } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DatabaseService {
   project = {} as D_Projects;
-  hostAddress = "http://40.87.150.18:27385";
-  signelProject$: BehaviorSubject<D_Project> = new BehaviorSubject<D_Project>(new D_Project);
-  behavProject$: BehaviorSubject<D_Projects> = new BehaviorSubject<D_Projects>(new D_Projects);
-  listOfProjects$: BehaviorSubject<D_Project[]> = new BehaviorSubject<D_Project[]>([]);
-  EditorDocoment$: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
+  hostAddress = 'http://40.87.150.18:27385';
+  signelProject$: BehaviorSubject<D_Project> = new BehaviorSubject<D_Project>(
+    new D_Project()
+  );
+  behavProject$: BehaviorSubject<D_Projects> = new BehaviorSubject<D_Projects>(
+    new D_Projects()
+  );
+  listOfProjects$: BehaviorSubject<D_Project[]> = new BehaviorSubject<
+    D_Project[]
+  >([]);
+  EditorDocoment$: BehaviorSubject<D_Document> =
+    new BehaviorSubject<D_Document>(new D_Document());
 
-  constructor() {
-  }
-
+  constructor() {}
 
   //#region Project
   /*-------------------Projects-------------------*/
@@ -26,7 +42,6 @@ export class DatabaseService {
    * @param name The projects owner name
    */
   public GetProjectsTheRigthWay(name: string) {
-
     // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
     const userDbInfomation = new UserDbInfomation();
     userDbInfomation.setDbname(name);
@@ -34,14 +49,15 @@ export class DatabaseService {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: D_Projects) => {
-        this.listOfProjects$.next(Message.getDProjectList())
+        this.listOfProjects$.next(Message.getDProjectList());
         // this.behavProject$.next(Message);
         // console.log(Message);
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
-      }, onEnd: res => {
+      },
+      onEnd: (res) => {
         // console.log("It have endes")
-      }
-    })
+      },
+    });
   }
   /**
    *
@@ -57,10 +73,11 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: D_Project) => {
         this.signelProject$.next(Message);
-      }, onEnd: res => {
+      },
+      onEnd: (res) => {
         // console.log("It have endes")
-      }
-    })
+      },
+    });
   }
   /**
    * This adds a D_prject to the database.
@@ -77,11 +94,13 @@ export class DatabaseService {
       request: projectuserInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
-        console.log("entris change: " + Message.getNumber());
-        this.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString());
-      }, onEnd: res => {
-      }
-    })
+        console.log('entris change: ' + Message.getNumber());
+        this.GetProjectsTheRigthWay(
+          sessionStorage.getItem('username')!.toString()
+        );
+      },
+      onEnd: (res) => {},
+    });
   }
   /**
    * //TODO: Struction Documents => call getdocoment => getData() (getData() is not return in the first call and you have to call getdoument to get the data back(its in html form.))
@@ -98,22 +117,21 @@ export class DatabaseService {
       onMessage: (Message: D_Project) => {
         // this.behavProject$.next(Message);
         if (Message.getDocumentsList().length > 0) {
-
-          console.log("From dataService (GetDocoments) with name: " + name);
+          console.log('From dataService (GetDocoments) with name: ' + name);
           console.log(Message.getDocumentsList()[0].getId());
           console.log(Message.getDocumentsList()[0].getData());
         }
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
-      }, onEnd: res => {
+      },
+      onEnd: (res) => {
         // console.log("It have endes")
-      }
-    })
+      },
+    });
   }
   //#endregion
   //#region Documents
   /*-------------------Documents-------------------*/
   public AddDocument(name: string, docomentToAdd: D_Document) {
-
     // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
     const userDbInfomation = docomentToAdd;
     grpc.invoke(GrpcDatabaseProject.AddDocument, {
@@ -122,27 +140,31 @@ export class DatabaseService {
       onMessage: (Message: intger) => {
         // this.behavProject$.next(Message);
         // console.log(Message);
-        this.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString());
+        this.GetProjectsTheRigthWay(
+          sessionStorage.getItem('username')!.toString()
+        );
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
-      }, onEnd: res => {
+      },
+      onEnd: (res) => {
         // console.log("It have endes")
-      }
-    })
+      },
+    });
   }
 
   public GetDocuments(name: string, id: number): Observable<D_Documents> {
     const userDbInfomation = new UserDbInfomation();
     userDbInfomation.setDbname(name);
     userDbInfomation.setId(id);
-    const docmoments: BehaviorSubject<D_Documents> = new BehaviorSubject<D_Documents>(new D_Documents);
+    const docmoments: BehaviorSubject<D_Documents> =
+      new BehaviorSubject<D_Documents>(new D_Documents());
     grpc.invoke(GrpcDatabaseProject.GetDocuments, {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: D_Documents) => {
         docmoments.next(Message);
-      }, onEnd: res => {
-      }
-    })
+      },
+      onEnd: (res) => {},
+    });
     return docmoments;
   }
 
@@ -150,7 +172,9 @@ export class DatabaseService {
     const userDbInfomation = new UserDbInfomation();
     userDbInfomation.setDbname(name);
     userDbInfomation.setId(id);
-    let docoment: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
+    let docoment: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(
+      new D_Document()
+    );
     grpc.invoke(GrpcDatabaseProject.GetDocument, {
       request: userDbInfomation,
       host: this.hostAddress,
@@ -159,10 +183,11 @@ export class DatabaseService {
         docoment.next(Message);
 
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
-      }, onEnd: res => {
+      },
+      onEnd: (res) => {
         // console.log("It have endes")
-      }
-    })
+      },
+    });
     return docoment;
   }
   /**
@@ -171,46 +196,49 @@ export class DatabaseService {
    * @param id the docoment id
    * @returns a behaviorsubject of type D_document.
    */
-  public GetDocomentHtml(name: string, id: number): BehaviorSubject<D_Document> {
+  public GetDocomentHtml(
+    name: string,
+    id: number
+  ): BehaviorSubject<D_Document> {
     const userDbInfomation = new UserDbInfomation();
     userDbInfomation.setDbname(name);
     userDbInfomation.setId(id);
-    let docoment: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
+    let docoment: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(
+      new D_Document()
+    );
     grpc.invoke(GrpcDatabaseProject.GetDocument, {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: D_Document) => {
-        this.EditorDocoment$.next(Message)
+        this.EditorDocoment$.next(Message);
         // console.log("Data from database in html form.",Message.getData())
-        docoment.next(Message)
-      }, onEnd: res => {
-      }
-    })
+        docoment.next(Message);
+      },
+      onEnd: (res) => {},
+    });
     return docoment;
-
   }
 
   /**
- *
- * @param name The docoment owners name
- * @param docomentToUpdate the document to update in database.
- * @returns a behaviorsubject of type D_document.
- */
+   *
+   * @param name The docoment owners name
+   * @param docomentToUpdate the document to update in database.
+   * @returns a behaviorsubject of type D_document.
+   */
   public UpdateDocoment(name: string, docomentToUpdate: D_Document) {
-
     const userDbInfomation = docomentToUpdate;
     grpc.invoke(GrpcDatabaseProject.UpdateDocument, {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         if (Message.getNumber() == 0) {
-          console.log("D_DocomentId",docomentToUpdate.getId());
-          console.log("Title",docomentToUpdate.getTitle());
-          console.log("Data",docomentToUpdate.getData());
+          console.log('D_DocomentId', docomentToUpdate.getId());
+          console.log('Title', docomentToUpdate.getTitle());
+          console.log('Data', docomentToUpdate.getData());
         }
-      }, onEnd: res => {
-      }
-    })
+      },
+      onEnd: (res) => {},
+    });
   }
 
   public RemoveDocoment(docomnet: D_Document, projectID: number) {
@@ -218,23 +246,26 @@ export class DatabaseService {
     //Removedocoment usese userinfomation as the docoment id..
     //BadFix but Create new Project and add the docoment into that and send that to the database.
     //and ofcufse remeber to set the projectid from the parm"projectID"
-    let tempproject = new D_Project;
+    let tempproject = new D_Project();
     tempproject.addDocuments(docomnet);
     tempproject.setId(projectID);
-    userDbInfomation.setProject(tempproject)
+    userDbInfomation.setProject(tempproject);
+
     grpc.invoke(GrpcDatabaseProject.RemoveDocument, {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
-        this.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString());
-        console.log("This have been change in database.")
-      }, onEnd: res => {
-      }
-    })
-
+        console.log('This have been change in database.');
+        this.GetProjectsTheRigthWay(
+          sessionStorage.getItem('username')!.toString()
+        );
+      },
+      onEnd: (res) => {
+      },
+    });
   }
 
-  public DeleteProject(project:D_Project,name:string){
+  public DeleteProject(project: D_Project, name: string) {
     const userDbInfomation = new ProjectUserInfomation();
     const userinfomation = new UserDbInfomation();
     userinfomation.setDbname(name);
@@ -245,13 +276,11 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         this.GetProjectsTheRigthWay(name);
-        console.log("This have been change in database.",Message.getNumber())
-      }, onEnd: res => {
-      }
-    })
+        console.log('This have been change in database.', Message.getNumber());
+      },
+      onEnd: (res) => {},
+    });
   }
   //#endregion
   /*-------------------RemoteFiles-------------------*/
 }
-
-
