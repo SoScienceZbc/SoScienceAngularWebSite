@@ -1,5 +1,5 @@
-import { Component, Inject, Injectable, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { QuillEditorBase, QuillEditorComponent, QuillModule, QuillService } from 'ngx-quill';
 import { Quill } from 'quill';
 import { BehaviorSubject } from 'rxjs';
@@ -26,49 +26,22 @@ export class TextEditorComponent implements OnInit {
   loadingText$ = this.spinner.loading$;
   title: string | any;
 
-  // modules = {
-  //   toolbar: [
-  //     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-  //     ['blockquote', 'code-block'],
-
-  //     [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-  //     [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-  //     [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-  //     [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-  //     [{ 'direction': 'rtl' }],                         // text direction
-
-  //     [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-  //     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-  //     [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-  //     [{ 'font': [] }],
-  //     [{ 'align': [] }],
-
-  //     ['clean'],                                         // remove formatting button
-
-  //     ['link', 'image', 'video']                         // link and image, video
-  //   ]
-  // };
-
-
-
   public QuilData = {
     editorData: "",
     Title: "",
-  }
-
-  public Progress = {
-    Forside: false,
-    Formaal: false,
-    Materiale: false,
-    Forsoegsopstilling: false,
-    Sikkerhed: false,
-    Teori: false,
-    Resultater: false,
-    Diskussion: false,
-    Fejlkilder: false,
-    Konklusion: false,
-    Kilder: false,
+    compltedList: {
+      Forside: false,
+      Formaal: false,
+      Materiale: false,
+      Forsoegsopstilling: false,
+      Sikkerhed: false,
+      Teori: false,
+      Resultater: false,
+      Diskussion: false,
+      Fejlkilder: false,
+      Konklusion: false,
+      Kilder: false,
+    }
   }
 
 
@@ -79,7 +52,7 @@ export class TextEditorComponent implements OnInit {
         this.QuilData.Title = x.getTitle();
         this.QuilData.editorData = (x.getData());
         x.getCompletedList().forEach((x, y) => {
-          console.log("CompleteList ",x,y);
+          console.log("CompleteList ", x, y);
           this.check(x);
         });
       }
@@ -90,7 +63,8 @@ export class TextEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.Progress = {
+
+    this.QuilData.compltedList = {
       Forside: false,
       Formaal: false,
       Materiale: false,
@@ -113,7 +87,9 @@ export class TextEditorComponent implements OnInit {
     // this.QuilData.editorData = this.QuilData.editorData;
     if (this.localDDocoment$.value.getId() > 0) {
       this.localDDocoment$.value.setTitle(this.QuilData.Title);
-      // console.log("localdocoment", this.localDDocoment$.value);
+      if (!this.localDDocoment$.value.getCompletedList().includes("Forside")) {
+        this.localDDocoment$.value.addCompleted("Forside")
+      }
       this.localDDocoment$.value.setData(editor);
       this.localDDocoment$.value.setCompletedcount(0);
       console.log(this.localDDocoment$.value.getCompletedcount());
@@ -124,6 +100,8 @@ export class TextEditorComponent implements OnInit {
 
   closeDialogBox() {
     this.localDDocoment$.value.setTitle(this.QuilData.Title);
+    this.localDDocoment$.value.setCompletedcount(0);
+    this.localDDocoment$.value.clearCompletedList();
     this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
     this.dialog.closeAll()
 
@@ -133,28 +111,33 @@ export class TextEditorComponent implements OnInit {
 
     switch (value) {
       case 'Forside':
-        console.log("Length of compltede list",this.localDDocoment$.value.getCompletedList());
-        return this.Progress.Forside = true;
+        this.localDDocoment$.value.getCompletedList().forEach(x => {
+          if (x !== value) {
+            this.localDDocoment$.value.addCompleted('Forside');
+
+          }
+        })
+        return this.QuilData.compltedList.Forside = true;
       case 'Formaal':
-        return this.Progress.Formaal = true;
+        return this.QuilData.compltedList.Formaal = true;
       case 'Materiale':
-        return this.Progress.Materiale = true;
+        return this.QuilData.compltedList.Materiale = true;
       case 'Forsoegsopstilling':
-        return this.Progress.Forsoegsopstilling = true;
+        return this.QuilData.compltedList.Forsoegsopstilling = true;
       case 'Sikkerhed':
-        return this.Progress.Sikkerhed = true;
+        return this.QuilData.compltedList.Sikkerhed = true;
       case 'Teori':
-        return this.Progress.Teori = true;
+        return this.QuilData.compltedList.Teori = true;
       case 'Resultater':
-        return this.Progress.Resultater = true;
+        return this.QuilData.compltedList.Resultater = true;
       case 'Diskussion':
-        return this.Progress.Diskussion = true;
+        return this.QuilData.compltedList.Diskussion = true;
       case 'Fejlkilder':
-        return this.Progress.Fejlkilder = true;
+        return this.QuilData.compltedList.Fejlkilder = true;
       case 'Konklusion':
-        return this.Progress.Konklusion = true;
+        return this.QuilData.compltedList.Konklusion = true;
       case 'Kilder':
-        return this.Progress.Kilder = true;
+        return this.QuilData.compltedList.Kilder = true;
       default:
         return false;
 

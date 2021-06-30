@@ -12,36 +12,36 @@
         <p>Check færdige Kategorier</p>
         <hr>
         <mat-selection-list>
-          <mat-checkbox #Forside [(ngModel)]="Progress.Forside" value="Forside">
+          <mat-checkbox #Forside [(ngModel)]="QuilData.compltedList.Forside" (change)="QuilData.compltedList.Forside != QuilData.compltedList.Forside " value="Forside">
             Forside</mat-checkbox>
           <hr>
-          <mat-checkbox #Formaal [(ngModel)]="Progress.Formaal" value="Formaal">
+          <mat-checkbox #Formaal [(ngModel)]="QuilData.compltedList.Formaal" value="Formaal">
             Formål</mat-checkbox>
           <hr>
-          <mat-checkbox #Materiale [(ngModel)]="Progress.Materiale"
+          <mat-checkbox #Materiale [(ngModel)]="QuilData.compltedList.Materiale"
             value="Materiale">Materiale</mat-checkbox>
           <hr>
-          <mat-checkbox #Forsoegsopstilling [(ngModel)]="Progress.Forsoegsopstilling" value="Forsoegsopstilling">Forsøgsopstilling</mat-checkbox>
+          <mat-checkbox #Forsoegsopstilling [(ngModel)]="QuilData.compltedList.Forsoegsopstilling" value="Forsoegsopstilling">Forsøgsopstilling</mat-checkbox>
           <hr>
-          <mat-checkbox #Sikkerhed [(ngModel)]="Progress.Sikkerhed"
+          <mat-checkbox #Sikkerhed [(ngModel)]="QuilData.compltedList.Sikkerhed"
             value="Sikkerhed">Sikkerhed</mat-checkbox>
           <hr>
-          <mat-checkbox #Teori [(ngModel)]="Progress.Teori" value="Teori">Teori
+          <mat-checkbox #Teori [(ngModel)]="QuilData.compltedList.Teori" value="Teori">Teori
           </mat-checkbox>
           <hr>
-          <mat-checkbox #Resultater [(ngModel)]="Progress.Resultater"
+          <mat-checkbox #Resultater [(ngModel)]="QuilData.compltedList.Resultater"
             value="Resultater">Resultater</mat-checkbox>
           <hr>
-          <mat-checkbox #Diskussion [(ngModel)]="Progress.Diskussion"
+          <mat-checkbox #Diskussion [(ngModel)]="QuilData.compltedList.Diskussion"
             value="Diskussion">Diskussion</mat-checkbox>
           <hr>
-          <mat-checkbox #Fejlkilder [(ngModel)]="Progress.Fejlkilder"
+          <mat-checkbox #Fejlkilder [(ngModel)]="QuilData.compltedList.Fejlkilder"
             value="Fejlkilder">Fejlkilder</mat-checkbox>
           <hr>
-          <mat-checkbox #Konklusion [(ngModel)]="Progress.Konklusion"
+          <mat-checkbox #Konklusion [(ngModel)]="QuilData.compltedList.Konklusion"
             value="Konklusion">Konklusion</mat-checkbox>
           <hr>
-          <mat-checkbox #Kilder [(ngModel)]="Progress.Kilder" value="Kilder">
+          <mat-checkbox #Kilder [(ngModel)]="QuilData.compltedList.Kilder" value="Kilder">
             Kilder
           </mat-checkbox>
         </mat-selection-list>
