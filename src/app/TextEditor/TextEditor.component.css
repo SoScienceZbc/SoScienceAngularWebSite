@@ -2,9 +2,3 @@
 /* @import '~quill/dist/quill.bubble.css'; */
 @import '~quill/dist/quill.snow.css';
 
-.quillEditorSize{
-  /* min-width: 75% !important;
-  max-width: 75% !important;
-  max-height: 50% !important;
-  min-height: 50% !important; */
-}
