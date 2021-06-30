@@ -78,8 +78,8 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   OpenQuilEditor(event: any) {
-    quill.register(TextEditorComponent, true);
 
+    quill.register(TextEditorComponent, true);
     this.dilog.open(TextEditorComponent, {
       data: { docoment: event }
       , autoFocus: true,

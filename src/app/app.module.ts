@@ -130,8 +130,7 @@ import { DocumentAddComponent } from './archive/AddDocument/document-add/documen
 
           ['link', 'image', 'video']                         // link and image, video
         ]
-
-      }
+      },theme:'snow'
     })
   ],
   providers: [DatabaseService, LoginService, LoadingService, AuthGuardGuard,
