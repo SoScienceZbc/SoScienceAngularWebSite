@@ -1,4 +1,13 @@
 <mat-card>
+  <mat-card-header style="float: right;">
+    <button mat-icon-button (click)="CloseDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+  </mat-card-header>
+  <mat-card-title>
+    Nyt dokument
+  </mat-card-title>
+  <br>
   <mat-card-content>
     <form (submit)="addNewDocoment(titel.value)" [formGroup]="addDocuFormGroup">
 
@@ -7,7 +16,13 @@
         <mat-error *ngIf="addDocuFormControl.hasError">{{getError()}}</mat-error>
       </mat-form-field>
       <hr>
-      <button [disabled]="addDocuFormGroup.invalid" type="submit" mat-icon-button><mat-icon>create_new_file</mat-icon></button>
+      <mat-card-actions style="display: flex; margin: auto; justify-content: center;">
+        <mat-label style="display: flex; margin: auto; justify-content: center;">Tilføj dokument</mat-label>
+        <button #tooltip="matTooltip" matTooltip="Tilføj nyt projekt" matTooltipHideDelay="100" mat-ripple
+          mat-mini-fab type="submit" [disabled]="addDocuFormGroup.invalid">
+          <mat-icon>create_new_file</mat-icon>
+        </button>
+      </mat-card-actions>
     </form>
   </mat-card-content>
 </mat-card>

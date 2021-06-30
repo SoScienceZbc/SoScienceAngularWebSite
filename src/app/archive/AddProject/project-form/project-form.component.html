@@ -19,7 +19,7 @@
         </mat-form-field>
         <br>
         <mat-card-actions style="display: flex; margin: auto; justify-content: center;">
-          <mat-label style="display: flex; margin: auto; justify-content: center;">Tilføj dit project nu</mat-label>
+          <mat-label style="display: flex; margin: auto; justify-content: center;">Tilføj projekt</mat-label>
           <button #tooltip="matTooltip" matTooltip="Tilføj nyt projekt" matTooltipHideDelay="100" mat-ripple
             mat-mini-fab type="submit" [disabled]="newprojectFormgroup.invalid" (click)="AddNewProject(titel.value)">
             <mat-icon>create_new_folder</mat-icon>

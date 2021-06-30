@@ -25,6 +25,9 @@ export class DocumentAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  CloseDialog(){
+    this.dialog.closeAll();
+  }
   getError(){
     if(this.addDocuFormControl.hasError('minlength')){
       return "Titel for kort"
