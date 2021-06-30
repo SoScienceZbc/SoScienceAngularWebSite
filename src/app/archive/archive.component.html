@@ -69,14 +69,18 @@
               <table *ngIf="GetDocomentsAsObject(element).getDocumentsList()[0].getId() != 0">
                 <thead>
                   <tr>
+                    <br>
                     <th mat-header-cell style=" text-align: left;">Navn/Titel</th>
+                    <br>
                     <th style=" text-align: left;">Rediger</th>
-                    <th style=" text-align: left;">Fremdrift</th>
+                    <br>
+                    <th style=" text-align: right;">Fremdrift</th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let item of GetDocomentsAsObject(element).getDocumentsList()">
                   <tr>
                     <!-- <td>{{item.getId()}}</td> -->
+                    <br>
                     <td>{{item.getTitle()}}</td>
                     <td id="testid">
                       <button mat-ripple (click)="OpenQuilEditor(item)"

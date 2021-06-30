@@ -11,11 +11,10 @@ import { LoginService } from '../login.service';
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
 
-
   LoginFormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(4),
-    Validators.maxLength(9)
+    Validators.maxLength(30)
   ]);
 
   PasswordFormControl = new FormControl('', [
@@ -54,13 +53,13 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   getErrorMessage() {
 
     if (this.LoginFormControl.hasError('required')) {
-      return 'indtast dit uni-login eller unilogin mail';
+      return 'Indtast dit uni-login eller mail';
     } else if (this.LoginFormControl.hasError('minlength')) {
-      return 'dit unilogin er normalt over 4 charerecter langt'
+      return 'Dit unilogin er normalt over 4 karaktere langt'
     } else if (this.LoginFormControl.hasError('maxength')) {
-      return 'dit unilogin er normalt ikke over 8 charerecter lang.'
+      return 'Dit unilogin er normalt ikke over 8 karaktere lang.'
     }
-    return this.LoginFormControl.hasError('pattern') ? 'det ser ikke ud til at være en uni-login navn' : '';
+    return this.LoginFormControl.hasError('pattern') ? 'pattern error' : '';
   }
 
   getErrorPasswordMessage() {
