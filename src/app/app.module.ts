@@ -128,7 +128,9 @@ import { DocumentAddComponent } from './archive/AddDocument/document-add/documen
 
           ['clean'],                                         // remove formatting button
 
-          ['link', 'image', 'video']                         // link and image, video
+          ['link', 'image', 'video'] ,                        // link and image, video
+
+
         ]
       },theme:'snow'
     })

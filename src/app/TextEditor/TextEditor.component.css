@@ -3,6 +3,16 @@
 @import '~quill/dist/quill.snow.css';
 
 
-#editor{
-  font-size: large;
+.ql-toolbar .ql-stroke {
+  fill: none !important;
+  stroke: hotpink !important;
+}
+
+.ql-toolbar .ql-fill {
+  fill: hotpink !important;
+  stroke: none !important;
+}
+
+.ql-toolbar .ql-picker {
+  color: hotpink !important;
 }
