@@ -64,12 +64,12 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   getErrorPasswordMessage() {
     if (this.PasswordFormControl.hasError('required')) {
-      return 'du skal intaste kodeord';
+      return 'Indtast kodeord';
     }else if (this.PasswordFormControl.hasError('minlength')) {
-      return 'dit kodeord ser meget kort ud'
+      return 'Kodeord for kort'
     }
 
-    return this.LoginFormControl.hasError('') ? 'det ser ikke ud til at være en uni-login navn' : '';
+    return this.LoginFormControl.hasError('') ? 'Det ser ikke ud til at være et uni-login navn' : '';
   }
 
 
@@ -83,7 +83,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.login.CheckLogin(name, password);
     this.spinner.show();
     var tempName = name.split("@",1);
-    sessionStorage.setItem('username', tempName.toString())
+    tempName.toString().toLowerCase();
+    sessionStorage.setItem('username', tempName.toString());
     if (this.testlogin) {
     }
   }
