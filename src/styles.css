@@ -18,17 +18,17 @@ footer{
 
 .ql-toolbar .ql-stroke {
   fill: none !important;
-  stroke: white !important;
+  stroke: indigo !important;
 }
 
 .ql-toolbar .ql-fill {
   /* filter: invert(1); */
-  fill: white !important;
+  fill: indigo !important;
   stroke: none !important;
 }
 
 .ql-toolbar .ql-picker-label {
-  color: white !important;
+  color: indigo !important;
 }
 
 
