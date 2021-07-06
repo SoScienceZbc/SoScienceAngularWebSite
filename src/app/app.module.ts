@@ -54,6 +54,7 @@ import { ProjectFormComponent } from './archive/AddProject/project-form/project-
 import { AddDocumentDialogBoxComponent } from './archive/AddDocument/add-document-dialog-box/add-document-dialog-box.component';
 import { DocumentAddComponent } from './archive/AddDocument/document-add/document-add.component';
 import { FooterComponent } from './footer/footer.component';
+import { DialogAreYouSureComponent } from './dialog-are-you-sure/dialog-are-you-sure.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { FooterComponent } from './footer/footer.component';
     AddDocumentDialogBoxComponent,
     DocumentAddComponent,
     FooterComponent,
+    DialogAreYouSureComponent,
   ],
   imports: [
     BrowserModule,

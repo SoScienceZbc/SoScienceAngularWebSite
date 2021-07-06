@@ -31,4 +31,17 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 @media (prefers-color-scheme: dark) {
   @include angular-material-theme($dark-theme);
   @include custom-components-theme($dark-theme);
+  .ql-toolbar .ql-picker-label {
+    color: white !important;
+  }
+  .ql-toolbar .ql-stroke {
+    fill: none !important;
+    stroke: white !important;
+  }
+
+  .ql-toolbar .ql-fill {
+    /* filter: invert(1); */
+    fill: white !important;
+    stroke: none !important;
+  }
 }

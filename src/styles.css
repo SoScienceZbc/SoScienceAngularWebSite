@@ -16,22 +16,5 @@ footer{
   color:white;
 }
 
-.ql-toolbar .ql-stroke {
-  fill: none !important;
-  stroke: indigo !important;
-}
-
-.ql-toolbar .ql-fill {
-  /* filter: invert(1); */
-  fill: indigo !important;
-  stroke: none !important;
-}
-
-.ql-toolbar .ql-picker-label {
-  color: indigo !important;
-}
-
-
-
 
 

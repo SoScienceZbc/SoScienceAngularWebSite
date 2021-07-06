@@ -48,15 +48,10 @@
         <td mat-cell *matCellDef="let element">{{ element.getEnddate() }}<a
             *ngIf="element.getDocumentsList().length <= 0" style="z-index: 10;">
 
-
-            <button mat-button [matMenuTriggerFor]="menu">
+            <button mat-ripple (click)="DeleteProject(element)"
+              style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
               <mat-icon>delete</mat-icon>
             </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="DeleteProject(element)">Slet</button>
-              <button mat-menu-item>Annuller</button>
-            </mat-menu>
-
           </a>
         </td>
       </ng-container>
@@ -89,28 +84,15 @@
                       </button>
                     </td>
 
-                      <td>
+                    <td>
+                      <button mat-ripple (click)="OpenDialogAreYouSureDocument(item)"
+                        style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
 
-                        <!--
-                          <button mat-ripple (click)="DeleteDocoment(item)" style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                        -->
-
-                        <mat-menu #menuDelDoco="matMenu" >
-                          <ng-template matMenuContent>
-                          <button mat-menu-item (click)="DeleteDocoment(item)">Slet</button>
-                          <button mat-menu-item>Annuller</button>
-                        </ng-template>
-                        </mat-menu>
-
-                        <button mat-button [matMenuTriggerFor]="menuDelDoco">
-                          <mat-icon>delete</mat-icon>
-                        </button>
-                      </td>
-
-                      <td>
-                        <mat-progress-bar style="min-width: 150px;" mode="determinate"
+                    <td>
+                      <mat-progress-bar style="min-width: 150px;" mode="determinate"
                         [value]='((item.getCompletedcount() /11)*100)'>
                       </mat-progress-bar>
                     </td>

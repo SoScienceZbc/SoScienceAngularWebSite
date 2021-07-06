@@ -9,6 +9,8 @@ import { D_Document, D_Documents, D_Project, D_Projects } from '../generated/Dat
 import { LoadingService } from '../loading.service';
 import { TextEditorComponent } from '../TextEditor/TextEditor.component';
 import quill from 'quill'
+import { HtmlParser } from '@angular/compiler';
+import { DialogAreYouSureComponent } from '../dialog-are-you-sure/dialog-are-you-sure.component';
 
 /**
  * @title Table with expandable rows
@@ -84,7 +86,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       data: { docoment: event }
       , autoFocus: true,
       restoreFocus: true,
-      maxHeight:'50vh',
+      maxHeight: '50vh',
 
     })
   }
@@ -137,9 +139,21 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
   DeleteProject(element: D_Project) {
-    this.spinner.show();
-    this.dataserve.DeleteProject(element, sessionStorage.getItem("username")!.toString());
+    this.dilog.open(DialogAreYouSureComponent, {
+      data: { docoment: element,type:"P" }
+      , autoFocus: true,
+      restoreFocus: true,
 
+    });
+  }
+
+  OpenDialogAreYouSureDocument(event: any) {
+    this.dilog.open(DialogAreYouSureComponent, {
+      data: { docoment: event,type:"D" }
+      , autoFocus: true,
+      restoreFocus: true,
+
+    });
   }
 }
 
