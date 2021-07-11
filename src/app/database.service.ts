@@ -128,6 +128,31 @@ export class DatabaseService {
       },
     });
   }
+/**
+ * updates the providede project in the database.
+ * @param projectToUpdate the project to update in database
+ * @param name the users name in the database
+ */
+  public UpdateProject(projectToUpdate:D_Project,name:string){
+    const userDbInfomation = new ProjectUserInfomation();
+    const userinfo = new UserDbInfomation();
+    userinfo.setDbname(name)
+    userDbInfomation.setProject(projectToUpdate);
+    userDbInfomation.setUser(userinfo)
+    grpc.invoke(GrpcDatabaseProject.EditProject, {
+      request: userDbInfomation,
+      host: this.hostAddress,
+      onMessage: (Message: intger) => {
+        this.GetProjectsTheRigthWay(
+          sessionStorage.getItem('username')!.toString()
+        );
+      },
+      onEnd: (res) => {
+        // console.log("It have endes")
+      },
+    });
+
+  }
   //#endregion
   //#region Documents
   /*-------------------Documents-------------------*/

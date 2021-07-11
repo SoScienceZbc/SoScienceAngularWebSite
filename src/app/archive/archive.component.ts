@@ -5,12 +5,12 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatabaseService } from '../database.service';
-import { D_Document, D_Documents, D_Project, D_Projects } from '../generated/DataBaseProto/DatabaseProto_pb';
+import { D_Document, D_Documents, D_Project } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 import { TextEditorComponent } from '../TextEditor/TextEditor.component';
-import quill from 'quill'
-import { HtmlParser } from '@angular/compiler';
+import quill from 'quill';
 import { DialogAreYouSureComponent } from '../dialog-are-you-sure/dialog-are-you-sure.component';
+import { QuilEditorPreViewComponent } from '../quil-editor-pre-view/quil-editor-pre-view.component';
 
 /**
  * @title Table with expandable rows
@@ -44,6 +44,10 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   /*--------------DataTable Values--------------*/
   displayedColumns = ["Id", "name", "completed", "lastedited", "endDate"];
   matdatascoure = new MatTableDataSource<expandingD_Project>(this.dataSource);
+
+  dataSourceDoneProjjects: Array<expandingD_Project> = new Array<expandingD_Project>();
+  matdatascoureDoneProjects = new MatTableDataSource<expandingD_Project>(this.dataSourceDoneProjjects);
+
   Docoments: expandingD_Docs = new expandingD_Docs();
   expandingelement: expandingD_Docs = new expandingD_Docs();
   isExpansionDetailRow = (id: number, row: any | expandingD_Docs) => this.isExpansionDetailRows(id, row);
@@ -53,7 +57,18 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
 
     this.dataserve.listOfProjects$.subscribe(x => {
-      this.matdatascoure.data = (x as expandingD_Project[]);
+      // this.matdatascoure.data = (x as expandingD_Project[]);
+      this.matdatascoure.data = [];
+      this.matdatascoureDoneProjects.data = [];
+      x.forEach((data,index) => {
+        if(data.getCompleted()){
+          this.matdatascoureDoneProjects.data.push((data as expandingD_Project))
+          this.matdatascoureDoneProjects._updateChangeSubscription();
+        }else{
+          this.matdatascoure.data.push((data as expandingD_Project));
+          this.matdatascoure._updateChangeSubscription();
+        }
+      })
       this.spinner.hide();
     });
     this.onsortChange();
@@ -133,11 +148,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     return mockup;
 
   }
-  DeleteDocoment(docoment: D_Document) {
-    this.spinner.show();
-    this.dataserve.RemoveDocoment(docoment, docoment.getProjectid());
 
-  }
   DeleteProject(element: D_Project) {
     this.dilog.open(DialogAreYouSureComponent, {
       data: { docoment: element,type:"P" }
@@ -154,6 +165,32 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       restoreFocus: true,
 
     });
+  }
+
+  updateProject(item:D_Project){
+
+    const tempitem = item;
+    tempitem.setCompleted(true);
+    this.dilog.open(DialogAreYouSureComponent, {
+      data: { docoment: tempitem,type:"U" }
+      , autoFocus: true,
+      restoreFocus: true,
+    });
+    this.matdatascoure._updateChangeSubscription();
+
+  }
+
+  openQuillViwer(event: any){
+
+    quill.register(QuilEditorPreViewComponent, true);
+    this.dilog.open(QuilEditorPreViewComponent, {
+      data: { docoment: event }
+      , autoFocus: true,
+      restoreFocus: true,
+      maxHeight: '50vh',
+
+    })
+
   }
 }
 

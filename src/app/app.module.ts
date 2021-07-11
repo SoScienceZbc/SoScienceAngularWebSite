@@ -30,7 +30,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { MatBottomSheetModule } from '@angular/material/bottom-sheet'
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
 import { LoginService } from './login.service';
@@ -55,6 +55,7 @@ import { AddDocumentDialogBoxComponent } from './archive/AddDocument/add-documen
 import { DocumentAddComponent } from './archive/AddDocument/document-add/document-add.component';
 import { FooterComponent } from './footer/footer.component';
 import { DialogAreYouSureComponent } from './dialog-are-you-sure/dialog-are-you-sure.component';
+import { QuilEditorPreViewComponent } from './quil-editor-pre-view/quil-editor-pre-view.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { DialogAreYouSureComponent } from './dialog-are-you-sure/dialog-are-you-
     DocumentAddComponent,
     FooterComponent,
     DialogAreYouSureComponent,
+    QuilEditorPreViewComponent,
   ],
   imports: [
     BrowserModule,

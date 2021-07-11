@@ -29,6 +29,8 @@ export class DialogAreYouSureComponent implements OnInit {
       this.spinner.show();
       this.dataservice.DeleteProject(this.data.docoment, sessionStorage.getItem("username")!.toString());
       this.dialogbox.closeAll();
+    }else if(this.data.type == "U"){
+      this.dataservice.UpdateProject(this.data.docoment,sessionStorage.getItem("username")!.toString());
     }
 
   }
