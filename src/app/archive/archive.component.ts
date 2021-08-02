@@ -170,7 +170,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   updateProject(item:D_Project){
 
     const tempitem = item;
-    tempitem.setCompleted(true);
     this.dilog.open(DialogAreYouSureComponent, {
       data: { docoment: tempitem,type:"U" }
       , autoFocus: true,

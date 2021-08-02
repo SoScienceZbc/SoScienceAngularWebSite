@@ -1,7 +1,7 @@
-<mat-tab-group style="background-color: black;">
+<mat-tab-group>
   <!-- Projects that are not done is shown under this tab -->
   <mat-tab label="Igangværne Projecter">
-<mat-card>
+<mat-card style="border-radius: 0px 0px 5px 5px;">
   <div>
     <div style="display: flex;;">
       <!-- <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button> -->
@@ -152,7 +152,7 @@
 </mat-card>
   </mat-tab>
   <!-- Projects that are done is shown under this tab -->
-  <mat-tab label="Færdigjort Projecter"><mat-card>
+  <mat-tab label="Færdigjort Projecter"><mat-card style="border-radius: 0px 0px 5px 5px;">
     <div>
       <div style="display: flex;;">
         <app-add-project-dialog-box #tooltip="matTooltip" matTooltip="Tilføj nyt projekt" matTooltipHideDelay="100">
