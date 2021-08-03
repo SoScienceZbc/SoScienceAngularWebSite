@@ -13,6 +13,11 @@ export class GuidelineComponent implements OnInit {
   panelOpenState4 = false;
   panelOpenState5 = false;
   panelOpenState6 = false;
+  panelOpenState7 = false;
+  panelOpenState8 = false;
+  panelOpenState9 = false;
+  panelOpenState10 = false;
+  panelOpenState11 = false;
 
   constructor() {
 
