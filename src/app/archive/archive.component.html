@@ -18,7 +18,7 @@
       </mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Filter/Søg" #input />
     </mat-form-field>
-    <table mat-table [dataSource]="matdatascoure" multiTemplateDataRows class="mat-elevation-z8" matSort>
+    <table #mattable mat-table [dataSource]="matdatascoure" multiTemplateDataRows class="mat-elevation-z8" matSort>
 
       <!-- Name Column -->
       <ng-container matColumnDef="Id">
@@ -34,7 +34,7 @@
 
       <!-- completed Column -->
       <ng-container matColumnDef="completed">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Færdigjort</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Færdiggjort</th>
         <td mat-cell *matCellDef="let element">{{ element.getCompleted() ? "Ja" : "Nej" }}
           <a style="z-index: 10;">
             <button mat-ripple (click)="updateProject(element)"
@@ -136,7 +136,7 @@
       <!-- Expanded Content Column - The detail row is made up of this one column -->
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns; when:isExpansionDetailRow" class="example-element-row"
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
         [class.example-expanded-row]="Docoments == row" (click)="Docoments = Docoments  == row ? null: row"
         style="overflow: hidden;">
       </tr>
@@ -145,7 +145,7 @@
     </table>
 
 
-    <mat-paginator [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
+    <mat-paginator #paginator [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
   </div>
   <mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;"
     [mode]="'indeterminate'" *ngIf="loading$ |async"></mat-progress-spinner>
@@ -164,9 +164,9 @@
         <mat-label style="font-size: large">
           <mat-icon>search</mat-icon>
         </mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Filter/Søg" #input />
+        <input matInput (keyup)="applyFilterDone($event)" placeholder="Filter/Søg" #input />
       </mat-form-field>
-      <table mat-table [dataSource]="matdatascoureDoneProjects" multiTemplateDataRows class="mat-elevation-z8" matSort>
+      <table mat-table #tableDone [dataSource]="matdatascoureDoneProjects" multiTemplateDataRows class="mat-elevation-z8" matSort>
 
         <!-- Name Column -->
         <ng-container matColumnDef="Id">
@@ -182,7 +182,7 @@
 
         <!-- completed Column -->
         <ng-container matColumnDef="completed">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Færdigjort</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Færdiggjort</th>
           <td mat-cell *matCellDef="let element">{{ element.getCompleted() ? "Ja" : "Nej" }}</td>
         </ng-container>
 
@@ -209,7 +209,7 @@
 
         <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
         <ng-container matColumnDef="expandedDetail">
-          <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <td #fint mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
             <div class="example-element-detail" [@detailExpand]="(element === Docoments) ? 'expanded' : 'collapsed'">
               <div>
                 <table *ngIf="GetDocomentsAsObject(element).getDocumentsList()[0].getId() != 0">
@@ -254,7 +254,7 @@
         <!-- Expanded Content Column - The detail row is made up of this one column -->
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns; when:isExpansionDetailRow" class="example-element-row"
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
           [class.example-expanded-row]="Docoments == row" (click)="Docoments = Docoments  == row ? null: row"
           style="overflow: hidden;">
         </tr>
@@ -263,7 +263,7 @@
       </table>
 
 
-      <mat-paginator [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
+      <mat-paginator #paginatorDone [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
     </div>
     <mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;"
       [mode]="'indeterminate'" *ngIf="loading$ |async"></mat-progress-spinner>

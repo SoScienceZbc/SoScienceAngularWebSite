@@ -23,11 +23,21 @@ $light-theme:   mat-light-theme($light-primary, $light-accent);
 
   // Fix light theme project nav bar
   .mat-tab-label-container{
-    background: #f0f0f0;
-    border-radius: 5px 5px 0px 0px;
+    background: transparentize($color: #f0f0f0, $amount: 0.05);
+    border-radius: 5px 5px 20px 20px;
   }
   .mat-tab-nav-bar, .mat-tab-header {
     border-bottom: 0px solid rgba(255, 255, 255, 0.12);
+  }
+
+
+  tr.example-element-row:not(.example-expanded-row):hover {
+   background: #7979b0;
+  }
+
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
   }
 }
 
@@ -62,15 +72,20 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
     height: 64px;
   }
   tr.example-element-row:not(.example-expanded-row):hover {
-    background: #494949 !important;
+    background: #494980;
+  }
+
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
   }
 
   // Fix dark theme project nav bar
   .mat-tab-label-container{
-    background: #494949;
+    background: transparentize($color: #494949, $amount: 0.05);
     border-radius: 5px 5px 0px 0px;
   }
-  
+
   .mat-tab-nav-bar, .mat-tab-header {
     border-bottom: 0px solid rgba(255, 255, 255, 0.12);
   }

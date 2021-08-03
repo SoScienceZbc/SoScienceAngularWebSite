@@ -1,9 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DatabaseService } from '../database.service';
 import { D_Document, D_Documents, D_Project } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
@@ -21,9 +21,9 @@ import { QuilEditorPreViewComponent } from '../quil-editor-pre-view/quil-editor-
   styleUrls: ['./archive.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('collapsed, void', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> collapsed, void => expanded', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
@@ -35,12 +35,18 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   /*--------------ViewChilds--------------*/
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+
+  @ViewChild("mattable", { read: MatSort }) sort!: MatSort;
+
+  @ViewChild("tableDone", { read: MatSort }) sortDone!: MatSort;
+
+  @ViewChild("tableDone") tabledone!: MatTable<expandingD_Project>;
+  @ViewChild("paginatorDone") paginatorDone!: MatPaginator;
+
   /*--------------Spinner--------------*/
   loading$ = this.spinner.loading$;
   /*--------------SimpleDataObjects--------------*/
   public dataSource: Array<expandingD_Project> = new Array<expandingD_Project>();
-  canExpand: boolean = false;
   /*--------------DataTable Values--------------*/
   displayedColumns = ["Id", "name", "completed", "lastedited", "endDate"];
   matdatascoure = new MatTableDataSource<expandingD_Project>(this.dataSource);
@@ -57,26 +63,30 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
 
     this.dataserve.listOfProjects$.subscribe(x => {
-      // this.matdatascoure.data = (x as expandingD_Project[]);
       this.matdatascoure.data = [];
       this.matdatascoureDoneProjects.data = [];
-      x.forEach((data,index) => {
-        if(data.getCompleted()){
+      x.forEach((data, index) => {
+        if (data.getCompleted()) {
           this.matdatascoureDoneProjects.data.push((data as expandingD_Project))
           this.matdatascoureDoneProjects._updateChangeSubscription();
-        }else{
+        } else {
           this.matdatascoure.data.push((data as expandingD_Project));
           this.matdatascoure._updateChangeSubscription();
+
         }
       })
       this.spinner.hide();
     });
-    this.onsortChange();
   }
 
   ngAfterViewInit(): void {
     this.matdatascoure.paginator = this.paginator;
     this.matdatascoure.sort = this.sort;
+    this.onsortChange();
+
+    this.matdatascoureDoneProjects.sort = this.sortDone;
+    this.matdatascoureDoneProjects.paginator = this.paginatorDone;
+    this.onSortDoneChange();
   }
 
   ngOnDestroy(): void {
@@ -92,6 +102,10 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.matdatascoure.filter = filterValue.trim().toLowerCase();
+  }
+  applyFilterDone(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.matdatascoureDoneProjects.filter = filterValue.trim().toLowerCase();
   }
 
   OpenQuilEditor(event: any) {
@@ -111,15 +125,29 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   onsortChange() {
     this.matdatascoure.sortingDataAccessor = (item, property) => {
+      let switchValue = ""
       switch (property) {
-        case 'name': return item.getName();
-        case 'Id': return item.getId();
-        case 'Completed': return "" + item.getCompleted() + "";
-        case 'lastedited': return item.getLastedited();
-        case 'endDate': return item.getEnddate();
-        default: return "";
+        case 'name': switchValue = item.getName(); break;
+        case 'Id': switchValue = item.getId().toString(); break;
+        case 'lastedited': switchValue = item.getLastedited(); break;
+        case 'endDate': switchValue = item.getEnddate(); break;
       }
+      return switchValue;
     };
+
+  }
+  onSortDoneChange() {
+    this.matdatascoureDoneProjects.sortingDataAccessor = (item, property) => {
+      let switchValue = ""
+      switch (property) {
+        case 'name': switchValue = item.getName(); break;
+        case 'Id': switchValue = item.getId().toString(); break;
+        case 'lastedited': switchValue = item.getLastedited(); break;
+        case 'endDate': switchValue = item.getEnddate(); break;
+      }
+      return switchValue;
+    };
+
   }
 
   /**
@@ -151,7 +179,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   DeleteProject(element: D_Project) {
     this.dilog.open(DialogAreYouSureComponent, {
-      data: { docoment: element,type:"P" }
+      data: { docoment: element, type: "P" }
       , autoFocus: true,
       restoreFocus: true,
 
@@ -160,18 +188,18 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   OpenDialogAreYouSureDocument(event: any) {
     this.dilog.open(DialogAreYouSureComponent, {
-      data: { docoment: event,type:"D" }
+      data: { docoment: event, type: "D" }
       , autoFocus: true,
       restoreFocus: true,
 
     });
   }
 
-  updateProject(item:D_Project){
+  updateProject(item: D_Project) {
 
     const tempitem = item;
     this.dilog.open(DialogAreYouSureComponent, {
-      data: { docoment: tempitem,type:"U" }
+      data: { docoment: tempitem, type: "U" }
       , autoFocus: true,
       restoreFocus: true,
     });
@@ -179,7 +207,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
-  openQuillViwer(event: any){
+  openQuillViwer(event: any) {
 
     quill.register(QuilEditorPreViewComponent, true);
     this.dilog.open(QuilEditorPreViewComponent, {
