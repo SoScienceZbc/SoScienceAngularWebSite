@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'guideline', component: GuidelineComponent, canActivate: [AuthGuardGuard] },
   { path: 'arkiv', component: ArchiveComponent, canActivate: [AuthGuardGuard] },
   { path: 'indstillinger', component: SettingsComponent, canActivate: [AuthGuardGuard] },
-  { path: "TextEditor", component: TextEditorComponent },
+  { path: "TextEditor", component: TextEditorComponent ,canActivate:[AuthGuardGuard]},
 ];
 
 @NgModule({

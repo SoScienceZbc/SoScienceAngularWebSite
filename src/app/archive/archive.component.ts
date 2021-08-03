@@ -11,6 +11,7 @@ import { TextEditorComponent } from '../TextEditor/TextEditor.component';
 import quill from 'quill';
 import { DialogAreYouSureComponent } from '../dialog-are-you-sure/dialog-are-you-sure.component';
 import { QuilEditorPreViewComponent } from '../quil-editor-pre-view/quil-editor-pre-view.component';
+import { isTemplateExpression } from 'typescript';
 
 /**
  * @title Table with expandable rows
@@ -22,7 +23,7 @@ import { QuilEditorPreViewComponent } from '../quil-editor-pre-view/quil-editor-
   animations: [
     trigger('detailExpand', [
       state('collapsed, void', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
+      state('expanded', style({ height: '*'})),
       transition('expanded <=> collapsed, void => expanded', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -148,6 +149,9 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       return switchValue;
     };
 
+  }
+  GetText(item:string){
+    return "hallo";
   }
 
   /**
