@@ -21,9 +21,9 @@ import { QuilEditorPreViewComponent } from '../quil-editor-pre-view/quil-editor-
   styleUrls: ['./archive.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded, void', style({ height: '*' })),
-      transition('expanded <=> collapsed, void => collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      state('collapsed, void', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed, void => expanded', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
