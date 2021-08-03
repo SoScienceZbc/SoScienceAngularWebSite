@@ -69,32 +69,27 @@
       <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
       <ng-container matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-          <div class="example-element-detail" [@detailExpand]="(element === Docoments) ? 'expanded' : 'collapsed'">
-            <div>
+          <div  class="example-element-detail" [@detailExpand]="(element === Docoments) ? 'expanded' : 'collapsed'">
               <table *ngIf="GetDocomentsAsObject(element).getDocumentsList()[0].getId() != 0">
-                <thead>
-                  <tr>
-                    <br>
-                    <th mat-header-cell style=" text-align: left;">Navn/Titel</th>
-                    <br>
-                    <th style=" text-align: left;">Rediger</th>
-                    <br>
-                    <th style=" text-align: right;">Fremdrift</th>
+                <thead style="border-bottom: 1px solid #494949;">
+                  <tr >
+                    <th style="border-bottom: 1px solid #757575; width: 35%; text-align: left; padding: 0px;">Navn/Titel</th>
+                    <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Rediger</th>
+                    <th style="border-bottom: 1px solid #757575; width: 50%; text-align: center; padding: 0px;">Fremdrift</th>
                   </tr>
                 </thead>
-                <tbody *ngFor="let item of GetDocomentsAsObject(element).getDocumentsList()">
-                  <tr>
+                <tbody >
+                  <tr *ngFor="let item of GetDocomentsAsObject(element).getDocumentsList()" >
                     <!-- <td>{{item.getId()}}</td> -->
-                    <br>
-                    <td>{{item.getTitle()}}</td>
-                    <td id="testid">
+                    <td style="overflow: hidden;
+                    text-overflow: clip;
+                    max-width: 0px;" class="hoverme" > {{item.getTitle()}}
+                  </td>
+                    <td id="testid" style="text-align: center;">
                       <button mat-ripple (click)="OpenQuilEditor(item)"
                         style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
                         <mat-icon>edit</mat-icon>
                       </button>
-                    </td>
-
-                    <td>
                       <button mat-ripple (click)="OpenDialogAreYouSureDocument(item)"
                         style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
                         <mat-icon>delete</mat-icon>
@@ -127,7 +122,6 @@
                   <mat-icon>videocam</mat-icon>
                 </button>
               </div>
-            </div>
           </div>
 
         </td>
@@ -154,7 +148,7 @@
   <!-- Projects that are done is shown under this tab -->
   <mat-tab label="Færdiggjorte Projekter"><mat-card style="border-radius: 0px 0px 5px 5px;">
     <div>
-      <div style="display: flex;;">
+      <div style="display: flex;">
         <app-add-project-dialog-box #tooltip="matTooltip" matTooltip="Tilføj nyt projekt" matTooltipHideDelay="100">
         </app-add-project-dialog-box>
       </div>
