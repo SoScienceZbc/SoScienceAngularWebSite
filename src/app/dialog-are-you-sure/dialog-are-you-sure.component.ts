@@ -34,6 +34,11 @@ export class DialogAreYouSureComponent implements OnInit {
       this.data.docoment.setCompleted(true);
       this.dataservice.UpdateProject(this.data.docoment,sessionStorage.getItem("username")!.toString());
       this.dialogbox.closeAll();
+    }else if(this.data.type == "UU"){
+      this.spinner.show();
+      this.data.docoment.setCompleted(false);
+      this.dataservice.UpdateProject(this.data.docoment,sessionStorage.getItem("username")!.toString());
+      this.dialogbox.closeAll();
     }
 
   }

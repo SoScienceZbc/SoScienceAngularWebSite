@@ -23,8 +23,8 @@ $light-theme:   mat-light-theme($light-primary, $light-accent);
 
   // Fix light theme project nav bar
   .mat-tab-label-container{
-    background: transparentize($color: #f0f0f0, $amount: 0.05);
-    border-radius: 5px 5px 20px 20px;
+    background: #f0f0f0;
+    border-radius: 5px 5px 0px 0px;
   }
   .mat-tab-nav-bar, .mat-tab-header {
     border-bottom: 0px solid rgba(255, 255, 255, 0.12);
@@ -82,7 +82,7 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
   // Fix dark theme project nav bar
   .mat-tab-label-container{
-    background: transparentize($color: #494949, $amount: 0.05);
+    background: #494949;
     border-radius: 5px 5px 0px 0px;
   }
 
