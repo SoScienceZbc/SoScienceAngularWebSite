@@ -30,11 +30,11 @@ export class DialogAreYouSureComponent implements OnInit {
       this.dataservice.DeleteProject(this.data.docoment, sessionStorage.getItem("username")!.toString());
       this.dialogbox.closeAll();
     }else if(this.data.type == "U"){
+      this.spinner.show();
       this.data.docoment.setCompleted(true);
       this.dataservice.UpdateProject(this.data.docoment,sessionStorage.getItem("username")!.toString());
-      this.spinner.show();
+      this.dialogbox.closeAll();
     }
-    this.dialogbox.closeAll();
 
   }
   NonConfirmDelete() {

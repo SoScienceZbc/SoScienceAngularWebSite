@@ -29,6 +29,16 @@ $light-theme:   mat-light-theme($light-primary, $light-accent);
   .mat-tab-nav-bar, .mat-tab-header {
     border-bottom: 0px solid rgba(255, 255, 255, 0.12);
   }
+
+  
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+  }
+
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+  }
 }
 
 // Dark theme
@@ -62,7 +72,12 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
     height: 64px;
   }
   tr.example-element-row:not(.example-expanded-row):hover {
-    background: #494949 !important;
+    background: #494949;
+  }
+
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
   }
 
   // Fix dark theme project nav bar
