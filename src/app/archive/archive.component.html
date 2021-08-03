@@ -183,7 +183,13 @@
         <!-- completed Column -->
         <ng-container matColumnDef="completed">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Færdiggjort</th>
-          <td mat-cell *matCellDef="let element">{{ element.getCompleted() ? "Ja" : "Nej" }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.getCompleted() ? "Ja" : "Nej" }}
+            <button mat-ripple (click)="updateProject(element)"
+              style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
+              <mat-icon>close</mat-icon>
+            </button>
+          </td>
+
         </ng-container>
 
         <!-- lastedited Column -->
