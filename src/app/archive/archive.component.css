@@ -8,6 +8,11 @@
 
 }
 
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
 .mat-column-completed{
   z-index: 5;
 
