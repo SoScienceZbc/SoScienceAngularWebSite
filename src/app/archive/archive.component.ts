@@ -206,6 +206,17 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.matdatascoure._updateChangeSubscription();
 
   }
+  updateProjectUndo(item: D_Project) {
+
+    const tempitem = item;
+    this.dilog.open(DialogAreYouSureComponent, {
+      data: { docoment: tempitem, type: "UU" }
+      , autoFocus: true,
+      restoreFocus: true,
+    });
+    this.matdatascoureDoneProjects._updateChangeSubscription();
+
+  }
 
   openQuillViwer(event: any) {
 
