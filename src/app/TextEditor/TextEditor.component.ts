@@ -27,31 +27,31 @@ export class TextEditorComponent implements OnInit {
   title: string | any;
 
   ProgressEnum: Array<completedPartsAngular> = [{
-    ComppletedPartName: "Forside", isCompleted: false
+    CompletedPartName: "Forside", isCompleted: false
   },
-  { ComppletedPartName: "Formaal", isCompleted: false },
-  { ComppletedPartName: "Materiale", isCompleted: false },
-  { ComppletedPartName: "Forsoegsopstilling", isCompleted: false },
-  { ComppletedPartName: "Sikkerhed", isCompleted: false },
-  { ComppletedPartName: "Teori", isCompleted: false },
-  { ComppletedPartName: "Resultater", isCompleted: false },
-  { ComppletedPartName: "Diskussion", isCompleted: false },
-  { ComppletedPartName: "Fejlkilder", isCompleted: false },
-  { ComppletedPartName: "Konklusion", isCompleted: false },
-  { ComppletedPartName: "Kilder", isCompleted: false },
+  { CompletedPartName: "Formaal", isCompleted: false },
+  { CompletedPartName: "Materiale", isCompleted: false },
+  { CompletedPartName: "Forsoegsopstilling", isCompleted: false },
+  { CompletedPartName: "Sikkerhed", isCompleted: false },
+  { CompletedPartName: "Teori", isCompleted: false },
+  { CompletedPartName: "Resultater", isCompleted: false },
+  { CompletedPartName: "Diskussion", isCompleted: false },
+  { CompletedPartName: "Fejlkilder", isCompleted: false },
+  { CompletedPartName: "Konklusion", isCompleted: false },
+  { CompletedPartName: "Kilder", isCompleted: false },
 
   ]
 
   public QuilData = {
     editorData: "",
     Title: "",
-    compltedList: this.ProgressEnum
+    completedList: this.ProgressEnum
   }
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private datasevice: DatabaseService, private dialog: MatDialog) {
-    this.localDDocoment$ = this.datasevice.GetDocomentHtml(sessionStorage.getItem("username") as string, (this.data.docoment as D_Document).getId());
-    this.datasevice.EditorDocoment$.subscribe(x => {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dataservice: DatabaseService, private dialog: MatDialog) {
+    this.localDDocoment$ = this.dataservice.GetDocomentHtml(sessionStorage.getItem("username") as string, (this.data.docoment as D_Document).getId());
+    this.dataservice.EditorDocoment$.subscribe(x => {
       if (this.QuilData.editorData != x.getData()) {
         this.QuilData.Title = x.getTitle();
         this.QuilData.editorData = (x.getData());
@@ -77,32 +77,32 @@ export class TextEditorComponent implements OnInit {
       this.localDDocoment$.value.clearCompletedList();
 
       //#region checkList
-      if (this.QuilData.compltedList[0].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[0].ComppletedPartName)
-      } if (this.QuilData.compltedList[1].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[1].ComppletedPartName)
-      } if (this.QuilData.compltedList[2].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[2].ComppletedPartName)
-      } if (this.QuilData.compltedList[3].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[3].ComppletedPartName)
-      } if (this.QuilData.compltedList[4].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[4].ComppletedPartName)
-      } if (this.QuilData.compltedList[5].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[5].ComppletedPartName)
-      } if (this.QuilData.compltedList[6].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[6].ComppletedPartName)
-      } if (this.QuilData.compltedList[7].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[7].ComppletedPartName)
-      } if (this.QuilData.compltedList[8].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[8].ComppletedPartName)
-      } if (this.QuilData.compltedList[9].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[9].ComppletedPartName)
-      } if (this.QuilData.compltedList[10].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.compltedList[10].ComppletedPartName)
+      if (this.QuilData.completedList[0].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[0].CompletedPartName)
+      } if (this.QuilData.completedList[1].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[1].CompletedPartName)
+      } if (this.QuilData.completedList[2].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[2].CompletedPartName)
+      } if (this.QuilData.completedList[3].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[3].CompletedPartName)
+      } if (this.QuilData.completedList[4].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[4].CompletedPartName)
+      } if (this.QuilData.completedList[5].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[5].CompletedPartName)
+      } if (this.QuilData.completedList[6].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[6].CompletedPartName)
+      } if (this.QuilData.completedList[7].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[7].CompletedPartName)
+      } if (this.QuilData.completedList[8].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[8].CompletedPartName)
+      } if (this.QuilData.completedList[9].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[9].CompletedPartName)
+      } if (this.QuilData.completedList[10].isCompleted) {
+        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[10].CompletedPartName)
       }
       //#endregion
       this.localDDocoment$.value.setData(editor);
-      this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
+      this.dataservice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
     }
 
   }
@@ -112,8 +112,8 @@ export class TextEditorComponent implements OnInit {
     this.onChange(null);
     this.localDDocoment$.value.setTitle(this.QuilData.Title);
     // console.log("UpdateDockument", this.localDDocoment$.value)
-    // this.datasevice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
-    this.datasevice.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString())
+    // this.dataservice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
+    this.dataservice.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString())
     this.dialog.closeAll()
 
   }
@@ -122,27 +122,27 @@ export class TextEditorComponent implements OnInit {
 
     switch (value) {
       case 'Forside':
-        return this.QuilData.compltedList[0].isCompleted = true;
+        return this.QuilData.completedList[0].isCompleted = true;
       case 'Formaal':
-        return this.QuilData.compltedList[1].isCompleted = true;
+        return this.QuilData.completedList[1].isCompleted = true;
       case 'Materiale':
-        return this.QuilData.compltedList[2].isCompleted = true;
+        return this.QuilData.completedList[2].isCompleted = true;
       case 'Forsoegsopstilling':
-        return this.QuilData.compltedList[3].isCompleted = true;
+        return this.QuilData.completedList[3].isCompleted = true;
       case 'Sikkerhed':
-        return this.QuilData.compltedList[4].isCompleted = true;
+        return this.QuilData.completedList[4].isCompleted = true;
       case 'Teori':
-        return this.QuilData.compltedList[5].isCompleted = true;
+        return this.QuilData.completedList[5].isCompleted = true;
       case 'Resultater':
-        return this.QuilData.compltedList[6].isCompleted = true;
+        return this.QuilData.completedList[6].isCompleted = true;
       case 'Diskussion':
-        return this.QuilData.compltedList[7].isCompleted = true;
+        return this.QuilData.completedList[7].isCompleted = true;
       case 'Fejlkilder':
-        return this.QuilData.compltedList[8].isCompleted = true;
+        return this.QuilData.completedList[8].isCompleted = true;
       case 'Konklusion':
-        return this.QuilData.compltedList[9].isCompleted = true;
+        return this.QuilData.completedList[9].isCompleted = true;
       case 'Kilder':
-        return this.QuilData.compltedList[10].isCompleted = true;
+        return this.QuilData.completedList[10].isCompleted = true;
       default:
         return false;
 
@@ -169,7 +169,7 @@ export class TextEditorComponent implements OnInit {
       this.localDDocoment$.value.clearCompletedList();
       this.localDDocoment$.value.setCompletedcount(this.localDDocoment$.value.getCompletedList().length);
       this.localDDocoment$.value.addCompleted(event);
-      this.datasevice.UpdateDocoment("", this.localDDocoment$.value);
+      this.dataservice.UpdateDocoment("", this.localDDocoment$.value);
       console.log("setcat was true", event)
     } else {
       console.log(event)
@@ -181,6 +181,6 @@ export class TextEditorComponent implements OnInit {
 }
 
 export interface completedPartsAngular {
-  ComppletedPartName: string
+  CompletedPartName: string
   isCompleted: boolean
 }
