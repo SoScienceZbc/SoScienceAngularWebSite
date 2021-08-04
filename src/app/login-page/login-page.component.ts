@@ -21,7 +21,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     Validators.required,
     Validators.minLength(5),
   ]);
-  LoginFormGruop = new FormGroup({
+  LoginFormGroup = new FormGroup({
     username: this.LoginFormControl,
     password: this.PasswordFormControl
   })

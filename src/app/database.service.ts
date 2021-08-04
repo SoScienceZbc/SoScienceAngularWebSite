@@ -171,7 +171,7 @@ export class DatabaseService {
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       },
       onEnd: (res) => {
-        // console.log("It have endes")
+        // console.log("It have ended")
       },
     });
   }
@@ -280,7 +280,7 @@ export class DatabaseService {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
-        console.log('This have been change in database.');
+        console.log('This have been changed in database.');
         this.GetProjectsTheRigthWay(
           sessionStorage.getItem('username')!.toString()
         );
@@ -301,7 +301,7 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         this.GetProjectsTheRigthWay(name);
-        console.log('This have been change in database.', Message.getNumber());
+        console.log('This have been changed in database.', Message.getNumber());
       },
       onEnd: (res) => {},
     });
