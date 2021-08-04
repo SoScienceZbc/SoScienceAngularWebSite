@@ -1,6 +1,10 @@
 <div style="display: flex;">
   <mat-card class="quillEditorSize" style ="overflow-y: auto;">
-    <mat-card-title><input matInput type="text" [(ngModel)]="QuilData.Title" maxlength="30"></mat-card-title>
+    <mat-card-title><input matInput type="text" [(ngModel)]="QuilData.Title" maxlength="30">
+      <button mat-ripple style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card-title>
       <quill-editor  #editor [(ngModel)]="QuilData.editorData" (ngModelChange)="onChange($event)" ></quill-editor>
   </mat-card>
 
@@ -48,6 +52,7 @@
 
       </div>
     </div>
+    <mat-icon>print</mat-icon>
   </mat-card>
 
   <button mat-icon-button (click)="closeDialogBox()" mat-dialog-close>
