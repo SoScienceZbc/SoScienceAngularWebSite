@@ -13,22 +13,18 @@ export class LoginService {
   LoginCheakBehavierSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   userlogin = {} as LoginRepley;
 
-  constructor() { }
-
-  public CheckLogin(usernam:string,passwor:string){
-    let response = {} as LoginRepley;
+  public CheckLogin(username:string,password:string){
     const user = new LoginRequset();
-    user.setUsername(usernam);
-    user.setPassword(passwor);
-    grpc.unary(LoginServcie.LoginAD,{
+    user.setUsername(username);
+    user.setPassword(password);
+    grpc.invoke(LoginServcie.LoginAD,{
       request: user,
       host: this.hostAddress,
-      onEnd: res => {
-        const { status, message } = res;
-        if (status === grpc.Code.OK && message) {
-          this.LoginCheakBehavierSubject$.next((message.toObject() as LoginRepley.AsObject).loginsucsefull);
-        }
-      }
+      onMessage: (Message:  LoginRepley) => {
+        this.LoginCheakBehavierSubject$.next((Message.toObject() as LoginRepley.AsObject).loginsucsefull);
+      },
+      onEnd: res => {}
+      
 
     });
   }

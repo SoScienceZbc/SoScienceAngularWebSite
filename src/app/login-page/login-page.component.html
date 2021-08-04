@@ -6,7 +6,7 @@
         <mat-card-title class="loginbox-header-text">Login</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form class="example-form" (Submit)="Login(UserName.value, password.value)" [formGroup]="LoginFormGruop">
+        <form class="example-form" (Submit)="Login(UserName.value, password.value)" [formGroup]="LoginFormGroup">
           <table class="example-full-width" cellspacing="10">
             <tr>
               <td>
@@ -25,7 +25,7 @@
               </td>
             </tr>
           </table>
-          <button type="submit" [disabled]="LoginFormGruop.invalid" mat-raised-button color="primary"
+          <button type="submit" [disabled]="LoginFormGroup.invalid" mat-raised-button color="primary"
           (click)="Login(UserName.value, password.value)">
           <a>
             Log ind

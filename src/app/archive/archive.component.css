@@ -39,6 +39,7 @@
 
 table {
   width: 100%;
+  border-spacing: 0px;
 }
 
 tr.example-detail-row {
@@ -80,28 +81,4 @@ tr.example-detail-row {
 .hoverme::after{
   text-align: left !important;
 
-}
-/* scollbar style */
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 1px grey;
-  border-radius: 10px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
- height: 1px;
-  background: #494990;
-  border-radius: 5px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background:  #494970;
 }
