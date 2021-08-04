@@ -10,7 +10,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 export class LoginService {
 
   hostAddress = "http://40.87.150.18:27385";
-  LoginCheakBehavierSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  LoginCheckBehaviorSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   userlogin = {} as LoginRepley;
 
   public CheckLogin(username:string,password:string){
@@ -21,7 +21,7 @@ export class LoginService {
       request: user,
       host: this.hostAddress,
       onMessage: (Message:  LoginRepley) => {
-        this.LoginCheakBehavierSubject$.next((Message.toObject() as LoginRepley.AsObject).loginsucsefull);
+        this.LoginCheckBehaviorSubject$.next((Message.toObject() as LoginRepley.AsObject).loginsucsefull);
       },
       onEnd: res => {}
       

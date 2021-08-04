@@ -35,11 +35,11 @@ export class ProjectFormComponent implements OnInit {
   getErrorMessage() {
 
     if (this.ProjectNameFormControl.hasError('required')) {
-      return 'indtast et Project navn';
+      return 'indtast et Projekt navn';
     } else if (this.ProjectNameFormControl.hasError('minlength')) {
-      return 'et Project navn er normalt over 4 charerecter langt'
-    } else if (this.ProjectNameFormControl.hasError('maxength')) {
-      return 'et Project navn er normalt ikke over 25 charerecter lang.'
+      return 'et Projekt navn er normalt over 4 Karaktere langt'
+    } else if (this.ProjectNameFormControl.hasError('maxlength')) {
+      return 'et Projekt navn er normalt ikke over 25 Karaktere lang.'
     }
     return this.ProjectNameFormControl.hasError('pattern') ? 'noget gik galt prøv igen' : '';
   }

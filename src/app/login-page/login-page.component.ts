@@ -35,7 +35,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private route: Router
   ) {
 
-    this.login.LoginCheakBehavierSubject$.subscribe((x) => {
+    this.login.LoginCheckBehaviorSubject$.subscribe((x) => {
       if (x !== this.testlogin) {
         this.testlogin = x;
         sessionStorage.setItem('loggedIn', '' + this.testlogin + '');
@@ -48,7 +48,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    this.login.LoginCheakBehavierSubject$.unsubscribe();
+    this.login.LoginCheckBehaviorSubject$.unsubscribe();
   }
   getErrorMessage() {
 
@@ -56,7 +56,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       return 'Indtast dit uni-login eller mail';
     } else if (this.LoginFormControl.hasError('minlength')) {
       return 'Dit unilogin er normalt over 4 karaktere langt'
-    } else if (this.LoginFormControl.hasError('maxength')) {
+    } else if (this.LoginFormControl.hasError('maxlength')) {
       return 'Dit unilogin er normalt ikke over 8 karaktere lang.'
     }
     return this.LoginFormControl.hasError('pattern') ? 'pattern error' : '';
@@ -75,9 +75,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void { }
   /**
-   * this cheaks if the user can login and emits a boolian.
+   * this checks if the user can login and emits a boolian.
    * @param name the unilogin
-   * @param password the passward for the unilogin
+   * @param password the password for the unilogin
    */
   public Login(name: string, password: string) {
     this.login.CheckLogin(name, password);

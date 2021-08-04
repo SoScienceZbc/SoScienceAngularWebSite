@@ -50,12 +50,12 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   public dataSource: Array<expandingD_Project> = new Array<expandingD_Project>();
   /*--------------DataTable Values--------------*/
   displayedColumns = ["Id", "name", "completed", "lastedited", "endDate"];
-  matdatascoure = new MatTableDataSource<expandingD_Project>(this.dataSource);
+  matdatasource = new MatTableDataSource<expandingD_Project>(this.dataSource);
 
   dataSourceDoneProjjects: Array<expandingD_Project> = new Array<expandingD_Project>();
-  matdatascoureDoneProjects = new MatTableDataSource<expandingD_Project>(this.dataSourceDoneProjjects);
+  matdatasourceDoneProjects = new MatTableDataSource<expandingD_Project>(this.dataSourceDoneProjjects);
 
-  Docoments: expandingD_Docs = new expandingD_Docs();
+  Documents: expandingD_Docs = new expandingD_Docs();
   expandingelement: expandingD_Docs = new expandingD_Docs();
   isExpansionDetailRow = (id: number, row: any | expandingD_Docs) => this.isExpansionDetailRows(id, row);
 
@@ -64,15 +64,15 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
 
     this.dataserve.listOfProjects$.subscribe(x => {
-      this.matdatascoure.data = [];
-      this.matdatascoureDoneProjects.data = [];
+      this.matdatasource.data = [];
+      this.matdatasourceDoneProjects.data = [];
       x.forEach((data, index) => {
         if (data.getCompleted()) {
-          this.matdatascoureDoneProjects.data.push((data as expandingD_Project))
-          this.matdatascoureDoneProjects._updateChangeSubscription();
+          this.matdatasourceDoneProjects.data.push((data as expandingD_Project))
+          this.matdatasourceDoneProjects._updateChangeSubscription();
         } else {
-          this.matdatascoure.data.push((data as expandingD_Project));
-          this.matdatascoure._updateChangeSubscription();
+          this.matdatasource.data.push((data as expandingD_Project));
+          this.matdatasource._updateChangeSubscription();
 
         }
       })
@@ -81,12 +81,12 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.matdatascoure.paginator = this.paginator;
-    this.matdatascoure.sort = this.sort;
+    this.matdatasource.paginator = this.paginator;
+    this.matdatasource.sort = this.sort;
     this.onsortChange();
 
-    this.matdatascoureDoneProjects.sort = this.sortDone;
-    this.matdatascoureDoneProjects.paginator = this.paginatorDone;
+    this.matdatasourceDoneProjects.sort = this.sortDone;
+    this.matdatasourceDoneProjects.paginator = this.paginatorDone;
     this.onSortDoneChange();
   }
 
@@ -102,11 +102,11 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
    */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.matdatascoure.filter = filterValue.trim().toLowerCase();
+    this.matdatasource.filter = filterValue.trim().toLowerCase();
   }
   applyFilterDone(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.matdatascoureDoneProjects.filter = filterValue.trim().toLowerCase();
+    this.matdatasourceDoneProjects.filter = filterValue.trim().toLowerCase();
   }
 
   OpenQuilEditor(event: any) {
@@ -125,7 +125,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
    * This sets up the sorting logic for the table.
    */
   onsortChange() {
-    this.matdatascoure.sortingDataAccessor = (item, property) => {
+    this.matdatasource.sortingDataAccessor = (item, property) => {
       let switchValue = ""
       switch (property) {
         case 'name': switchValue = item.getName(); break;
@@ -138,7 +138,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
   onSortDoneChange() {
-    this.matdatascoureDoneProjects.sortingDataAccessor = (item, property) => {
+    this.matdatasourceDoneProjects.sortingDataAccessor = (item, property) => {
       let switchValue = ""
       switch (property) {
         case 'name': switchValue = item.getName(); break;
@@ -166,11 +166,11 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   /**
-   * This is false data(mockup) in the case that the docomentslist is empty or null
-   * @param element the elemen to fetch docoments for.
+   * This is false data(mockup) in the case that the Documentslist is empty or null
+   * @param element the elemen to fetch Documents for.
    * @returns void
    */
-  GetDocomentsAsObject(element: expandingD_Project) {
+  GetDocumentsAsObject(element: expandingD_Project) {
     let mockup = element.clone();
     if (mockup.getDocumentsList().length > 0) {
       return mockup;
@@ -183,8 +183,8 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   DeleteProject(element: D_Project) {
     this.dilog.open(DialogAreYouSureComponent, {
-      data: { docoment: element, type: "P" }
-      , autoFocus: true,
+      data: { docoment: element, type: "P" }, 
+      autoFocus: true,
       restoreFocus: true,
 
     });
@@ -192,8 +192,8 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   OpenDialogAreYouSureDocument(event: any) {
     this.dilog.open(DialogAreYouSureComponent, {
-      data: { docoment: event, type: "D" }
-      , autoFocus: true,
+      data: { docoment: event, type: "D" }, 
+      autoFocus: true,
       restoreFocus: true,
 
     });
@@ -203,22 +203,22 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
     const tempitem = item;
     this.dilog.open(DialogAreYouSureComponent, {
-      data: { docoment: tempitem, type: "U" }
-      , autoFocus: true,
+      data: { docoment: tempitem, type: "U" },
+      autoFocus: true,
       restoreFocus: true,
     });
-    this.matdatascoure._updateChangeSubscription();
+    this.matdatasource._updateChangeSubscription();
 
   }
   updateProjectUndo(item: D_Project) {
 
     const tempitem = item;
     this.dilog.open(DialogAreYouSureComponent, {
-      data: { docoment: tempitem, type: "UU" }
-      , autoFocus: true,
+      data: { docoment: tempitem, type: "UU" },
+      autoFocus: true,
       restoreFocus: true,
     });
-    this.matdatascoureDoneProjects._updateChangeSubscription();
+    this.matdatasourceDoneProjects._updateChangeSubscription();
 
   }
 
@@ -226,11 +226,10 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
     quill.register(QuilEditorPreViewComponent, true);
     this.dilog.open(QuilEditorPreViewComponent, {
-      data: { docoment: event }
-      , autoFocus: true,
+      data: { docoment: event },
+      autoFocus: true,
       restoreFocus: true,
       maxHeight: '50vh',
-
     })
 
   }
