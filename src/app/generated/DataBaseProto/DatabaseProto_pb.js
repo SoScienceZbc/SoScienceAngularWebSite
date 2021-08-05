@@ -1230,7 +1230,8 @@ proto.DatabaseGRPC.D_Project.toObject = function(includeInstance, msg) {
     lastedited: jspb.Message.getFieldWithDefault(msg, 4, ""),
     enddate: jspb.Message.getFieldWithDefault(msg, 5, ""),
     documentsList: jspb.Message.toObjectList(msg.getDocumentsList(),
-    proto.DatabaseGRPC.D_Document.toObject, includeInstance)
+    proto.DatabaseGRPC.D_Document.toObject, includeInstance),
+    projectthemeid: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -1291,6 +1292,10 @@ proto.DatabaseGRPC.D_Project.deserializeBinaryFromReader = function(msg, reader)
       var value = new proto.DatabaseGRPC.D_Document;
       reader.readMessage(value,proto.DatabaseGRPC.D_Document.deserializeBinaryFromReader);
       msg.addDocuments(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setProjectthemeid(value);
       break;
     default:
       reader.skipField();
@@ -1362,6 +1367,13 @@ proto.DatabaseGRPC.D_Project.serializeBinaryToWriter = function(message, writer)
       6,
       f,
       proto.DatabaseGRPC.D_Document.serializeBinaryToWriter
+    );
+  }
+  f = message.getProjectthemeid();
+  if (f !== 0) {
+    writer.writeInt32(
+      7,
+      f
     );
   }
 };
@@ -1492,6 +1504,24 @@ proto.DatabaseGRPC.D_Project.prototype.addDocuments = function(opt_value, opt_in
  */
 proto.DatabaseGRPC.D_Project.prototype.clearDocumentsList = function() {
   return this.setDocumentsList([]);
+};
+
+
+/**
+ * optional int32 ProjectThemeID = 7;
+ * @return {number}
+ */
+proto.DatabaseGRPC.D_Project.prototype.getProjectthemeid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.DatabaseGRPC.D_Project} returns this
+ */
+proto.DatabaseGRPC.D_Project.prototype.setProjectthemeid = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 

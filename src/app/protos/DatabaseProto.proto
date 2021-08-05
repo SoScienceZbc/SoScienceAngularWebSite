@@ -28,7 +28,7 @@ rpc GetRemoteFiles(UserDbInfomation) returns (D_RemoteFiles);
 
 message UserDbInfomation{
     int32 ID = 1;
-    string DbName = 2;
+    string DbName = 2;     
 }
 
 message ProjectUserInfomation{
@@ -51,7 +51,6 @@ message D_RemoteFiles{
     repeated D_RemoteFile D_RemoteFile = 1;
 }
 // Project
-
 message D_Project{
 	int32 id = 1;
     string name = 2;
@@ -59,6 +58,7 @@ message D_Project{
     string lastedited = 4;
     string endDate = 5;
     repeated D_Document documents = 6;
+    int32 ProjectThemeID = 7;
 }
 // document
 message D_Document{
@@ -78,6 +78,5 @@ message D_RemoteFile{
      int32 projectID = 4;
      string path = 5;
 }
-
 
 //protoc --plugin=protoc-gen-ts="C:\Users\andi0137\source\repos\AngularRefactorV2\SoScienceRefactorV2\node_modules\.bin\protoc-gen-ts.cmd" --js_out="import_style=commonjs,binary:src/app/generated/DataBaseProto" --ts_out="service=grpc-web:src/app/generated" src/app/protos/DatabaseProto.proto

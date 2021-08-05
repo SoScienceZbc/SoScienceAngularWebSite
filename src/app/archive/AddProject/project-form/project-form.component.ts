@@ -55,7 +55,8 @@ export class ProjectFormComponent implements OnInit {
       d.setCompleted(false);
       d.setEnddate(event.toLocaleString('en-GB', { timeZone: 'GMT' }));
       d.setLastedited(event.toLocaleString('en-GB', { timeZone: 'GMT' }));
-
+      d.setProjectthemeid(1);
+      console.log(d);
       console.log(event.toLocaleString('en-GB', { timeZone: 'GMT' }));
 
       this.dataservice.AddProject((name as string),d);

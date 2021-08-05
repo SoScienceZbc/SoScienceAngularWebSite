@@ -162,6 +162,9 @@ export class D_Project extends jspb.Message {
   setDocumentsList(value: Array<D_Document>): void;
   addDocuments(value?: D_Document, index?: number): D_Document;
 
+  getProjectthemeid(): number;
+  setProjectthemeid(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): D_Project.AsObject;
   static toObject(includeInstance: boolean, msg: D_Project): D_Project.AsObject;
@@ -180,6 +183,7 @@ export namespace D_Project {
     lastedited: string,
     enddate: string,
     documentsList: Array<D_Document.AsObject>,
+    projectthemeid: number,
   }
 }
 

@@ -1,7 +1,7 @@
 // package: DatabaseGRPC
 // file: src/app/protos/DatabaseProto.proto
 
-var src_app_protos_DatabaseProto_pb = require("../../generated/DataBaseProto/DatabaseProto_pb");
+var src_app_protos_DatabaseProto_pb = require("../DataBaseProto/DatabaseProto_pb");
 var grpc = require("@improbable-eng/grpc-web").grpc;
 
 var GrpcDatabaseProject = (function () {
