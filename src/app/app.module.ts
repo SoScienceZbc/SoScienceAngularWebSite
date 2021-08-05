@@ -137,8 +137,6 @@ import { QuilEditorPreViewComponent } from './quil-editor-pre-view/quil-editor-p
           ['clean'],                                         // remove formatting button
 
           ['link', 'image', 'video'] ,                        // link and image, video
-
-
         ]
       },theme:'snow'
     })

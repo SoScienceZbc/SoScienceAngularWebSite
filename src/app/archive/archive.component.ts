@@ -8,7 +8,7 @@ import { DatabaseService } from '../database.service';
 import { D_Document, D_Documents, D_Project } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 import { TextEditorComponent } from '../TextEditor/TextEditor.component';
-import quill from 'quill';
+import quill, { Quill } from 'quill';
 import { DialogAreYouSureComponent } from '../dialog-are-you-sure/dialog-are-you-sure.component';
 import { QuilEditorPreViewComponent } from '../quil-editor-pre-view/quil-editor-pre-view.component';
 import { isTemplateExpression } from 'typescript';
@@ -110,7 +110,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   OpenQuilEditor(event: any) {
-
     quill.register(TextEditorComponent, true);
     this.dilog.open(TextEditorComponent, {
       data: { docoment: event }
@@ -183,7 +182,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   DeleteProject(element: D_Project) {
     this.dilog.open(DialogAreYouSureComponent, {
-      data: { docoment: element, type: "P" }, 
+      data: { docoment: element, type: "P" },
       autoFocus: true,
       restoreFocus: true,
 
@@ -192,7 +191,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   OpenDialogAreYouSureDocument(event: any) {
     this.dilog.open(DialogAreYouSureComponent, {
-      data: { docoment: event, type: "D" }, 
+      data: { docoment: event, type: "D" },
       autoFocus: true,
       restoreFocus: true,
 
