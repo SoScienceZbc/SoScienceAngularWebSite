@@ -51,6 +51,7 @@ export class QuilEditorPreViewComponent implements OnInit {
     this.spinner.show();
   }
 
+
   ngOnInit(): void {}
 
   async SaveAsWordFile() {
