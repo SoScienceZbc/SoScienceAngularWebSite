@@ -4,33 +4,33 @@
 var src_app_protos_AdLookupProto_pb = require("./AdLookupProto_pb");
 var grpc = require("@improbable-eng/grpc-web").grpc;
 
-var LoginServcie = (function () {
-  function LoginServcie() {}
-  LoginServcie.serviceName = "LoginGRPC.LoginServcie";
-  return LoginServcie;
+var LoginService = (function () {
+  function LoginService() {}
+  LoginService.serviceName = "LoginGRPC.LoginService";
+  return LoginService;
 }());
 
-LoginServcie.LoginAD = {
+LoginService.LoginAD = {
   methodName: "LoginAD",
-  service: LoginServcie,
+  service: LoginService,
   requestStream: false,
   responseStream: false,
   requestType: src_app_protos_AdLookupProto_pb.LoginRequset,
   responseType: src_app_protos_AdLookupProto_pb.LoginRepley
 };
 
-exports.LoginServcie = LoginServcie;
+exports.LoginService = LoginService;
 
-function LoginServcieClient(serviceHost, options) {
+function LoginServiceClient(serviceHost, options) {
   this.serviceHost = serviceHost;
   this.options = options || {};
 }
 
-LoginServcieClient.prototype.loginAD = function loginAD(requestMessage, metadata, callback) {
+LoginServiceClient.prototype.loginAD = function loginAD(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(LoginServcie.LoginAD, {
+  var client = grpc.unary(LoginService.LoginAD, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -57,5 +57,5 @@ LoginServcieClient.prototype.loginAD = function loginAD(requestMessage, metadata
   };
 };
 
-exports.LoginServcieClient = LoginServcieClient;
+exports.LoginServiceClient = LoginServiceClient;
 

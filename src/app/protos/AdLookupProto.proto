@@ -3,7 +3,7 @@ syntax = "proto3";
 option csharp_namespace = "Proto";
 package LoginGRPC;
 
-service LoginServcie {
+service LoginService {
   rpc LoginAD(LoginRequset) returns (LoginRepley) {}
 }
 
@@ -14,6 +14,7 @@ string password = 2;
 
 message LoginRepley {
 	bool loginSucsefull = 1;
+	bool Admin = 2;
 }
 
 //protoc --plugin=protoc-gen-ts="C:\Users\alex303a\SoScienceRefactorV2\node_modules\.bin\protoc-gen-ts.cmd" --js_out="import_style=commonjs,binary:src/app/generated/AdLookupProto" --ts_out="service=grpc-web:src/app/generated" src/app/protos/AdLookupProto.proto

@@ -251,7 +251,8 @@ proto.LoginGRPC.LoginRepley.prototype.toObject = function(opt_includeInstance) {
  */
 proto.LoginGRPC.LoginRepley.toObject = function(includeInstance, msg) {
   var f, obj = {
-    loginsucsefull: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
+    loginsucsefull: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
+    admin: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -292,6 +293,10 @@ proto.LoginGRPC.LoginRepley.deserializeBinaryFromReader = function(msg, reader) 
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setLoginsucsefull(value);
       break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setAdmin(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -328,6 +333,13 @@ proto.LoginGRPC.LoginRepley.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
+  f = message.getAdmin();
+  if (f) {
+    writer.writeBool(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -346,6 +358,24 @@ proto.LoginGRPC.LoginRepley.prototype.getLoginsucsefull = function() {
  */
 proto.LoginGRPC.LoginRepley.prototype.setLoginsucsefull = function(value) {
   return jspb.Message.setProto3BooleanField(this, 1, value);
+};
+
+
+/**
+ * optional bool Admin = 2;
+ * @return {boolean}
+ */
+proto.LoginGRPC.LoginRepley.prototype.getAdmin = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.LoginGRPC.LoginRepley} returns this
+ */
+proto.LoginGRPC.LoginRepley.prototype.setAdmin = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
 

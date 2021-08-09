@@ -1,21 +1,21 @@
 // package: LoginGRPC
-// file: /protos/AdLookupProto.proto
+// file: src/app/protos/AdLookupProto.proto
 
-import * as src_app_protos_AdLookupProto_pb from "../AdLookupProto/AdLookupProto_pb";
+import * as src_app_protos_AdLookupProto_pb from "./AdLookupProto_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
-type LoginServcieLoginAD = {
+type LoginServiceLoginAD = {
   readonly methodName: string;
-  readonly service: typeof LoginServcie;
+  readonly service: typeof LoginService;
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof src_app_protos_AdLookupProto_pb.LoginRequset;
   readonly responseType: typeof src_app_protos_AdLookupProto_pb.LoginRepley;
 };
 
-export class LoginServcie {
+export class LoginService {
   static readonly serviceName: string;
-  static readonly LoginAD: LoginServcieLoginAD;
+  static readonly LoginAD: LoginServiceLoginAD;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -46,7 +46,7 @@ interface BidirectionalStream<ReqT, ResT> {
   on(type: 'status', handler: (status: Status) => void): BidirectionalStream<ReqT, ResT>;
 }
 
-export class LoginServcieClient {
+export class LoginServiceClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
