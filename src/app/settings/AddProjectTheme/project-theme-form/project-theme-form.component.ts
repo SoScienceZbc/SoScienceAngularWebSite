@@ -22,11 +22,11 @@ export class ProjectThemeFormComponent implements OnInit {
   getErrorMessage() {
 
     if (this.ThemeProjectNameFormControl.hasError('required')) {
-      return 'indtast et Projekt navn';
+      return 'indtast et Projekt Tema navn';
     } else if (this.ThemeProjectNameFormControl.hasError('minlength')) {
-      return 'et Projekt navn er normalt over 4 Karaktere langt'
+      return 'et Projekt Tema navn er normalt over 4 Karaktere langt'
     } else if (this.ThemeProjectNameFormControl.hasError('maxlength')) {
-      return 'et Projekt navn er normalt ikke over 25 Karaktere lang.'
+      return 'et Projekt Tema navn er normalt ikke over 25 Karaktere lang.'
     }
     return this.ThemeProjectNameFormControl.hasError('pattern') ? 'noget gik galt prøv igen' : '';
   }
