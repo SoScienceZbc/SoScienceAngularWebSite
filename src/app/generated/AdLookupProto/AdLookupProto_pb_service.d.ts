@@ -1,7 +1,7 @@
 // package: LoginGRPC
-// file: src/app/protos/AdLookupProto.proto
+// file: src/app/protos/ADLookupProto.proto
 
-import * as src_app_protos_AdLookupProto_pb from "./AdLookupProto_pb";
+import * as src_app_protos_ADLookupProto_pb from "./ADLookupProto_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
 type LoginServiceLoginAD = {
@@ -9,13 +9,23 @@ type LoginServiceLoginAD = {
   readonly service: typeof LoginService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_AdLookupProto_pb.LoginRequset;
-  readonly responseType: typeof src_app_protos_AdLookupProto_pb.LoginRepley;
+  readonly requestType: typeof src_app_protos_ADLookupProto_pb.LoginRequset;
+  readonly responseType: typeof src_app_protos_ADLookupProto_pb.LoginRepley;
+};
+
+type LoginServiceValidateToken = {
+  readonly methodName: string;
+  readonly service: typeof LoginService;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_ADLookupProto_pb.LoginRepley;
+  readonly responseType: typeof src_app_protos_ADLookupProto_pb.LoginRepley;
 };
 
 export class LoginService {
   static readonly serviceName: string;
   static readonly LoginAD: LoginServiceLoginAD;
+  static readonly ValidateToken: LoginServiceValidateToken;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -51,13 +61,22 @@ export class LoginServiceClient {
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
   loginAD(
-    requestMessage: src_app_protos_AdLookupProto_pb.LoginRequset,
+    requestMessage: src_app_protos_ADLookupProto_pb.LoginRequset,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_AdLookupProto_pb.LoginRepley|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_ADLookupProto_pb.LoginRepley|null) => void
   ): UnaryResponse;
   loginAD(
-    requestMessage: src_app_protos_AdLookupProto_pb.LoginRequset,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_AdLookupProto_pb.LoginRepley|null) => void
+    requestMessage: src_app_protos_ADLookupProto_pb.LoginRequset,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_ADLookupProto_pb.LoginRepley|null) => void
+  ): UnaryResponse;
+  validateToken(
+    requestMessage: src_app_protos_ADLookupProto_pb.LoginRepley,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_ADLookupProto_pb.LoginRepley|null) => void
+  ): UnaryResponse;
+  validateToken(
+    requestMessage: src_app_protos_ADLookupProto_pb.LoginRepley,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_ADLookupProto_pb.LoginRepley|null) => void
   ): UnaryResponse;
 }
 

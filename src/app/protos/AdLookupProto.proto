@@ -5,16 +5,18 @@ package LoginGRPC;
 
 service LoginService {
   rpc LoginAD(LoginRequset) returns (LoginRepley) {}
+  rpc ValidateToken(LoginRepley) returns (LoginRepley) {}
 }
 
 message LoginRequset {
-string username = 1;
-string password = 2;
+	string username = 1;
+	string password = 2;
 }
 
 message LoginRepley {
 	bool loginSucsefull = 1;
 	bool Admin = 2;
+	string Token = 3;
 }
 
 //protoc --plugin=protoc-gen-ts="C:\Users\alex303a\SoScienceRefactorV2\node_modules\.bin\protoc-gen-ts.cmd" --js_out="import_style=commonjs,binary:src/app/generated/AdLookupProto" --ts_out="service=grpc-web:src/app/generated" src/app/protos/AdLookupProto.proto

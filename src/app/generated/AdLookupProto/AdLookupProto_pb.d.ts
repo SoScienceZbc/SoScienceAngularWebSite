@@ -1,5 +1,5 @@
 // package: LoginGRPC
-// file: src/app/protos/AdLookupProto.proto
+// file: src/app/protos/ADLookupProto.proto
 
 import * as jspb from "google-protobuf";
 
@@ -34,6 +34,9 @@ export class LoginRepley extends jspb.Message {
   getAdmin(): boolean;
   setAdmin(value: boolean): void;
 
+  getToken(): string;
+  setToken(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): LoginRepley.AsObject;
   static toObject(includeInstance: boolean, msg: LoginRepley): LoginRepley.AsObject;
@@ -48,6 +51,7 @@ export namespace LoginRepley {
   export type AsObject = {
     loginsucsefull: boolean,
     admin: boolean,
+    token: string,
   }
 }
 

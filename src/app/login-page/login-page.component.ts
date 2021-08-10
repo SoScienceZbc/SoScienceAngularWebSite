@@ -36,9 +36,13 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   ) {
 
     this.login.LoginCheckBehaviorSubject$.subscribe((x) => {
-      if (x !== this.testlogin) {
-        this.testlogin = x;
-        sessionStorage.setItem('loggedIn', '' + this.testlogin + '');
+      console.log(x);
+      if (x.getLoginsucsefull() !== this.testlogin) {
+        this.testlogin = x.getLoginsucsefull();
+        sessionStorage.setItem('Token', '' + x.getToken() + '');
+        if(x.getAdmin()){
+          sessionStorage.setItem('Admin', '' + x.getAdmin() + '');
+        }
         if (this.testlogin) {
           this.route.navigateByUrl('/forside');
         }
@@ -84,8 +88,5 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.spinner.show();
     var tempName = name.split("@",1);
     tempName.toString().toLowerCase();
-    sessionStorage.setItem('username', tempName.toString());
-    if (this.testlogin) {
-    }
   }
 }

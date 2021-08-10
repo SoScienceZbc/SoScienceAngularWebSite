@@ -49,7 +49,7 @@ export class ProjectFormComponent implements OnInit {
 
       const event = new Date(Date.now());
       let d = new D_Project();
-      let name = sessionStorage.getItem("username");
+      let name = sessionStorage.getItem("Token");
 
       d.setName(titel);
       d.setCompleted(false);

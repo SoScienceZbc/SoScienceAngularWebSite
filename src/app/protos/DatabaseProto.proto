@@ -33,7 +33,7 @@ message UserDbInfomation{
 
 message ProjectUserInfomation{
 
-    UserDbInfomation user=1;
+    UserDbInfomation user = 1;
     D_Project project = 2;
 }
 

@@ -50,7 +50,7 @@ export class TextEditorComponent implements OnInit {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dataservice: DatabaseService, private dialog: MatDialog) {
-    this.localDDocoment$ = this.dataservice.GetDocomentHtml(sessionStorage.getItem("username") as string, (this.data.docoment as D_Document).getId());
+    this.localDDocoment$ = this.dataservice.GetDocomentHtml(sessionStorage.getItem("Token") as string, (this.data.docoment as D_Document).getId());
     this.dataservice.EditorDocoment$.subscribe(x => {
       if (this.QuilData.editorData != x.getData()) {
         this.QuilData.Title = x.getTitle();
@@ -102,7 +102,7 @@ export class TextEditorComponent implements OnInit {
       }
       //#endregion
       this.localDDocoment$.value.setData(editor);
-      this.dataservice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
+      this.dataservice.UpdateDocoment(sessionStorage.getItem("Token")!.toString(), this.localDDocoment$.value);
     }
 
   }
@@ -112,8 +112,8 @@ export class TextEditorComponent implements OnInit {
     this.onChange(null);
     this.localDDocoment$.value.setTitle(this.QuilData.Title);
     // console.log("UpdateDockument", this.localDDocoment$.value)
-    // this.dataservice.UpdateDocoment(sessionStorage.getItem("username")!.toString(), this.localDDocoment$.value);
-    this.dataservice.GetProjectsTheRigthWay(sessionStorage.getItem("username")!.toString())
+    // this.dataservice.UpdateDocoment(sessionStorage.getItem("Token")!.toString(), this.localDDocoment$.value);
+    this.dataservice.GetProjectsTheRigthWay(sessionStorage.getItem("Token")!.toString())
     this.dialog.closeAll()
 
   }
