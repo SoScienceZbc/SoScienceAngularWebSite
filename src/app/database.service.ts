@@ -95,9 +95,7 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         console.log('entris change: ' + Message.getNumber());
-        this.GetProjectsTheRigthWay(
-          sessionStorage.getItem('username')!.toString()
-        );
+        this.GetProjectsTheRigthWay(name);
       },
       onEnd: (res) => {},
     });
@@ -143,9 +141,7 @@ export class DatabaseService {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
-        this.GetProjectsTheRigthWay(
-          sessionStorage.getItem('username')!.toString()
-        );
+        this.GetProjectsTheRigthWay(name);
       },
       onEnd: (res) => {
         // console.log("It have endes")
@@ -165,9 +161,7 @@ export class DatabaseService {
       onMessage: (Message: intger) => {
         // this.behavProject$.next(Message);
         // console.log(Message);
-        this.GetProjectsTheRigthWay(
-          sessionStorage.getItem('username')!.toString()
-        );
+        this.GetProjectsTheRigthWay(name);
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       },
       onEnd: (res) => {
@@ -281,9 +275,7 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         console.log('This have been changed in database.');
-        this.GetProjectsTheRigthWay(
-          sessionStorage.getItem('username')!.toString()
-        );
+        this.GetProjectsTheRigthWay(sessionStorage.getItem('Token')!.toString());
       },
       onEnd: (res) => {
       },

@@ -1,28 +1,27 @@
 <!--Normal menu-->
-<app-footer></app-footer>
 <div fxFlexFill style="margin-top: 0vh !important;">
-  <div [hidden]="checkLogin()">
-  <mat-toolbar color="primary" >
-    <mat-toolbar-row>
-      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm >
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>
-      </span>
-      <input class="homeButton" type="image" src="../../assets/SoScience2.png" onclick="location.href='/forside';"/>
-      <div fxShow="true" fxHide.lt-md>
-        <a href="/forside" mat-button>Forside</a>
-        <a href="/guideline" mat-button>Guidelines</a>
-        <a href="/arkiv" mat-button>Projekter</a>
-        <a target="_blank" href="https://moodle.zbc.dk/login/index.php" mat-button>Moodle</a>
-      </div>
-      <span class="menu-spacer"></span>
-      <button mat-icon-button onclick="location.href='/indstillinger';" style="float: right !important;"><mat-icon>manage_accounts</mat-icon></button>
-      <button mat-icon-button (click)="logout()" style="float: right !important;"><mat-icon>logout</mat-icon></button>
-    </mat-toolbar-row>
-  </mat-toolbar>
-</div>
-<!--Burgermenu-->
+  <div *ngIf="checkLogin()">
+    <mat-toolbar color="primary" >
+      <mat-toolbar-row>
+        <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>
+        </span>
+        <input class="homeButton" type="image" src="../../assets/SoScience2.png" onclick="location.href='/forside';"/>
+        <div fxShow="true" fxHide.lt-md>
+          <a routerLink="/forside" mat-button>Forside</a>
+          <a routerLink="/guideline" mat-button>Guidelines</a>
+          <a routerLink="/arkiv" mat-button>Projekter</a>
+          <a target="_blank" href="https://moodle.zbc.dk/login/index.php" mat-button>Moodle</a>
+        </div>
+        <span class="menu-spacer"></span>
+        <button *ngIf="checkAdmin()" mat-icon-button onclick="location.href='/indstillinger';" style="float: right !important;"><mat-icon>manage_accounts</mat-icon></button>
+        <button mat-icon-button (click)="logout()" style="float: right !important;"><mat-icon>logout</mat-icon></button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <!--Burgermenu-->
   <mat-sidenav-container fxFlexFill class="menuNavbar">
     <mat-sidenav #sidenav>
       <mat-nav-list>
@@ -36,7 +35,8 @@
       <router-outlet>
       </router-outlet>
     </mat-sidenav-content>
-
+    
   </mat-sidenav-container>
-
+  
 </div>
+<app-footer></app-footer>

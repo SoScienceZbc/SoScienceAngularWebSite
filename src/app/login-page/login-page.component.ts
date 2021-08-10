@@ -36,7 +36,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   ) {
 
     this.login.LoginCheckBehaviorSubject$.subscribe((x) => {
-      console.log(x);
       if (x.getLoginsucsefull() !== this.testlogin) {
         this.testlogin = x.getLoginsucsefull();
         sessionStorage.setItem('Token', '' + x.getToken() + '');

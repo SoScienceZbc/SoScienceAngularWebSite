@@ -22,6 +22,9 @@ export class NavBarComponent implements OnInit {
   }
 
   checkLogin(){
-    return (sessionStorage.getItem("Token") !== null) ? false: true
+    return (sessionStorage.getItem("Token") !== null) ? true : false
+  }
+  checkAdmin(){
+    return (sessionStorage.getItem("Admin") !== null) ? true : false
   }
 }

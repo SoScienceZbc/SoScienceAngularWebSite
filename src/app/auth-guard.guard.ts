@@ -17,13 +17,9 @@ export class AuthGuardGuard implements CanActivate {
         const loginreply$ = this.loginService.ValidateLogin(token!,admin)
         loginreply$.subscribe(data => {
           if(data != null){
-            console.log("guard validation: ");
-            console.log(data.toString());
             if(data.getLoginsucsefull()){
-              console.log("Guard: validated");
               loginreply$.unsubscribe();
             }else{
-              console.log("Guard: validate failed");
               loginreply$.unsubscribe();
               sessionStorage.removeItem("Token");
               sessionStorage.removeItem("Admin");
