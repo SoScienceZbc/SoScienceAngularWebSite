@@ -1,7 +1,7 @@
 // package: LoginGRPC
 // file: src/app/protos/ADLookupProto.proto
 
-import * as src_app_protos_ADLookupProto_pb from "./ADLookupProto_pb";
+import * as src_app_protos_ADLookupProto_pb from "./AdLookupProto_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
 type LoginServiceLoginAD = {

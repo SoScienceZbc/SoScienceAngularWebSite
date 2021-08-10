@@ -56,7 +56,6 @@ import { DocumentAddComponent } from './archive/AddDocument/document-add/documen
 import { FooterComponent } from './footer/footer.component';
 import { DialogAreYouSureComponent } from './dialog-are-you-sure/dialog-are-you-sure.component';
 import { QuilEditorPreViewComponent } from './quil-editor-pre-view/quil-editor-pre-view.component';
-import { ProjectThemeFormComponent } from './settings/AddProjectTheme/project-theme-form/project-theme-form.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +74,7 @@ import { ProjectThemeFormComponent } from './settings/AddProjectTheme/project-th
     FooterComponent,
     DialogAreYouSureComponent,
     QuilEditorPreViewComponent,
-    ProjectThemeFormComponent,
+    
   ],
   imports: [
     BrowserModule,
