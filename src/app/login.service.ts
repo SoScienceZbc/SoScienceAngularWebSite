@@ -21,7 +21,6 @@ export class LoginService {
       request: user,
       host: this.hostAddress,
       onMessage: (Message:  LoginRepley) => {
-        console.log(Message.toObject());
         this.LoginCheckBehaviorSubject$.next(Message);
       },
       onEnd: res => {}
