@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { grpc } from "@improbable-eng/grpc-web";
-import { LoginService as pbLoginService } from "../app/generated/AdLookupProto/AdLookupProto_pb_service";
-import { LoginRequset, LoginRepley } from "../app/generated/AdLookupProto/AdLookupProto_pb";
+import { LoginService as pbLoginService } from "../app/generated/AdLookupProto/ADLookupProto_pb_service";
+import { LoginRequset, LoginRepley } from "../app/generated/AdLookupProto/ADLookupProto_pb";
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
