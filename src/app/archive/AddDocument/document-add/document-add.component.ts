@@ -40,7 +40,7 @@ export class DocumentAddComponent implements OnInit {
   addNewDocoment(title:string){
 
     let newdoc = new D_Document();
-    let name = sessionStorage.getItem("username");
+    let name = sessionStorage.getItem("Token");
 
 
 
