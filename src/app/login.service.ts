@@ -3,7 +3,6 @@ import { grpc } from "@improbable-eng/grpc-web";
 import { LoginService as pbLoginService } from "../app/generated/AdLookupProto/AdLookupProto_pb_service";
 import { LoginRequset, LoginRepley } from "../app/generated/AdLookupProto/AdLookupProto_pb";
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Console } from 'console';
 
 @Injectable({
   providedIn: 'root'
