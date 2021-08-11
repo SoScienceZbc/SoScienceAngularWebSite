@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
-import { D_Document } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
+import { D_Document } from 'src/app/generated/DataBaseProto/DataBaseProto_pb';
 import { LoadingService } from 'src/app/loading.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 

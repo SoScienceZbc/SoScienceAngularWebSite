@@ -3,7 +3,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Quill from 'quill';
 import { BehaviorSubject } from 'rxjs';
 import { DatabaseService } from '../database.service';
-import { D_Document } from '../generated/DataBaseProto/DatabaseProto_pb';
+import { D_Document } from '../generated/DataBaseProto/DataBaseProto_pb';
 import { LoadingService } from '../loading.service';
 import * as quillToWord from 'quill-to-word';
 import { saveAs } from 'file-saver';

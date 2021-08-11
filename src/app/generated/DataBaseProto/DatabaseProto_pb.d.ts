@@ -1,5 +1,5 @@
 // package: DatabaseGRPC
-// file: src/app/protos/DatabaseProto.proto
+// file: src/app/protos/DataBaseProto.proto
 
 import * as jspb from "google-protobuf";
 
@@ -141,6 +141,28 @@ export namespace D_RemoteFiles {
   }
 }
 
+export class D_Subjects extends jspb.Message {
+  clearSubjectList(): void;
+  getSubjectList(): Array<D_Subject>;
+  setSubjectList(value: Array<D_Subject>): void;
+  addSubject(value?: D_Subject, index?: number): D_Subject;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): D_Subjects.AsObject;
+  static toObject(includeInstance: boolean, msg: D_Subjects): D_Subjects.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: D_Subjects, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): D_Subjects;
+  static deserializeBinaryFromReader(message: D_Subjects, reader: jspb.BinaryReader): D_Subjects;
+}
+
+export namespace D_Subjects {
+  export type AsObject = {
+    subjectList: Array<D_Subject.AsObject>,
+  }
+}
+
 export class D_Project extends jspb.Message {
   getId(): number;
   setId(value: number): void;
@@ -266,6 +288,32 @@ export namespace D_RemoteFile {
     type: string,
     projectid: number,
     path: string,
+  }
+}
+
+export class D_Subject extends jspb.Message {
+  hasUser(): boolean;
+  clearUser(): void;
+  getUser(): UserDbInfomation | undefined;
+  setUser(value?: UserDbInfomation): void;
+
+  getName(): string;
+  setName(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): D_Subject.AsObject;
+  static toObject(includeInstance: boolean, msg: D_Subject): D_Subject.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: D_Subject, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): D_Subject;
+  static deserializeBinaryFromReader(message: D_Subject, reader: jspb.BinaryReader): D_Subject;
+}
+
+export namespace D_Subject {
+  export type AsObject = {
+    user?: UserDbInfomation.AsObject,
+    name: string,
   }
 }
 

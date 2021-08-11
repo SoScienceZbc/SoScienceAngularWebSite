@@ -3,7 +3,7 @@ import { grpc } from '@improbable-eng/grpc-web';
 import {
   GrpcDatabaseProject,
   GrpcDatabaseProjectClient,
-} from './generated/DataBaseProto/DatabaseProto_pb_service';
+} from './generated/DataBaseProto/DataBaseProto_pb_service';
 import {
   UserDbInfomation,
   ProjectUserInfomation,
@@ -12,7 +12,9 @@ import {
   D_Projects,
   D_Documents,
   D_Document,
-} from './generated/DataBaseProto/DatabaseProto_pb';
+  D_Subject,
+  D_Subjects
+} from './generated/DataBaseProto/DataBaseProto_pb';
 import { BehaviorSubject, Observable, of, Subject, zip } from 'rxjs';
 
 @Injectable({
@@ -300,4 +302,19 @@ export class DatabaseService {
   }
   //#endregion
   /*-------------------RemoteFiles-------------------*/
+
+  /*--------------------Subjects---------------------*/
+  public AddSubject(subject: D_Subject,name:string) {
+    const userinfomation = new UserDbInfomation();
+    userinfomation.setDbname(name);
+    subject.setUser(userinfomation);
+    
+    grpc.invoke(GrpcDatabaseProject.AddSubject, {
+      request: subject,
+      host: this.hostAddress,
+      onMessage: (Message: intger) => {
+      }, 
+      onEnd: (res) => {},
+    })
+  }
 }

@@ -56,6 +56,9 @@ import { DocumentAddComponent } from './archive/AddDocument/document-add/documen
 import { FooterComponent } from './footer/footer.component';
 import { DialogAreYouSureComponent } from './dialog-are-you-sure/dialog-are-you-sure.component';
 import { QuilEditorPreViewComponent } from './quil-editor-pre-view/quil-editor-pre-view.component';
+import { SubjectDialogBoxComponent } from './settings/subject/add-subject-dialog-box/subject-dialog-box/subject-dialog-box.component';
+import { SubjectFormComponent } from './settings/subject/add-subject-form/subject-form/subject-form.component';
+
 
 @NgModule({
   declarations: [
@@ -74,6 +77,8 @@ import { QuilEditorPreViewComponent } from './quil-editor-pre-view/quil-editor-p
     FooterComponent,
     DialogAreYouSureComponent,
     QuilEditorPreViewComponent,
+    SubjectDialogBoxComponent,
+    SubjectFormComponent,
   ],
   imports: [
     BrowserModule,

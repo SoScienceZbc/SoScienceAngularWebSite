@@ -1,7 +1,7 @@
 // package: DatabaseGRPC
-// file: src/app/protos/DatabaseProto.proto
+// file: src/app/protos/DataBaseProto.proto
 
-import * as src_app_protos_DatabaseProto_pb from "../DataBaseProto/DatabaseProto_pb";
+import * as src_app_protos_DataBaseProto_pb from "./DataBaseProto_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
 type GrpcDatabaseProjectGetProject = {
@@ -9,8 +9,8 @@ type GrpcDatabaseProjectGetProject = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_Project;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.UserDbInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.D_Project;
 };
 
 type GrpcDatabaseProjectAddProject = {
@@ -18,8 +18,8 @@ type GrpcDatabaseProjectAddProject = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.ProjectUserInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.ProjectUserInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.intger;
 };
 
 type GrpcDatabaseProjectEditProject = {
@@ -27,8 +27,8 @@ type GrpcDatabaseProjectEditProject = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.ProjectUserInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.ProjectUserInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.intger;
 };
 
 type GrpcDatabaseProjectRemoveProject = {
@@ -36,8 +36,8 @@ type GrpcDatabaseProjectRemoveProject = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.ProjectUserInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.ProjectUserInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.intger;
 };
 
 type GrpcDatabaseProjectGetProjects = {
@@ -45,8 +45,8 @@ type GrpcDatabaseProjectGetProjects = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_Projects;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.UserDbInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.D_Projects;
 };
 
 type GrpcDatabaseProjectGetDocuments = {
@@ -54,8 +54,8 @@ type GrpcDatabaseProjectGetDocuments = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_Documents;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.UserDbInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.D_Documents;
 };
 
 type GrpcDatabaseProjectAddDocument = {
@@ -63,8 +63,8 @@ type GrpcDatabaseProjectAddDocument = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.D_Document;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.D_Document;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.intger;
 };
 
 type GrpcDatabaseProjectGetDocument = {
@@ -72,8 +72,8 @@ type GrpcDatabaseProjectGetDocument = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_Document;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.UserDbInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.D_Document;
 };
 
 type GrpcDatabaseProjectUpdateDocument = {
@@ -81,8 +81,8 @@ type GrpcDatabaseProjectUpdateDocument = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.D_Document;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.D_Document;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.intger;
 };
 
 type GrpcDatabaseProjectRemoveDocument = {
@@ -90,8 +90,8 @@ type GrpcDatabaseProjectRemoveDocument = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.ProjectUserInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.ProjectUserInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.intger;
 };
 
 type GrpcDatabaseProjectAddRemoteFile = {
@@ -99,8 +99,8 @@ type GrpcDatabaseProjectAddRemoteFile = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.D_RemoteFile;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.D_RemoteFile;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.intger;
 };
 
 type GrpcDatabaseProjectGetRemoteFile = {
@@ -108,8 +108,8 @@ type GrpcDatabaseProjectGetRemoteFile = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_RemoteFile;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.UserDbInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.D_RemoteFile;
 };
 
 type GrpcDatabaseProjectUpdateRemoteFile = {
@@ -117,8 +117,8 @@ type GrpcDatabaseProjectUpdateRemoteFile = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.D_RemoteFile;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_RemoteFile;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.D_RemoteFile;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.D_RemoteFile;
 };
 
 type GrpcDatabaseProjectRemoveRemoteFile = {
@@ -126,8 +126,8 @@ type GrpcDatabaseProjectRemoveRemoteFile = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.UserDbInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.intger;
 };
 
 type GrpcDatabaseProjectGetRemoteFiles = {
@@ -135,8 +135,26 @@ type GrpcDatabaseProjectGetRemoteFiles = {
   readonly service: typeof GrpcDatabaseProject;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_RemoteFiles;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.UserDbInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.D_RemoteFiles;
+};
+
+type GrpcDatabaseProjectAddSubject = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.D_Subject;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.intger;
+};
+
+type GrpcDatabaseProjectGetSubjects = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DataBaseProto_pb.UserDbInfomation;
+  readonly responseType: typeof src_app_protos_DataBaseProto_pb.D_Subjects;
 };
 
 export class GrpcDatabaseProject {
@@ -156,6 +174,8 @@ export class GrpcDatabaseProject {
   static readonly UpdateRemoteFile: GrpcDatabaseProjectUpdateRemoteFile;
   static readonly RemoveRemoteFile: GrpcDatabaseProjectRemoveRemoteFile;
   static readonly GetRemoteFiles: GrpcDatabaseProjectGetRemoteFiles;
+  static readonly AddSubject: GrpcDatabaseProjectAddSubject;
+  static readonly GetSubjects: GrpcDatabaseProjectGetSubjects;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -191,139 +211,157 @@ export class GrpcDatabaseProjectClient {
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
   getProject(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Project|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_Project|null) => void
   ): UnaryResponse;
   getProject(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Project|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_Project|null) => void
   ): UnaryResponse;
   addProject(
-    requestMessage: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
+    requestMessage: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   addProject(
-    requestMessage: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   editProject(
-    requestMessage: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
+    requestMessage: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   editProject(
-    requestMessage: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   removeProject(
-    requestMessage: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
+    requestMessage: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   removeProject(
-    requestMessage: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   getProjects(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Projects|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_Projects|null) => void
   ): UnaryResponse;
   getProjects(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Projects|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_Projects|null) => void
   ): UnaryResponse;
   getDocuments(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Documents|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_Documents|null) => void
   ): UnaryResponse;
   getDocuments(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Documents|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_Documents|null) => void
   ): UnaryResponse;
   addDocument(
-    requestMessage: src_app_protos_DatabaseProto_pb.D_Document,
+    requestMessage: src_app_protos_DataBaseProto_pb.D_Document,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   addDocument(
-    requestMessage: src_app_protos_DatabaseProto_pb.D_Document,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.D_Document,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   getDocument(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Document|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_Document|null) => void
   ): UnaryResponse;
   getDocument(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Document|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_Document|null) => void
   ): UnaryResponse;
   updateDocument(
-    requestMessage: src_app_protos_DatabaseProto_pb.D_Document,
+    requestMessage: src_app_protos_DataBaseProto_pb.D_Document,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   updateDocument(
-    requestMessage: src_app_protos_DatabaseProto_pb.D_Document,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.D_Document,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   removeDocument(
-    requestMessage: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
+    requestMessage: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   removeDocument(
-    requestMessage: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   addRemoteFile(
-    requestMessage: src_app_protos_DatabaseProto_pb.D_RemoteFile,
+    requestMessage: src_app_protos_DataBaseProto_pb.D_RemoteFile,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   addRemoteFile(
-    requestMessage: src_app_protos_DatabaseProto_pb.D_RemoteFile,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.D_RemoteFile,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   getRemoteFile(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_RemoteFile|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_RemoteFile|null) => void
   ): UnaryResponse;
   getRemoteFile(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_RemoteFile|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_RemoteFile|null) => void
   ): UnaryResponse;
   updateRemoteFile(
-    requestMessage: src_app_protos_DatabaseProto_pb.D_RemoteFile,
+    requestMessage: src_app_protos_DataBaseProto_pb.D_RemoteFile,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_RemoteFile|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_RemoteFile|null) => void
   ): UnaryResponse;
   updateRemoteFile(
-    requestMessage: src_app_protos_DatabaseProto_pb.D_RemoteFile,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_RemoteFile|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.D_RemoteFile,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_RemoteFile|null) => void
   ): UnaryResponse;
   removeRemoteFile(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   removeRemoteFile(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
   ): UnaryResponse;
   getRemoteFiles(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_RemoteFiles|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_RemoteFiles|null) => void
   ): UnaryResponse;
   getRemoteFiles(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_RemoteFiles|null) => void
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_RemoteFiles|null) => void
+  ): UnaryResponse;
+  addSubject(
+    requestMessage: src_app_protos_DataBaseProto_pb.D_Subject,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  addSubject(
+    requestMessage: src_app_protos_DataBaseProto_pb.D_Subject,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  getSubjects(
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_Subjects|null) => void
+  ): UnaryResponse;
+  getSubjects(
+    requestMessage: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DataBaseProto_pb.D_Subjects|null) => void
   ): UnaryResponse;
 }
 

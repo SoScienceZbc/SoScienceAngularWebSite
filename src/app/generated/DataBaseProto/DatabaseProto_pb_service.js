@@ -1,7 +1,7 @@
 // package: DatabaseGRPC
-// file: src/app/protos/DatabaseProto.proto
+// file: src/app/protos/DataBaseProto.proto
 
-var src_app_protos_DatabaseProto_pb = require("../DataBaseProto/DatabaseProto_pb");
+var src_app_protos_DataBaseProto_pb = require("./DataBaseProto_pb");
 var grpc = require("@improbable-eng/grpc-web").grpc;
 
 var GrpcDatabaseProject = (function () {
@@ -15,8 +15,8 @@ GrpcDatabaseProject.GetProject = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.D_Project
+  requestType: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.D_Project
 };
 
 GrpcDatabaseProject.AddProject = {
@@ -24,8 +24,8 @@ GrpcDatabaseProject.AddProject = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.intger
+  requestType: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.intger
 };
 
 GrpcDatabaseProject.EditProject = {
@@ -33,8 +33,8 @@ GrpcDatabaseProject.EditProject = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.intger
+  requestType: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.intger
 };
 
 GrpcDatabaseProject.RemoveProject = {
@@ -42,8 +42,8 @@ GrpcDatabaseProject.RemoveProject = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.intger
+  requestType: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.intger
 };
 
 GrpcDatabaseProject.GetProjects = {
@@ -51,8 +51,8 @@ GrpcDatabaseProject.GetProjects = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.D_Projects
+  requestType: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.D_Projects
 };
 
 GrpcDatabaseProject.GetDocuments = {
@@ -60,8 +60,8 @@ GrpcDatabaseProject.GetDocuments = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.D_Documents
+  requestType: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.D_Documents
 };
 
 GrpcDatabaseProject.AddDocument = {
@@ -69,8 +69,8 @@ GrpcDatabaseProject.AddDocument = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.D_Document,
-  responseType: src_app_protos_DatabaseProto_pb.intger
+  requestType: src_app_protos_DataBaseProto_pb.D_Document,
+  responseType: src_app_protos_DataBaseProto_pb.intger
 };
 
 GrpcDatabaseProject.GetDocument = {
@@ -78,8 +78,8 @@ GrpcDatabaseProject.GetDocument = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.D_Document
+  requestType: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.D_Document
 };
 
 GrpcDatabaseProject.UpdateDocument = {
@@ -87,8 +87,8 @@ GrpcDatabaseProject.UpdateDocument = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.D_Document,
-  responseType: src_app_protos_DatabaseProto_pb.intger
+  requestType: src_app_protos_DataBaseProto_pb.D_Document,
+  responseType: src_app_protos_DataBaseProto_pb.intger
 };
 
 GrpcDatabaseProject.RemoveDocument = {
@@ -96,8 +96,8 @@ GrpcDatabaseProject.RemoveDocument = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.intger
+  requestType: src_app_protos_DataBaseProto_pb.ProjectUserInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.intger
 };
 
 GrpcDatabaseProject.AddRemoteFile = {
@@ -105,8 +105,8 @@ GrpcDatabaseProject.AddRemoteFile = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.D_RemoteFile,
-  responseType: src_app_protos_DatabaseProto_pb.intger
+  requestType: src_app_protos_DataBaseProto_pb.D_RemoteFile,
+  responseType: src_app_protos_DataBaseProto_pb.intger
 };
 
 GrpcDatabaseProject.GetRemoteFile = {
@@ -114,8 +114,8 @@ GrpcDatabaseProject.GetRemoteFile = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.D_RemoteFile
+  requestType: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.D_RemoteFile
 };
 
 GrpcDatabaseProject.UpdateRemoteFile = {
@@ -123,8 +123,8 @@ GrpcDatabaseProject.UpdateRemoteFile = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.D_RemoteFile,
-  responseType: src_app_protos_DatabaseProto_pb.D_RemoteFile
+  requestType: src_app_protos_DataBaseProto_pb.D_RemoteFile,
+  responseType: src_app_protos_DataBaseProto_pb.D_RemoteFile
 };
 
 GrpcDatabaseProject.RemoveRemoteFile = {
@@ -132,8 +132,8 @@ GrpcDatabaseProject.RemoveRemoteFile = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.intger
+  requestType: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.intger
 };
 
 GrpcDatabaseProject.GetRemoteFiles = {
@@ -141,8 +141,26 @@ GrpcDatabaseProject.GetRemoteFiles = {
   service: GrpcDatabaseProject,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.D_RemoteFiles
+  requestType: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.D_RemoteFiles
+};
+
+GrpcDatabaseProject.AddSubject = {
+  methodName: "AddSubject",
+  service: GrpcDatabaseProject,
+  requestStream: false,
+  responseStream: false,
+  requestType: src_app_protos_DataBaseProto_pb.D_Subject,
+  responseType: src_app_protos_DataBaseProto_pb.intger
+};
+
+GrpcDatabaseProject.GetSubjects = {
+  methodName: "GetSubjects",
+  service: GrpcDatabaseProject,
+  requestStream: false,
+  responseStream: false,
+  requestType: src_app_protos_DataBaseProto_pb.UserDbInfomation,
+  responseType: src_app_protos_DataBaseProto_pb.D_Subjects
 };
 
 exports.GrpcDatabaseProject = GrpcDatabaseProject;
@@ -591,6 +609,68 @@ GrpcDatabaseProjectClient.prototype.getRemoteFiles = function getRemoteFiles(req
     callback = arguments[1];
   }
   var client = grpc.unary(GrpcDatabaseProject.GetRemoteFiles, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrpcDatabaseProjectClient.prototype.addSubject = function addSubject(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(GrpcDatabaseProject.AddSubject, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrpcDatabaseProjectClient.prototype.getSubjects = function getSubjects(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(GrpcDatabaseProject.GetSubjects, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

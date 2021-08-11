@@ -1,11 +1,7 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog/'
-import { D_Document } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog/'
 import { LoadingService } from 'src/app/loading.service';
-import { TextEditorComponent } from 'src/app/TextEditor/TextEditor.component';
-import { expandingD_Docs } from '../../archive.component';
 import { DocumentAddComponent } from '../document-add/document-add.component';
-import { ProjectFormComponent } from '../../AddProject/project-form/project-form.component';
 
 @Component({
   selector: 'app-add-document-dialog-box',
