@@ -163,6 +163,24 @@ GrpcDatabaseProject.GetSubjects = {
   responseType: src_app_protos_DatabaseProto_pb.D_Subjects
 };
 
+GrpcDatabaseProject.AddProjectTheme = {
+  methodName: "AddProjectTheme",
+  service: GrpcDatabaseProject,
+  requestStream: false,
+  responseStream: false,
+  requestType: src_app_protos_DatabaseProto_pb.D_ProjectTheme,
+  responseType: src_app_protos_DatabaseProto_pb.intger
+};
+
+GrpcDatabaseProject.GetProjectThemes = {
+  methodName: "GetProjectThemes",
+  service: GrpcDatabaseProject,
+  requestStream: false,
+  responseStream: false,
+  requestType: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+  responseType: src_app_protos_DatabaseProto_pb.D_ProjectThemes
+};
+
 exports.GrpcDatabaseProject = GrpcDatabaseProject;
 
 function GrpcDatabaseProjectClient(serviceHost, options) {
@@ -671,6 +689,68 @@ GrpcDatabaseProjectClient.prototype.getSubjects = function getSubjects(requestMe
     callback = arguments[1];
   }
   var client = grpc.unary(GrpcDatabaseProject.GetSubjects, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrpcDatabaseProjectClient.prototype.addProjectTheme = function addProjectTheme(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(GrpcDatabaseProject.AddProjectTheme, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrpcDatabaseProjectClient.prototype.getProjectThemes = function getProjectThemes(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(GrpcDatabaseProject.GetProjectThemes, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
