@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog/'
+import { MatDialog } from '@angular/material/dialog/';
 import { LoadingService } from 'src/app/loading.service';
 import { DocumentAddComponent } from '../document-add/document-add.component';
 
