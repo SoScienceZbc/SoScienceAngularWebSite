@@ -13,7 +13,7 @@
     <form [formGroup]="projectthemeGroup">
         <mat-form-field class="form-element">
             <mat-label>Fag</mat-label>
-            <mat-select [(ngModel)]="selectedValue" name="food">
+            <mat-select [(ngModel)]="selectedValue" name="food" [ngModelOptions]="{standalone: true}">
                 <mat-option *ngFor="let subject of subjects" [value]="subject.value">
                     {{subject.viewValue}}
                 </mat-option>
@@ -21,7 +21,7 @@
         </mat-form-field>
         <br>
         <mat-form-field class="form-element">
-            <input #titel matInput [formControl]="nameFormControl" placeholder="Titel">
+            <input #titel matInput [formControl]="nameFormControl" formControlName="projectThemeName" placeholder="Titel">
             <mat-error *ngIf="nameFormControl.hasError">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <br>

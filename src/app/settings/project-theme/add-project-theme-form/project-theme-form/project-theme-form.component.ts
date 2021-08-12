@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { DatabaseService } from 'src/app/database.service';
 
 interface Subject {
   value: number;
@@ -24,16 +25,19 @@ export class ProjectThemeFormComponent implements OnInit {
     projectThemeName:this.nameFormControl
   })
 
-  subjects: Subject[] = [
-    {value: 0, viewValue: 'Steak'},
-    {value: 1, viewValue: 'Pizza'},
-    {value: 2, viewValue: 'Tacos'}
-  ];
+  subjects: Subject[] = [];
 
   selectedValue: number;
   
-  constructor(private dialog:MatDialog) { 
+  constructor(private dialog:MatDialog, private dbService : DatabaseService) { 
     this.selectedValue = 0;
+    dbService.GetSubject(sessionStorage.getItem("Token")!).subscribe(data =>{
+      data.getSubjectList().forEach(subject => {
+        this.subjects.push({value : subject.getId(), viewValue : subject.getName()});
+        console.log(subject.getId());
+        
+      }); 
+    })
   }
   
   getErrorMessage() {
