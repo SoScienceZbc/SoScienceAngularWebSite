@@ -4,7 +4,7 @@ import { QuillEditorBase, QuillEditorComponent, QuillModule, QuillService } from
 import { Quill } from 'quill';
 import { BehaviorSubject } from 'rxjs';
 import { DatabaseService } from '../database.service';
-import { D_Document } from '../generated/DataBaseProto/DataBaseProto_pb';
+import { D_Document } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 // import *  as customEditor from '../ckedtitor/build/ckeditor';
 

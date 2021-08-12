@@ -5,7 +5,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DatabaseService } from '../database.service';
-import { D_Document, D_Documents, D_Project } from '../generated/DataBaseProto/DataBaseProto_pb';
+import { D_Document, D_Documents, D_Project } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 import { TextEditorComponent } from '../TextEditor/TextEditor.component';
 import quill, { Quill } from 'quill';

@@ -3,7 +3,7 @@ import { grpc } from '@improbable-eng/grpc-web';
 import {
   GrpcDatabaseProject,
   GrpcDatabaseProjectClient,
-} from './generated/DataBaseProto/DataBaseProto_pb_service';
+} from './generated/DataBaseProto/DatabaseProto_pb_service';
 import {
   UserDbInfomation,
   ProjectUserInfomation,
@@ -14,7 +14,7 @@ import {
   D_Document,
   D_Subject,
   D_Subjects
-} from './generated/DataBaseProto/DataBaseProto_pb';
+} from './generated/DataBaseProto/DatabaseProto_pb';
 import { BehaviorSubject, Observable, of, Subject, zip } from 'rxjs';
 
 @Injectable({
