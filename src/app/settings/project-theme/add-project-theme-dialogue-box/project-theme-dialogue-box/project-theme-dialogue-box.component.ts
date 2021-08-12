@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog/';
+import { LoadingService } from 'src/app/loading.service';
+import { ProjectThemeFormComponent } from '../../add-project-theme-form/project-theme-form/project-theme-form.component';
 
 @Component({
   selector: 'app-project-theme-dialogue-box',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectThemeDialogueBoxComponent implements OnInit {
 
-  constructor() { }
+  
+  loading$ = this.spinner.loading$;
+  constructor(private dilog: MatDialog, private spinner : LoadingService) { 
+
+  }
 
   ngOnInit(): void {
   }
-
+  
+  openDialog() {
+    let t = this.dilog.open(ProjectThemeFormComponent,{
+      data:{
+      }
+    });
+  }
 }
