@@ -3,6 +3,34 @@
 
 import * as jspb from "google-protobuf";
 
+export class ThemeFromSubject extends jspb.Message {
+  hasUser(): boolean;
+  clearUser(): void;
+  getUser(): UserDbInfomation | undefined;
+  setUser(value?: UserDbInfomation): void;
+
+  hasSubject(): boolean;
+  clearSubject(): void;
+  getSubject(): D_Subject | undefined;
+  setSubject(value?: D_Subject): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ThemeFromSubject.AsObject;
+  static toObject(includeInstance: boolean, msg: ThemeFromSubject): ThemeFromSubject.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ThemeFromSubject, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ThemeFromSubject;
+  static deserializeBinaryFromReader(message: ThemeFromSubject, reader: jspb.BinaryReader): ThemeFromSubject;
+}
+
+export namespace ThemeFromSubject {
+  export type AsObject = {
+    user?: UserDbInfomation.AsObject,
+    subject?: D_Subject.AsObject,
+  }
+}
+
 export class UserDbInfomation extends jspb.Message {
   getId(): number;
   setId(value: number): void;
@@ -356,8 +384,8 @@ export class D_ProjectTheme extends jspb.Message {
   getLastedited(): string;
   setLastedited(value: string): void;
 
-  getTeacherid(): number;
-  setTeacherid(value: number): void;
+  getTeacher(): string;
+  setTeacher(value: string): void;
 
   getSubjectid(): number;
   setSubjectid(value: number): void;
@@ -378,7 +406,7 @@ export namespace D_ProjectTheme {
     name: string,
     enddate: string,
     lastedited: string,
-    teacherid: number,
+    teacher: string,
     subjectid: number,
   }
 }

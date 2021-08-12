@@ -30,6 +30,12 @@ rpc GetSubjects(UserDbInfomation) returns (D_Subjects);
 // ProjectTheme
 rpc AddProjectTheme(D_ProjectTheme) returns (intger);
 rpc GetProjectThemes(UserDbInfomation) returns (D_ProjectThemes);
+rpc GetProjectThemesFromSubject(ThemeFromSubject) returns (D_ProjectThemes);
+}
+
+message ThemeFromSubject{
+    UserDbInfomation user = 1;
+    D_Subject subject = 2;
 }
 
 message UserDbInfomation{
@@ -105,7 +111,7 @@ message D_ProjectTheme {
     string name = 2;
     string endDate = 3;
     string lastEdited = 4;
-    int32 teacherID = 5;
+    string Teacher = 5;
     int32 subjectID = 6;
 }
 

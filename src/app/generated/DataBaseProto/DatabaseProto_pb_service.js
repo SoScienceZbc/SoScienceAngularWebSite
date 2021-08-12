@@ -181,6 +181,15 @@ GrpcDatabaseProject.GetProjectThemes = {
   responseType: src_app_protos_DatabaseProto_pb.D_ProjectThemes
 };
 
+GrpcDatabaseProject.GetProjectThemesFromSubject = {
+  methodName: "GetProjectThemesFromSubject",
+  service: GrpcDatabaseProject,
+  requestStream: false,
+  responseStream: false,
+  requestType: src_app_protos_DatabaseProto_pb.ThemeFromSubject,
+  responseType: src_app_protos_DatabaseProto_pb.D_ProjectThemes
+};
+
 exports.GrpcDatabaseProject = GrpcDatabaseProject;
 
 function GrpcDatabaseProjectClient(serviceHost, options) {
@@ -751,6 +760,37 @@ GrpcDatabaseProjectClient.prototype.getProjectThemes = function getProjectThemes
     callback = arguments[1];
   }
   var client = grpc.unary(GrpcDatabaseProject.GetProjectThemes, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrpcDatabaseProjectClient.prototype.getProjectThemesFromSubject = function getProjectThemesFromSubject(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(GrpcDatabaseProject.GetProjectThemesFromSubject, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

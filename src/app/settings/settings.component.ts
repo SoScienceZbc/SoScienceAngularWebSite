@@ -34,12 +34,12 @@ export class SettingsComponent implements OnInit {
 
 
 
-  constructor() 
+  constructor(database: DatabaseService) 
   {
-    /*const data$ = database.GetSubject(sessionStorage.getItem("Token")!.toString())
-    data$.subscribe(data => {
-      console.log(data.toString());
-    })*/
+    // const data$ = database.GetSubject(sessionStorage.getItem("Token")!.toString())
+    // data$.subscribe(data => {
+    //   console.log(data.toString());
+    // })
   }
   panelOpenState1 = false;
   panelOpenState2 = false;

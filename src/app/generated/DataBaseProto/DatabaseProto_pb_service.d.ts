@@ -175,6 +175,15 @@ type GrpcDatabaseProjectGetProjectThemes = {
   readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_ProjectThemes;
 };
 
+type GrpcDatabaseProjectGetProjectThemesFromSubject = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.ThemeFromSubject;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_ProjectThemes;
+};
+
 export class GrpcDatabaseProject {
   static readonly serviceName: string;
   static readonly GetProject: GrpcDatabaseProjectGetProject;
@@ -196,6 +205,7 @@ export class GrpcDatabaseProject {
   static readonly GetSubjects: GrpcDatabaseProjectGetSubjects;
   static readonly AddProjectTheme: GrpcDatabaseProjectAddProjectTheme;
   static readonly GetProjectThemes: GrpcDatabaseProjectGetProjectThemes;
+  static readonly GetProjectThemesFromSubject: GrpcDatabaseProjectGetProjectThemesFromSubject;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -399,6 +409,15 @@ export class GrpcDatabaseProjectClient {
   ): UnaryResponse;
   getProjectThemes(
     requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_ProjectThemes|null) => void
+  ): UnaryResponse;
+  getProjectThemesFromSubject(
+    requestMessage: src_app_protos_DatabaseProto_pb.ThemeFromSubject,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_ProjectThemes|null) => void
+  ): UnaryResponse;
+  getProjectThemesFromSubject(
+    requestMessage: src_app_protos_DatabaseProto_pb.ThemeFromSubject,
     callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_ProjectThemes|null) => void
   ): UnaryResponse;
 }
