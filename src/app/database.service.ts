@@ -317,4 +317,25 @@ export class DatabaseService {
       onEnd: (res) => {},
     })
   }
+
+  public GetSubject(token: string): Observable<D_Subjects> {
+    const userDbInfomation = new UserDbInfomation();
+    userDbInfomation.setDbname(token);
+    let subject: BehaviorSubject<D_Subjects> = new BehaviorSubject<D_Subjects>(
+      new D_Subjects()
+    );
+    grpc.invoke(GrpcDatabaseProject.GetSubjects, {
+      request: userDbInfomation,
+      host: this.hostAddress,
+      onMessage: (Message: D_Subjects) => {
+        subject.next(Message);
+
+        // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
+      },
+      onEnd: (res) => {
+        // console.log("It have endes")
+      },
+    });
+    return subject;
+  }
 }

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { expandingD_Project } from '../archive/archive.component';
+import { DatabaseService } from '../database.service';
 
 interface Language {
   value: string | any;
@@ -33,8 +34,13 @@ export class SettingsComponent implements OnInit {
 
 
 
-
-  constructor() { }
+  constructor() 
+  {
+    /*const data$ = database.GetSubject(sessionStorage.getItem("Token")!.toString())
+    data$.subscribe(data => {
+      console.log(data.toString());
+    })*/
+  }
   panelOpenState1 = false;
   panelOpenState2 = false;
   panelOpenState3 = false;
