@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { expandingD_Project } from '../archive/archive.component';
 import { DatabaseService } from '../database.service';
-import { D_ProjectTheme } from '../protos/DatabaseProto_pb';
+import { D_Projects, D_ProjectTheme } from '../protos/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 
 interface Language {
@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
 
   loading$ = this.spinner.loading$;
   
-  displayedColumns = ["Id", "name", "endDate"];
+  displayedColumns = ["name", "endDate"];
 
   @ViewChild("mattable", { read: MatSort }) sort!: MatSort;
 
@@ -38,8 +38,8 @@ export class SettingsComponent implements OnInit {
 
   projectThemes: Array<D_ProjectTheme> = new Array<D_ProjectTheme>();
 
-  Projects = new D_ProjectTheme();
-
+  Projects = new D_Projects();
+  
   constructor(database: DatabaseService, private spinner:LoadingService) 
   {
     database.listOfProjectThemes$.subscribe(projectThemes =>{
