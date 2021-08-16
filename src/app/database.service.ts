@@ -13,9 +13,13 @@ import {
   D_Documents,
   D_Document,
   D_Subject,
-  D_Subjects
+  D_Subjects,
+  D_ProjectTheme,
+  ThemeFromSubject,
+  D_ProjectThemes
 } from './generated/DataBaseProto/DatabaseProto_pb';
 import { BehaviorSubject, Observable, of, Subject, zip } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +39,7 @@ export class DatabaseService {
   EditorDocoment$: BehaviorSubject<D_Document> =
     new BehaviorSubject<D_Document>(new D_Document());
 
-  constructor() {}
+  constructor(private datePipe: DatePipe) {}
 
   //#region Project
   /*-------------------Projects-------------------*/
@@ -43,10 +47,10 @@ export class DatabaseService {
    * this call the grpc function the rigth way..
    * @param name The projects owner name
    */
-  public GetProjectsTheRigthWay(name: string) {
+  public GetProjectsTheRigthWay() {
     // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
     const userDbInfomation = new UserDbInfomation();
-    userDbInfomation.setDbname(name);
+    userDbInfomation.setDbname(sessionStorage.getItem("Token")!);
     grpc.invoke(GrpcDatabaseProject.GetProjects, {
       request: userDbInfomation,
       host: this.hostAddress,
@@ -86,18 +90,25 @@ export class DatabaseService {
    * @param name the project owner name.
    * @param projectToAdd a D_Project to add to the database.
    */
-  AddProject(name: string, projectToAdd: D_Project) {
-    const projectuserInfomation = new ProjectUserInfomation();
-    projectuserInfomation.setProject(projectToAdd);
-    const userDbInfomation = new UserDbInfomation();
-    userDbInfomation.setDbname(name);
+  AddProject(title : string, themeId : number) {
+
+    let project = new D_Project();
+    project.setName(title);
+    project.setProjectthemeid(themeId);
+    
+    let projectuserInfomation = new ProjectUserInfomation();
+    projectuserInfomation.setProject(project);
+
+    let userDbInfomation = new UserDbInfomation();
+    userDbInfomation.setDbname(sessionStorage.getItem("Token")!);
     projectuserInfomation.setUser(userDbInfomation);
+
     grpc.invoke(GrpcDatabaseProject.AddProject, {
       request: projectuserInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         console.log('entris change: ' + Message.getNumber());
-        this.GetProjectsTheRigthWay(name);
+        this.GetProjectsTheRigthWay();
       },
       onEnd: (res) => {},
     });
@@ -133,17 +144,17 @@ export class DatabaseService {
  * @param projectToUpdate the project to update in database
  * @param name the users name in the database
  */
-  public UpdateProject(projectToUpdate:D_Project,name:string){
+  public UpdateProject(projectToUpdate:D_Project){
     const userDbInfomation = new ProjectUserInfomation();
     const userinfo = new UserDbInfomation();
-    userinfo.setDbname(name)
+    userinfo.setDbname(sessionStorage.getItem("Token")!)
     userDbInfomation.setProject(projectToUpdate);
     userDbInfomation.setUser(userinfo)
     grpc.invoke(GrpcDatabaseProject.EditProject, {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
-        this.GetProjectsTheRigthWay(name);
+        this.GetProjectsTheRigthWay();
       },
       onEnd: (res) => {
         // console.log("It have endes")
@@ -154,7 +165,7 @@ export class DatabaseService {
   //#endregion
   //#region Documents
   /*-------------------Documents-------------------*/
-  public AddDocument(name: string, docomentToAdd: D_Document) {
+  public AddDocument(docomentToAdd: D_Document) {
     // const grpcC = new GrpcDatabaseProjectClient(this.hostAddress);
     const userDbInfomation = docomentToAdd;
     grpc.invoke(GrpcDatabaseProject.AddDocument, {
@@ -163,7 +174,7 @@ export class DatabaseService {
       onMessage: (Message: intger) => {
         // this.behavProject$.next(Message);
         // console.log(Message);
-        this.GetProjectsTheRigthWay(name);
+        this.GetProjectsTheRigthWay();
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       },
       onEnd: (res) => {
@@ -246,7 +257,7 @@ export class DatabaseService {
    * @param docomentToUpdate the document to update in database.
    * @returns a behaviorsubject of type D_document.
    */
-  public UpdateDocoment(name: string, docomentToUpdate: D_Document) {
+  public UpdateDocoment(docomentToUpdate: D_Document) {
     const userDbInfomation = docomentToUpdate;
     grpc.invoke(GrpcDatabaseProject.UpdateDocument, {
       request: userDbInfomation,
@@ -277,24 +288,24 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         console.log('This have been changed in database.');
-        this.GetProjectsTheRigthWay(sessionStorage.getItem('Token')!.toString());
+        this.GetProjectsTheRigthWay();
       },
       onEnd: (res) => {
       },
     });
   }
 
-  public DeleteProject(project: D_Project, name: string) {
+  public DeleteProject(project: D_Project) {
     const userDbInfomation = new ProjectUserInfomation();
     const userinfomation = new UserDbInfomation();
-    userinfomation.setDbname(name);
+    userinfomation.setDbname(sessionStorage.getItem("Token")!);
     userDbInfomation.setProject(project);
     userDbInfomation.setUser(userinfomation);
     grpc.invoke(GrpcDatabaseProject.RemoveProject, {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
-        this.GetProjectsTheRigthWay(name);
+        this.GetProjectsTheRigthWay();
         console.log('This have been changed in database.', Message.getNumber());
       },
       onEnd: (res) => {},
@@ -329,7 +340,6 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: D_Subjects) => {
         subject.next(Message);
-
         // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       },
       onEnd: (res) => {
@@ -337,5 +347,43 @@ export class DatabaseService {
       },
     });
     return subject;
+  }
+  public AddProjectTheme(subjectId : number, enddate : Date, name : string) {
+    const projectTheme = new D_ProjectTheme();
+    projectTheme.setEnddate(this.datePipe.transform(enddate,"dd/MM/yyyy HH:mm:ss")!);
+    projectTheme.setName(name);
+    projectTheme.setTeacher(sessionStorage.getItem("Token")!);
+    projectTheme.setSubjectid(subjectId);
+    grpc.invoke(GrpcDatabaseProject.AddProjectTheme, {
+      request: projectTheme,
+      host: this.hostAddress,
+      onMessage: (Message: intger) => {
+      }, 
+      onEnd: (res) => {},
+    })
+  }
+  public GetProjectThemeFromSubject(subjectId : number){
+    let themeSubject = new ThemeFromSubject();
+    let subject = new D_Subject();
+    let user = new UserDbInfomation();
+    subject.setId(subjectId);
+    user.setDbname(sessionStorage.getItem("Token")!);
+    themeSubject.setSubject(subject);
+    themeSubject.setUser()
+    let themes: BehaviorSubject<D_ProjectThemes> = new BehaviorSubject<D_ProjectThemes>(
+      new D_ProjectThemes()
+    );
+    grpc.invoke(GrpcDatabaseProject.GetProjectThemesFromSubject, {
+      request: themeSubject,
+      host: this.hostAddress,
+      onMessage: (Message: D_ProjectThemes) => {
+        themes.next(Message);
+        // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
+      },
+      onEnd: (res) => {
+        // console.log("It have endes")
+      },
+    });
+    return themes;
   }
 }

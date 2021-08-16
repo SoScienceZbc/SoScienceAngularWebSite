@@ -50,7 +50,7 @@ export class DocumentAddComponent implements OnInit {
     // newdoc.setData("<p>skriv noget tjekket og awsome. og tro på den vindeskablig fremgangs måde</p>")
     // newdoc.setCompletedcount(2);
 
-    this.databaseserve.AddDocument((name as string),newdoc);
+    this.databaseserve.AddDocument(newdoc);
     this.spinner.show();
 
       // console.log(this.projectid);

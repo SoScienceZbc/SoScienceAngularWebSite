@@ -102,7 +102,7 @@ export class TextEditorComponent implements OnInit {
       }
       //#endregion
       this.localDDocoment$.value.setData(editor);
-      this.dataservice.UpdateDocoment(sessionStorage.getItem("Token")!.toString(), this.localDDocoment$.value);
+      this.dataservice.UpdateDocoment(this.localDDocoment$.value);
     }
 
   }
@@ -113,7 +113,7 @@ export class TextEditorComponent implements OnInit {
     this.localDDocoment$.value.setTitle(this.QuilData.Title);
     // console.log("UpdateDockument", this.localDDocoment$.value)
     // this.dataservice.UpdateDocoment(sessionStorage.getItem("Token")!.toString(), this.localDDocoment$.value);
-    this.dataservice.GetProjectsTheRigthWay(sessionStorage.getItem("Token")!.toString())
+    this.dataservice.GetProjectsTheRigthWay()
     this.dialog.closeAll()
 
   }
@@ -148,20 +148,6 @@ export class TextEditorComponent implements OnInit {
 
 
     }
-
-
-    // return this.localDDocoment$.value.getCompletedList().includes(value, 0);
-    // let state = false;
-    // this.localDDocoment$.value.getCompletedList().forEach(element => {
-    //   if (value.toLowerCase() === element.toLowerCase()) {
-    //     state = true;
-    //     return
-    //   } else {
-
-    //     state = false;
-    //   }
-    // });
-    // return state;
   }
 
   SetCategoro(event: string) {
@@ -169,14 +155,11 @@ export class TextEditorComponent implements OnInit {
       this.localDDocoment$.value.clearCompletedList();
       this.localDDocoment$.value.setCompletedcount(this.localDDocoment$.value.getCompletedList().length);
       this.localDDocoment$.value.addCompleted(event);
-      this.dataservice.UpdateDocoment("", this.localDDocoment$.value);
+      this.dataservice.UpdateDocoment(this.localDDocoment$.value);
       console.log("setcat was true", event)
     } else {
       console.log(event)
-      // console.log("Find",this.localDDocoment$.value.getCompletedList().find(e=>e==event))
-      // console.log("FindIndex",this.localDDocoment$.value.getCompletedList().findIndex(e => e === event));
     }
-
   }
 }
 

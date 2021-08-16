@@ -60,6 +60,8 @@ import { SubjectDialogBoxComponent } from './settings/subject/add-subject-dialog
 import { SubjectFormComponent } from './settings/subject/add-subject-form/subject-form.component';
 import { ProjectThemeFormComponent } from './settings/project-theme/add-project-theme-form/project-theme-form/project-theme-form.component';
 import { ProjectThemeDialogueBoxComponent } from './settings/project-theme/add-project-theme-dialogue-box/project-theme-dialogue-box/project-theme-dialogue-box.component';
+import { DatePipe } from '@angular/common';
+import { Field } from '@ngx-grpc/well-known-types';
 
 
 @NgModule({
@@ -150,8 +152,14 @@ import { ProjectThemeDialogueBoxComponent } from './settings/project-theme/add-p
       },theme:'snow'
     })
   ],
-  providers: [DatabaseService, LoginService, LoadingService, AuthGuardGuard,
-    MatSidenav, CustomMatPaginatorIntl],
+  providers: [
+    DatabaseService, 
+    LoginService, 
+    LoadingService, 
+    AuthGuardGuard,
+    MatSidenav, 
+    CustomMatPaginatorIntl,
+    DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

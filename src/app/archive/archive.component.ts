@@ -61,7 +61,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   constructor(private dataserve: DatabaseService, private spinner: LoadingService, private dilog: MatDialog) {
-    this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('Token') as string);
+    this.dataserve.GetProjectsTheRigthWay();
 
     this.dataserve.listOfProjects$.subscribe(x => {
       this.matdatasource.data = [];

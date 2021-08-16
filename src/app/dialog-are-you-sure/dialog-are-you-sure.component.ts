@@ -26,17 +26,17 @@ export class DialogAreYouSureComponent implements OnInit {
     } else if (this.data.type == "P") {
       console.log("This is type D_project");
       this.spinner.show();
-      this.dataservice.DeleteProject(this.data.docoment, sessionStorage.getItem("Token")!.toString());
+      this.dataservice.DeleteProject(this.data.docoment);
       this.dialogbox.closeAll();
     }else if(this.data.type == "U"){
       this.spinner.show();
       this.data.docoment.setCompleted(true);
-      this.dataservice.UpdateProject(this.data.docoment,sessionStorage.getItem("Token")!.toString());
+      this.dataservice.UpdateProject(this.data.docoment);
       this.dialogbox.closeAll();
     }else if(this.data.type == "UU"){
       this.spinner.show();
       this.data.docoment.setCompleted(false);
-      this.dataservice.UpdateProject(this.data.docoment,sessionStorage.getItem("Token")!.toString());
+      this.dataservice.UpdateProject(this.data.docoment);
       this.dialogbox.closeAll();
     }
 

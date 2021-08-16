@@ -10,6 +10,14 @@
 @mixin custom-components-theme($theme) {
 }
 
+
+// All Themes
+.form-element{
+  width: 75%;
+  padding-left: 12.5%;
+}
+
+
 // Light theme
 $light-primary: mat-palette($mat-indigo);
 // $light-primary: mat-palette($mat-indigo);
