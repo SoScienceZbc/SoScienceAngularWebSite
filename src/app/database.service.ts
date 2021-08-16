@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { grpc } from '@improbable-eng/grpc-web';
 import {
-  GrpcDatabaseProject,
-  GrpcDatabaseProjectClient,
-} from './generated/DataBaseProto/DatabaseProto_pb_service';
+  GrpcDatabaseProject
+} from './protos/DatabaseProto_pb_service';
 import {
   UserDbInfomation,
   ProjectUserInfomation,
@@ -17,7 +16,7 @@ import {
   D_ProjectTheme,
   ThemeFromSubject,
   D_ProjectThemes
-} from './generated/DataBaseProto/DatabaseProto_pb';
+} from './protos/DatabaseProto_pb';
 import { BehaviorSubject, Observable, of, Subject, zip } from 'rxjs';
 import { DatePipe } from '@angular/common';
 
@@ -36,6 +35,9 @@ export class DatabaseService {
   listOfProjects$: BehaviorSubject<D_Project[]> = new BehaviorSubject<
     D_Project[]
   >([]);
+  listOfProjectThemes$: BehaviorSubject<D_ProjectTheme[]> = new BehaviorSubject<
+  D_ProjectTheme[]
+>([]);
   EditorDocoment$: BehaviorSubject<D_Document> =
     new BehaviorSubject<D_Document>(new D_Document());
 
@@ -358,6 +360,7 @@ export class DatabaseService {
       request: projectTheme,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
+        this.GetProjectTheme();
       }, 
       onEnd: (res) => {},
     })
@@ -369,7 +372,7 @@ export class DatabaseService {
     subject.setId(subjectId);
     user.setDbname(sessionStorage.getItem("Token")!);
     themeSubject.setSubject(subject);
-    themeSubject.setUser()
+    themeSubject.setUser(user);
     let themes: BehaviorSubject<D_ProjectThemes> = new BehaviorSubject<D_ProjectThemes>(
       new D_ProjectThemes()
     );
@@ -378,12 +381,24 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: D_ProjectThemes) => {
         themes.next(Message);
-        // console.log(Message.getDProjectList().findIndex(x => console.log(x.getName())));
       },
       onEnd: (res) => {
-        // console.log("It have endes")
       },
     });
     return themes;
+  }
+
+  public GetProjectTheme(){
+    let user = new UserDbInfomation();
+    user.setDbname(sessionStorage.getItem("Token")!);
+    grpc.invoke(GrpcDatabaseProject.GetProjectThemes, {
+      request: user,
+      host: this.hostAddress,
+      onMessage: (Message: D_ProjectThemes) => {
+        this.listOfProjectThemes$.next(Message.getProjectthemeList());
+      },
+      onEnd: (res) => {
+      },
+    });
   }
 }

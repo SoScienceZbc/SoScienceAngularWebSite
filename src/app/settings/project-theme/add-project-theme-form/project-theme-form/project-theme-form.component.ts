@@ -28,7 +28,6 @@ export class ProjectThemeFormComponent implements OnInit {
   datetimeFormControl =  new FormControl(this.datePipe.transform(new Date(),"yyyy-MM-ddThh:mm"),[
     Validators.required,
   ])
-
   projectthemeGroup = new FormGroup({
     'projectThemeName' : this.nameFormControl,
     'subjectSelect' : this.selectedFormControl,

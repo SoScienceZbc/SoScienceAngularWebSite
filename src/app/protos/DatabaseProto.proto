@@ -31,6 +31,8 @@ rpc GetSubjects(UserDbInfomation) returns (D_Subjects);
 rpc AddProjectTheme(D_ProjectTheme) returns (intger);
 rpc GetProjectThemes(UserDbInfomation) returns (D_ProjectThemes);
 rpc GetProjectThemesFromSubject(ThemeFromSubject) returns (D_ProjectThemes);
+rpc RemoveProjectTheme(ProjectThemeUserInfomation) returns (intger);
+rpc AddProjectThemeCoTeacher(ProjectThemeUserInfomation) returns (intger);
 }
 
 message ThemeFromSubject{
@@ -47,6 +49,13 @@ message ProjectUserInfomation{
 
     UserDbInfomation user = 1;
     D_Project project = 2;
+}
+
+message ProjectThemeUserInfomation{
+
+    UserDbInfomation user = 1;
+    D_ProjectTheme theme = 2;
+    string username = 3;
 }
 
 message intger{
@@ -78,6 +87,7 @@ message D_Project{
     string endDate = 5;
     repeated D_Document documents = 6;
     int32 ProjectThemeID = 7;
+    bool CloseToDeletion = 8;
 }
 // document
 message D_Document{
@@ -113,6 +123,7 @@ message D_ProjectTheme {
     string lastEdited = 4;
     string Teacher = 5;
     int32 subjectID = 6;
+    D_Projects projects = 7;
 }
 
-//protoc --plugin=protoc-gen-ts="C:\Users\andi0137\source\repos\AngularRefactorV2\SoScienceRefactorV2\node_modules\.bin\protoc-gen-ts.cmd" --js_out="import_style=commonjs,binary:src/app/generated/DataBaseProto" --ts_out="service=grpc-web:src/app/generated" src/app/protos/DatabaseProto.proto
+//protoc --plugin=protoc-gen-ts="C:\sandbox\SoScienceAngularWebSite\node_modules\.bin\protoc-gen-ts.cmd" --js_out="import_style=commonjs,binary:." --ts_out="service=grpc-web:." src/app/protos/*.proto

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
-import { D_Subject, D_Subjects } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
+import { D_Subject, D_Subjects } from 'src/app/protos/DatabaseProto_pb';
 import { LoadingService } from 'src/app/loading.service';
 
 @Component({

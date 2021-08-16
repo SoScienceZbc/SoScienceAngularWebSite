@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
-import { D_Project } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from 'src/app/loading.service';
 
 interface DropDoneItem {
@@ -69,6 +68,14 @@ export class ProjectFormComponent implements OnInit {
 
   GetProjectThemes(){
     console.log(this.selectedSubjectFormControl.value);
+    this.dataservice.GetProjectThemeFromSubject(this.selectedSubjectFormControl.value).subscribe(data =>{
+      console.log("got projectThemess");      
+      this.themes = [];
+      data.getProjectthemeList().forEach(projectTheme => {
+        this.themes.push({value : projectTheme.getId(), viewValue : projectTheme.getName()});
+      }); 
+      this.selectedThemeFormControl.setValue(null);
+    })
   }
 
   AddNewProject(){

@@ -4,6 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { expandingD_Project } from '../archive/archive.component';
 import { DatabaseService } from '../database.service';
+import { D_ProjectTheme } from '../protos/DatabaseProto_pb';
+import { LoadingService } from '../loading.service';
 
 interface Language {
   value: string | any;
@@ -24,29 +26,35 @@ interface Language {
 })
 export class SettingsComponent implements OnInit {
 
-  public dataSource: Array<expandingD_Project> = new Array<expandingD_Project>();
+  public dataSource: Array<D_ProjectTheme> = new Array<D_ProjectTheme>();
 
-  displayedColumns = ["Id", "name", "completed", "endDate"];
+  loading$ = this.spinner.loading$;
+  
+  displayedColumns = ["Id", "name", "endDate"];
 
   @ViewChild("mattable", { read: MatSort }) sort!: MatSort;
 
-  matdatasource = new MatTableDataSource<expandingD_Project>(this.dataSource);
+  matdatasource = new MatTableDataSource<D_ProjectTheme>(this.dataSource);
 
+  projectThemes: Array<D_ProjectTheme> = new Array<D_ProjectTheme>();
 
+  Projects = new D_ProjectTheme();
 
-  constructor(database: DatabaseService) 
+  constructor(database: DatabaseService, private spinner:LoadingService) 
   {
-    // const data$ = database.GetSubject(sessionStorage.getItem("Token")!.toString())
-    // data$.subscribe(data => {
-    //   console.log(data.toString());
-    // })
+    database.listOfProjectThemes$.subscribe(projectThemes =>{
+      console.log("Got project Themes");
+      this.projectThemes = projectThemes;
+      this.matdatasource.data = [];
+      this.projectThemes.forEach(projectTheme => {
+        this.matdatasource.data.push(projectTheme);
+        this.matdatasource._updateChangeSubscription();
+      })
+      this.spinner.hide();
+    });
+    database.GetProjectTheme();
+    let d = new D_ProjectTheme();
   }
-  panelOpenState1 = false;
-  panelOpenState2 = false;
-  panelOpenState3 = false;
-  panelOpenState4 = false;
-  panelOpenState5 = false;
-  panelOpenState6 = false;
 
   public languages: Language[] = [
     {value: 'danish', viewValue: 'Dansk'},
