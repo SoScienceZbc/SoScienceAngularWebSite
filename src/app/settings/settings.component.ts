@@ -4,10 +4,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { expandingD_Project } from '../archive/archive.component';
 import { DatabaseService } from '../database.service';
-import { D_Projects, D_ProjectTheme } from '../protos/DatabaseProto_pb';
+import { D_Project, D_Projects, D_ProjectTheme } from '../protos/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 import { AfterViewInit } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Console } from 'console';
 
 interface Language {
   value: string | any;
@@ -47,13 +48,12 @@ export class SettingsComponent implements OnInit, AfterViewInit {
   constructor(database: DatabaseService, private spinner:LoadingService) 
   {
     database.listOfProjectThemes$.subscribe(projectThemes =>{
-      console.log("Got project Themes");
       this.projectThemes = projectThemes;
-      console.log(this.projectThemes.toString());
       this.matdatasource.data = [];
       this.projectThemes.forEach(projectTheme => {
         this.matdatasource.data.push(projectTheme);
         this.matdatasource._updateChangeSubscription();
+        this.Projects.getDProjectList()[0].getCompleted()
       })
       this.spinner.hide();
     });
@@ -80,6 +80,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.matdatasource.filter = filterValue.trim().toLowerCase();
   }
+
 
   onsortChange() {
     this.matdatasource.sortingDataAccessor = (item, property) => {
