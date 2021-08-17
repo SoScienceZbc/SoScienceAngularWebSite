@@ -3275,7 +3275,7 @@ proto.DatabaseGRPC.D_ProjectTheme.toObject = function(includeInstance, msg) {
     enddate: jspb.Message.getFieldWithDefault(msg, 3, ""),
     lastedited: jspb.Message.getFieldWithDefault(msg, 4, ""),
     teacher: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    subjectid: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    subject: jspb.Message.getFieldWithDefault(msg, 6, ""),
     projects: (f = msg.getProjects()) && proto.DatabaseGRPC.D_Projects.toObject(includeInstance, f)
   };
 
@@ -3334,8 +3334,8 @@ proto.DatabaseGRPC.D_ProjectTheme.deserializeBinaryFromReader = function(msg, re
       msg.setTeacher(value);
       break;
     case 6:
-      var value = /** @type {number} */ (reader.readInt32());
-      msg.setSubjectid(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSubject(value);
       break;
     case 7:
       var value = new proto.DatabaseGRPC.D_Projects;
@@ -3406,9 +3406,9 @@ proto.DatabaseGRPC.D_ProjectTheme.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = message.getSubjectid();
-  if (f !== 0) {
-    writer.writeInt32(
+  f = message.getSubject();
+  if (f.length > 0) {
+    writer.writeString(
       6,
       f
     );
@@ -3515,20 +3515,20 @@ proto.DatabaseGRPC.D_ProjectTheme.prototype.setTeacher = function(value) {
 
 
 /**
- * optional int32 subjectID = 6;
- * @return {number}
+ * optional string subject = 6;
+ * @return {string}
  */
-proto.DatabaseGRPC.D_ProjectTheme.prototype.getSubjectid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+proto.DatabaseGRPC.D_ProjectTheme.prototype.getSubject = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.DatabaseGRPC.D_ProjectTheme} returns this
  */
-proto.DatabaseGRPC.D_ProjectTheme.prototype.setSubjectid = function(value) {
-  return jspb.Message.setProto3IntField(this, 6, value);
+proto.DatabaseGRPC.D_ProjectTheme.prototype.setSubject = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 

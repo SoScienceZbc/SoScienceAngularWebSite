@@ -202,6 +202,15 @@ type GrpcDatabaseProjectAddProjectThemeCoTeacher = {
   readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
 };
 
+type GrpcDatabaseProjectRemoveProjectThemeCoTeacher = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+};
+
 export class GrpcDatabaseProject {
   static readonly serviceName: string;
   static readonly GetProject: GrpcDatabaseProjectGetProject;
@@ -226,6 +235,7 @@ export class GrpcDatabaseProject {
   static readonly GetProjectThemesFromSubject: GrpcDatabaseProjectGetProjectThemesFromSubject;
   static readonly RemoveProjectTheme: GrpcDatabaseProjectRemoveProjectTheme;
   static readonly AddProjectThemeCoTeacher: GrpcDatabaseProjectAddProjectThemeCoTeacher;
+  static readonly RemoveProjectThemeCoTeacher: GrpcDatabaseProjectRemoveProjectThemeCoTeacher;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -455,6 +465,15 @@ export class GrpcDatabaseProjectClient {
     callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
   ): UnaryResponse;
   addProjectThemeCoTeacher(
+    requestMessage: src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  removeProjectThemeCoTeacher(
+    requestMessage: src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  removeProjectThemeCoTeacher(
     requestMessage: src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation,
     callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
   ): UnaryResponse;

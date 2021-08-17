@@ -208,6 +208,15 @@ GrpcDatabaseProject.AddProjectThemeCoTeacher = {
   responseType: src_app_protos_DatabaseProto_pb.intger
 };
 
+GrpcDatabaseProject.RemoveProjectThemeCoTeacher = {
+  methodName: "RemoveProjectThemeCoTeacher",
+  service: GrpcDatabaseProject,
+  requestStream: false,
+  responseStream: false,
+  requestType: src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation,
+  responseType: src_app_protos_DatabaseProto_pb.intger
+};
+
 exports.GrpcDatabaseProject = GrpcDatabaseProject;
 
 function GrpcDatabaseProjectClient(serviceHost, options) {
@@ -871,6 +880,37 @@ GrpcDatabaseProjectClient.prototype.addProjectThemeCoTeacher = function addProje
     callback = arguments[1];
   }
   var client = grpc.unary(GrpcDatabaseProject.AddProjectThemeCoTeacher, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrpcDatabaseProjectClient.prototype.removeProjectThemeCoTeacher = function removeProjectThemeCoTeacher(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(GrpcDatabaseProject.RemoveProjectThemeCoTeacher, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

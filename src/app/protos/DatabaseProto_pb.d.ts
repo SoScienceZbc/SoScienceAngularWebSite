@@ -423,8 +423,8 @@ export class D_ProjectTheme extends jspb.Message {
   getTeacher(): string;
   setTeacher(value: string): void;
 
-  getSubjectid(): number;
-  setSubjectid(value: number): void;
+  getSubject(): string;
+  setSubject(value: string): void;
 
   hasProjects(): boolean;
   clearProjects(): void;
@@ -448,7 +448,7 @@ export namespace D_ProjectTheme {
     enddate: string,
     lastedited: string,
     teacher: string,
-    subjectid: number,
+    subject: string,
     projects?: D_Projects.AsObject,
   }
 }

@@ -49,7 +49,6 @@ export class ProjectThemeFormComponent implements OnInit {
     dbService.GetSubject(sessionStorage.getItem("Token")!).subscribe(data =>{
       data.getSubjectList().forEach(subject => {
         this.subjects.push({value : subject.getId(), viewValue : subject.getName()});
-        this.values.push(subject.getName(),subject.getId())
       }); 
       // this.selectedFormControl.setValue(1);
     })
