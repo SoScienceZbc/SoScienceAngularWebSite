@@ -11,7 +11,7 @@ export class AuthGuardGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(sessionStorage.getItem("Token") !== null){
+      if(sessionStorage.getItem("Token") !== null && sessionStorage.getItem("Token") !== ""){
         let token = sessionStorage.getItem("Token");
         let admin = sessionStorage.getItem("admin") !== null;
         const loginreply$ = this.loginService.ValidateLogin(token!,admin)
@@ -23,12 +23,14 @@ export class AuthGuardGuard implements CanActivate {
               loginreply$.unsubscribe();
               sessionStorage.removeItem("Token");
               sessionStorage.removeItem("Admin");
-              this.router.navigate(['/']);
+              this.router.navigate(["/"]);
             }
           }
         });
         return true;
       }
+      sessionStorage.removeItem("Token");
+      sessionStorage.removeItem("Admin");
       return this.router.parseUrl("/");
   }
 

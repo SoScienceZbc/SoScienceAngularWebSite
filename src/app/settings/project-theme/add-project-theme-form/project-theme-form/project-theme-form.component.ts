@@ -4,6 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
 import { DatePipe } from '@angular/common';
 import { LoadingService } from 'src/app/loading.service';
+import { Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 interface Subject {
   value: number;
@@ -22,7 +25,7 @@ export class ProjectThemeFormComponent implements OnInit {
     Validators.minLength(4),
     Validators.maxLength(25)
   ]);  
-  selectedFormControl = new FormControl(0, [
+  myControl = new FormControl("", [
     Validators.required,
   ]);
   datetimeFormControl =  new FormControl(this.datePipe.transform(new Date(),"yyyy-MM-ddThh:mm"),[
@@ -30,10 +33,13 @@ export class ProjectThemeFormComponent implements OnInit {
   ])
   projectthemeGroup = new FormGroup({
     'projectThemeName' : this.nameFormControl,
-    'subjectSelect' : this.selectedFormControl,
+    'subjectSelect' : this.myControl,
     'datetimeSelect' : this.datetimeFormControl
   })
 
+  options : string[] = ['One', 'Two', 'Three',"Four","Five"];
+  filteredOptions: Observable<string[]> | any;
+  
   subjects: Subject[] = [];
 
   selectedValue: number;
@@ -43,8 +49,9 @@ export class ProjectThemeFormComponent implements OnInit {
     dbService.GetSubject(sessionStorage.getItem("Token")!).subscribe(data =>{
       data.getSubjectList().forEach(subject => {
         this.subjects.push({value : subject.getId(), viewValue : subject.getName()});
+        this.values.push(subject.getName(),subject.getId())
       }); 
-      this.selectedFormControl.setValue(1);
+      // this.selectedFormControl.setValue(1);
     })
   }
   
@@ -61,11 +68,24 @@ export class ProjectThemeFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
 
+  private _filter(value: string): string[] {
+    if(value !== null){      
+
+      const filterValue = value.toLowerCase();
+      
+      return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    }
+    return this.options.filter(option => option.toLowerCase());
   }
 
   addProjectTheme() : void{
-    this.dbService.AddProjectTheme(this.selectedFormControl.value,this.datetimeFormControl.value,this.nameFormControl.value);
+    // this.dbService.AddProjectTheme(this.selectedFormControl.value,this.datetimeFormControl.value,this.nameFormControl.value);
     this.dialog.closeAll();
     this.spinner.show();
   }
