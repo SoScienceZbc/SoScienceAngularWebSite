@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoadingService } from 'src/app/loading.service';
-import { SubjectFormComponent } from '../../add-subject-form/subject-form.component';
 
 @Component({
   selector: 'app-subject-dialog-box',
@@ -16,12 +15,6 @@ export class SubjectDialogBoxComponent implements OnInit {
   }
 
   testDialog() {
-    this.dilog.open(SubjectFormComponent,{
-      data:{
-        
-      }
-
-    });
   }
 
 }

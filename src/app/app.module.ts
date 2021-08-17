@@ -70,8 +70,7 @@ import { DocumentAddComponent } from './archive/AddDocument/document-add/documen
 import { FooterComponent } from './footer/footer.component';
 import { DialogAreYouSureComponent } from './dialog-are-you-sure/dialog-are-you-sure.component';
 import { QuilEditorPreViewComponent } from './quil-editor-pre-view/quil-editor-pre-view.component';
-import { SubjectDialogBoxComponent } from './settings/subject/add-subject-dialog-box/subject-dialog-box/subject-dialog-box.component';
-import { SubjectFormComponent } from './settings/subject/add-subject-form/subject-form.component';
+
 import { ProjectThemeFormComponent } from './settings/project-theme/add-project-theme-form/project-theme-form/project-theme-form.component';
 import { ProjectThemeDialogueBoxComponent } from './settings/project-theme/add-project-theme-dialogue-box/project-theme-dialogue-box/project-theme-dialogue-box.component';
 import { DatePipe } from '@angular/common';
@@ -95,8 +94,6 @@ import { Field } from '@ngx-grpc/well-known-types';
     FooterComponent,
     DialogAreYouSureComponent,
     QuilEditorPreViewComponent,
-    SubjectDialogBoxComponent,
-    SubjectFormComponent,
     ProjectThemeFormComponent,
     ProjectThemeDialogueBoxComponent,
   ],

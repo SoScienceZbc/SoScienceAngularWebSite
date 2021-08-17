@@ -6,6 +6,8 @@ import { expandingD_Project } from '../archive/archive.component';
 import { DatabaseService } from '../database.service';
 import { D_Projects, D_ProjectTheme } from '../protos/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
+import { AfterViewInit } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 interface Language {
   value: string | any;
@@ -24,13 +26,15 @@ interface Language {
     ]),
   ],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, AfterViewInit {
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  
   public dataSource: Array<D_ProjectTheme> = new Array<D_ProjectTheme>();
 
   loading$ = this.spinner.loading$;
   
-  displayedColumns = ["name", "endDate"];
+  displayedColumns = ["name", "subject", "lastedited", "endDate"];
 
   @ViewChild("mattable", { read: MatSort }) sort!: MatSort;
 
@@ -56,6 +60,11 @@ export class SettingsComponent implements OnInit {
     database.GetProjectTheme();
     let d = new D_ProjectTheme();
   }
+  ngAfterViewInit(): void {
+    this.matdatasource.paginator = this.paginator;
+    this.matdatasource.sort = this.sort;
+    this.onsortChange();
+  }
 
   public languages: Language[] = [
     {value: 'danish', viewValue: 'Dansk'},
@@ -64,17 +73,20 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.matdatasource.filter = filterValue.trim().toLowerCase();
-  // }
+  /**
+   * This apply a filter to the matdatatable.
+   */
+   applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.matdatasource.filter = filterValue.trim().toLowerCase();
+  }
 
   onsortChange() {
     this.matdatasource.sortingDataAccessor = (item, property) => {
       let switchValue = ""
       switch (property) {
         case 'name': switchValue = item.getName(); break;
-        case 'Id': switchValue = item.getId().toString(); break;
+        case 'subject': switchValue = item.getSubject(); break;
         case 'lastedited': switchValue = item.getLastedited(); break;
         case 'endDate': switchValue = item.getEnddate(); break;
       }
