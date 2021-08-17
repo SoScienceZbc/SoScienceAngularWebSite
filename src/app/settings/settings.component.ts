@@ -45,6 +45,7 @@ export class SettingsComponent implements OnInit {
     database.listOfProjectThemes$.subscribe(projectThemes =>{
       console.log("Got project Themes");
       this.projectThemes = projectThemes;
+      console.log(this.projectThemes.toString());
       this.matdatasource.data = [];
       this.projectThemes.forEach(projectTheme => {
         this.matdatasource.data.push(projectTheme);

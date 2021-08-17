@@ -350,12 +350,12 @@ export class DatabaseService {
     });
     return subject;
   }
-  public AddProjectTheme(subjectId : number, enddate : Date, name : string) {
+  public AddProjectTheme(subject : string, enddate : Date, name : string) {
     const projectTheme = new D_ProjectTheme();
     projectTheme.setEnddate(this.datePipe.transform(enddate,"dd/MM/yyyy HH:mm:ss")!);
     projectTheme.setName(name);
     projectTheme.setTeacher(sessionStorage.getItem("Token")!);
-    projectTheme.setSubjectid(subjectId);
+    projectTheme.setSubject(subject);
     grpc.invoke(GrpcDatabaseProject.AddProjectTheme, {
       request: projectTheme,
       host: this.hostAddress,
@@ -365,13 +365,13 @@ export class DatabaseService {
       onEnd: (res) => {},
     })
   }
-  public GetProjectThemeFromSubject(subjectId : number){
+  public GetProjectThemeFromSubject(subject : string){
     let themeSubject = new ThemeFromSubject();
-    let subject = new D_Subject();
+    let d_subject = new D_Subject();
     let user = new UserDbInfomation();
-    subject.setId(subjectId);
+    d_subject.setName(subject);
     user.setDbname(sessionStorage.getItem("Token")!);
-    themeSubject.setSubject(subject);
+    themeSubject.setSubject(d_subject);
     themeSubject.setUser(user);
     let themes: BehaviorSubject<D_ProjectThemes> = new BehaviorSubject<D_ProjectThemes>(
       new D_ProjectThemes()

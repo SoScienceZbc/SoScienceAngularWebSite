@@ -4,6 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
 import { LoadingService } from 'src/app/loading.service';
 
+interface DropDownItemStrings {
+  value: string;
+  viewValue: string;
+}
 interface DropDoneItem {
   value: number;
   viewValue: string;
@@ -16,7 +20,7 @@ interface DropDoneItem {
 })
 export class ProjectFormComponent implements OnInit {
 
-  subjects: DropDoneItem[] = [];
+  subjects: DropDownItemStrings[] = [];
   themes: DropDoneItem[] = [];
 
   selectedSubjectFormControl = new FormControl(null, [
@@ -41,7 +45,7 @@ export class ProjectFormComponent implements OnInit {
   constructor(private dataservice:DatabaseService,private dialog:MatDialog,private spinner:LoadingService) { 
     dataservice.GetSubject(sessionStorage.getItem("Token")!).subscribe(data =>{
       data.getSubjectList().forEach(subject => {
-        this.subjects.push({value : subject.getId(), viewValue : subject.getName()});
+        this.subjects.push({value : subject.getName(), viewValue : subject.getName()});
       }); 
       this.selectedSubjectFormControl.setValue(null);
     })

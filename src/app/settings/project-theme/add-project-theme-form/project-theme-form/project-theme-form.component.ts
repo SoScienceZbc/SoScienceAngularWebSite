@@ -37,7 +37,7 @@ export class ProjectThemeFormComponent implements OnInit {
     'datetimeSelect' : this.datetimeFormControl
   })
 
-  options : string[] = ['One', 'Two', 'Three',"Four","Five"];
+  options : string[] = [];
   filteredOptions: Observable<string[]> | any;
   
   subjects: Subject[] = [];
@@ -49,6 +49,8 @@ export class ProjectThemeFormComponent implements OnInit {
     dbService.GetSubject(sessionStorage.getItem("Token")!).subscribe(data =>{
       data.getSubjectList().forEach(subject => {
         this.subjects.push({value : subject.getId(), viewValue : subject.getName()});
+        this.options.push(subject.getName());
+        this.myControl.setValue("");
       }); 
       // this.selectedFormControl.setValue(1);
     })
@@ -84,7 +86,7 @@ export class ProjectThemeFormComponent implements OnInit {
   }
 
   addProjectTheme() : void{
-    // this.dbService.AddProjectTheme(this.selectedFormControl.value,this.datetimeFormControl.value,this.nameFormControl.value);
+    this.dbService.AddProjectTheme(this.myControl.value,this.datetimeFormControl.value,this.nameFormControl.value);
     this.dialog.closeAll();
     this.spinner.show();
   }
