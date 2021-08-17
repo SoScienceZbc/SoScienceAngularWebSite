@@ -35,7 +35,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
 
   loading$ = this.spinner.loading$;
   
-  displayedColumns = ["name", "subject", "lastedited", "endDate"];
+  displayedColumns = ["name", "subject", "lastedited", "endDate", "menu"];
 
   @ViewChild("mattable", { read: MatSort }) sort!: MatSort;
 
@@ -81,6 +81,9 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     this.matdatasource.filter = filterValue.trim().toLowerCase();
   }
 
+  consoleLog(id : any){
+      console.log(id);
+  }
 
   onsortChange() {
     this.matdatasource.sortingDataAccessor = (item, property) => {
