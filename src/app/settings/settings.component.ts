@@ -45,6 +45,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
 
   Projects = new D_Projects();
   
+  
   constructor(database: DatabaseService, private spinner:LoadingService) 
   {
     database.listOfProjectThemes$.subscribe(projectThemes =>{
