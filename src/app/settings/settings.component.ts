@@ -54,7 +54,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
       this.projectThemes.forEach(projectTheme => {
         this.matdatasource.data.push(projectTheme);
         this.matdatasource._updateChangeSubscription();
-        this.Projects.getDProjectList()[0].getCompleted()
+        
       })
       this.spinner.hide();
     });
