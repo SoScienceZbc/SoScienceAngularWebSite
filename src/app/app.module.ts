@@ -75,6 +75,7 @@ import { ProjectThemeFormComponent } from './settings/project-theme/add-project-
 import { ProjectThemeDialogueBoxComponent } from './settings/project-theme/add-project-theme-dialogue-box/project-theme-dialogue-box/project-theme-dialogue-box.component';
 import { DatePipe } from '@angular/common';
 import { Field } from '@ngx-grpc/well-known-types';
+import { AddRemoveUserComponent } from './settings/add-remove-user/add-remove-user.component';
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { Field } from '@ngx-grpc/well-known-types';
     QuilEditorPreViewComponent,
     ProjectThemeFormComponent,
     ProjectThemeDialogueBoxComponent,
+    AddRemoveUserComponent,
   ],
   imports: [
     BrowserModule,

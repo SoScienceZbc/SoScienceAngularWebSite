@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-header>            
+        <ng-template [ngIf]="addCoTeacherStyle">
+            <mat-card-title>Tilføj Ekstra Lære</mat-card-title>
+        </ng-template>
+      <ng-template #elseButton>
+          <mat-card-title>Fjern Ekstra Lære</mat-card-title>
+      </ng-template>
+    </mat-card-header>
+    <mat-card-content style="display: inline-block;">
+        <form [formGroup]="formGroup">
+            <mat-form-field class="form-element">
+                <input #titel matInput [formControl]="usernameFormControl" formControlName="projectThemeName" placeholder="Titel">
+                <mat-error *ngIf="usernameFormControl.hasError">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <br>
+          <mat-card-actions style="display: flex; margin: auto; justify-content: center;">
+            
+            <ng-template [ngIf]="addCoTeacherStyle">
+                <mat-label style="display: flex; margin: auto; justify-content: center;">Tilføj ekstra lære</mat-label>
+                <button #tooltip="matTooltip" matTooltip="Tilføj Nyt Fag" [disabled]="formGroup.invalid" matToolTipHideDelay="100" mat-ripple mat-mini-fab type="submit"  (click)="addCoTeacher()"><mat-icon>person_add_alt</mat-icon></button>
+              </ng-template>
+              <ng-template #elseButton>
+                <mat-label style="display: flex; margin: auto; justify-content: center;">Fjern ekstra lære</mat-label>
+                  <button #tooltip="matTooltip" matTooltip="Tilføj Nyt Fag" [disabled]="formGroup.invalid" matToolTipHideDelay="100" mat-ripple mat-mini-fab type="submit"  (click)="removeCoTeacher()"><mat-icon>person_remove</mat-icon></button>
+              </ng-template>
+        </mat-card-actions>
+    </form>
+    </mat-card-content>
+  </mat-card>
+  

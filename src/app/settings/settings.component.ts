@@ -11,6 +11,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Console } from 'console';
 import { DialogAreYouSureComponent } from '../dialog-are-you-sure/dialog-are-you-sure.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AddRemoveUserComponent } from './add-remove-user/add-remove-user.component';
 
 interface Language {
   value: string | any;
@@ -87,13 +88,22 @@ export class SettingsComponent implements OnInit, AfterViewInit {
       console.log(id);
   }
 
-  DeleteProjectTheme(id : any){
+  deleteProjectTheme(id : any){
     this.dilog.open(DialogAreYouSureComponent, {
       data: { docoment: id, type: "PT" },
       autoFocus: true,
       restoreFocus: true,
 
     });
+}
+
+addCoTeacher(id : any){
+  this.dilog.open(AddRemoveUserComponent, {
+    data: { id: id, addCoTeacherStyle : true },
+    autoFocus: true,
+    restoreFocus: true,
+
+  });
 }
 
   onsortChange() {

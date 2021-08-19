@@ -30,9 +30,9 @@
             <ng-container matColumnDef="menu">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>mini menu</th>
               <td mat-cell *matCellDef="let element">
-                <button (click)="consoleLog(element.getId())" mat-icon-button><mat-icon color="accent">person_add_alt</mat-icon></button>
+                <button (click)="addCoTeacher(element.getId())" mat-icon-button><mat-icon color="accent">person_add_alt</mat-icon></button>
                 <button (click)="consoleLog(element.getId())" mat-icon-button><mat-icon color="warn">person_remove</mat-icon></button>
-                <button (click)="DeleteProjectTheme(element.getId())" mat-icon-button><mat-icon>delete_outline</mat-icon></button>
+                <button (click)="deleteProjectTheme(element.getId())" mat-icon-button><mat-icon>delete_sweep</mat-icon></button>
               </td>
             </ng-container>
       <!-- endDate Column -->
