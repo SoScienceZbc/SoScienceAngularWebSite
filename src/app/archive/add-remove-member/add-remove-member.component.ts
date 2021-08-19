@@ -27,12 +27,12 @@ export class AddRemoveMemberComponent implements OnInit {
   }
 
 
-  removeCoTeacher(){
+  removeMember(){
     this.dataservice.RemoveProjectMember(this.data.id, this.usernameFormControl.value);
     this.dialogbox.closeAll();
     this.spinner.show();
   }
-  addCoTeacher(){
+  addMember(){
     this.dataservice.AddProjectMember(this.data.id, this.usernameFormControl.value);
     this.dialogbox.closeAll();
     this.spinner.show();
