@@ -405,7 +405,9 @@ export class DatabaseService {
       },
     });
   }
-  public RemoveProjectTheme(theme: D_ProjectTheme) {
+  public RemoveProjectTheme(id : number) {
+    const theme = new D_ProjectTheme();
+    theme.setId(id);
     const userDbInfomation = new ProjectThemeUserInfomation();
     const userinfomation = new UserDbInfomation();
     userinfomation.setDbname(sessionStorage.getItem("Token")!);
@@ -415,7 +417,7 @@ export class DatabaseService {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
-        //this.GetProjectsTheRigthWay();
+        this.GetProjectTheme();
         console.log('This have been changed in database.', Message.getNumber());
       },
       onEnd: (res) => {},

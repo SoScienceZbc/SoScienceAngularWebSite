@@ -40,7 +40,7 @@ export class DialogAreYouSureComponent implements OnInit {
       this.dialogbox.closeAll();
     } else if (this.data.type == "PT"){
       this.spinner.show();
-      this.dataservice.RemoveProjectTheme(this.data.id)
+      this.dataservice.RemoveProjectTheme(this.data.docoment)
       this.dialogbox.closeAll();
     }
 
