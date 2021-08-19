@@ -1,10 +1,8 @@
 <mat-card>
-    <mat-card-header>            
-        <ng-template [ngIf]="addCoTeacherStyle">
-            <mat-card-title>Tilføj Ekstra Lære</mat-card-title>
-        </ng-template>
-      <ng-template #elseButton>
-          <mat-card-title>Fjern Ekstra Lære</mat-card-title>
+    <mat-card-header>         
+            <mat-card-title *ngIf="addCoTeacherStyle; else elseTitle">Tilføj Ekstra Lære</mat-card-title>
+      <ng-template #elseTitle>
+          <mat-card-title>Fjern Ekstra  Lære</mat-card-title>
       </ng-template>
     </mat-card-header>
     <mat-card-content style="display: inline-block;">
@@ -16,13 +14,15 @@
             <br>
           <mat-card-actions style="display: flex; margin: auto; justify-content: center;">
             
-            <ng-template [ngIf]="addCoTeacherStyle">
+            <div *ngIf="addCoTeacherStyle; else elseButton">
                 <mat-label style="display: flex; margin: auto; justify-content: center;">Tilføj ekstra lære</mat-label>
                 <button #tooltip="matTooltip" matTooltip="Tilføj Nyt Fag" [disabled]="formGroup.invalid" matToolTipHideDelay="100" mat-ripple mat-mini-fab type="submit"  (click)="addCoTeacher()"><mat-icon>person_add_alt</mat-icon></button>
-              </ng-template>
+            </div>
               <ng-template #elseButton>
-                <mat-label style="display: flex; margin: auto; justify-content: center;">Fjern ekstra lære</mat-label>
-                  <button #tooltip="matTooltip" matTooltip="Tilføj Nyt Fag" [disabled]="formGroup.invalid" matToolTipHideDelay="100" mat-ripple mat-mini-fab type="submit"  (click)="removeCoTeacher()"><mat-icon>person_remove</mat-icon></button>
+                  <div>
+                      <mat-label style="display: flex; margin: auto; justify-content: center;">Fjern ekstra lære</mat-label>
+                      <button #tooltip="matTooltip" matTooltip="Tilføj Nyt Fag" [disabled]="formGroup.invalid" matToolTipHideDelay="100" mat-ripple mat-mini-fab type="submit"  (click)="removeCoTeacher()"><mat-icon>person_remove</mat-icon></button>
+                    </div>
               </ng-template>
         </mat-card-actions>
     </form>

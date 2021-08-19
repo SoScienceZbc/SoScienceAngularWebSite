@@ -423,7 +423,7 @@ export class DatabaseService {
       onEnd: (res) => {},
     });
   }
-  
+
   //AddProjectThemeCoTeacher
   public AddProjectThemeCoTeacher(ptId : number, CoTeacherName : string) {
     const theme = new D_ProjectTheme();
@@ -435,6 +435,27 @@ export class DatabaseService {
     userDbInfomation.setTheme(theme);
     userDbInfomation.setUser(userinfomation);
     grpc.invoke(GrpcDatabaseProject.AddProjectThemeCoTeacher, {
+      request: userDbInfomation,
+      host: this.hostAddress,
+      onMessage: (Message: intger) => {
+        this.GetProjectTheme();
+        console.log('This have been changed in database.', Message.getNumber());
+      },
+      onEnd: (res) => {},
+    });
+  }
+
+  //RemoveProjectThemeCoTeacher
+  public RemoveProjectThemeCoTeacher(ptId : number, CoTeacherName : string) {
+    const theme = new D_ProjectTheme();
+    theme.setId(ptId)
+    const userDbInfomation = new ProjectThemeUserInfomation();
+    const userinfomation = new UserDbInfomation();
+    userinfomation.setDbname(sessionStorage.getItem("Token")!);
+    userDbInfomation.setUsername(CoTeacherName)
+    userDbInfomation.setTheme(theme);
+    userDbInfomation.setUser(userinfomation);
+    grpc.invoke(GrpcDatabaseProject.RemoveProjectThemeCoTeacher, {
       request: userDbInfomation,
       host: this.hostAddress,
       onMessage: (Message: intger) => {

@@ -106,6 +106,15 @@ addCoTeacher(id : any){
   });
 }
 
+removeCoTeacher(id : any){
+  this.dilog.open(AddRemoveUserComponent, {
+    data: { id: id, addCoTeacherStyle : false },
+    autoFocus: true,
+    restoreFocus: true,
+
+  });
+}
+
   onsortChange() {
     this.matdatasource.sortingDataAccessor = (item, property) => {
       let switchValue = ""

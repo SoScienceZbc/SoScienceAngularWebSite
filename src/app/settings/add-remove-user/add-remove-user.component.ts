@@ -28,6 +28,9 @@ export class AddRemoveUserComponent implements OnInit {
 
 
   removeCoTeacher(){
+    this.dataservice.RemoveProjectThemeCoTeacher(this.data.id, this.usernameFormControl.value);
+    this.dialogbox.closeAll();
+    this.spinner.show();
   }
   addCoTeacher(){
     this.dataservice.AddProjectThemeCoTeacher(this.data.id, this.usernameFormControl.value);
