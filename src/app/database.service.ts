@@ -281,14 +281,17 @@ export class DatabaseService {
   }
 
   public RemoveDocoment(docomnet: D_Document, projectID: number) {
+    const DBinformation = new UserDbInfomation();
     const userDbInfomation = new ProjectUserInfomation();
     //Removedocoment usese userinfomation as the docoment id..
     //BadFix but Create new Project and add the docoment into that and send that to the database.
     //and ofcufse remeber to set the projectid from the parm"projectID"
     let tempproject = new D_Project();
     tempproject.addDocuments(docomnet);
+    DBinformation.setDbname(sessionStorage.getItem("Token")!);
     tempproject.setId(projectID);
     userDbInfomation.setProject(tempproject);
+    userDbInfomation.setUser(DBinformation);
 
     grpc.invoke(GrpcDatabaseProject.RemoveDocument, {
       request: userDbInfomation,
