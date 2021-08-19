@@ -38,6 +38,10 @@ export class DialogAreYouSureComponent implements OnInit {
       this.data.docoment.setCompleted(false);
       this.dataservice.UpdateProject(this.data.docoment);
       this.dialogbox.closeAll();
+    } else if (this.data.type == "PT"){
+      this.spinner.show();
+      this.dataservice.RemoveProjectTheme(this.data.id)
+      this.dialogbox.closeAll();
     }
 
   }

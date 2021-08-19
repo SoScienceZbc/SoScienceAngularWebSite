@@ -15,7 +15,8 @@ import {
   D_Subjects,
   D_ProjectTheme,
   ThemeFromSubject,
-  D_ProjectThemes
+  D_ProjectThemes,
+  ProjectThemeUserInfomation
 } from './protos/DatabaseProto_pb';
 import { BehaviorSubject, Observable, of, Subject, zip } from 'rxjs';
 import { DatePipe } from '@angular/common';
@@ -402,6 +403,22 @@ export class DatabaseService {
       },
       onEnd: (res) => {
       },
+    });
+  }
+  public RemoveProjectTheme(theme: D_ProjectTheme) {
+    const userDbInfomation = new ProjectThemeUserInfomation();
+    const userinfomation = new UserDbInfomation();
+    userinfomation.setDbname(sessionStorage.getItem("Token")!);
+    userDbInfomation.setTheme(theme);
+    userDbInfomation.setUser(userinfomation);
+    grpc.invoke(GrpcDatabaseProject.RemoveProjectTheme, {
+      request: userDbInfomation,
+      host: this.hostAddress,
+      onMessage: (Message: intger) => {
+        //this.GetProjectsTheRigthWay();
+        console.log('This have been changed in database.', Message.getNumber());
+      },
+      onEnd: (res) => {},
     });
   }
 }

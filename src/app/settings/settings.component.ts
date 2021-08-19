@@ -9,6 +9,8 @@ import { LoadingService } from '../loading.service';
 import { AfterViewInit } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Console } from 'console';
+import { DialogAreYouSureComponent } from '../dialog-are-you-sure/dialog-are-you-sure.component';
+import { MatDialog } from '@angular/material/dialog';
 
 interface Language {
   value: string | any;
@@ -46,7 +48,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
   Projects = new D_Projects();
   
   
-  constructor(database: DatabaseService, private spinner:LoadingService) 
+  constructor(database: DatabaseService, private spinner:LoadingService,private dilog: MatDialog) 
   {
     database.listOfProjectThemes$.subscribe(projectThemes =>{
       this.projectThemes = projectThemes;
@@ -84,6 +86,15 @@ export class SettingsComponent implements OnInit, AfterViewInit {
   consoleLog(id : any){
       console.log(id);
   }
+
+  DeleteProjectTheme(id : any){
+    this.dilog.open(DialogAreYouSureComponent, {
+      data: { docoment: id, type: "PT" },
+      autoFocus: true,
+      restoreFocus: true,
+
+    });
+}
 
   onsortChange() {
     this.matdatasource.sortingDataAccessor = (item, property) => {
