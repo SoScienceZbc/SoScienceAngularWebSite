@@ -211,6 +211,24 @@ type GrpcDatabaseProjectRemoveProjectThemeCoTeacher = {
   readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
 };
 
+type GrpcDatabaseProjectAddProjectMember = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.MemberInformation;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+};
+
+type GrpcDatabaseProjectRemoveProjectMember = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.MemberInformation;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+};
+
 export class GrpcDatabaseProject {
   static readonly serviceName: string;
   static readonly GetProject: GrpcDatabaseProjectGetProject;
@@ -236,6 +254,8 @@ export class GrpcDatabaseProject {
   static readonly RemoveProjectTheme: GrpcDatabaseProjectRemoveProjectTheme;
   static readonly AddProjectThemeCoTeacher: GrpcDatabaseProjectAddProjectThemeCoTeacher;
   static readonly RemoveProjectThemeCoTeacher: GrpcDatabaseProjectRemoveProjectThemeCoTeacher;
+  static readonly AddProjectMember: GrpcDatabaseProjectAddProjectMember;
+  static readonly RemoveProjectMember: GrpcDatabaseProjectRemoveProjectMember;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -475,6 +495,24 @@ export class GrpcDatabaseProjectClient {
   ): UnaryResponse;
   removeProjectThemeCoTeacher(
     requestMessage: src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  addProjectMember(
+    requestMessage: src_app_protos_DatabaseProto_pb.MemberInformation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  addProjectMember(
+    requestMessage: src_app_protos_DatabaseProto_pb.MemberInformation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  removeProjectMember(
+    requestMessage: src_app_protos_DatabaseProto_pb.MemberInformation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  removeProjectMember(
+    requestMessage: src_app_protos_DatabaseProto_pb.MemberInformation,
     callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
   ): UnaryResponse;
 }

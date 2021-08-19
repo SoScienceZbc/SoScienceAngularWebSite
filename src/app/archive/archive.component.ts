@@ -11,6 +11,7 @@ import { TextEditorComponent } from '../TextEditor/TextEditor.component';
 import quill, { Quill } from 'quill';
 import { DialogAreYouSureComponent } from '../dialog-are-you-sure/dialog-are-you-sure.component';
 import { QuilEditorPreViewComponent } from '../quil-editor-pre-view/quil-editor-pre-view.component';
+import { AddRemoveMemberComponent } from './add-remove-member/add-remove-member.component';
 
 /**
  * @title Table with expandable rows
@@ -208,6 +209,24 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.matdatasource._updateChangeSubscription();
 
   }
+
+  addMember(id : any){
+    this.dilog.open(AddRemoveMemberComponent, {
+      data: { id: id, addMemberStyle : true },
+      autoFocus: true,
+      restoreFocus: true,
+    });
+  }
+
+  removeMember(id : any){
+    this.dilog.open(AddRemoveMemberComponent, {
+      data: { id: id, addMemberStyle : false },
+      autoFocus: true,
+      restoreFocus: true,
+    });
+  }
+  
+
   updateProjectUndo(item: D_Project) {
 
     const tempitem = item;

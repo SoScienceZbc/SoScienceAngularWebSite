@@ -31,6 +31,32 @@ export namespace ThemeFromSubject {
   }
 }
 
+export class MemberInformation extends jspb.Message {
+  hasUser(): boolean;
+  clearUser(): void;
+  getUser(): UserDbInfomation | undefined;
+  setUser(value?: UserDbInfomation): void;
+
+  getNewmember(): string;
+  setNewmember(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): MemberInformation.AsObject;
+  static toObject(includeInstance: boolean, msg: MemberInformation): MemberInformation.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: MemberInformation, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): MemberInformation;
+  static deserializeBinaryFromReader(message: MemberInformation, reader: jspb.BinaryReader): MemberInformation;
+}
+
+export namespace MemberInformation {
+  export type AsObject = {
+    user?: UserDbInfomation.AsObject,
+    newmember: string,
+  }
+}
+
 export class UserDbInfomation extends jspb.Message {
   getId(): number;
   setId(value: number): void;

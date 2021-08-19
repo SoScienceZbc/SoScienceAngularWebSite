@@ -76,6 +76,7 @@ import { ProjectThemeDialogueBoxComponent } from './settings/project-theme/add-p
 import { DatePipe } from '@angular/common';
 import { Field } from '@ngx-grpc/well-known-types';
 import { AddRemoveUserComponent } from './settings/add-remove-user/add-remove-user.component';
+import { AddRemoveMemberComponent } from './archive/add-remove-member/add-remove-member.component';
 
 
 @NgModule({
@@ -98,6 +99,7 @@ import { AddRemoveUserComponent } from './settings/add-remove-user/add-remove-us
     ProjectThemeFormComponent,
     ProjectThemeDialogueBoxComponent,
     AddRemoveUserComponent,
+    AddRemoveMemberComponent,
   ],
   imports: [
     BrowserModule,

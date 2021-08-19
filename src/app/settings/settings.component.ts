@@ -102,7 +102,6 @@ addCoTeacher(id : any){
     data: { id: id, addCoTeacherStyle : true },
     autoFocus: true,
     restoreFocus: true,
-
   });
 }
 

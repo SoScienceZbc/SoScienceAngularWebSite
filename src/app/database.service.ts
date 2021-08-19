@@ -16,7 +16,8 @@ import {
   D_ProjectTheme,
   ThemeFromSubject,
   D_ProjectThemes,
-  ProjectThemeUserInfomation
+  ProjectThemeUserInfomation,
+  MemberInformation
 } from './protos/DatabaseProto_pb';
 import { BehaviorSubject, Observable, of, Subject, zip } from 'rxjs';
 import { DatePipe } from '@angular/common';
@@ -460,6 +461,43 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         this.GetProjectTheme();
+        console.log('This have been changed in database.', Message.getNumber());
+      },
+      onEnd: (res) => {},
+    });
+  }
+
+  //AddProjectMember
+  public AddProjectMember(ptId : number, newMember : string) {
+    const memberInfomation = new MemberInformation();
+    const userinfomation = new UserDbInfomation();
+    userinfomation.setDbname(sessionStorage.getItem("Token")!);
+    userinfomation.setId(ptId);
+    memberInfomation.setNewmember(newMember)
+    memberInfomation.setUser(userinfomation);
+    grpc.invoke(GrpcDatabaseProject.AddProjectMember, {
+      request: memberInfomation,
+      host: this.hostAddress,
+      onMessage: (Message: intger) => {
+        this.GetProjectsTheRigthWay();
+        console.log('This have been changed in database.', Message.getNumber());
+      },
+      onEnd: (res) => {},
+    });
+  }
+  //RemoveProjectMember
+  public RemoveProjectMember(ptId : number, newMember : string) {
+    const memberInfomation = new MemberInformation();
+    const userinfomation = new UserDbInfomation();
+    userinfomation.setDbname(sessionStorage.getItem("Token")!);
+    userinfomation.setId(ptId);
+    memberInfomation.setNewmember(newMember)
+    memberInfomation.setUser(userinfomation);
+    grpc.invoke(GrpcDatabaseProject.RemoveProjectMember, {
+      request: memberInfomation,
+      host: this.hostAddress,
+      onMessage: (Message: intger) => {
+        this.GetProjectsTheRigthWay();
         console.log('This have been changed in database.', Message.getNumber());
       },
       onEnd: (res) => {},
