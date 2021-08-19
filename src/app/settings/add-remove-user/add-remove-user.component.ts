@@ -49,5 +49,8 @@ export class AddRemoveUserComponent implements OnInit {
     }
     return this.usernameFormControl.hasError('pattern') ? 'noget gik galt prøv igen' : '';
   }
+  CloseDialog(){
+    this.dialogbox.closeAll()
+  }
 
 }
