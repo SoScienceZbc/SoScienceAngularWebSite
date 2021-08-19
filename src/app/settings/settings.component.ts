@@ -12,6 +12,7 @@ import { Console } from 'console';
 import { DialogAreYouSureComponent } from '../dialog-are-you-sure/dialog-are-you-sure.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AddRemoveUserComponent } from './add-remove-user/add-remove-user.component';
+import { ProjectOverviewComponent } from './project-overview/project-overview.component';
 
 interface Language {
   value: string | any;
@@ -76,6 +77,14 @@ export class SettingsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
+  openProject(project : D_Project){
+    this.dilog.open(ProjectOverviewComponent, {
+      data: { name : project.getName(), id : project.getId() },
+      autoFocus: true,
+      restoreFocus: true,
+
+    });
+  }
   /**
    * This apply a filter to the matdatatable.
    */

@@ -87,15 +87,11 @@
                     text-overflow: clip;
                     max-width: 0px;" class="hoverme" > {{item.getTitle()}}
                   </td>
-                    <td id="testid" style="text-align: center;">
-                      <button mat-ripple (click)="OpenQuilEditor(item)"
-                        style="cursor: pointer; z-index: 1;"
-                        mat-icon-button>
+                    <td style="text-align: center;">
+                      <button mat-ripple (click)="OpenQuilEditor(item)"style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;"  class="TextColor">
                         <mat-icon>edit</mat-icon>
                       </button>
-                      <button mat-ripple (click)="OpenDialogAreYouSureDocument(item)"
-                        style="cursor: pointer; z-index: 1;"
-                        mat-icon-button>
+                      <button mat-ripple (click)="OpenDialogAreYouSureDocument(item)"style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
                         <mat-icon>delete</mat-icon>
                       </button>
                     </td>

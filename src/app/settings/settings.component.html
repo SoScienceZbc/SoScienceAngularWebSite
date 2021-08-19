@@ -55,7 +55,7 @@
                 <th mat-header-cell style=" text-align: left;">Sidst redigeret</th>
               </thead>
               <tbody>
-                <tr *ngFor="let item of element.getProjects()!.getDProjectList()">
+                <tr *ngFor="let item of element.getProjects()!.getDProjectList()" (click)="openProject(item)">
                   <td>{{item.getName()}}</td>
                   <td>{{item.getCompleted()}}</td>
                   <td>{{item.getLastedited()}}</td>

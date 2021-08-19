@@ -28,6 +28,9 @@ $light-theme:   mat-light-theme($light-primary, $light-accent);
   @include angular-material-theme($light-theme);
   @include custom-components-theme($light-theme);
 
+  .TextColor{
+    color: #0f0f0f;
+  }
   // Fix light theme project nav bar
   .mat-tab-label-container{
     background: #f0f0f0;
@@ -90,6 +93,9 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
     stroke: white !important;
   }
 
+  .TextColor{
+    color: #f0f0f0;
+  }
   // Fix dark theme height missing
   .mat-expansion-panel-header{
     height: 48px;

@@ -190,9 +190,9 @@ export class DatabaseService {
     });
   }
 
-  public GetDocuments(name: string, id: number): Observable<D_Documents> {
+  public GetDocuments(id: number): Observable<D_Documents> {
     const userDbInfomation = new UserDbInfomation();
-    userDbInfomation.setDbname(name);
+    userDbInfomation.setDbname(sessionStorage.getItem("Token")!);
     userDbInfomation.setId(id);
     const docmoments: BehaviorSubject<D_Documents> =
       new BehaviorSubject<D_Documents>(new D_Documents());

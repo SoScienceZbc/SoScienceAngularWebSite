@@ -1,0 +1,30 @@
+<div style="min-width: 50em !important;">
+    <mat-card>
+        <mat-card-header style="float: right;">
+            <button mat-icon-button (click)="CloseDialog()">
+            <mat-icon>close</mat-icon>
+          </button>      
+        </mat-card-header>
+            <mat-card-title>{{project.getName()}}</mat-card-title>
+        <mat-card-content>
+            <table style="width: 100%;">
+                <thead>
+                    <th style="width: 35%;">name</th>
+                    <th style="width: 15%;">type</th>
+                    <th style="width: 50%;">completed</th>
+                </thead>
+                <tbody>
+                    <tr  *ngFor="let doc of project.getDocumentsList()">
+                        <td>{{doc.getTitle()}}</td>
+                        <td>{{doc.getType()}}</td>
+                        <td>
+                            <mat-progress-bar style="width: 100%;" mode="determinate"
+                              [value]='((doc.getCompletedcount() /11)*100)'>
+                            </mat-progress-bar>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-card-content>
+    </mat-card>
+</div>    
