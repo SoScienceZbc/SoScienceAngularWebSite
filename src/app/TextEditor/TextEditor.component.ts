@@ -17,6 +17,7 @@ import { LoadingService } from '../loading.service';
 })
 export class TextEditorComponent implements OnInit {
 
+  showTitle : boolean = true;
   @ViewChild('editor') editor?: any;
 
   localDDocoment$: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
@@ -52,7 +53,8 @@ export class TextEditorComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dataservice: DatabaseService, private dialog: MatDialog) {
     this.localDDocoment$ = this.dataservice.GetDocomentHtml(sessionStorage.getItem("Token") as string, (this.data.docoment as D_Document).getId());
     this.dataservice.EditorDocoment$.subscribe(x => {
-      if (this.QuilData.editorData != x.getData()) {
+     
+      if (this.QuilData.editorData != x.getData() || x.getData() == '') {
         this.QuilData.Title = x.getTitle();
         this.QuilData.editorData = (x.getData());
         x.getCompletedList().forEach((x, y) => {
@@ -106,7 +108,11 @@ export class TextEditorComponent implements OnInit {
     }
 
   }
-
+  changeTitle(){
+    console.log(this.showTitle);
+    
+    this.showTitle = !this.showTitle;
+  }
   closeDialogBox() {
     this.spinner.show();
     this.onChange(null);

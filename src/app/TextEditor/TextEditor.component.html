@@ -1,9 +1,18 @@
 <div style="display: flex;">
   <mat-card class="quillEditorSize" style ="overflow-y: auto;">
-    <mat-card-title><input matInput type="text" [(ngModel)]="QuilData.Title" maxlength="30">
-      <button mat-ripple style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
-        <mat-icon>edit</mat-icon>
-      </button>
+    <mat-card-title>
+      <div *ngIf="showTitle; else elseTitle">
+        <span>{{QuilData.Title}}</span>
+        <button mat-ripple style="cursor: pointer; z-index: 1;" mat-icon-button (click)="changeTitle()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+        <ng-template #elseTitle>
+          <input matInput type="text" [(ngModel)]="QuilData.Title" maxlength="30">
+          <button mat-ripple style="cursor: pointer; z-index: 1;" mat-icon-button (click)="changeTitle()">
+            <mat-icon>save</mat-icon>
+          </button>
+        </ng-template>
     </mat-card-title>
       <quill-editor  #editor [(ngModel)]="QuilData.editorData" (ngModelChange)="onChange($event)" ></quill-editor>
   </mat-card>
