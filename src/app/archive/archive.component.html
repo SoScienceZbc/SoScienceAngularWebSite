@@ -89,11 +89,13 @@
                   </td>
                     <td id="testid" style="text-align: center;">
                       <button mat-ripple (click)="OpenQuilEditor(item)"
-                        style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
+                        style="cursor: pointer; z-index: 1;"
+                        mat-icon-button>
                         <mat-icon>edit</mat-icon>
                       </button>
                       <button mat-ripple (click)="OpenDialogAreYouSureDocument(item)"
-                        style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
+                        style="cursor: pointer; z-index: 1;"
+                        mat-icon-button>
                         <mat-icon>delete</mat-icon>
                       </button>
                     </td>
@@ -115,11 +117,13 @@
                 <!-- <button mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button> -->
                 <!-- <a style="margin: 5px;">Tilføj nyt dokument</a> -->
                 <span></span>
-                <button mat-mini-fab style="background-color:#3f51b5; margin-left: 5px;" #tooltip="matTooltip"
+                <button mat-mini-fab style="margin-left: 5px;" #tooltip="matTooltip"
+                  color="primary"
                   matTooltip="Optage lyd" matTooltipHideDelay="100">
                   <mat-icon>mic</mat-icon>
                 </button>
-                <button mat-mini-fab style="background-color:#3f51b5; margin-left: 5px;" #tooltip="matTooltip"
+                <button mat-mini-fab style="margin-left: 5px;" #tooltip="matTooltip"
+                  color="primary"
                   matTooltip="Optage Video" matTooltipHideDelay="100">
                   <mat-icon>videocam</mat-icon>
                 </button>
@@ -218,26 +222,14 @@
                 <table *ngIf="GetDocumentsAsObject(element).getDocumentsList()[0].getId() != 0">
                   <thead>
                     <tr>
-                      <br>
-                      <th mat-header-cell style=" text-align: left;">Navn/Titel</th>
-                      <br>
-                      <th style=" text-align: left;">Rediger</th>
-                      <br>
-                      <th style=" text-align: right;">Fremdrift</th>
+                      <th mat-header-cell style="text-align: left;">Navn/Titel</th>
+                      <th style="text-align: left;">Fremdrift</th>
                     </tr>
                   </thead>
                   <tbody *ngFor="let item of GetDocumentsAsObject(element).getDocumentsList()">
                     <tr>
                       <!-- <td>{{item.getId()}}</td> -->
-                      <br>
                       <td>{{item.getTitle()}}</td>
-                      <td id="testid">
-                        <button mat-ripple (click)="openQuillViwer(item)"
-                          style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
-                          <mat-icon>edit</mat-icon>
-                        </button>
-                      </td>
-
                       <td>
                         <mat-progress-bar style="min-width: 150px;" mode="determinate"
                           [value]='((item.getCompletedcount() /11)*100)'>
