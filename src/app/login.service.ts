@@ -9,8 +9,8 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 })
 export class LoginService {
 
-  // hostAddress = "http://40.87.150.18:27385";
-  hostAddress = "http://localhost:27385";
+  hostAddress = "http://40.87.150.18:27385";
+  //hostAddress = "http://localhost:27385";
 
   LoginCheckBehaviorSubject$: BehaviorSubject<LoginRepley> = new BehaviorSubject<LoginRepley>(new LoginRepley());
   userlogin = {} as LoginRepley;
