@@ -79,28 +79,12 @@ export class TextEditorComponent implements OnInit {
       this.localDDocoment$.value.clearCompletedList();
 
       //#region checkList
-      if (this.QuilData.completedList[0].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[0].CompletedPartName)
-      } if (this.QuilData.completedList[1].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[1].CompletedPartName)
-      } if (this.QuilData.completedList[2].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[2].CompletedPartName)
-      } if (this.QuilData.completedList[3].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[3].CompletedPartName)
-      } if (this.QuilData.completedList[4].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[4].CompletedPartName)
-      } if (this.QuilData.completedList[5].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[5].CompletedPartName)
-      } if (this.QuilData.completedList[6].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[6].CompletedPartName)
-      } if (this.QuilData.completedList[7].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[7].CompletedPartName)
-      } if (this.QuilData.completedList[8].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[8].CompletedPartName)
-      } if (this.QuilData.completedList[9].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[9].CompletedPartName)
-      } if (this.QuilData.completedList[10].isCompleted) {
-        this.localDDocoment$.value.addCompleted(this.QuilData.completedList[10].CompletedPartName)
+
+      for (let index = 0; index < this.QuilData.completedList.length; index++) {
+        if (this.QuilData.completedList[index].isCompleted) {
+          this.localDDocoment$.value.addCompleted(this.QuilData.completedList[index].CompletedPartName)
+        }
+        
       }
       //#endregion
       this.localDDocoment$.value.setData(editor);
