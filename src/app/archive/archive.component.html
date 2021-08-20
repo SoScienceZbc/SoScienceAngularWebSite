@@ -65,6 +65,16 @@
             <mat-icon color="warn">delete_outline</mat-icon>
             </button>
           </a>
+          <button (click)="addMember(element.getId())" mat-icon-button  style="margin-left: 5px;" #tooltip="matTooltip"
+                  color="primary"
+                  matTooltip="Tilføj projektmedlem" matTooltipHideDelay="100">
+                  <mat-icon color="accent">person_add_alt</mat-icon>
+                </button>
+                <button (click)="removeMember(element.getId())" mat-icon-button #tooltip="matTooltip"
+                  color="primary"
+                  matTooltip="Fjern projektmedlem" matTooltipHideDelay="100">
+                  <mat-icon color="warn">person_remove_alt_1</mat-icon>
+                </button>
         </td>
       </ng-container>
 
@@ -123,16 +133,7 @@
                   matTooltip="Optage Video" matTooltipHideDelay="100">
                   <mat-icon>videocam</mat-icon>
                 </button>
-                <button (click)="addMember(element.getId())" mat-mini-fab style="margin-left: 5px;" #tooltip="matTooltip"
-                  color="primary"
-                  matTooltip="Tilføj projektmedlem" matTooltipHideDelay="100">
-                  <mat-icon>person_add_alt</mat-icon>
-                </button>
-                <button (click)="removeMember(element.getId())" mat-mini-fab style="margin-left: 5px;" #tooltip="matTooltip"
-                  color="primary"
-                  matTooltip="Fjern projektmedlem" matTooltipHideDelay="100">
-                  <mat-icon>person_remove_alt_1</mat-icon>
-                </button>
+                
               </div>
           </div>
         </td>
