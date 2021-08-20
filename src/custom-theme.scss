@@ -98,16 +98,16 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   }
   // Fix dark theme height missing
   .mat-expansion-panel-header{
-    height: 2em;
+    height: 48px;
   }
   .mat-expansion-panel-header.mat-expanded {
-    height: 3em;
+    height: 64px;
   }
   .mat-toolbar-multiple-rows {
-    min-height: 3em;
+    min-height: 64px;
   }
   .mat-toolbar-row, .mat-toolbar-single-row {
-    height: 3em;
+    height: 64px;
   }
   tr.example-element-row:not(.example-expanded-row):hover {
     background: #494980;
