@@ -120,6 +120,10 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     })
   }
 
+  Log(){
+    console.log("Clicked");
+  }
+
   /**
    * This sets up the sorting logic for the table.
    */

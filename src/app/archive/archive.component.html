@@ -72,7 +72,11 @@
               matTooltip="Fjern projektmedlem" matTooltipHideDelay="100">
               <mat-icon>person_remove_alt_1</mat-icon>
             </button>
-
+            
+            <button (click)="Log()" mat-icon-button #tooltip="matTooltip"
+              matTooltip="Download Filer" matTooltipHideDelay="100">
+              <mat-icon>download</mat-icon>
+            </button>
         </td>
       </ng-container>
 
@@ -105,7 +109,7 @@
                     </td>
 
                     <td>
-                      <mat-progress-bar style="min-width: 150px;" mode="determinate"
+                      <mat-progress-bar color="accent" style="min-width: 150px;" mode="buffer"
                         [value]='((item.getCompletedcount() /11)*100)'>
                       </mat-progress-bar>
                     </td>
