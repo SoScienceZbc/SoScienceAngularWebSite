@@ -12,10 +12,12 @@ export class AuthGuardGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.cookie.check("Token") && (sessionStorage.getItem("Token") == null || sessionStorage.getItem("Token") == "")) {
+      if(this.cookie.check("Token") && (sessionStorage.getItem("Token") == null || sessionStorage.getItem("Token") == "")) 
+      {
         sessionStorage.setItem("Token",this.cookie.get("Token"));
       }
-      if(sessionStorage.getItem("Token") !== null && sessionStorage.getItem("Token") !== ""){
+      if(sessionStorage.getItem("Token") !== null && sessionStorage.getItem("Token") !== "")
+      {
         let token = sessionStorage.getItem("Token");
         let loginreply$ = this.loginService.ValidateLogin(token!)
         loginreply$.subscribe(data => {
