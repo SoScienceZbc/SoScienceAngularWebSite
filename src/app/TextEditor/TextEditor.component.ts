@@ -1,15 +1,10 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { QuillEditorBase, QuillEditorComponent, QuillModule, QuillService } from 'ngx-quill';
-import { Quill } from 'quill';
 import { BehaviorSubject } from 'rxjs';
 import { DatabaseService } from '../database.service';
 import { D_Document } from '../protos/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 
-import * as quillToWord from 'quill-to-word';
-import { saveAs } from 'file-saver';
-import { pdfExporter } from 'quill-to-pdf';
 import { interval, Subscription } from 'rxjs';
 // import *  as customEditor from '../ckedtitor/build/ckeditor';
 
@@ -51,10 +46,12 @@ export class TextEditorComponent implements OnInit, OnDestroy {
   ]
 
   public QuilData = {
-    editorData: "",
+    editorData: [],
     Title: "",
     completedList: this.ProgressEnum
   }
+
+  temp : any;
 
   editorInstance: any;
   onEditorCreated(quillInstance : any) {
@@ -67,9 +64,16 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     this.localDDocoment$ = this.dataservice.GetDocomentHtml(sessionStorage.getItem("Token") as string, (this.data.docoment as D_Document).getId());
     this.dataservice.EditorDocoment$.subscribe(x => {
      
-      if (this.QuilData.editorData != x.getData() || x.getData() == '') {
+      if (x.getData() == ''){
         this.QuilData.Title = x.getTitle();
-        this.QuilData.editorData = (x.getData());
+        x.getCompletedList().forEach((x, y) => {
+          console.log("CompleteList ", x, y);
+          this.check(x);
+        });
+      }
+      else if (this.QuilData.editorData != JSON.parse(x.getData())) {
+        this.QuilData.Title = x.getTitle();
+        this.QuilData.editorData = JSON.parse(x.getData());
         x.getCompletedList().forEach((x, y) => {
           console.log("CompleteList ", x, y);
           this.check(x);
@@ -83,8 +87,6 @@ export class TextEditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.QuilData.Title = "";
-    this.QuilData.editorData = "";
   }
   public saveDoc(){
     if(this.updated){
@@ -109,7 +111,7 @@ export class TextEditorComponent implements OnInit, OnDestroy {
         
       }
       //#endregion
-      this.localDDocoment$.value.setData(editor);
+      this.localDDocoment$.value.setData(JSON.stringify(this.QuilData.editorData));
       this.updated = true;
     }
 
@@ -177,20 +179,7 @@ export class TextEditorComponent implements OnInit, OnDestroy {
       console.log(event)
     }
   }
-  async SaveAsWordFile() {
-    console.log(this.editorInstance.getText(0, 10));
-    
-    const data = await quillToWord.generateWord((this.editorInstance.getContents() as any), {
-      exportAs: 'blob',
-    });
-    saveAs(data as any,'word-export.docx');
-  }
 
-  async PrintPdfFile(){
-
-    const data = await pdfExporter.generatePdf((this.editorInstance.getContents() as any));
-    saveAs(data as any,'pdf-export.pdf');
-  }
 }
 
 export interface completedPartsAngular {

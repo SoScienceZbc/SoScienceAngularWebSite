@@ -12,6 +12,9 @@ import quill, { Quill } from 'quill';
 import { DialogAreYouSureComponent } from '../dialog-are-you-sure/dialog-are-you-sure.component';
 import { QuilEditorPreViewComponent } from '../quil-editor-pre-view/quil-editor-pre-view.component';
 import { AddRemoveMemberComponent } from './add-remove-member/add-remove-member.component';
+import * as quillToWord from 'quill-to-word';
+import { saveAs } from 'file-saver';
+import { pdfExporter } from 'quill-to-pdf';
 
 /**
  * @title Table with expandable rows
@@ -33,7 +36,13 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent = new PageEvent();
-
+  
+  download = {
+    id : 0,
+    needToDownload : 0,
+    ReadyToDownload : 100,
+    Downloaded : 100
+  }
   /*--------------ViewChilds--------------*/
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -118,6 +127,25 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       maxHeight: '50vh',
 
     })
+  }
+
+  downloadData(project : D_Project){
+    this.download = {
+      id : project.getId(),
+      needToDownload : project.getDocumentsList().length,
+      ReadyToDownload : 0,
+      Downloaded : 0};
+    project.getDocumentsList().forEach(doc => {
+      let localData$ = this.dataserve.GetDocomentHtml(sessionStorage.getItem("Token") as string, doc.getId());
+      localData$.subscribe(x => {
+        this.download.ReadyToDownload += 100/this.download.needToDownload;
+        switch (x.getType()) {
+          case 'Doc':
+              this.saveAsWordFile(x.getData(),x.getTitle());
+            break;
+        }
+      });
+    });
   }
 
   Log(){
@@ -253,6 +281,24 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       maxHeight: '50vh',
     })
 
+  }
+
+  async saveAsWordFile(doc : string, title : string) {
+    if (doc != ''){
+      const data = await quillToWord.generateWord(JSON.parse(doc), {
+        exportAs: 'blob',
+      });
+      saveAs(data as any, title + '.docx');
+    }
+    this.download.Downloaded += 100/this.download.needToDownload;
+  }
+
+  async printPdfFile(doc : string, title : string){
+    if (doc != ''){
+    const data = await pdfExporter.generatePdf(JSON.parse(doc));
+    saveAs(data as any, title + '.pdf');
+    this.download.Downloaded += 100/this.download.needToDownload;
+  }
   }
 }
 

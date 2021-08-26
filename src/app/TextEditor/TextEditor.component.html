@@ -17,13 +17,12 @@
       <quill-editor  #editor 
       [(ngModel)]="QuilData.editorData" 
       (ngModelChange)="onChange($event)"
+      [format]="'object'"
     (onEditorCreated)="onEditorCreated($event)"></quill-editor>
   </mat-card>
 
   <!-- Cheack box -->
   <mat-card>
-    <button (click)="SaveAsWordFile()">Word</button>
-    <button (click)="PrintPdfFile()">PDF</button>
     <mat-card-title>Liste</mat-card-title>
     <div>
       <div>

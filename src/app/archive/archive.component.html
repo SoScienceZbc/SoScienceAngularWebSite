@@ -73,10 +73,16 @@
               <mat-icon>person_remove_alt_1</mat-icon>
             </button>
             
-            <button (click)="Log()" mat-icon-button #tooltip="matTooltip"
+            <button (click)="downloadData(element)" mat-icon-button #tooltip="matTooltip"
               matTooltip="Download Filer" matTooltipHideDelay="100">
               <mat-icon>download</mat-icon>
             </button>
+
+            
+            <mat-progress-bar *ngIf="(download.Downloaded < 99 && download.id == element.getId())" style="width: 100%;" color="accent" mode="buffer"
+            [value]='(download.Downloaded)'
+            [bufferValue]='(download.ReadyToDownload)'>
+          </mat-progress-bar>
         </td>
       </ng-container>
 
