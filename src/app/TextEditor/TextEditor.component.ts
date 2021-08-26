@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { QuillEditorBase, QuillEditorComponent, QuillModule, QuillService } from 'ngx-quill';
 import { Quill } from 'quill';
@@ -20,7 +20,7 @@ import { interval, Subscription } from 'rxjs';
   templateUrl: './TextEditor.component.html',
   styleUrls: ['./TextEditor.component.css']
 })
-export class TextEditorComponent implements OnInit {
+export class TextEditorComponent implements OnInit, OnDestroy {
 
   updated : boolean = false;
   subscription: Subscription;
@@ -128,6 +128,10 @@ export class TextEditorComponent implements OnInit {
     this.dataservice.GetProjectsTheRigthWay()
     this.dialog.closeAll()
 
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   check(value: string): boolean {
