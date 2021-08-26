@@ -38,10 +38,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private login: LoginService,
     public spinner: LoadingService,
     private route: Router,
-    private cookie : CookieService
-  ) {
+    private cookie : CookieService) 
+  {
     if((cookie.get("Token") != null && cookie.get("Token") != "") || (sessionStorage.getItem("Token") != null && sessionStorage.getItem("Token") != ""))
-      route.navigate(["/forside"]);
+      route.navigate(["/forside"]); 
     this.login.LoginCheckBehaviorSubject$.subscribe((x) => {
       if (x.getLoginsucsefull() !== this.testlogin) {
         this.testlogin = x.getLoginsucsefull();
@@ -81,10 +81,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     }else if (this.PasswordFormControl.hasError('minlength')) {
       return 'Kodeord for kort'
     }
-
     return this.LoginFormControl.hasError('') ? 'Det ser ikke ud til at være et uni-login navn' : '';
   }
-
 
   ngOnInit(): void { }
 
