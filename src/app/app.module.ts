@@ -78,6 +78,7 @@ import { Field } from '@ngx-grpc/well-known-types';
 import { AddRemoveUserComponent } from './settings/add-remove-user/add-remove-user.component';
 import { AddRemoveMemberComponent } from './archive/add-remove-member/add-remove-member.component';
 import { ProjectOverviewComponent } from './settings/project-overview/project-overview.component';
+import { CookieComponent } from './cookie/cookie.component';
 
 
 @NgModule({
@@ -102,6 +103,7 @@ import { ProjectOverviewComponent } from './settings/project-overview/project-ov
     AddRemoveUserComponent,
     AddRemoveMemberComponent,
     ProjectOverviewComponent,
+    CookieComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+.buttonPanel{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.disallowbtn{
+    justify-self: right;
+    display: block;
+    min-width: 50%;
+}
+.allowbtn{
+    justify-self: left;
+    display: block;
+    min-width: 50%;
+}

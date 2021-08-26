@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { LoadingService } from '../loading.service';
 import { LoginService } from '../login.service';
 
@@ -21,26 +22,35 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     Validators.required,
     Validators.minLength(5),
   ]);
+  
+  rememberMeFormControl = new FormControl(false);
+
   LoginFormGroup = new FormGroup({
     username: this.LoginFormControl,
-    password: this.PasswordFormControl
+    password: this.PasswordFormControl,
+    rememberMe: this.rememberMeFormControl,
   })
-  testlogin: boolean = false;
 
+  testlogin: boolean = false;
   loading$ = this.spinner.loading$;
 
   constructor(
     private login: LoginService,
     public spinner: LoadingService,
-    private route: Router
+    private route: Router,
+    private cookie : CookieService
   ) {
-
+    if((cookie.get("Token") != null && cookie.get("Token") != "") || (sessionStorage.getItem("Token") != null && sessionStorage.getItem("Token") != ""))
+      route.navigate(["/forside"]);
     this.login.LoginCheckBehaviorSubject$.subscribe((x) => {
       if (x.getLoginsucsefull() !== this.testlogin) {
         this.testlogin = x.getLoginsucsefull();
         sessionStorage.setItem('Token', '' + x.getToken() + '');
         if(x.getAdmin()){
           sessionStorage.setItem('Admin', '' + x.getAdmin() + '');
+        }
+        if(this.rememberMeFormControl.value && (cookie.check("IsCookieAllowed") && cookie.get("IsCookieAllowed") == "True")){
+          cookie.set("Token", x.getToken(), 14);
         }
         if (this.testlogin) {
           this.route.navigateByUrl('/forside');
@@ -77,6 +87,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void { }
+
   /**
    * this checks if the user can login and emits a boolian.
    * @param name the unilogin
