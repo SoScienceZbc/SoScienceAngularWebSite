@@ -57,9 +57,13 @@
       <ng-container matColumnDef="endDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Slut Dato</th>
         <td mat-cell *matCellDef="let element">{{ element.getEnddate() }}
-            <button mat-ripple (click)="DeleteProject(element)"
-            style="cursor: pointer; z-index: 1;"
-            mat-icon-button [disabled]="element.getDocumentsList().length > 0" color="warn">
+            <button 
+              mat-ripple 
+              (click)="DeleteProject(element)"
+              style="cursor: pointer; z-index: 1;"
+              mat-icon-button 
+              [disabled]="element.getDocumentsList().length > 0" 
+              color="warn">
             <mat-icon>delete_forever</mat-icon>
             </button>
             <button (click)="addMember(element.getId())" mat-icon-button #tooltip="matTooltip"
@@ -67,14 +71,21 @@
               matTooltip="Tilføj projektmedlem" matTooltipHideDelay="100">
               <mat-icon>person_add_alt_1</mat-icon>
             </button>
-            <button (click)="removeMember(element.getId())" mat-icon-button #tooltip="matTooltip"
+            <button 
+              (click)="removeMember(element.getId())" 
+              mat-icon-button #tooltip="matTooltip"
               color="warn"
-              matTooltip="Fjern projektmedlem" matTooltipHideDelay="100">
+              matTooltip="Fjern projektmedlem" 
+              matTooltipHideDelay="100">
               <mat-icon>person_remove_alt_1</mat-icon>
             </button>
             
-            <button (click)="downloadData(element)" mat-icon-button #tooltip="matTooltip"
-              matTooltip="Download Filer" matTooltipHideDelay="100">
+            <button 
+              (click)="downloadData(element)" 
+              mat-icon-button #tooltip="matTooltip"
+              matTooltip="Download Filer" 
+              [disabled]="element.getDocumentsList().length == 0"
+              matTooltipHideDelay="100">
               <mat-icon>download</mat-icon>
             </button>
 

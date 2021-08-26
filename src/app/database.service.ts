@@ -250,7 +250,6 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: D_Document) => {
         this.EditorDocoment$.next(Message);
-        // console.log("Data from database in html form.",Message.getData())
         docoment.next(Message);
       },
       onEnd: (res) => {},

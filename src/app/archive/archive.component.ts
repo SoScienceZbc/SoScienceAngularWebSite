@@ -138,12 +138,14 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     project.getDocumentsList().forEach(doc => {
       let localData$ = this.dataserve.GetDocomentHtml(sessionStorage.getItem("Token") as string, doc.getId());
       localData$.subscribe(x => {
-        this.download.ReadyToDownload += 100/this.download.needToDownload;
-        switch (x.getType()) {
-          case 'Doc':
+        if (x != new D_Document()){
+          this.download.ReadyToDownload += 100/this.download.needToDownload;
+          switch (x.getType()) {
+            case 'Doc':
               this.saveAsWordFile(x.getData(),x.getTitle());
-            break;
-        }
+              break;
+            }
+          }
       });
     });
   }

@@ -22,8 +22,7 @@ export class TextEditorComponent implements OnInit, OnDestroy {
   showTitle : boolean = true;
   @ViewChild('editor') editor!: any;
 
-  localDDocoment$: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
-  localDDocoment: D_Document = this.localDDocoment$.value;
+  localDDocoment: D_Document = new D_Document();
   localHtmltext: BehaviorSubject<string> = new BehaviorSubject<string>("");
   spinner: LoadingService = new LoadingService();
   loadingText$ = this.spinner.loading$;
@@ -42,7 +41,6 @@ export class TextEditorComponent implements OnInit, OnDestroy {
   { CompletedPartName: "Fejlkilder", isCompleted: false },
   { CompletedPartName: "Konklusion", isCompleted: false },
   { CompletedPartName: "Kilder", isCompleted: false },
-
   ]
 
   public QuilData = {
@@ -61,27 +59,29 @@ export class TextEditorComponent implements OnInit, OnDestroy {
   }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dataservice: DatabaseService, private dialog: MatDialog) {
-    this.localDDocoment$ = this.dataservice.GetDocomentHtml(sessionStorage.getItem("Token") as string, (this.data.docoment as D_Document).getId());
-    this.dataservice.EditorDocoment$.subscribe(x => {
-     
-      if (x.getData() == ''){
-        this.QuilData.Title = x.getTitle();
-        x.getCompletedList().forEach((x, y) => {
-          console.log("CompleteList ", x, y);
-          this.check(x);
-        });
+    let localDDocoment$ = this.dataservice.GetDocomentHtml(sessionStorage.getItem("Token") as string, (this.data.docoment as D_Document).getId());
+    localDDocoment$.subscribe(x => {    
+      if(x != new D_Document()){
+        this.localDDocoment = x;
+        if (x.getData() == ''){
+          this.QuilData.Title = x.getTitle();
+          x.getCompletedList().forEach((x, y) => {
+            console.log("CompleteList ", x, y);
+            this.check(x);
+          });
+        }
+        else if (this.QuilData.editorData != JSON.parse(x.getData())) {
+          this.QuilData.Title = x.getTitle();
+          this.QuilData.editorData = JSON.parse(x.getData());
+          x.getCompletedList().forEach((x, y) => {
+            console.log("CompleteList ", x, y);
+            this.check(x);
+          });
+        }
+        this.spinner.hide();
       }
-      else if (this.QuilData.editorData != JSON.parse(x.getData())) {
-        this.QuilData.Title = x.getTitle();
-        this.QuilData.editorData = JSON.parse(x.getData());
-        x.getCompletedList().forEach((x, y) => {
-          console.log("CompleteList ", x, y);
-          this.check(x);
-        });
-      }
-      this.spinner.hide();
     })
-    const source = interval(10000);
+    let source = interval(10000);
     this.subscription = source.subscribe(val => this.saveDoc());
     this.spinner.show();
   }
@@ -90,28 +90,27 @@ export class TextEditorComponent implements OnInit, OnDestroy {
   }
   public saveDoc(){
     if(this.updated){
-      this.dataservice.UpdateDocoment(this.localDDocoment$.value);
+      this.dataservice.UpdateDocoment(this.localDDocoment);
       this.updated = false;
       console.log("saved");
-      
     }
   }
 
-  public onChange(editor: Event | any) {
-    if (this.localDDocoment$.value.getId() > 0) {
-      this.localDDocoment$.value.setTitle(this.QuilData.Title);
-      this.localDDocoment$.value.clearCompletedList();
+  public onChange() {
+    if (this.localDDocoment.getId() > 0) {
+      this.localDDocoment.setTitle(this.QuilData.Title);
+      this.localDDocoment.clearCompletedList();
 
       //#region checkList
 
       for (let index = 0; index < this.QuilData.completedList.length; index++) {
         if (this.QuilData.completedList[index].isCompleted) {
-          this.localDDocoment$.value.addCompleted(this.QuilData.completedList[index].CompletedPartName)
+          this.localDDocoment.addCompleted(this.QuilData.completedList[index].CompletedPartName)
         }
         
       }
       //#endregion
-      this.localDDocoment$.value.setData(JSON.stringify(this.QuilData.editorData));
+      this.localDDocoment.setData(JSON.stringify(this.QuilData.editorData));
       this.updated = true;
     }
 
@@ -123,17 +122,15 @@ export class TextEditorComponent implements OnInit, OnDestroy {
   }
   closeDialogBox() {
     this.spinner.show();
-    this.onChange(null);
-    this.localDDocoment$.value.setTitle(this.QuilData.Title);
-    // console.log("UpdateDockument", this.localDDocoment$.value)
-    // this.dataservice.UpdateDocoment(sessionStorage.getItem("Token")!.toString(), this.localDDocoment$.value);
-    this.dataservice.GetProjectsTheRigthWay()
-    this.dialog.closeAll()
+    this.dialog.closeAll();
 
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.onChange();
+    this.saveDoc();
+    this.dataservice.GetProjectsTheRigthWay();
   }
 
   check(value: string): boolean {
@@ -163,23 +160,8 @@ export class TextEditorComponent implements OnInit, OnDestroy {
         return this.QuilData.completedList[10].isCompleted = true;
       default:
         return false;
-
-
     }
   }
-
-  SetCategoro(event: string) {
-    if (!this.localDDocoment$.value.getCompletedList().includes(event)) {
-      this.localDDocoment$.value.clearCompletedList();
-      this.localDDocoment$.value.setCompletedcount(this.localDDocoment$.value.getCompletedList().length);
-      this.localDDocoment$.value.addCompleted(event);
-      this.dataservice.UpdateDocoment(this.localDDocoment$.value);
-      console.log("setcat was true", event)
-    } else {
-      console.log(event)
-    }
-  }
-
 }
 
 export interface completedPartsAngular {
