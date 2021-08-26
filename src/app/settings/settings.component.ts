@@ -2,13 +2,11 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { expandingD_Project } from '../archive/archive.component';
 import { DatabaseService } from '../database.service';
 import { D_Project, D_Projects, D_ProjectTheme } from '../protos/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 import { AfterViewInit } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Console } from 'console';
+import { MatPaginator } from '@angular/material/paginator';
 import { DialogAreYouSureComponent } from '../dialog-are-you-sure/dialog-are-you-sure.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AddRemoveUserComponent } from './add-remove-user/add-remove-user.component';
