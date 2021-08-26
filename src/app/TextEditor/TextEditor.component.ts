@@ -10,6 +10,7 @@ import { LoadingService } from '../loading.service';
 import * as quillToWord from 'quill-to-word';
 import { saveAs } from 'file-saver';
 import { pdfExporter } from 'quill-to-pdf';
+import { interval, Subscription } from 'rxjs';
 // import *  as customEditor from '../ckedtitor/build/ckeditor';
 
 
@@ -21,6 +22,8 @@ import { pdfExporter } from 'quill-to-pdf';
 })
 export class TextEditorComponent implements OnInit {
 
+  updated : boolean = false;
+  subscription: Subscription;
   showTitle : boolean = true;
   @ViewChild('editor') editor!: any;
 
@@ -74,13 +77,22 @@ export class TextEditorComponent implements OnInit {
       }
       this.spinner.hide();
     })
-
+    const source = interval(10000);
+    this.subscription = source.subscribe(val => this.saveDoc());
     this.spinner.show();
   }
 
   ngOnInit(): void {
     this.QuilData.Title = "";
     this.QuilData.editorData = "";
+  }
+  public saveDoc(){
+    if(this.updated){
+      this.dataservice.UpdateDocoment(this.localDDocoment$.value);
+      this.updated = false;
+      console.log("saved");
+      
+    }
   }
 
   public onChange(editor: Event | any) {
@@ -98,7 +110,7 @@ export class TextEditorComponent implements OnInit {
       }
       //#endregion
       this.localDDocoment$.value.setData(editor);
-      this.dataservice.UpdateDocoment(this.localDDocoment$.value);
+      this.updated = true;
     }
 
   }
