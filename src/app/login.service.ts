@@ -30,10 +30,9 @@ export class LoginService {
 
     });
   }
-  public ValidateLogin(token:string,admin:boolean){
+  public ValidateLogin(token:string){
     const user = new LoginRepley();
     user.setToken(token);
-    user.setAdmin(admin);
     user.setLoginsucsefull(false);
     const reply: BehaviorSubject<LoginRepley| null> =
       new BehaviorSubject<LoginRepley | null>(null);

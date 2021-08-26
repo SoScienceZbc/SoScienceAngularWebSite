@@ -17,16 +17,21 @@ export class AuthGuardGuard implements CanActivate {
       }
       if(sessionStorage.getItem("Token") !== null && sessionStorage.getItem("Token") !== ""){
         let token = sessionStorage.getItem("Token");
-        let admin = sessionStorage.getItem("admin") !== null;
-        const loginreply$ = this.loginService.ValidateLogin(token!,admin)
+        let loginreply$ = this.loginService.ValidateLogin(token!)
         loginreply$.subscribe(data => {
           if(data != null){
             if(data.getLoginsucsefull()){
               loginreply$.unsubscribe();
+              if (data.getAdmin()){
+                sessionStorage.setItem("Admin",'' + data.getAdmin() + '');
+              }else{
+                sessionStorage.removeItem("Admin");
+              }
             }else{
               loginreply$.unsubscribe();
               sessionStorage.removeItem("Token");
               sessionStorage.removeItem("Admin");
+              this.cookie.delete("Token");
               this.router.navigate(["/"]);
             }
           }
@@ -35,6 +40,7 @@ export class AuthGuardGuard implements CanActivate {
       }
       sessionStorage.removeItem("Token");
       sessionStorage.removeItem("Admin");
+      this.cookie.delete("Token");
       return this.router.parseUrl("/");
   }
 
