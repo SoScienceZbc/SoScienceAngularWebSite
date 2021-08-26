@@ -6,6 +6,10 @@ import { BehaviorSubject } from 'rxjs';
 import { DatabaseService } from '../database.service';
 import { D_Document } from '../protos/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
+
+import * as quillToWord from 'quill-to-word';
+import { saveAs } from 'file-saver';
+import { pdfExporter } from 'quill-to-pdf';
 // import *  as customEditor from '../ckedtitor/build/ckeditor';
 
 
@@ -18,7 +22,7 @@ import { LoadingService } from '../loading.service';
 export class TextEditorComponent implements OnInit {
 
   showTitle : boolean = true;
-  @ViewChild('editor') editor?: any;
+  @ViewChild('editor') editor!: any;
 
   localDDocoment$: BehaviorSubject<D_Document> = new BehaviorSubject<D_Document>(new D_Document);
   localDDocoment: D_Document = this.localDDocoment$.value;
@@ -49,6 +53,12 @@ export class TextEditorComponent implements OnInit {
     completedList: this.ProgressEnum
   }
 
+  editorInstance: any;
+  onEditorCreated(quillInstance : any) {
+    this.editorInstance = quillInstance;
+    console.log(quillInstance);
+    
+  }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dataservice: DatabaseService, private dialog: MatDialog) {
     this.localDDocoment$ = this.dataservice.GetDocomentHtml(sessionStorage.getItem("Token") as string, (this.data.docoment as D_Document).getId());
@@ -150,6 +160,20 @@ export class TextEditorComponent implements OnInit {
     } else {
       console.log(event)
     }
+  }
+  async SaveAsWordFile() {
+    console.log(this.editorInstance.getText(0, 10));
+    
+    const data = await quillToWord.generateWord((this.editorInstance.getContents() as any), {
+      exportAs: 'blob',
+    });
+    saveAs(data as any,'word-export.docx');
+  }
+
+  async PrintPdfFile(){
+
+    const data = await pdfExporter.generatePdf((this.editorInstance.getContents() as any));
+    saveAs(data as any,'pdf-export.pdf');
   }
 }
 

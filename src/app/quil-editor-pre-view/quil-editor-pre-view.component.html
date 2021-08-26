@@ -1,8 +1,12 @@
 
 <mat-card class="quillEditorSize" style ="overflow-y: auto;">
-  <mat-card-title><input matInput type="text" [readonly]="true" [(ngModel)]="QuilData.Title"><button>test</button></mat-card-title>
-    <quill-editor  #editor [(ngModel)]="QuilData.editorData" [readOnly]="true">
-
+  <mat-card-title>
+    <input matInput type="text" 
+    [readonly]="true" 
+    [(ngModel)]="QuilData.Title"><button>test</button></mat-card-title>
+    <quill-editor  #editor 
+    [(ngModel)]="QuilData.editorData" 
+    [readOnly]="true">
     </quill-editor>
   </mat-card>
 

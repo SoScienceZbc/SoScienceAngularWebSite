@@ -14,11 +14,15 @@
           </button>
         </ng-template>
     </mat-card-title>
-      <quill-editor  #editor [(ngModel)]="QuilData.editorData" (ngModelChange)="onChange($event)" ></quill-editor>
+      <quill-editor  #editor 
+      [(ngModel)]="QuilData.editorData" 
+      (ngModelChange)="onChange($event)"
+    (onEditorCreated)="onEditorCreated($event)"></quill-editor>
   </mat-card>
 
   <!-- Cheack box -->
   <mat-card>
+    <button (click)="SaveAsWordFile()">button</button>
     <mat-card-title>Liste</mat-card-title>
     <div>
       <div>
