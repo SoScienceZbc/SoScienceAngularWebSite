@@ -40,8 +40,18 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private route: Router,
     private cookie : CookieService) 
   {
-    if((cookie.get("Token") != null && cookie.get("Token") != "") || (sessionStorage.getItem("Token") != null && sessionStorage.getItem("Token") != ""))
+    if((cookie.get("Token") != null && cookie.get("Token") != "") || 
+    (sessionStorage.getItem("Token") != null && sessionStorage.getItem("Token") != ""))
       route.navigate(["/forside"]); 
+
+    if(cookie.check("Token") || sessionStorage.getItem("Token") == null){
+      if(cookie.get("Admin") == "true"){
+        sessionStorage.setItem('Admin', "true");
+      }
+    }else {
+      cookie.delete("Admin");
+      sessionStorage.removeItem("Admin");
+    }
     this.login.LoginCheckBehaviorSubject$.subscribe((x) => {
       if (x.getLoginsucsefull() !== this.testlogin) {
         this.testlogin = x.getLoginsucsefull();
@@ -49,7 +59,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         if(x.getAdmin()){
           sessionStorage.setItem('Admin', '' + x.getAdmin() + '');
         }
-        if(this.rememberMeFormControl.value && (cookie.check("IsCookieAllowed") && cookie.get("IsCookieAllowed") == "True")){
+        if(cookie.check("IsCookieAllowed") && cookie.get("IsCookieAllowed") == "True"){
+          if(x.getAdmin()) {
+            cookie.set("Admin", x.getAdmin() + "", 14);
+          }
           cookie.set("Token", x.getToken(), 14);
         }
         if (this.testlogin) {
@@ -61,7 +74,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
+    if(!this.cookie.check("Token")) {
     this.login.LoginCheckBehaviorSubject$.unsubscribe();
+    }
   }
   getErrorMessage() {
 
@@ -84,7 +99,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     return this.LoginFormControl.hasError('') ? 'Det ser ikke ud til at være et uni-login navn' : '';
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    
+   }
 
   /**
    * this checks if the user can login and emits a boolian.

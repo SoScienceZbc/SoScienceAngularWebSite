@@ -22,13 +22,13 @@ export class CookieComponent implements OnInit, OnDestroy {
 
   allowCookie(){
     this.cookie.deleteAll();
-    this.cookie.set("IsCookieAllowed", "True", 14);
+    this.cookie.set("IsCookieAllowed", "True", 30);
     this.bottomSheet.dismiss();
   }
 
   disallowCookie(){
     this.cookie.deleteAll();
-    this.cookie.set("IsCookieAllowed", "False", 14);
+    this.cookie.set("IsCookieAllowed", "False", 30);
     this.bottomSheet.dismiss();
   }
 }
