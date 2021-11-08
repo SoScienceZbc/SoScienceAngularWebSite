@@ -54,6 +54,7 @@ export class AuthGuardGuard implements CanActivate {
                   sessionStorage.removeItem("Token");
                   sessionStorage.removeItem("Admin");
                   this.cookie.delete("Token");
+                  this.cookie.delete("Admin");
                   this.router.navigate(["/"]);
                 }
               }
