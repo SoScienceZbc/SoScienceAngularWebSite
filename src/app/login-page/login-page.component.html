@@ -24,7 +24,13 @@
                 </mat-form-field>
               </td>
             </tr>
+            <tr>
+              <td>
+                  <mat-checkbox color="primary" matInput [formControl]="rememberMeFormControl">Husk mig i 14 dage</mat-checkbox>
+              </td>
+            </tr>
           </table>
+          <br>
           <button type="submit" [disabled]="LoginFormGroup.invalid" mat-raised-button color="primary"
           (click)="Login(UserName.value, password.value)">
           <a>

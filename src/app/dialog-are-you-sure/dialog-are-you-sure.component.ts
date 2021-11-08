@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatabaseService } from '../database.service';
-import { D_Document, D_Project } from '../generated/DataBaseProto/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 
 @Component({
@@ -18,29 +17,38 @@ export class DialogAreYouSureComponent implements OnInit {
   }
 
   ConfirmDelete() {
-    // console.log(this.data.docoment)
-    if (this.data.type == "D") {
-      this.spinner.show();
-      console.log("This is type Docoment")
-      this.dataservice.RemoveDocoment(this.data.docoment, this.data.docoment.getProjectid());
-      this.dialogbox.closeAll();
-    } else if (this.data.type == "P") {
-      console.log("This is type D_project");
-      this.spinner.show();
-      this.dataservice.DeleteProject(this.data.docoment, sessionStorage.getItem("username")!.toString());
-      this.dialogbox.closeAll();
-    }else if(this.data.type == "U"){
-      this.spinner.show();
-      this.data.docoment.setCompleted(true);
-      this.dataservice.UpdateProject(this.data.docoment,sessionStorage.getItem("username")!.toString());
-      this.dialogbox.closeAll();
-    }else if(this.data.type == "UU"){
-      this.spinner.show();
-      this.data.docoment.setCompleted(false);
-      this.dataservice.UpdateProject(this.data.docoment,sessionStorage.getItem("username")!.toString());
-      this.dialogbox.closeAll();
-    }
 
+    switch (this.data.type) {
+      case "D":
+        this.spinner.show();
+        console.log("This is type Docoment")
+        this.dataservice.RemoveDocoment(this.data.docoment, this.data.docoment.getProjectid());
+        this.dialogbox.closeAll();
+        break;
+      case "P":
+        console.log("This is type D_project");
+        this.spinner.show();
+        this.dataservice.DeleteProject(this.data.docoment);
+        this.dialogbox.closeAll();
+        break;
+      case "U":
+        this.spinner.show();
+        this.data.docoment.setCompleted(true);
+        this.dataservice.UpdateProject(this.data.docoment);
+        this.dialogbox.closeAll();
+        break;
+      case "UU":
+        this.spinner.show();
+        this.data.docoment.setCompleted(false);
+        this.dataservice.UpdateProject(this.data.docoment);
+        this.dialogbox.closeAll();
+        break;
+      case "PT":
+        this.spinner.show();
+        this.dataservice.RemoveProjectTheme(this.data.docoment)
+        this.dialogbox.closeAll();
+        break;
+    }
   }
   NonConfirmDelete() {
     this.dialogbox.closeAll();

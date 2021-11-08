@@ -4,8 +4,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { grpc } from '@improbable-eng/grpc-web';
+import { GrpcCoreModule } from '@ngx-grpc/core';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 /*-----------------Materials-----------------*/
+import { CommonModule } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkTreeModule } from '@angular/cdk/tree';
+import { PortalModule } from '@angular/cdk/portal';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
@@ -16,8 +33,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
-import { grpc } from '@improbable-eng/grpc-web';
-import { GrpcCoreModule } from '@ngx-grpc/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
@@ -29,7 +44,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatCheckboxModule } from '@angular/material/checkbox'
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
@@ -57,6 +71,16 @@ import { FooterComponent } from './footer/footer.component';
 import { DialogAreYouSureComponent } from './dialog-are-you-sure/dialog-are-you-sure.component';
 import { QuilEditorPreViewComponent } from './quil-editor-pre-view/quil-editor-pre-view.component';
 
+import { ProjectThemeFormComponent } from './settings/project-theme/add-project-theme-form/project-theme-form/project-theme-form.component';
+import { ProjectThemeDialogueBoxComponent } from './settings/project-theme/add-project-theme-dialogue-box/project-theme-dialogue-box/project-theme-dialogue-box.component';
+import { DatePipe } from '@angular/common';
+import { Field } from '@ngx-grpc/well-known-types';
+import { AddRemoveUserComponent } from './settings/add-remove-user/add-remove-user.component';
+import { AddRemoveMemberComponent } from './archive/add-remove-member/add-remove-member.component';
+import { ProjectOverviewComponent } from './settings/project-overview/project-overview.component';
+import { CookieComponent } from './cookie/cookie.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +98,12 @@ import { QuilEditorPreViewComponent } from './quil-editor-pre-view/quil-editor-p
     FooterComponent,
     DialogAreYouSureComponent,
     QuilEditorPreViewComponent,
+    ProjectThemeFormComponent,
+    ProjectThemeDialogueBoxComponent,
+    AddRemoveUserComponent,
+    AddRemoveMemberComponent,
+    ProjectOverviewComponent,
+    CookieComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +136,20 @@ import { QuilEditorPreViewComponent } from './quil-editor-pre-view/quil-editor-p
     MatTooltipModule,
     FlexLayoutModule,
     MatBottomSheetModule,
+    CommonModule,
+    OverlayModule,
+    CdkTreeModule,
+    PortalModule,
+    MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatSnackBarModule,
+    MatTreeModule,
+    MatBadgeModule,
+    MatGridListModule,
+    MatRadioModule,
+    MatDatepickerModule,
     /*---Grpc---*/
     GrpcCoreModule.forRoot(),
     ImprobableEngGrpcWebClientModule.forRoot({
@@ -137,14 +181,18 @@ import { QuilEditorPreViewComponent } from './quil-editor-pre-view/quil-editor-p
           ['clean'],                                         // remove formatting button
 
           ['link', 'image', 'video'] ,                        // link and image, video
-
-
         ]
       },theme:'snow'
     })
   ],
-  providers: [DatabaseService, LoginService, LoadingService, AuthGuardGuard,
-    MatSidenav, CustomMatPaginatorIntl],
+  providers: [
+    DatabaseService, 
+    LoginService, 
+    LoadingService, 
+    AuthGuardGuard,
+    MatSidenav, 
+    CustomMatPaginatorIntl,
+    DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

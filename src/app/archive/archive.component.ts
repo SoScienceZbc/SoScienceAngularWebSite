@@ -5,13 +5,16 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DatabaseService } from '../database.service';
-import { D_Document, D_Documents, D_Project } from '../generated/DataBaseProto/DatabaseProto_pb';
+import { D_Document, D_Documents, D_Project } from '../protos/DatabaseProto_pb';
 import { LoadingService } from '../loading.service';
 import { TextEditorComponent } from '../TextEditor/TextEditor.component';
-import quill from 'quill';
+import quill, { Quill } from 'quill';
 import { DialogAreYouSureComponent } from '../dialog-are-you-sure/dialog-are-you-sure.component';
 import { QuilEditorPreViewComponent } from '../quil-editor-pre-view/quil-editor-pre-view.component';
-import { isTemplateExpression } from 'typescript';
+import { AddRemoveMemberComponent } from './add-remove-member/add-remove-member.component';
+import * as quillToWord from 'quill-to-word';
+import { saveAs } from 'file-saver';
+import { pdfExporter } from 'quill-to-pdf';
 
 /**
  * @title Table with expandable rows
@@ -33,7 +36,13 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent = new PageEvent();
-
+  
+  download = {
+    id : 0,
+    needToDownload : 0,
+    ReadyToDownload : 100,
+    Downloaded : 100
+  }
   /*--------------ViewChilds--------------*/
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -61,7 +70,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   constructor(private dataserve: DatabaseService, private spinner: LoadingService, private dilog: MatDialog) {
-    this.dataserve.GetProjectsTheRigthWay(sessionStorage.getItem('username') as string);
+    this.dataserve.GetProjectsTheRigthWay();
 
     this.dataserve.listOfProjects$.subscribe(x => {
       this.matdatasource.data = [];
@@ -110,7 +119,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   OpenQuilEditor(event: any) {
-
     quill.register(TextEditorComponent, true);
     this.dilog.open(TextEditorComponent, {
       data: { docoment: event }
@@ -119,6 +127,31 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       maxHeight: '50vh',
 
     })
+  }
+
+  downloadData(project : D_Project){
+    this.download = {
+      id : project.getId(),
+      needToDownload : project.getDocumentsList().length,
+      ReadyToDownload : 0,
+      Downloaded : 0};
+    project.getDocumentsList().forEach(doc => {
+      let localData$ = this.dataserve.GetDocomentHtml(sessionStorage.getItem("Token") as string, doc.getId());
+      localData$.subscribe(x => {
+        if (x != new D_Document()){
+          this.download.ReadyToDownload += 100/this.download.needToDownload;
+          switch (x.getType()) {
+            case 'Doc':
+              this.saveAsWordFile(x.getData(),x.getTitle());
+              break;
+            }
+          }
+      });
+    });
+  }
+
+  Log(){
+    console.log("Clicked");
   }
 
   /**
@@ -183,7 +216,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   DeleteProject(element: D_Project) {
     this.dilog.open(DialogAreYouSureComponent, {
-      data: { docoment: element, type: "P" }, 
+      data: { docoment: element, type: "P" },
       autoFocus: true,
       restoreFocus: true,
 
@@ -192,7 +225,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   OpenDialogAreYouSureDocument(event: any) {
     this.dilog.open(DialogAreYouSureComponent, {
-      data: { docoment: event, type: "D" }, 
+      data: { docoment: event, type: "D" },
       autoFocus: true,
       restoreFocus: true,
 
@@ -210,6 +243,24 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.matdatasource._updateChangeSubscription();
 
   }
+
+  addMember(id : any){
+    this.dilog.open(AddRemoveMemberComponent, {
+      data: { id: id, addMemberStyle : true },
+      autoFocus: true,
+      restoreFocus: true,
+    });
+  }
+
+  removeMember(id : any){
+    this.dilog.open(AddRemoveMemberComponent, {
+      data: { id: id, addMemberStyle : false },
+      autoFocus: true,
+      restoreFocus: true,
+    });
+  }
+  
+
   updateProjectUndo(item: D_Project) {
 
     const tempitem = item;
@@ -232,6 +283,24 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       maxHeight: '50vh',
     })
 
+  }
+
+  async saveAsWordFile(doc : string, title : string) {
+    if (doc != ''){
+      const data = await quillToWord.generateWord(JSON.parse(doc), {
+        exportAs: 'blob',
+      });
+      saveAs(data as any, title + '.docx');
+    }
+    this.download.Downloaded += 100/this.download.needToDownload;
+  }
+
+  async printPdfFile(doc : string, title : string){
+    if (doc != ''){
+    const data = await pdfExporter.generatePdf(JSON.parse(doc));
+    saveAs(data as any, title + '.pdf');
+    this.download.Downloaded += 100/this.download.needToDownload;
+  }
   }
 }
 

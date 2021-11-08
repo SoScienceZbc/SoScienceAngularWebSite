@@ -1,11 +1,24 @@
 <div style="display: flex;">
   <mat-card class="quillEditorSize" style ="overflow-y: auto;">
-    <mat-card-title><input matInput type="text" [(ngModel)]="QuilData.Title" maxlength="30">
-      <button mat-ripple style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;">
-        <mat-icon>edit</mat-icon>
-      </button>
+    <mat-card-title>
+      <div *ngIf="showTitle; else elseTitle">
+        <span>{{QuilData.Title}}</span>
+        <button mat-ripple style="cursor: pointer; z-index: 1;" mat-icon-button (click)="changeTitle()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+        <ng-template #elseTitle>
+          <input matInput type="text" [(ngModel)]="QuilData.Title" maxlength="30">
+          <button mat-ripple style="cursor: pointer; z-index: 1;" mat-icon-button (click)="changeTitle()">
+            <mat-icon>save</mat-icon>
+          </button>
+        </ng-template>
     </mat-card-title>
-      <quill-editor  #editor [(ngModel)]="QuilData.editorData" (ngModelChange)="onChange($event)" ></quill-editor>
+      <quill-editor  #editor 
+      [(ngModel)]="QuilData.editorData" 
+      (ngModelChange)="onChange()"
+      [format]="'object'"
+    (onEditorCreated)="onEditorCreated($event)"></quill-editor>
   </mat-card>
 
   <!-- Cheack box -->
@@ -16,43 +29,43 @@
         <p>Check færdige Kategorier</p>
         <hr>
         <mat-selection-list>
-          <mat-checkbox #Forside [(ngModel)]="QuilData.compltedList[0].isCompleted"  (ngModelChange)="QuilData.compltedList[0].isCompleted = Forside.checked" value="Forside">
+          <mat-checkbox #Forside [(ngModel)]="QuilData.completedList[0].isCompleted"  (ngModelChange)="QuilData.completedList[0].isCompleted = Forside.checked" value="Forside">
             Forside</mat-checkbox>
           <hr>
-          <mat-checkbox #Formaal [(ngModel)]="QuilData.compltedList[1].isCompleted" value="Formaal">
+          <mat-checkbox #Formaal [(ngModel)]="QuilData.completedList[1].isCompleted" value="Formaal">
             Formål</mat-checkbox>
           <hr>
-          <mat-checkbox #Materiale [(ngModel)]="QuilData.compltedList[2].isCompleted"
+          <mat-checkbox #Materiale [(ngModel)]="QuilData.completedList[2].isCompleted"
             value="Materiale">Materiale</mat-checkbox>
           <hr>
-          <mat-checkbox #Forsoegsopstilling [(ngModel)]="QuilData.compltedList[3].isCompleted" value="Forsoegsopstilling">Forsøgsopstilling</mat-checkbox>
+          <mat-checkbox #Forsoegsopstilling [(ngModel)]="QuilData.completedList[3].isCompleted" value="Forsoegsopstilling">Forsøgsopstilling</mat-checkbox>
           <hr>
-          <mat-checkbox #Sikkerhed [(ngModel)]="QuilData.compltedList[4].isCompleted"
+          <mat-checkbox #Sikkerhed [(ngModel)]="QuilData.completedList[4].isCompleted"
             value="Sikkerhed">Sikkerhed</mat-checkbox>
           <hr>
-          <mat-checkbox #Teori [(ngModel)]="QuilData.compltedList[5].isCompleted" value="Teori">Teori
+          <mat-checkbox #Teori [(ngModel)]="QuilData.completedList[5].isCompleted" value="Teori">Teori
           </mat-checkbox>
           <hr>
-          <mat-checkbox #Resultater [(ngModel)]="QuilData.compltedList[6].isCompleted"
+          <mat-checkbox #Resultater [(ngModel)]="QuilData.completedList[6].isCompleted"
             value="Resultater">Resultater</mat-checkbox>
           <hr>
-          <mat-checkbox #Diskussion [(ngModel)]="QuilData.compltedList[7].isCompleted"
+          <mat-checkbox #Diskussion [(ngModel)]="QuilData.completedList[7].isCompleted"
             value="Diskussion">Diskussion</mat-checkbox>
           <hr>
-          <mat-checkbox #Fejlkilder [(ngModel)]="QuilData.compltedList[8].isCompleted"
+          <mat-checkbox #Fejlkilder [(ngModel)]="QuilData.completedList[8].isCompleted"
             value="Fejlkilder">Fejlkilder</mat-checkbox>
           <hr>
-          <mat-checkbox #Konklusion [(ngModel)]="QuilData.compltedList[9].isCompleted"
+          <mat-checkbox #Konklusion [(ngModel)]="QuilData.completedList[9].isCompleted"
             value="Konklusion">Konklusion</mat-checkbox>
           <hr>
-          <mat-checkbox #Kilder [(ngModel)]="QuilData.compltedList[10].isCompleted" value="Kilder">
+          <mat-checkbox #Kilder [(ngModel)]="QuilData.completedList[10].isCompleted" value="Kilder">
             Kilder
           </mat-checkbox>
         </mat-selection-list>
 
       </div>
     </div>
-    <mat-icon>print</mat-icon>
+
   </mat-card>
 
   <button mat-icon-button (click)="closeDialogBox()" mat-dialog-close>

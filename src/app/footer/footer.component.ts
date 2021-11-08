@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
-import { FrontpageComponent } from '../frontpage/frontpage.component';
+import { CookieComponent } from '../cookie/cookie.component';
 
 
 @Component({
@@ -10,9 +10,9 @@ import { FrontpageComponent } from '../frontpage/frontpage.component';
 })
 export class FooterComponent {
 
-  constructor(private _bottomSheet: MatBottomSheet) { }
+  constructor(private bottomSheet: MatBottomSheet) { }
 
   openBottomSheet(): void {
-    this._bottomSheet.open(FrontpageComponent);
+    this.bottomSheet.open(CookieComponent);
   }
 }

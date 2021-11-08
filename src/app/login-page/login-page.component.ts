@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { LoadingService } from '../loading.service';
 import { LoginService } from '../login.service';
 
@@ -21,24 +22,49 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     Validators.required,
     Validators.minLength(5),
   ]);
+  
+  rememberMeFormControl = new FormControl(false);
+
   LoginFormGroup = new FormGroup({
     username: this.LoginFormControl,
-    password: this.PasswordFormControl
+    password: this.PasswordFormControl,
+    rememberMe: this.rememberMeFormControl,
   })
-  testlogin: boolean = false;
 
+  testlogin: boolean = false;
   loading$ = this.spinner.loading$;
 
   constructor(
     private login: LoginService,
     public spinner: LoadingService,
-    private route: Router
-  ) {
+    private route: Router,
+    private cookie : CookieService) 
+  {
+    if((cookie.get("Token") != null && cookie.get("Token") != "") || 
+    (sessionStorage.getItem("Token") != null && sessionStorage.getItem("Token") != ""))
+      route.navigate(["/forside"]); 
 
+    if(cookie.check("Token") || sessionStorage.getItem("Token") == null){
+      if(cookie.get("Admin") == "true"){
+        sessionStorage.setItem('Admin', "true");
+      }
+    }else {
+      cookie.delete("Admin");
+      sessionStorage.removeItem("Admin");
+    }
     this.login.LoginCheckBehaviorSubject$.subscribe((x) => {
-      if (x !== this.testlogin) {
-        this.testlogin = x;
-        sessionStorage.setItem('loggedIn', '' + this.testlogin + '');
+      if (x.getLoginsucsefull() !== this.testlogin) {
+        this.testlogin = x.getLoginsucsefull();
+        sessionStorage.setItem('Token', '' + x.getToken() + '');
+        if(x.getAdmin()){
+          sessionStorage.setItem('Admin', '' + x.getAdmin() + '');
+        }
+        if(cookie.check("IsCookieAllowed") && cookie.get("IsCookieAllowed") == "True"){
+          if(x.getAdmin()) {
+            cookie.set("Admin", x.getAdmin() + "", 14);
+          }
+          cookie.set("Token", x.getToken(), 14);
+        }
         if (this.testlogin) {
           this.route.navigateByUrl('/forside');
         }
@@ -48,7 +74,9 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
+    if(!this.cookie.check("Token")) {
     this.login.LoginCheckBehaviorSubject$.unsubscribe();
+    }
   }
   getErrorMessage() {
 
@@ -68,12 +96,13 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     }else if (this.PasswordFormControl.hasError('minlength')) {
       return 'Kodeord for kort'
     }
-
     return this.LoginFormControl.hasError('') ? 'Det ser ikke ud til at være et uni-login navn' : '';
   }
 
+  ngOnInit(): void {
+    
+   }
 
-  ngOnInit(): void { }
   /**
    * this checks if the user can login and emits a boolian.
    * @param name the unilogin
@@ -84,8 +113,5 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.spinner.show();
     var tempName = name.split("@",1);
     tempName.toString().toLowerCase();
-    sessionStorage.setItem('username', tempName.toString());
-    if (this.testlogin) {
-    }
   }
 }

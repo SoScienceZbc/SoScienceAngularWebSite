@@ -1,7 +1,7 @@
 // package: DatabaseGRPC
 // file: src/app/protos/DatabaseProto.proto
 
-import * as src_app_protos_DatabaseProto_pb from "../../generated/DataBaseProto/DatabaseProto_pb";
+import * as src_app_protos_DatabaseProto_pb from "../../../src/app/protos/DatabaseProto_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
 type GrpcDatabaseProjectGetProject = {
@@ -139,6 +139,96 @@ type GrpcDatabaseProjectGetRemoteFiles = {
   readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_RemoteFiles;
 };
 
+type GrpcDatabaseProjectAddSubject = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.D_Subject;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+};
+
+type GrpcDatabaseProjectGetSubjects = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_Subjects;
+};
+
+type GrpcDatabaseProjectAddProjectTheme = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.D_ProjectTheme;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+};
+
+type GrpcDatabaseProjectGetProjectThemes = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_ProjectThemes;
+};
+
+type GrpcDatabaseProjectGetProjectThemesFromSubject = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.ThemeFromSubject;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_ProjectThemes;
+};
+
+type GrpcDatabaseProjectRemoveProjectTheme = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+};
+
+type GrpcDatabaseProjectAddProjectThemeCoTeacher = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+};
+
+type GrpcDatabaseProjectRemoveProjectThemeCoTeacher = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+};
+
+type GrpcDatabaseProjectAddProjectMember = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.MemberInformation;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+};
+
+type GrpcDatabaseProjectRemoveProjectMember = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.MemberInformation;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+};
+
 export class GrpcDatabaseProject {
   static readonly serviceName: string;
   static readonly GetProject: GrpcDatabaseProjectGetProject;
@@ -156,6 +246,16 @@ export class GrpcDatabaseProject {
   static readonly UpdateRemoteFile: GrpcDatabaseProjectUpdateRemoteFile;
   static readonly RemoveRemoteFile: GrpcDatabaseProjectRemoveRemoteFile;
   static readonly GetRemoteFiles: GrpcDatabaseProjectGetRemoteFiles;
+  static readonly AddSubject: GrpcDatabaseProjectAddSubject;
+  static readonly GetSubjects: GrpcDatabaseProjectGetSubjects;
+  static readonly AddProjectTheme: GrpcDatabaseProjectAddProjectTheme;
+  static readonly GetProjectThemes: GrpcDatabaseProjectGetProjectThemes;
+  static readonly GetProjectThemesFromSubject: GrpcDatabaseProjectGetProjectThemesFromSubject;
+  static readonly RemoveProjectTheme: GrpcDatabaseProjectRemoveProjectTheme;
+  static readonly AddProjectThemeCoTeacher: GrpcDatabaseProjectAddProjectThemeCoTeacher;
+  static readonly RemoveProjectThemeCoTeacher: GrpcDatabaseProjectRemoveProjectThemeCoTeacher;
+  static readonly AddProjectMember: GrpcDatabaseProjectAddProjectMember;
+  static readonly RemoveProjectMember: GrpcDatabaseProjectRemoveProjectMember;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -324,6 +424,96 @@ export class GrpcDatabaseProjectClient {
   getRemoteFiles(
     requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
     callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_RemoteFiles|null) => void
+  ): UnaryResponse;
+  addSubject(
+    requestMessage: src_app_protos_DatabaseProto_pb.D_Subject,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  addSubject(
+    requestMessage: src_app_protos_DatabaseProto_pb.D_Subject,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  getSubjects(
+    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Subjects|null) => void
+  ): UnaryResponse;
+  getSubjects(
+    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Subjects|null) => void
+  ): UnaryResponse;
+  addProjectTheme(
+    requestMessage: src_app_protos_DatabaseProto_pb.D_ProjectTheme,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  addProjectTheme(
+    requestMessage: src_app_protos_DatabaseProto_pb.D_ProjectTheme,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  getProjectThemes(
+    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_ProjectThemes|null) => void
+  ): UnaryResponse;
+  getProjectThemes(
+    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_ProjectThemes|null) => void
+  ): UnaryResponse;
+  getProjectThemesFromSubject(
+    requestMessage: src_app_protos_DatabaseProto_pb.ThemeFromSubject,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_ProjectThemes|null) => void
+  ): UnaryResponse;
+  getProjectThemesFromSubject(
+    requestMessage: src_app_protos_DatabaseProto_pb.ThemeFromSubject,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_ProjectThemes|null) => void
+  ): UnaryResponse;
+  removeProjectTheme(
+    requestMessage: src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  removeProjectTheme(
+    requestMessage: src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  addProjectThemeCoTeacher(
+    requestMessage: src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  addProjectThemeCoTeacher(
+    requestMessage: src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  removeProjectThemeCoTeacher(
+    requestMessage: src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  removeProjectThemeCoTeacher(
+    requestMessage: src_app_protos_DatabaseProto_pb.ProjectThemeUserInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  addProjectMember(
+    requestMessage: src_app_protos_DatabaseProto_pb.MemberInformation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  addProjectMember(
+    requestMessage: src_app_protos_DatabaseProto_pb.MemberInformation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  removeProjectMember(
+    requestMessage: src_app_protos_DatabaseProto_pb.MemberInformation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  removeProjectMember(
+    requestMessage: src_app_protos_DatabaseProto_pb.MemberInformation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
   ): UnaryResponse;
 }
 

@@ -10,10 +10,17 @@
 @mixin custom-components-theme($theme) {
 }
 
+
+// All Themes
+.form-element{
+  width: 75%;
+  padding-left: 12.5%;
+}
+
+
 // Light theme
 $light-primary: mat-palette($mat-indigo);
-// $light-primary: mat-palette($mat-indigo);
-$light-accent:  mat-palette($mat-pink, A200, A100, A400);
+$light-accent:  mat-palette($mat-green);
 $light-warn:    mat-palette($mat-red);
 $light-theme:   mat-light-theme($light-primary, $light-accent);
 
@@ -21,6 +28,9 @@ $light-theme:   mat-light-theme($light-primary, $light-accent);
   @include angular-material-theme($light-theme);
   @include custom-components-theme($light-theme);
 
+  .TextColor{
+    color: #0f0f0f;
+  }
   // Fix light theme project nav bar
   .mat-tab-label-container{
     background: #f0f0f0;
@@ -68,8 +78,8 @@ $light-theme:   mat-light-theme($light-primary, $light-accent);
 
 // Dark theme
 $dark-primary: mat-palette($mat-indigo);
-$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
-$dark-warn:    mat-palette($mat-deep-orange);
+$dark-accent:  mat-palette($mat-green);
+$dark-warn:    mat-palette($mat-red);
 $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 @media (prefers-color-scheme: dark) {
@@ -83,6 +93,9 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
     stroke: white !important;
   }
 
+  .TextColor{
+    color: #f0f0f0;
+  }
   // Fix dark theme height missing
   .mat-expansion-panel-header{
     height: 48px;

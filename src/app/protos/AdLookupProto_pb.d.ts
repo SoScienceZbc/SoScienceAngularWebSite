@@ -31,6 +31,12 @@ export class LoginRepley extends jspb.Message {
   getLoginsucsefull(): boolean;
   setLoginsucsefull(value: boolean): void;
 
+  getAdmin(): boolean;
+  setAdmin(value: boolean): void;
+
+  getToken(): string;
+  setToken(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): LoginRepley.AsObject;
   static toObject(includeInstance: boolean, msg: LoginRepley): LoginRepley.AsObject;
@@ -44,6 +50,8 @@ export class LoginRepley extends jspb.Message {
 export namespace LoginRepley {
   export type AsObject = {
     loginsucsefull: boolean,
+    admin: boolean,
+    token: string,
   }
 }
 

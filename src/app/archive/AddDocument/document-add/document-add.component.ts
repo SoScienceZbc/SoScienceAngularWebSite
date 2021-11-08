@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
-import { D_Document } from 'src/app/generated/DataBaseProto/DatabaseProto_pb';
+import { D_Document } from 'src/app/protos/DatabaseProto_pb';
 import { LoadingService } from 'src/app/loading.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -40,7 +40,7 @@ export class DocumentAddComponent implements OnInit {
   addNewDocoment(title:string){
 
     let newdoc = new D_Document();
-    let name = sessionStorage.getItem("username");
+    let name = sessionStorage.getItem("Token");
 
 
 
@@ -50,7 +50,7 @@ export class DocumentAddComponent implements OnInit {
     // newdoc.setData("<p>skriv noget tjekket og awsome. og tro på den vindeskablig fremgangs måde</p>")
     // newdoc.setCompletedcount(2);
 
-    this.databaseserve.AddDocument((name as string),newdoc);
+    this.databaseserve.AddDocument(newdoc);
     this.spinner.show();
 
       // console.log(this.projectid);

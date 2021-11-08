@@ -251,7 +251,9 @@ proto.LoginGRPC.LoginRepley.prototype.toObject = function(opt_includeInstance) {
  */
 proto.LoginGRPC.LoginRepley.toObject = function(includeInstance, msg) {
   var f, obj = {
-    loginsucsefull: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
+    loginsucsefull: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
+    admin: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
+    token: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -292,6 +294,14 @@ proto.LoginGRPC.LoginRepley.deserializeBinaryFromReader = function(msg, reader) 
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setLoginsucsefull(value);
       break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setAdmin(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setToken(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -328,6 +338,20 @@ proto.LoginGRPC.LoginRepley.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
+  f = message.getAdmin();
+  if (f) {
+    writer.writeBool(
+      2,
+      f
+    );
+  }
+  f = message.getToken();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -346,6 +370,42 @@ proto.LoginGRPC.LoginRepley.prototype.getLoginsucsefull = function() {
  */
 proto.LoginGRPC.LoginRepley.prototype.setLoginsucsefull = function(value) {
   return jspb.Message.setProto3BooleanField(this, 1, value);
+};
+
+
+/**
+ * optional bool Admin = 2;
+ * @return {boolean}
+ */
+proto.LoginGRPC.LoginRepley.prototype.getAdmin = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.LoginGRPC.LoginRepley} returns this
+ */
+proto.LoginGRPC.LoginRepley.prototype.setAdmin = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 2, value);
+};
+
+
+/**
+ * optional string Token = 3;
+ * @return {string}
+ */
+proto.LoginGRPC.LoginRepley.prototype.getToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.LoginGRPC.LoginRepley} returns this
+ */
+proto.LoginGRPC.LoginRepley.prototype.setToken = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

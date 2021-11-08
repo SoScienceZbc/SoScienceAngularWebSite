@@ -1,3 +1,11 @@
+img {
+  width: 33.33%;
+  margin-left: 33.33%;
+}
+p {
+  max-width: 75%;
+  margin-left: 12.5%;
+}
 /*------------GENERAL------------*/
 .center {
   margin: auto;

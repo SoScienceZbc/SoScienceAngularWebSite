@@ -24,17 +24,46 @@ rpc GetRemoteFile(UserDbInfomation) returns (D_RemoteFile);
 rpc UpdateRemoteFile(D_RemoteFile) returns (D_RemoteFile);
 rpc RemoveRemoteFile(UserDbInfomation) returns (intger);
 rpc GetRemoteFiles(UserDbInfomation) returns (D_RemoteFiles);
+// Subject
+rpc AddSubject(D_Subject) returns (intger);
+rpc GetSubjects(UserDbInfomation) returns (D_Subjects);
+// ProjectTheme
+rpc AddProjectTheme(D_ProjectTheme) returns (intger);
+rpc GetProjectThemes(UserDbInfomation) returns (D_ProjectThemes);
+rpc GetProjectThemesFromSubject(ThemeFromSubject) returns (D_ProjectThemes);
+rpc RemoveProjectTheme(ProjectThemeUserInfomation) returns (intger);
+rpc AddProjectThemeCoTeacher(ProjectThemeUserInfomation) returns (intger);
+rpc RemoveProjectThemeCoTeacher(ProjectThemeUserInfomation) returns (intger);
+rpc AddProjectMember(MemberInformation) returns (intger);
+rpc RemoveProjectMember(MemberInformation) returns (intger);
+}
+
+message ThemeFromSubject{
+    UserDbInfomation user = 1;
+    D_Subject subject = 2;
+}
+
+message MemberInformation {
+    UserDbInfomation user = 1;
+    string newMember = 2;
 }
 
 message UserDbInfomation{
     int32 ID = 1;
-    string DbName = 2;
+    string DbName = 2;     
 }
 
 message ProjectUserInfomation{
 
-    UserDbInfomation user=1;
+    UserDbInfomation user = 1;
     D_Project project = 2;
+}
+
+message ProjectThemeUserInfomation{
+
+    UserDbInfomation user = 1;
+    D_ProjectTheme theme = 2;
+    string username = 3;
 }
 
 message intger{
@@ -50,8 +79,14 @@ message D_Projects{
 message D_RemoteFiles{
     repeated D_RemoteFile D_RemoteFile = 1;
 }
-// Project
+message D_Subjects{
+    repeated D_Subject Subject = 1;
+}
+message D_ProjectThemes {
+    repeated D_ProjectTheme ProjectTheme = 1;
+}
 
+// Project
 message D_Project{
 	int32 id = 1;
     string name = 2;
@@ -59,6 +94,8 @@ message D_Project{
     string lastedited = 4;
     string endDate = 5;
     repeated D_Document documents = 6;
+    int32 ProjectThemeID = 7;
+    bool CloseToDeletion = 8;
 }
 // document
 message D_Document{
@@ -79,5 +116,22 @@ message D_RemoteFile{
      string path = 5;
 }
 
+// Subject
+message D_Subject {
+    UserDbInfomation user = 1;
+    string name = 2;
+    int32 ID = 3;
+}
 
-//protoc --plugin=protoc-gen-ts="C:\Users\andi0137\source\repos\AngularRefactorV2\SoScienceRefactorV2\node_modules\.bin\protoc-gen-ts.cmd" --js_out="import_style=commonjs,binary:src/app/generated/DataBaseProto" --ts_out="service=grpc-web:src/app/generated" src/app/protos/DatabaseProto.proto
+// Project Theme
+message D_ProjectTheme {
+    int32 ID = 1;
+    string name = 2;
+    string endDate = 3;
+    string lastEdited = 4;
+    string Teacher = 5;
+    string subject = 6;
+    D_Projects projects = 7;
+}
+
+//protoc --plugin=protoc-gen-ts="C:\sandbox\SoScienceAngularWebSite\node_modules\.bin\protoc-gen-ts.cmd" --js_out="import_style=commonjs,binary:." --ts_out="service=grpc-web:." src/app/protos/*.proto

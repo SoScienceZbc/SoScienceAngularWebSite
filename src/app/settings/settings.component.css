@@ -1,40 +1,87 @@
-/*-----------GENERAL--------------*/
-
-
-/*-----------sections--------------*/
-
-.box {
+table{
   width: 80%;
-  height: fit-content;
-  margin-left: 10%;
-  margin-bottom: 2vh;
-  box-shadow: 0vh 0.5vh 0.25vh rgba(227,227,227,1);
 }
 
-h5, p {
-  color: #1CBDC1;
-  margin: 0vh 0vh 0vh 0.8vw;
-  width: fit-content;
-  float: left;
-  clear: both;
+.mat-form-field {
+  font-size: 14px;
+  width: 25%;
+}
+.mat-column-name{
+  z-index: 5;
+
 }
 
-.selector {
+.example-element-detail {
+  overflow: hidden;
+  display: block;
+}
+
+.mat-column-completed{
+  z-index: 5;
+
+}
+.mat-column-lastedited{
+  z-index: 5;
+}
+.mat-column-endDate{
+  z-index: 5;
+}
+
+.bouttenTextMatIcon {
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  margin-left: 2.5rem;
+}
+.maticonBounten {
   float: left;
+  background-color: #3f51b5;
+}
+
+
+/* ----Test Table css----- */
+
+table {
   width: 100%;
-  margin-top: 3vh;
-  margin-left: 0.8vw;
-  color: #1CBDC1;
-  border: none;
-  text-align: center;
+  border-spacing: 0px;
 }
-.mat-expansion-panel {
-margin: 0 !important;
+
+tr.example-detail-row {
+  height: 0;
+}
+
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+
+/* -- tooltip fix -- */
+.hoverme:hover{
+  /* overflow: visible !important; */
+  overflow-x: auto !important;
+  text-overflow: unset !important;
+  width: auto;
+  /* max-width: fit-content !important; */
 
 }
 
-.mat-panel-title {
-min-width: 40% !important;
-font-size: large;
-font-weight: bold;
+.hoverme::after{
+  text-align: left !important;
+
 }

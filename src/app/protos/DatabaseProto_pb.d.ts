@@ -3,6 +3,60 @@
 
 import * as jspb from "google-protobuf";
 
+export class ThemeFromSubject extends jspb.Message {
+  hasUser(): boolean;
+  clearUser(): void;
+  getUser(): UserDbInfomation | undefined;
+  setUser(value?: UserDbInfomation): void;
+
+  hasSubject(): boolean;
+  clearSubject(): void;
+  getSubject(): D_Subject | undefined;
+  setSubject(value?: D_Subject): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ThemeFromSubject.AsObject;
+  static toObject(includeInstance: boolean, msg: ThemeFromSubject): ThemeFromSubject.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ThemeFromSubject, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ThemeFromSubject;
+  static deserializeBinaryFromReader(message: ThemeFromSubject, reader: jspb.BinaryReader): ThemeFromSubject;
+}
+
+export namespace ThemeFromSubject {
+  export type AsObject = {
+    user?: UserDbInfomation.AsObject,
+    subject?: D_Subject.AsObject,
+  }
+}
+
+export class MemberInformation extends jspb.Message {
+  hasUser(): boolean;
+  clearUser(): void;
+  getUser(): UserDbInfomation | undefined;
+  setUser(value?: UserDbInfomation): void;
+
+  getNewmember(): string;
+  setNewmember(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): MemberInformation.AsObject;
+  static toObject(includeInstance: boolean, msg: MemberInformation): MemberInformation.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: MemberInformation, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): MemberInformation;
+  static deserializeBinaryFromReader(message: MemberInformation, reader: jspb.BinaryReader): MemberInformation;
+}
+
+export namespace MemberInformation {
+  export type AsObject = {
+    user?: UserDbInfomation.AsObject,
+    newmember: string,
+  }
+}
+
 export class UserDbInfomation extends jspb.Message {
   getId(): number;
   setId(value: number): void;
@@ -52,6 +106,38 @@ export namespace ProjectUserInfomation {
   export type AsObject = {
     user?: UserDbInfomation.AsObject,
     project?: D_Project.AsObject,
+  }
+}
+
+export class ProjectThemeUserInfomation extends jspb.Message {
+  hasUser(): boolean;
+  clearUser(): void;
+  getUser(): UserDbInfomation | undefined;
+  setUser(value?: UserDbInfomation): void;
+
+  hasTheme(): boolean;
+  clearTheme(): void;
+  getTheme(): D_ProjectTheme | undefined;
+  setTheme(value?: D_ProjectTheme): void;
+
+  getUsername(): string;
+  setUsername(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ProjectThemeUserInfomation.AsObject;
+  static toObject(includeInstance: boolean, msg: ProjectThemeUserInfomation): ProjectThemeUserInfomation.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: ProjectThemeUserInfomation, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ProjectThemeUserInfomation;
+  static deserializeBinaryFromReader(message: ProjectThemeUserInfomation, reader: jspb.BinaryReader): ProjectThemeUserInfomation;
+}
+
+export namespace ProjectThemeUserInfomation {
+  export type AsObject = {
+    user?: UserDbInfomation.AsObject,
+    theme?: D_ProjectTheme.AsObject,
+    username: string,
   }
 }
 
@@ -141,6 +227,50 @@ export namespace D_RemoteFiles {
   }
 }
 
+export class D_Subjects extends jspb.Message {
+  clearSubjectList(): void;
+  getSubjectList(): Array<D_Subject>;
+  setSubjectList(value: Array<D_Subject>): void;
+  addSubject(value?: D_Subject, index?: number): D_Subject;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): D_Subjects.AsObject;
+  static toObject(includeInstance: boolean, msg: D_Subjects): D_Subjects.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: D_Subjects, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): D_Subjects;
+  static deserializeBinaryFromReader(message: D_Subjects, reader: jspb.BinaryReader): D_Subjects;
+}
+
+export namespace D_Subjects {
+  export type AsObject = {
+    subjectList: Array<D_Subject.AsObject>,
+  }
+}
+
+export class D_ProjectThemes extends jspb.Message {
+  clearProjectthemeList(): void;
+  getProjectthemeList(): Array<D_ProjectTheme>;
+  setProjectthemeList(value: Array<D_ProjectTheme>): void;
+  addProjecttheme(value?: D_ProjectTheme, index?: number): D_ProjectTheme;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): D_ProjectThemes.AsObject;
+  static toObject(includeInstance: boolean, msg: D_ProjectThemes): D_ProjectThemes.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: D_ProjectThemes, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): D_ProjectThemes;
+  static deserializeBinaryFromReader(message: D_ProjectThemes, reader: jspb.BinaryReader): D_ProjectThemes;
+}
+
+export namespace D_ProjectThemes {
+  export type AsObject = {
+    projectthemeList: Array<D_ProjectTheme.AsObject>,
+  }
+}
+
 export class D_Project extends jspb.Message {
   getId(): number;
   setId(value: number): void;
@@ -162,6 +292,12 @@ export class D_Project extends jspb.Message {
   setDocumentsList(value: Array<D_Document>): void;
   addDocuments(value?: D_Document, index?: number): D_Document;
 
+  getProjectthemeid(): number;
+  setProjectthemeid(value: number): void;
+
+  getClosetodeletion(): boolean;
+  setClosetodeletion(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): D_Project.AsObject;
   static toObject(includeInstance: boolean, msg: D_Project): D_Project.AsObject;
@@ -180,6 +316,8 @@ export namespace D_Project {
     lastedited: string,
     enddate: string,
     documentsList: Array<D_Document.AsObject>,
+    projectthemeid: number,
+    closetodeletion: boolean,
   }
 }
 
@@ -262,6 +400,82 @@ export namespace D_RemoteFile {
     type: string,
     projectid: number,
     path: string,
+  }
+}
+
+export class D_Subject extends jspb.Message {
+  hasUser(): boolean;
+  clearUser(): void;
+  getUser(): UserDbInfomation | undefined;
+  setUser(value?: UserDbInfomation): void;
+
+  getName(): string;
+  setName(value: string): void;
+
+  getId(): number;
+  setId(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): D_Subject.AsObject;
+  static toObject(includeInstance: boolean, msg: D_Subject): D_Subject.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: D_Subject, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): D_Subject;
+  static deserializeBinaryFromReader(message: D_Subject, reader: jspb.BinaryReader): D_Subject;
+}
+
+export namespace D_Subject {
+  export type AsObject = {
+    user?: UserDbInfomation.AsObject,
+    name: string,
+    id: number,
+  }
+}
+
+export class D_ProjectTheme extends jspb.Message {
+  getId(): number;
+  setId(value: number): void;
+
+  getName(): string;
+  setName(value: string): void;
+
+  getEnddate(): string;
+  setEnddate(value: string): void;
+
+  getLastedited(): string;
+  setLastedited(value: string): void;
+
+  getTeacher(): string;
+  setTeacher(value: string): void;
+
+  getSubject(): string;
+  setSubject(value: string): void;
+
+  hasProjects(): boolean;
+  clearProjects(): void;
+  getProjects(): D_Projects | undefined;
+  setProjects(value?: D_Projects): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): D_ProjectTheme.AsObject;
+  static toObject(includeInstance: boolean, msg: D_ProjectTheme): D_ProjectTheme.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: D_ProjectTheme, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): D_ProjectTheme;
+  static deserializeBinaryFromReader(message: D_ProjectTheme, reader: jspb.BinaryReader): D_ProjectTheme;
+}
+
+export namespace D_ProjectTheme {
+  export type AsObject = {
+    id: number,
+    name: string,
+    enddate: string,
+    lastedited: string,
+    teacher: string,
+    subject: string,
+    projects?: D_Projects.AsObject,
   }
 }
 
