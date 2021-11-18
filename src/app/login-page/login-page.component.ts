@@ -109,9 +109,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
    * @param password the password for the unilogin
    */
   public Login(name: string, password: string) {
-    this.login.CheckLogin(name, password);
-    this.spinner.show();
     var tempName = name.split("@",1);
-    tempName.toString().toLowerCase();
+    this.login.CheckLogin(tempName.toString().toLowerCase(), password);
+    this.spinner.show();
   }
 }
