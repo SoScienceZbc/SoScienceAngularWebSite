@@ -25,8 +25,7 @@ export class LoginService {
       onMessage: (Message:  LoginRepley) => {
         this.LoginCheckBehaviorSubject$.next(Message);
       },
-      onEnd: res => {}
-      
+      onEnd: res => {}      
 
     });
   }
@@ -42,8 +41,7 @@ export class LoginService {
       onMessage: (Message:  LoginRepley) => {
         reply.next(Message);
       },
-      onEnd: res => {}
-      
+      onEnd: res => {}      
 
     });
     return reply;

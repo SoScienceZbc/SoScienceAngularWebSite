@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Console } from 'console';
 import { CookieService } from 'ngx-cookie-service';
 import { LoadingService } from '../loading.service';
 import { LoginService } from '../login.service';
@@ -48,7 +49,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       if(cookie.get("Admin") == "true"){
         sessionStorage.setItem('Admin', "true");
       }
-    }else {
+    }
+    else {
       cookie.delete("Admin");
       sessionStorage.removeItem("Admin");
     }
@@ -60,10 +62,16 @@ export class LoginPageComponent implements OnInit, OnDestroy {
           sessionStorage.setItem('Admin', '' + x.getAdmin() + '');
         }
         if(cookie.check("IsCookieAllowed") && cookie.get("IsCookieAllowed") == "True"){
+
+          const testDate: Date = new Date();
+          testDate.setHours(testDate.getHours() + 24 * 14);
+          //testDate.setMinutes(testDate.getMinutes() + 1); //Time in minutes for faster testing
+
+          cookie.set("Token", x.getToken(), testDate);
+
           if(x.getAdmin()) {
-            cookie.set("Admin", x.getAdmin() + "", 14);
+            cookie.set("Admin", x.getAdmin() + "", testDate);
           }
-          cookie.set("Token", x.getToken(), 14);
         }
         if (this.testlogin) {
           this.route.navigateByUrl('/forside');
@@ -109,9 +117,13 @@ export class LoginPageComponent implements OnInit, OnDestroy {
    * @param password the password for the unilogin
    */
   public Login(name: string, password: string) {
-    this.login.CheckLogin(name, password);
+    if(name.includes("@")){
+      var tempName = name.split("@",1); //In case the user inputs their email instead of just their unilogin
+      this.login.CheckLogin(tempName.toString().toLowerCase(), password);
+    }
+    else {
+      this.login.CheckLogin(name, password);
+    }
     this.spinner.show();
-    var tempName = name.split("@",1);
-    tempName.toString().toLowerCase();
   }
 }
