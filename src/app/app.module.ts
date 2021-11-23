@@ -186,11 +186,11 @@ import { CookieComponent } from './cookie/cookie.component';
     })
   ],
   providers: [
-    DatabaseService, 
-    LoginService, 
-    LoadingService, 
+    DatabaseService,
+    LoginService,
+    LoadingService,
     AuthGuardGuard,
-    MatSidenav, 
+    MatSidenav,
     CustomMatPaginatorIntl,
     DatePipe],
   bootstrap: [AppComponent]
