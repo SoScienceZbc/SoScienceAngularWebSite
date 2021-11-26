@@ -42,8 +42,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private cookie : CookieService) 
   {
     if((cookie.get("Token") != null && cookie.get("Token") != "") || 
-    (sessionStorage.getItem("Token") != null && sessionStorage.getItem("Token") != ""))
-      route.navigate(["/forside"]); 
+    (sessionStorage.getItem("Token") != null && sessionStorage.getItem("Token") != "")) {
+      //console.log(cookie.get("Token"));
+      route.navigate(["/forside"]);
+    }
 
     if(cookie.check("Token") || sessionStorage.getItem("Token") == null){
       if(cookie.get("Admin") == "true"){
@@ -61,22 +63,27 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         if(x.getAdmin()){
           sessionStorage.setItem('Admin', '' + x.getAdmin() + '');
         }
+
         if(cookie.check("IsCookieAllowed") && cookie.get("IsCookieAllowed") == "True"){
 
-          const testDate: Date = new Date();
-          testDate.setHours(testDate.getHours() + 24 * 14);
-          //testDate.setMinutes(testDate.getMinutes() + 1); //Time in minutes for faster testing
+          console.log("Checkbox status: " + this.LoginFormGroup.get('rememberMe')?.value);
 
-          cookie.set("Token", x.getToken(), testDate);
-
-          if(x.getAdmin()) {
-            cookie.set("Admin", x.getAdmin() + "", testDate);
+          if(this.LoginFormGroup.get('rememberMe')?.value == true) {
+            const cookieExpiration: Date = new Date();
+            cookieExpiration.setHours(cookieExpiration.getHours() + 24 * 14);
+  
+            cookie.set("Token", x.getToken(), cookieExpiration);
+  
+            if(x.getAdmin()) {
+              cookie.set("Admin", x.getAdmin() + "", cookieExpiration);
+            }
           }
         }
+
         if (this.testlogin) {
           this.route.navigateByUrl('/forside');
         }
-        console.log(this.testlogin);
+        //console.log(this.testlogin);
       }
       this.spinner.hide();
     });

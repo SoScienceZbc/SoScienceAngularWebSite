@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ComponentFactoryResolver, Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
@@ -38,25 +38,33 @@ export class AuthGuardGuard implements CanActivate {
 
       if(sessionStorage.getItem("Token") !== null && sessionStorage.getItem("Token") !== "")
       {
-        let token = sessionStorage.getItem("Token");       
-        let loginreply$ = this.loginService.ValidateLogin(token!)
+        let token = sessionStorage.getItem("Token");
+        let loginreply$ = this.loginService.ValidateLogin(token!);        
+
+        console.log(loginreply$);
+
         if(token != null && token != ""){
-          if(loginreply$ != null){ //Temporary test check, remove later
-            loginreply$.subscribe(data => {
-              if(data != null){
-                console.log("has data");
+          loginreply$.subscribe(data => {
+            if(data != null){
+              console.log("data token: " + data.getToken().length);
+              if(data.getToken().length > 0) {
+                //console.log("has data");
+                //console.log(data.getToken());
+
                 if(data.getLoginsucsefull()){
+                  console.log("login successful.");
                   loginreply$.unsubscribe();
-                  if (data.getAdmin()){
-                    //sessionStorage.setItem("Admin",'' + data.getAdmin() + '');
-                    console.log("Admin exists."); 
+
+                  if (data.getAdmin() && (sessionStorage.getItem("Admin") == null || sessionStorage.getItem("Admin") == "")) {
+                    sessionStorage.setItem("Admin",'' + data.getAdmin() + '');
                   }
-                  else{
+                  else {
                     sessionStorage.removeItem("Admin");
                     this.cookie.delete("Admin");
                   }
                 }
                 else {
+                  console.log("login not successful, cookie deleted.");
                   loginreply$.unsubscribe();
                   sessionStorage.removeItem("Token");
                   sessionStorage.removeItem("Admin");
@@ -66,18 +74,18 @@ export class AuthGuardGuard implements CanActivate {
                 }
               }
               else {
-                console.log("data is empty.");
-              }
-            });
-          }
-          else {
-            console.log("login reply is empty.");
-          }
-
-        }
-        
+                loginreply$.unsubscribe();
+                console.log("Token empty");
+              } 
+            }
+            else {
+              console.log("data is empty.");               
+            }
+          });
+        }        
         return true;
       }
+      console.log("No session or no cookie to make session from");
       sessionStorage.removeItem("Token");
       sessionStorage.removeItem("Admin");
       this.cookie.delete("Token");
