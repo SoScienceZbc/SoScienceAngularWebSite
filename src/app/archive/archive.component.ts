@@ -82,7 +82,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
         } else {
           this.matdatasource.data.push((data as expandingD_Project));
           this.matdatasource._updateChangeSubscription();
-
         }
       })
       this.spinner.hide();
@@ -125,7 +124,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       , autoFocus: true,
       restoreFocus: true,
       maxHeight: '50vh',
-
     })
   }
 
@@ -142,7 +140,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
           this.download.ReadyToDownload += 100/this.download.needToDownload;
           switch (x.getType()) {
             case 'Doc':
-              this.saveAsWordFile(x.getData(),x.getTitle());
+              this.saveAsWordFile(x.getData(),x.getTitle(), project.getId());
               break;
             }
           }
@@ -170,6 +168,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     };
 
   }
+
   onSortDoneChange() {
     this.matdatasourceDoneProjects.sortingDataAccessor = (item, property) => {
       let switchValue = ""
@@ -181,8 +180,8 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       return switchValue;
     };
-
   }
+
   GetText(item:string){
     return "hallo";
   }
@@ -211,7 +210,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     mockup.clearDocumentsList();
     mockup.addDocuments(new D_Document());
     return mockup;
-
   }
 
   DeleteProject(element: D_Project) {
@@ -219,7 +217,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       data: { docoment: element, type: "P" },
       autoFocus: true,
       restoreFocus: true,
-
     });
   }
 
@@ -228,7 +225,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       data: { docoment: event, type: "D" },
       autoFocus: true,
       restoreFocus: true,
-
     });
   }
 
@@ -270,7 +266,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       restoreFocus: true,
     });
     this.matdatasourceDoneProjects._updateChangeSubscription();
-
   }
 
   openQuillViwer(event: any) {
@@ -282,10 +277,9 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       restoreFocus: true,
       maxHeight: '50vh',
     })
-
   }
 
-  async saveAsWordFile(doc : string, title : string) {
+  async saveAsWordFile(doc : string, title : string, projectID : number) {
     if (doc != ''){
       const data = await quillToWord.generateWord(JSON.parse(doc), {
         exportAs: 'blob',
@@ -297,10 +291,10 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async printPdfFile(doc : string, title : string){
     if (doc != ''){
-    const data = await pdfExporter.generatePdf(JSON.parse(doc));
-    saveAs(data as any, title + '.pdf');
-    this.download.Downloaded += 100/this.download.needToDownload;
-  }
+      const data = await pdfExporter.generatePdf(JSON.parse(doc));
+      saveAs(data as any, title + '.pdf');
+      this.download.Downloaded += 100/this.download.needToDownload;
+    }
   }
 }
 
