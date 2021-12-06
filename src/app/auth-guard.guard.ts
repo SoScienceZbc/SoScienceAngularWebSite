@@ -43,46 +43,42 @@ export class AuthGuardGuard implements CanActivate {
 
         console.log(loginreply$);
 
-        if(token != null && token != ""){
-          loginreply$.subscribe(data => {
-            if(data != null){
-              console.log("data token: " + data.getToken().length);
-              if(data.getToken().length > 0) {
-                //console.log("has data");
-                //console.log(data.getToken());
+        loginreply$.subscribe(data => {
+          if(data != null){
+            console.log("data token: " + data.getToken().length);
+            if(data.getToken().length > 0) {
 
-                if(data.getLoginsucsefull()){
-                  console.log("login successful.");
-                  loginreply$.unsubscribe();
+              if(data.getLoginsucsefull()){
+                console.log("login successful.");
+                loginreply$.unsubscribe();
 
-                  if (data.getAdmin() && (sessionStorage.getItem("Admin") == null || sessionStorage.getItem("Admin") == "")) {
-                    sessionStorage.setItem("Admin",'' + data.getAdmin() + '');
-                  }
-                  else {
-                    sessionStorage.removeItem("Admin");
-                    this.cookie.delete("Admin");
-                  }
+                if (data.getAdmin() && (sessionStorage.getItem("Admin") == null || sessionStorage.getItem("Admin") == "")) {
+                  sessionStorage.setItem("Admin",'' + data.getAdmin() + '');
                 }
                 else {
-                  console.log("login not successful, cookie deleted.");
-                  loginreply$.unsubscribe();
-                  sessionStorage.removeItem("Token");
                   sessionStorage.removeItem("Admin");
-                  this.cookie.delete("Token");
                   this.cookie.delete("Admin");
-                  this.router.navigate(["/"]);
                 }
               }
               else {
+                console.log("login not successful, cookie deleted.");
                 loginreply$.unsubscribe();
-                console.log("Token empty");
-              } 
+                sessionStorage.removeItem("Token");
+                sessionStorage.removeItem("Admin");
+                this.cookie.delete("Token");
+                this.cookie.delete("Admin");
+                this.router.navigate(["/"]);
+              }
             }
             else {
-              console.log("data is empty.");               
-            }
-          });
-        }        
+              loginreply$.unsubscribe();
+              console.log("Token empty");
+            } 
+          }
+          else {
+            console.log("data is empty.");               
+          }
+        });     
         return true;
       }
       console.log("No session or no cookie to make session from");
