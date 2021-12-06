@@ -43,12 +43,11 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   {
     if((cookie.get("Token") != null && cookie.get("Token") != "") || 
     (sessionStorage.getItem("Token") != null && sessionStorage.getItem("Token") != "")) {
-      //console.log(cookie.get("Token"));
       route.navigate(["/forside"]);
     }
 
-    if(cookie.check("Token") || sessionStorage.getItem("Token") == null){
-      if(cookie.get("Admin") == "true"){
+    if(cookie.check("Token") || sessionStorage.getItem("Token") == null) {
+      if(cookie.get("Admin") == "true") {
         sessionStorage.setItem('Admin', "true");
       }
     }
@@ -56,6 +55,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       cookie.delete("Admin");
       sessionStorage.removeItem("Admin");
     }
+
     this.login.LoginCheckBehaviorSubject$.subscribe((x) => {
       if (x.getLoginsucsefull() !== this.testlogin) {
         this.testlogin = x.getLoginsucsefull();
@@ -64,26 +64,16 @@ export class LoginPageComponent implements OnInit, OnDestroy {
           sessionStorage.setItem('Admin', '' + x.getAdmin() + '');
         }
 
-        if(cookie.check("IsCookieAllowed") && cookie.get("IsCookieAllowed") == "True"){
+        if(cookie.check("IsCookieAllowed") && 
+        cookie.get("IsCookieAllowed") == "True" && 
+        this.LoginFormGroup.get('rememberMe')?.value == true) {
 
-          console.log("Checkbox status: " + this.LoginFormGroup.get('rememberMe')?.value);
-
-          if(this.LoginFormGroup.get('rememberMe')?.value == true) {
-            const cookieExpiration: Date = new Date();
-            cookieExpiration.setHours(cookieExpiration.getHours() + 24 * 14);
-  
-            cookie.set("Token", x.getToken(), cookieExpiration);
-  
-            if(x.getAdmin()) {
-              cookie.set("Admin", x.getAdmin() + "", cookieExpiration);
-            }
-          }
+          this.createCookie(x.getToken(), x.getAdmin(), true);
         }
 
         if (this.testlogin) {
           this.route.navigateByUrl('/forside');
         }
-        //console.log(this.testlogin);
       }
       this.spinner.hide();
     });
@@ -132,5 +122,32 @@ export class LoginPageComponent implements OnInit, OnDestroy {
       this.login.CheckLogin(name, password);
     }
     this.spinner.show();
+  }
+
+  /**
+   * Creates a cookie that expires after a set amount of days
+   * @param token the cookie value
+   * @param isAdmin is user an admin
+   * @param canExpire does the cookie expire at some point
+   */
+  createCookie(token: string, isAdmin: boolean, canExpire: boolean) {
+    const cookieExpiration: Date = new Date();
+    const hoursToExpire: number = 24 * 14;
+    cookieExpiration.setHours(cookieExpiration.getHours() + hoursToExpire);
+
+    if(canExpire) {
+      this.cookie.set("Token", token, cookieExpiration);
+
+      if(isAdmin) {
+        this.cookie.set("Admin", isAdmin + "", cookieExpiration);
+      }
+    }
+    else {
+      this.cookie.set("Token", token);
+
+      if(isAdmin) {
+        this.cookie.set("Admin", isAdmin + "");
+      }
+    }
   }
 }
