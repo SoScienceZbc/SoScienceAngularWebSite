@@ -114,6 +114,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
    * @param password the password for the unilogin
    */
   public Login(name: string, password: string) {
+
     if(name.includes("@")){
       var tempName = name.split("@",1); //In case the user inputs their email instead of just their unilogin
       this.login.CheckLogin(tempName.toString().toLowerCase(), password);
@@ -149,5 +150,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         this.cookie.set("Admin", isAdmin + "");
       }
     }
+
   }
 }

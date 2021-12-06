@@ -57,7 +57,9 @@ export class AuthGuardGuard implements CanActivate {
                 }
                 else {
                   sessionStorage.removeItem("Admin");
+
                   this.cookie.delete("Admin");
+
                 }
               }
               else {
