@@ -9,24 +9,27 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 })
 export class LoginService {
 
-  hostAddress = "http://40.87.150.18:27385";
+  hostAddress = "http://93.191.157.106:27385";
   //hostAddress = "http://localhost:27385";
+  //hostAddress = "http://127.0.0.1:27385";
 
   LoginCheckBehaviorSubject$: BehaviorSubject<LoginRepley> = new BehaviorSubject<LoginRepley>(new LoginRepley());
   userlogin = {} as LoginRepley;
 
   public CheckLogin(username:string,password:string){
+    console.log("checks login");
     const user = new LoginRequset();
     user.setUsername(username);
     user.setPassword(password);
+    console.log("Try To Invoke");
     grpc.invoke(pbLoginService.LoginAD,{
       request: user,
       host: this.hostAddress,
       onMessage: (Message:  LoginRepley) => {
-        this.LoginCheckBehaviorSubject$.next(Message);
+        console.log("try Msg");
+        console.log(this.LoginCheckBehaviorSubject$.next(Message));
       },
-      onEnd: res => {}
-      
+      onEnd: res => {console.log(res);}      
 
     });
   }
@@ -42,8 +45,7 @@ export class LoginService {
       onMessage: (Message:  LoginRepley) => {
         reply.next(Message);
       },
-      onEnd: res => {}
-      
+      onEnd: res => {}   
 
     });
     return reply;

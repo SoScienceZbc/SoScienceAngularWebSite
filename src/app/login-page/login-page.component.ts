@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Console } from 'console';
 import { CookieService } from 'ngx-cookie-service';
 import { LoadingService } from '../loading.service';
 import { LoginService } from '../login.service';
@@ -41,17 +42,20 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private cookie : CookieService) 
   {
     if((cookie.get("Token") != null && cookie.get("Token") != "") || 
-    (sessionStorage.getItem("Token") != null && sessionStorage.getItem("Token") != ""))
-      route.navigate(["/forside"]); 
+    (sessionStorage.getItem("Token") != null && sessionStorage.getItem("Token") != "")) {
+      route.navigate(["/forside"]);
+    }
 
-    if(cookie.check("Token") || sessionStorage.getItem("Token") == null){
-      if(cookie.get("Admin") == "true"){
+    if(cookie.check("Token") || sessionStorage.getItem("Token") == null) {
+      if(cookie.get("Admin") == "true") {
         sessionStorage.setItem('Admin', "true");
       }
-    }else {
+    }
+    else {
       cookie.delete("Admin");
       sessionStorage.removeItem("Admin");
     }
+
     this.login.LoginCheckBehaviorSubject$.subscribe((x) => {
       if (x.getLoginsucsefull() !== this.testlogin) {
         this.testlogin = x.getLoginsucsefull();
@@ -59,16 +63,17 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         if(x.getAdmin()){
           sessionStorage.setItem('Admin', '' + x.getAdmin() + '');
         }
-        if(cookie.check("IsCookieAllowed") && cookie.get("IsCookieAllowed") == "True"){
-          if(x.getAdmin()) {
-            cookie.set("Admin", x.getAdmin() + "", 14);
-          }
-          cookie.set("Token", x.getToken(), 14);
+
+        if(cookie.check("IsCookieAllowed") && 
+        cookie.get("IsCookieAllowed") == "True" && 
+        this.LoginFormGroup.get('rememberMe')?.value == true) {
+
+          this.createCookie(x.getToken(), x.getAdmin(), true);
         }
+
         if (this.testlogin) {
           this.route.navigateByUrl('/forside');
         }
-        console.log(this.testlogin);
       }
       this.spinner.hide();
     });
@@ -109,8 +114,42 @@ export class LoginPageComponent implements OnInit, OnDestroy {
    * @param password the password for the unilogin
    */
   public Login(name: string, password: string) {
-    var tempName = name.split("@",1);
-    this.login.CheckLogin(tempName.toString().toLowerCase(), password);
+
+    if(name.includes("@")){
+      var tempName = name.split("@",1); //In case the user inputs their email instead of just their unilogin
+      this.login.CheckLogin(tempName.toString().toLowerCase(), password);
+    }
+    else {
+      this.login.CheckLogin(name, password);
+    }
     this.spinner.show();
+  }
+
+  /**
+   * Creates a cookie that expires after a set amount of days
+   * @param token the cookie value
+   * @param isAdmin is user an admin
+   * @param canExpire does the cookie expire at some point
+   */
+  createCookie(token: string, isAdmin: boolean, canExpire: boolean) {
+    const cookieExpiration: Date = new Date();
+    const hoursToExpire: number = 24 * 14;
+    cookieExpiration.setHours(cookieExpiration.getHours() + hoursToExpire);
+
+    if(canExpire) {
+      this.cookie.set("Token", token, cookieExpiration);
+
+      if(isAdmin) {
+        this.cookie.set("Admin", isAdmin + "", cookieExpiration);
+      }
+    }
+    else {
+      this.cookie.set("Token", token);
+
+      if(isAdmin) {
+        this.cookie.set("Admin", isAdmin + "");
+      }
+    }
+
   }
 }
