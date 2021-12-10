@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 })
 export class LoginService {
 
-  hostAddress = "http://93.191.157.106:27385";
+  hostAddress = "https://93.191.157.106:27385";
   //hostAddress = "http://localhost:27385";
   //hostAddress = "http://127.0.0.1:27385";
 
@@ -29,7 +29,7 @@ export class LoginService {
         console.log("try Msg");
         console.log(this.LoginCheckBehaviorSubject$.next(Message));
       },
-      onEnd: res => {console.log(res);}      
+      onEnd: res => {console.log("On End Check Login" + res);}      
 
     });
   }
