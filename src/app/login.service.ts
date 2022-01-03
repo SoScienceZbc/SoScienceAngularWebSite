@@ -3,6 +3,9 @@ import { grpc } from "@improbable-eng/grpc-web";
 import { LoginService as pbLoginService } from "./protos/AdLookupProto_pb_service";
 import { LoginRequset, LoginRepley } from "./protos/AdLookupProto_pb";
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { MockLoginReply, MockLoginRequest } from './protos/MockupProto_pb';
+import { loginMockup } from './protos/MockupProto_pb_service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +18,7 @@ export class LoginService {
 
   LoginCheckBehaviorSubject$: BehaviorSubject<LoginRepley> = new BehaviorSubject<LoginRepley>(new LoginRepley());
   userlogin = {} as LoginRepley;
+  userlogin2 = {} as MockLoginReply;
 
   public CheckLogin(username:string,password:string){
     console.log("checks login");
@@ -33,6 +37,24 @@ export class LoginService {
 
     });
   }
+
+  public loginMockupSuccessful(username:string, password:string){
+    const user = new MockLoginRequest();
+    user.setUsername(username);
+    user.setPass(password);
+
+    grpc.invoke(loginMockup.loginMockupSuccessful,{
+      request: user,
+      host: this.hostAddress,
+      onMessage: (Message:  MockLoginReply) => {
+        console.log("Reply Message: " + Message);
+      },
+      onEnd: res => {}   
+
+    });
+    
+  }
+  
   public ValidateLogin(token:string){
     const user = new LoginRepley();
     user.setToken(token);

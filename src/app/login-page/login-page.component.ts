@@ -125,6 +125,18 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.spinner.show();
   }
 
+  public Login2(name: string, password: string) {
+
+    if(name.includes("@")){
+      var tempName = name.split("@",1); //In case the user inputs their email instead of just their unilogin
+      this.login.loginMockupSuccessful(tempName.toString().toLowerCase(), password);
+    }
+    else {
+      this.login.loginMockupSuccessful(name, password);
+    }
+    this.spinner.show();
+  }
+
   /**
    * Creates a cookie that expires after a set amount of days
    * @param token the cookie value
