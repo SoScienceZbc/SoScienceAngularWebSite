@@ -29,7 +29,7 @@ export class DatabaseService {
   project = {} as D_Projects;
   
   hostAddress = 'https://93.191.157.106:27385';
-  //hostAddress = 'http://localhost:27385';
+  //hostAddress = 'https://localhost:27385';
 
   signelProject$: BehaviorSubject<D_Project> = new BehaviorSubject<D_Project>(
     new D_Project()
