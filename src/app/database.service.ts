@@ -28,7 +28,7 @@ import { DatePipe } from '@angular/common';
 export class DatabaseService {
   project = {} as D_Projects;
   
-  hostAddress = 'https://93.191.157.106:27385';
+  hostAddress = 'https://soscience.dk:27385';
   //hostAddress = 'https://localhost:27385';
 
   signelProject$: BehaviorSubject<D_Project> = new BehaviorSubject<D_Project>(
