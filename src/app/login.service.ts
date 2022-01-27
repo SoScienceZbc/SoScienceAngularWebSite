@@ -12,7 +12,7 @@ import { loginMockup } from './protos/MockupProto_pb_service';
 })
 export class LoginService {
 
-  hostAddress = "http://soscience.dk:27385";
+  hostAddress = "https://soscience.dk:27385";
   //hostAddress = "https://localhost:27385";
   //hostAddress = "http://127.0.0.1:27385";
 
