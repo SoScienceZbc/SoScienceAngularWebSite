@@ -154,7 +154,7 @@ import { CookieComponent } from './cookie/cookie.component';
     GrpcCoreModule.forRoot(),
     ImprobableEngGrpcWebClientModule.forRoot({
       settings: {
-        host: 'https://93.191.157.106:27385',
+        host: 'https://soscience.dk:27385',
         transport: grpc.CrossBrowserHttpTransport({}),
       },
     }),
