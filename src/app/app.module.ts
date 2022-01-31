@@ -79,6 +79,7 @@ import { AddRemoveUserComponent } from './settings/add-remove-user/add-remove-us
 import { AddRemoveMemberComponent } from './archive/add-remove-member/add-remove-member.component';
 import { ProjectOverviewComponent } from './settings/project-overview/project-overview.component';
 import { CookieComponent } from './cookie/cookie.component';
+import { RecordVideoComponent } from './archive/record-video/record-video.component';
 
 
 @NgModule({
@@ -104,6 +105,7 @@ import { CookieComponent } from './cookie/cookie.component';
     AddRemoveMemberComponent,
     ProjectOverviewComponent,
     CookieComponent,
+    RecordVideoComponent,
   ],
   imports: [
     BrowserModule,
