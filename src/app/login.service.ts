@@ -33,7 +33,7 @@ export class LoginService {
         console.log("try Msg");
         console.log(this.LoginCheckBehaviorSubject$.next(Message));
       },
-      onEnd: res => {console.log("On End Check Login " + res);}
+      onEnd: res => {console.log("On End Check Login" + res);}      
 
     });
   }
@@ -49,12 +49,12 @@ export class LoginService {
       onMessage: (Message:  MockLoginReply) => {
         console.log("Reply Message: " + Message);
       },
-      onEnd: res => {}
+      onEnd: res => {}   
 
     });
-
+    
   }
-
+  
   public ValidateLogin(token:string){
     const user = new LoginRepley();
     user.setToken(token);
@@ -67,7 +67,7 @@ export class LoginService {
       onMessage: (Message:  LoginRepley) => {
         reply.next(Message);
       },
-      onEnd: res => {}
+      onEnd: res => {}   
 
     });
     return reply;

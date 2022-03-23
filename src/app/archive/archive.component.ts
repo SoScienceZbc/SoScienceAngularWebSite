@@ -15,7 +15,6 @@ import { AddRemoveMemberComponent } from './add-remove-member/add-remove-member.
 import * as quillToWord from 'quill-to-word';
 import { saveAs } from 'file-saver';
 import { pdfExporter } from 'quill-to-pdf';
-import { RecordVideoComponent } from './record-video/record-video.component';
 
 /**
  * @title Table with expandable rows
@@ -37,7 +36,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent = new PageEvent();
-
+  
   download = {
     id : 0,
     needToDownload : 0,
@@ -70,7 +69,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   isExpansionDetailRow = (id: number, row: any | expandingD_Docs) => this.isExpansionDetailRows(id, row);
 
 
-  constructor(private dataserve: DatabaseService, private spinner: LoadingService, private dialog: MatDialog) {
+  constructor(private dataserve: DatabaseService, private spinner: LoadingService, private dilog: MatDialog) {
     this.dataserve.GetProjectsTheRigthWay();
 
     this.dataserve.listOfProjects$.subscribe(x => {
@@ -120,7 +119,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   OpenQuilEditor(event: any) {
     quill.register(TextEditorComponent, true);
-    this.dialog.open(TextEditorComponent, {
+    this.dilog.open(TextEditorComponent, {
       data: { docoment: event }
       , autoFocus: true,
       restoreFocus: true,
@@ -214,7 +213,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   DeleteProject(element: D_Project) {
-    this.dialog.open(DialogAreYouSureComponent, {
+    this.dilog.open(DialogAreYouSureComponent, {
       data: { docoment: element, type: "P" },
       autoFocus: true,
       restoreFocus: true,
@@ -222,25 +221,17 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   OpenDialogAreYouSureDocument(event: any) {
-    this.dialog.open(DialogAreYouSureComponent, {
+    this.dilog.open(DialogAreYouSureComponent, {
       data: { docoment: event, type: "D" },
       autoFocus: true,
       restoreFocus: true,
     });
   }
 
-  OpenRecordVideoDialog(){
-    this.dialog.open(RecordVideoComponent), {
-      data: {
-
-      }
-    }
-  }
-
   updateProject(item: D_Project) {
 
     const tempitem = item;
-    this.dialog.open(DialogAreYouSureComponent, {
+    this.dilog.open(DialogAreYouSureComponent, {
       data: { docoment: tempitem, type: "U" },
       autoFocus: true,
       restoreFocus: true,
@@ -250,7 +241,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   addMember(id : any){
-    this.dialog.open(AddRemoveMemberComponent, {
+    this.dilog.open(AddRemoveMemberComponent, {
       data: { id: id, addMemberStyle : true },
       autoFocus: true,
       restoreFocus: true,
@@ -258,18 +249,18 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   removeMember(id : any){
-    this.dialog.open(AddRemoveMemberComponent, {
+    this.dilog.open(AddRemoveMemberComponent, {
       data: { id: id, addMemberStyle : false },
       autoFocus: true,
       restoreFocus: true,
     });
   }
-
+  
 
   updateProjectUndo(item: D_Project) {
 
     const tempitem = item;
-    this.dialog.open(DialogAreYouSureComponent, {
+    this.dilog.open(DialogAreYouSureComponent, {
       data: { docoment: tempitem, type: "UU" },
       autoFocus: true,
       restoreFocus: true,
@@ -280,7 +271,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   openQuillViwer(event: any) {
 
     quill.register(QuilEditorPreViewComponent, true);
-    this.dialog.open(QuilEditorPreViewComponent, {
+    this.dilog.open(QuilEditorPreViewComponent, {
       data: { docoment: event },
       autoFocus: true,
       restoreFocus: true,
