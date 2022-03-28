@@ -9,9 +9,6 @@
     Optag ny video
   </mat-card-title>
 
-<!--
-  <video autoplay controls #videoElement></video>
-  <video controls id="videoShow"></video> -->
   <video playsinline [mediaStream]="{video: true}" (videoRecorded)="onVideo($event)"></video>
   <ng-container *ngIf="videoSrc">
     <video [src]="videoSrc"></video>
