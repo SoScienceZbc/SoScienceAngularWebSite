@@ -2,18 +2,18 @@ syntax = "proto3";
 
 option csharp_namespace = "Proto";
 
-package VideoGRPC;
+package AudioGRPC;
 
-service VideoTransfer {
-    rpc VideoSend(VideoSendRequest) returns (VideoSendReply) {}
+service AudioTransfer {
+    rpc AudioSend(AudioSendRequest) returns (AudioSendReply) {}
 }
 
 //TODO: Make correct request and reply messages
-message VideoSendRequest {
+message AudioSendRequest {
     string username = 1;
     string pass = 2;
 }
 
-message VideoSendReply {
+message AudioSendReply {
     bool MockLoginSuccess = 1;
 }
