@@ -70,7 +70,6 @@ import { DocumentAddComponent } from './archive/AddDocument/document-add/documen
 import { FooterComponent } from './footer/footer.component';
 import { DialogAreYouSureComponent } from './dialog-are-you-sure/dialog-are-you-sure.component';
 import { QuilEditorPreViewComponent } from './quil-editor-pre-view/quil-editor-pre-view.component';
-
 import { ProjectThemeFormComponent } from './settings/project-theme/add-project-theme-form/project-theme-form/project-theme-form.component';
 import { ProjectThemeDialogueBoxComponent } from './settings/project-theme/add-project-theme-dialogue-box/project-theme-dialogue-box/project-theme-dialogue-box.component';
 import { DatePipe } from '@angular/common';
@@ -79,7 +78,8 @@ import { AddRemoveUserComponent } from './settings/add-remove-user/add-remove-us
 import { AddRemoveMemberComponent } from './archive/add-remove-member/add-remove-member.component';
 import { ProjectOverviewComponent } from './settings/project-overview/project-overview.component';
 import { CookieComponent } from './cookie/cookie.component';
-
+import { RecordVideoComponent } from './archive/record-video/record-video.component';
+import { MediaStreamDirective } from './archive/record-video/mediastreamDirective/media-stream.directive';
 
 @NgModule({
   declarations: [
@@ -91,6 +91,7 @@ import { CookieComponent } from './cookie/cookie.component';
     LoginPageComponent,
     NavBarComponent,
     SettingsComponent,
+    MediaStreamDirective,
     AddProjectDialogBoxComponent,
     ProjectFormComponent,
     AddDocumentDialogBoxComponent,
@@ -104,6 +105,7 @@ import { CookieComponent } from './cookie/cookie.component';
     AddRemoveMemberComponent,
     ProjectOverviewComponent,
     CookieComponent,
+    RecordVideoComponent,
   ],
   imports: [
     BrowserModule,
@@ -192,7 +194,8 @@ import { CookieComponent } from './cookie/cookie.component';
     AuthGuardGuard,
     MatSidenav,
     CustomMatPaginatorIntl,
-    DatePipe],
+    DatePipe,
+  MediaStream],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
