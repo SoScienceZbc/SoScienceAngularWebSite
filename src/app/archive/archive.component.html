@@ -144,12 +144,12 @@
                 <span></span>
                 <button mat-mini-fab style="margin-left: 5px;" #tooltip="matTooltip"
                   color="primary"
-                  matTooltip="Optag lyd" matTooltipHideDelay="100">
+                  matTooltip="Optag lyd" matTooltipHideDelay="100" (click)="openRecordAudio">
                   <mat-icon>mic</mat-icon>
                 </button>
                 <button mat-mini-fab style="margin-left: 5px;" #tooltip="matTooltip"
                   color="primary"
-                  matTooltip="Optag Video" matTooltipHideDelay="100">
+                  matTooltip="Optag Video" matTooltipHideDelay="100" (click)="openRecordVideo()">
                   <mat-icon>videocam</mat-icon>
                 </button>
               </div>

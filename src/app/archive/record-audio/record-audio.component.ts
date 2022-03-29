@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatCard } from '@angular/material/card';
 
 @Component({
   selector: 'app-record-audio',

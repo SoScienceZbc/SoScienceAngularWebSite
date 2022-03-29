@@ -79,6 +79,7 @@ import { AddRemoveMemberComponent } from './archive/add-remove-member/add-remove
 import { ProjectOverviewComponent } from './settings/project-overview/project-overview.component';
 import { CookieComponent } from './cookie/cookie.component';
 import { RecordVideoComponent } from './archive/record-video/record-video.component';
+import { RecordAudioComponent } from './archive/record-audio/record-audio.component';
 import { MediaStreamDirective } from './archive/record-video/mediastreamDirective/media-stream.directive';
 
 @NgModule({
@@ -106,6 +107,7 @@ import { MediaStreamDirective } from './archive/record-video/mediastreamDirectiv
     ProjectOverviewComponent,
     CookieComponent,
     RecordVideoComponent,
+    RecordAudioComponent,
   ],
   imports: [
     BrowserModule,
