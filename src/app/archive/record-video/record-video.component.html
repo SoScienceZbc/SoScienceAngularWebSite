@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card style="height: 80vh; margin: 0% !important;">
   <mat-card-header style="float: right;">
     <button mat-icon-button (click)="CloseDialog()">
       <mat-icon>close</mat-icon>
@@ -9,9 +9,9 @@
     Optag ny video
   </mat-card-title>
 
-  <video playsinline [mediaStream]="{video: true}" (videoRecorded)="onVideo($event)"></video>
+  <video class="video" playsinline [mediaStream]="{video: true}" (videoRecorded)="onVideo($event)"></video>
   <ng-container *ngIf="videoSrc">
-    <video [src]="videoSrc"></video>
+    <video class="video" [src]="videoSrc"></video>
   </ng-container>
 
 
