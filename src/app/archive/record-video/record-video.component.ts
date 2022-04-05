@@ -19,15 +19,16 @@ constructor(private dialog: MatDialog, private sanitizer: DomSanitizer) { }
 ngAfterViewInit(): void {
 
 }
+  public onVideo(data: Blob): void {
+    this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
+  }
+  clearRecording() {
 
-public onVideo(data: Blob): void {
-this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
-}
-
-clearRecording() {
-
-}
+  }
   CloseDialog(){
     this.dialog.closeAll();
+  }
+  ngOnInit() {
+
   }
 }
