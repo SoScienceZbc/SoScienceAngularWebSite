@@ -10,15 +10,15 @@ import { MediaStreamDirective } from './mediastreamDirective/media-stream.direct
 })
 export class RecordVideoComponent implements AfterViewInit {
 
-@ViewChild(MediaStreamDirective)
-public mediaStream!: MediaStreamDirective;
+  @ViewChild(MediaStreamDirective)
+  public mediaStream!: MediaStreamDirective;
 
-public videoSrc!: SafeUrl;
-constructor(private dialog: MatDialog, private sanitizer: DomSanitizer) { }
+  public videoSrc!: SafeUrl;
+  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer) { }
 
-ngAfterViewInit(): void {
+  ngAfterViewInit(): void {
 
-}
+  }
   public onVideo(data: Blob): void {
     this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
   }
