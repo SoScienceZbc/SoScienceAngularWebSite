@@ -15,6 +15,9 @@ footer{
   background-color: black;
   color:white;
 }
+mat-dialog-container {
+  padding: 0 !important;
+}
 
 
 
