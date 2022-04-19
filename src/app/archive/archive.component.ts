@@ -108,7 +108,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.spinner.show();
   }
   /**
-   * This apply a filter to the matdatatable.
+   * This applies a filter to the MatDataTable.
    */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MediaStreamDirective } from './mediastreamDirective/media-stream.directive';
+import { DatabaseService } from 'src/app/database.service';
 
 @Component({
   selector: 'app-record-video',
@@ -14,7 +15,7 @@ export class RecordVideoComponent implements AfterViewInit {
 public mediaStream!: MediaStreamDirective;
 
 public videoSrc!: SafeUrl;
-constructor(private dialog: MatDialog, private sanitizer: DomSanitizer) { }
+constructor(@Inject(MAT_DIALOG_DATA) public projectid: any,private dialog: MatDialog, private sanitizer: DomSanitizer, private databaseService: DatabaseService) { }
 
 ngAfterViewInit(): void {
 
@@ -22,6 +23,11 @@ ngAfterViewInit(): void {
 
 public onVideo(data: Blob): void {
 this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
+console.log("videoSrc: ", this.videoSrc)
+console.log("vidblob: ", data)
+console.log("blob text: ", data.text)
+console.log(data.size)
+console.log(this.projectid)
 }
 
 clearRecording() {

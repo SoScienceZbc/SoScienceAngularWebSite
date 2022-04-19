@@ -1,7 +1,7 @@
 // package: DatabaseGRPC
 // file: src/app/protos/DatabaseProto.proto
 
-import * as src_app_protos_DatabaseProto_pb from "../../../src/app/protos/DatabaseProto_pb";
+import * as src_app_protos_DatabaseProto_pb from "./DatabaseProto_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
 type GrpcDatabaseProjectGetProject = {

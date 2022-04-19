@@ -27,7 +27,7 @@ import { DatePipe } from '@angular/common';
 })
 export class DatabaseService {
   project = {} as D_Projects;
-  
+
   hostAddress = 'https://soscience.dk:27385';
   //hostAddress = 'https://localhost:27385';
 
@@ -72,6 +72,14 @@ export class DatabaseService {
       },
     });
   }
+
+/**
+ *
+ * @param blob The blob returned from recording a video on the SoScience site.
+ * @param name The name used to store the blob inside the database
+ * @returns
+ */
+
   /**
    *
    * @param name the name to getproject for(note the id is the thing that is useing)
@@ -93,7 +101,7 @@ export class DatabaseService {
     });
   }
   /**
-   * This adds a D_prject to the database.
+   * This adds a D_project to the database.
    * @param name the project owner name.
    * @param projectToAdd a D_Project to add to the database.
    */
@@ -102,7 +110,7 @@ export class DatabaseService {
     let project = new D_Project();
     project.setName(title);
     project.setProjectthemeid(themeId);
-    
+
     let projectuserInfomation = new ProjectUserInfomation();
     projectuserInfomation.setProject(project);
 
@@ -323,17 +331,21 @@ export class DatabaseService {
   //#endregion
   /*-------------------RemoteFiles-------------------*/
 
+
+
+
+
   /*--------------------Subjects---------------------*/
   public AddSubject(subject: D_Subject,name:string) {
     const userinfomation = new UserDbInfomation();
     userinfomation.setDbname(name);
     subject.setUser(userinfomation);
-    
+
     grpc.invoke(GrpcDatabaseProject.AddSubject, {
       request: subject,
       host: this.hostAddress,
       onMessage: (Message: intger) => {
-      }, 
+      },
       onEnd: (res) => {},
     })
   }
@@ -368,7 +380,7 @@ export class DatabaseService {
       host: this.hostAddress,
       onMessage: (Message: intger) => {
         this.GetProjectTheme();
-      }, 
+      },
       onEnd: (res) => {},
     })
   }
