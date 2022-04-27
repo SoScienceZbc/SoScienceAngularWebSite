@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { delay } from 'rxjs/operators';
 import { MediaStreamDirective } from './mediastreamDirective/media-stream.directive';
 
 @Component({
@@ -32,11 +33,6 @@ export class RecordVideoComponent implements AfterViewInit {
     this.mediaStream.recordStop();
     this.mediaStream.stop();
     console.log(this.videoSrc)
-
-  }
-  stopCamera() {
-    this.mediaStream.stop();
-    this.clearRecording();
   }
   clearRecording(){
     this.videoSrc = "";
