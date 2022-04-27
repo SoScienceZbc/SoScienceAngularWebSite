@@ -49,15 +49,6 @@ type GrpcDatabaseProjectGetProjects = {
   readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_Projects;
 };
 
-type GrpcDatabaseProjectGetDocuments = {
-  readonly methodName: string;
-  readonly service: typeof GrpcDatabaseProject;
-  readonly requestStream: false;
-  readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
-  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_Documents;
-};
-
 type GrpcDatabaseProjectAddDocument = {
   readonly methodName: string;
   readonly service: typeof GrpcDatabaseProject;
@@ -92,6 +83,15 @@ type GrpcDatabaseProjectRemoveDocument = {
   readonly responseStream: false;
   readonly requestType: typeof src_app_protos_DatabaseProto_pb.ProjectUserInfomation;
   readonly responseType: typeof src_app_protos_DatabaseProto_pb.intger;
+};
+
+type GrpcDatabaseProjectGetDocuments = {
+  readonly methodName: string;
+  readonly service: typeof GrpcDatabaseProject;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof src_app_protos_DatabaseProto_pb.UserDbInfomation;
+  readonly responseType: typeof src_app_protos_DatabaseProto_pb.D_Documents;
 };
 
 type GrpcDatabaseProjectAddRemoteFile = {
@@ -236,11 +236,11 @@ export class GrpcDatabaseProject {
   static readonly EditProject: GrpcDatabaseProjectEditProject;
   static readonly RemoveProject: GrpcDatabaseProjectRemoveProject;
   static readonly GetProjects: GrpcDatabaseProjectGetProjects;
-  static readonly GetDocuments: GrpcDatabaseProjectGetDocuments;
   static readonly AddDocument: GrpcDatabaseProjectAddDocument;
   static readonly GetDocument: GrpcDatabaseProjectGetDocument;
   static readonly UpdateDocument: GrpcDatabaseProjectUpdateDocument;
   static readonly RemoveDocument: GrpcDatabaseProjectRemoveDocument;
+  static readonly GetDocuments: GrpcDatabaseProjectGetDocuments;
   static readonly AddRemoteFile: GrpcDatabaseProjectAddRemoteFile;
   static readonly GetRemoteFile: GrpcDatabaseProjectGetRemoteFile;
   static readonly UpdateRemoteFile: GrpcDatabaseProjectUpdateRemoteFile;
@@ -335,15 +335,6 @@ export class GrpcDatabaseProjectClient {
     requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
     callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Projects|null) => void
   ): UnaryResponse;
-  getDocuments(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-    metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Documents|null) => void
-  ): UnaryResponse;
-  getDocuments(
-    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Documents|null) => void
-  ): UnaryResponse;
   addDocument(
     requestMessage: src_app_protos_DatabaseProto_pb.D_Document,
     metadata: grpc.Metadata,
@@ -379,6 +370,15 @@ export class GrpcDatabaseProjectClient {
   removeDocument(
     requestMessage: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
     callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.intger|null) => void
+  ): UnaryResponse;
+  getDocuments(
+    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Documents|null) => void
+  ): UnaryResponse;
+  getDocuments(
+    requestMessage: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_DatabaseProto_pb.D_Documents|null) => void
   ): UnaryResponse;
   addRemoteFile(
     requestMessage: src_app_protos_DatabaseProto_pb.D_RemoteFile,

@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { delay } from 'rxjs/operators';
 import { MediaStreamDirective } from './mediastreamDirective/media-stream.directive';
+import { DatabaseService } from 'src/app/database.service';
 
 @Component({
   selector: 'app-record-video',

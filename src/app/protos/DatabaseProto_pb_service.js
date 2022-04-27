@@ -55,15 +55,6 @@ GrpcDatabaseProject.GetProjects = {
   responseType: src_app_protos_DatabaseProto_pb.D_Projects
 };
 
-GrpcDatabaseProject.GetDocuments = {
-  methodName: "GetDocuments",
-  service: GrpcDatabaseProject,
-  requestStream: false,
-  responseStream: false,
-  requestType: src_app_protos_DatabaseProto_pb.UserDbInfomation,
-  responseType: src_app_protos_DatabaseProto_pb.D_Documents
-};
-
 GrpcDatabaseProject.AddDocument = {
   methodName: "AddDocument",
   service: GrpcDatabaseProject,
@@ -98,6 +89,15 @@ GrpcDatabaseProject.RemoveDocument = {
   responseStream: false,
   requestType: src_app_protos_DatabaseProto_pb.ProjectUserInfomation,
   responseType: src_app_protos_DatabaseProto_pb.intger
+};
+
+GrpcDatabaseProject.GetDocuments = {
+  methodName: "GetDocuments",
+  service: GrpcDatabaseProject,
+  requestStream: false,
+  responseStream: false,
+  requestType: src_app_protos_DatabaseProto_pb.UserDbInfomation,
+  responseType: src_app_protos_DatabaseProto_pb.D_Documents
 };
 
 GrpcDatabaseProject.AddRemoteFile = {
@@ -397,37 +397,6 @@ GrpcDatabaseProjectClient.prototype.getProjects = function getProjects(requestMe
   };
 };
 
-GrpcDatabaseProjectClient.prototype.getDocuments = function getDocuments(requestMessage, metadata, callback) {
-  if (arguments.length === 2) {
-    callback = arguments[1];
-  }
-  var client = grpc.unary(GrpcDatabaseProject.GetDocuments, {
-    request: requestMessage,
-    host: this.serviceHost,
-    metadata: metadata,
-    transport: this.options.transport,
-    debug: this.options.debug,
-    onEnd: function (response) {
-      if (callback) {
-        if (response.status !== grpc.Code.OK) {
-          var err = new Error(response.statusMessage);
-          err.code = response.status;
-          err.metadata = response.trailers;
-          callback(err, null);
-        } else {
-          callback(null, response.message);
-        }
-      }
-    }
-  });
-  return {
-    cancel: function () {
-      callback = null;
-      client.close();
-    }
-  };
-};
-
 GrpcDatabaseProjectClient.prototype.addDocument = function addDocument(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
@@ -526,6 +495,37 @@ GrpcDatabaseProjectClient.prototype.removeDocument = function removeDocument(req
     callback = arguments[1];
   }
   var client = grpc.unary(GrpcDatabaseProject.RemoveDocument, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrpcDatabaseProjectClient.prototype.getDocuments = function getDocuments(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(GrpcDatabaseProject.GetDocuments, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

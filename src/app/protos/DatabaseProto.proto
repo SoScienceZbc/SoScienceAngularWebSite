@@ -6,32 +6,44 @@ package DatabaseGRPC;
 
 service GrpcDatabaseProject {
 //Project Grud
-  rpc GetProject(UserDbInfomation) returns (D_Project);
-  rpc AddProject(ProjectUserInfomation) returns (intger);
-  rpc EditProject(ProjectUserInfomation) returns (intger);
-  rpc RemoveProject(ProjectUserInfomation) returns (intger);
+rpc GetProject(UserDbInfomation) returns (D_Project);
+rpc AddProject(ProjectUserInfomation) returns (intger);
+rpc EditProject(ProjectUserInfomation) returns (intger);
+rpc RemoveProject(ProjectUserInfomation) returns (intger);
+rpc GetProjects(UserDbInfomation) returns (D_Projects);
 
-  rpc GetProjects(UserDbInfomation) returns (D_Projects);
-  rpc GetDocuments(UserDbInfomation) returns (D_Documents);
 // documents
 rpc AddDocument(D_Document) returns (intger);
 rpc GetDocument(UserDbInfomation) returns (D_Document);
 rpc UpdateDocument(D_Document) returns (intger);
 rpc RemoveDocument(ProjectUserInfomation) returns (intger);
+rpc GetDocuments(UserDbInfomation) returns (D_Documents);
+
 // RemoteFile
 rpc AddRemoteFile(D_RemoteFile) returns (intger);
 rpc GetRemoteFile(UserDbInfomation) returns (D_RemoteFile);
 rpc UpdateRemoteFile(D_RemoteFile) returns (D_RemoteFile);
 rpc RemoveRemoteFile(UserDbInfomation) returns (intger);
 rpc GetRemoteFiles(UserDbInfomation) returns (D_RemoteFiles);
+
+// RemoteMedia
+//  rpc AddRemoteMedia(D_RemoteMedia) returns (intger);
+// rpc GetRemoteMedia(UserDbInfomation) returns (D_RemoteMedia);
+// rpc UpdateRemoteMedia(D_RemoteMedia) returns (D_RemoteMedia);
+// rpc RemoteRemoteMedia(UserDbInfomation) returns (intger);
+// rpc GetRemoteMedias(UserDbInfomation) returns (D_RemoteMedia);
+
 // Subject
 rpc AddSubject(D_Subject) returns (intger);
 rpc GetSubjects(UserDbInfomation) returns (D_Subjects);
+
 // ProjectTheme
 rpc AddProjectTheme(D_ProjectTheme) returns (intger);
 rpc GetProjectThemes(UserDbInfomation) returns (D_ProjectThemes);
 rpc GetProjectThemesFromSubject(ThemeFromSubject) returns (D_ProjectThemes);
 rpc RemoveProjectTheme(ProjectThemeUserInfomation) returns (intger);
+
+// ProjectThemeCoTeacher
 rpc AddProjectThemeCoTeacher(ProjectThemeUserInfomation) returns (intger);
 rpc RemoveProjectThemeCoTeacher(ProjectThemeUserInfomation) returns (intger);
 rpc AddProjectMember(MemberInformation) returns (intger);
@@ -50,7 +62,7 @@ message MemberInformation {
 
 message UserDbInfomation{
     int32 ID = 1;
-    string DbName = 2;     
+    string DbName = 2;
 }
 
 message ProjectUserInfomation{
@@ -79,6 +91,9 @@ message D_Projects{
 message D_RemoteFiles{
     repeated D_RemoteFile D_RemoteFile = 1;
 }
+//message D_RemoteMedia{
+  //  repeated D_RemoteMedia D_RemoteMedia = 1;
+//}
 message D_Subjects{
     repeated D_Subject Subject = 1;
 }
@@ -115,6 +130,15 @@ message D_RemoteFile{
      int32 projectID = 4;
      string path = 5;
 }
+
+// RemoteMedia
+// message D_RemoteMedia{
+  //int32 ID = 1;
+  //string title = 2;
+  //string type = 3;
+  //int32 projectID = 4;
+  //bytes blobData = 5;
+//}
 
 // Subject
 message D_Subject {
