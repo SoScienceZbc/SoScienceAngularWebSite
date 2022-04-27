@@ -11,16 +11,13 @@
 
   <video class="video" playsinline [mediaStream]="{video: true}" (videoRecorded)="onVideo($event)"></video>
   <ng-container *ngIf="videoSrc">
-    <video class="video" [src]="videoSrc"></video>
+    <video class="video" controls [src]="videoSrc"></video>
   </ng-container>
 
 
     <mat-card-footer>
-      <button id="btnStart" mat-raised-button (click)="mediaStream.play()">Start video</button>
-      <button id="btnStop" mat-raised-button (click)="mediaStream.stop()">Stop video</button>
-      <button mat-raised-button (click)="mediaStream.recordStart()">Optag</button>
-      <button mat-raised-button (click)="mediaStream.recordStop()">Stop optag</button>
-      <button id="btnClear" mat-raised-button (click)="clearRecording()">Clear</button>
-      <button id="btnDownload" mat-raised-button >Download</button>
+      <button mat-raised-button (click)="startCamera()">Start Kamera</button>
+      <button mat-raised-button (click)="startRecord()">Optag</button>
+      <button mat-raised-button (click)="stopRecord()"><mat-icon>stop</mat-icon></button>
     </mat-card-footer>
 </mat-card>

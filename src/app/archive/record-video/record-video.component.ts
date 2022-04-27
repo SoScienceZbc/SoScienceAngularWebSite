@@ -17,18 +17,34 @@ export class RecordVideoComponent implements AfterViewInit {
   constructor(private dialog: MatDialog, private sanitizer: DomSanitizer) { }
 
   ngAfterViewInit(): void {
-
+    this.mediaStream.play();
   }
   public onVideo(data: Blob): void {
     this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
   }
-  clearRecording() {
+  startCamera(){
+    this.mediaStream.play();
+  }
+  startRecord(){
+    this.mediaStream.recordStart();
+  }
+  stopRecord(){
+    this.mediaStream.recordStop();
+    this.mediaStream.stop();
+    console.log(this.videoSrc)
 
+  }
+  stopCamera() {
+    this.mediaStream.stop();
+    this.clearRecording();
+  }
+  clearRecording(){
+    this.videoSrc = "";
   }
   CloseDialog(){
     this.dialog.closeAll();
   }
-  ngOnInit() {
 
-  }
+
+
 }
