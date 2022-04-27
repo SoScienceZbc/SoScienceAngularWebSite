@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { delay } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { MediaStreamDirective } from './mediastreamDirective/media-stream.direct
   templateUrl: './record-video.component.html',
   styleUrls: ['./record-video.component.css']
 })
-export class RecordVideoComponent implements AfterViewInit {
+export class RecordVideoComponent implements AfterViewInit{
 
   @ViewChild(MediaStreamDirective)
   public mediaStream!: MediaStreamDirective;
@@ -36,6 +36,9 @@ export class RecordVideoComponent implements AfterViewInit {
   }
   clearRecording(){
     this.videoSrc = "";
+  }
+  save(){
+
   }
   CloseDialog(){
     this.dialog.closeAll();
