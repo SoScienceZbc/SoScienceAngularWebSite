@@ -27,11 +27,11 @@ rpc RemoveRemoteFile(UserDbInfomation) returns (intger);
 rpc GetRemoteFiles(UserDbInfomation) returns (D_RemoteFiles);
 
 // RemoteMedia
-rpc AddRemoteMedia(D_RemoteMedia) returns (intger);
-rpc GetRemoteMedia(UserDbInfomation) returns (D_RemoteMedia);
-rpc UpdateRemoteMedia(D_RemoteMedia) returns (D_RemoteMedia);
-rpc RemoteRemoteMedia(UserDbInfomation) returns (intger);
-rpc GetRemoteMedias(UserDbInfomation) returns (D_RemoteMedia);
+//  rpc AddRemoteMedia(D_RemoteMedia) returns (intger);
+// rpc GetRemoteMedia(UserDbInfomation) returns (D_RemoteMedia);
+// rpc UpdateRemoteMedia(D_RemoteMedia) returns (D_RemoteMedia);
+// rpc RemoteRemoteMedia(UserDbInfomation) returns (intger);
+// rpc GetRemoteMedias(UserDbInfomation) returns (D_RemoteMedia);
 
 // Subject
 rpc AddSubject(D_Subject) returns (intger);
@@ -91,9 +91,9 @@ message D_Projects{
 message D_RemoteFiles{
     repeated D_RemoteFile D_RemoteFile = 1;
 }
-message D_RemoteMedia{
-    repeated D_RemoteMedia D_RemoteMedia = 1;
-}
+//message D_RemoteMedia{
+  //  repeated D_RemoteMedia D_RemoteMedia = 1;
+//}
 message D_Subjects{
     repeated D_Subject Subject = 1;
 }
@@ -132,13 +132,13 @@ message D_RemoteFile{
 }
 
 // RemoteMedia
-message D_RemoteMedia{
-  int32 ID = 1;
-  string title = 2;
-  string type = 3;
-  int32 projectID = 4;
-  bytes blobData = 5;
-}
+// message D_RemoteMedia{
+  //int32 ID = 1;
+  //string title = 2;
+  //string type = 3;
+  //int32 projectID = 4;
+  //bytes blobData = 5;
+//}
 
 // Subject
 message D_Subject {

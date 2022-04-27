@@ -403,44 +403,6 @@ export namespace D_RemoteFile {
   }
 }
 
-export class D_RemoteMedia extends jspb.Message {
-  getId(): number;
-  setId(value: number): void;
-
-  getTitle(): string;
-  setTitle(value: string): void;
-
-  getType(): string;
-  setType(value: string): void;
-
-  getProjectid(): number;
-  setProjectid(value: number): void;
-
-  getBlobdata(): Uint8Array | string;
-  getBlobdata_asU8(): Uint8Array;
-  getBlobdata_asB64(): string;
-  setBlobdata(value: Uint8Array | string): void;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): D_RemoteMedia.AsObject;
-  static toObject(includeInstance: boolean, msg: D_RemoteMedia): D_RemoteMedia.AsObject;
-  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: D_RemoteMedia, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): D_RemoteMedia;
-  static deserializeBinaryFromReader(message: D_RemoteMedia, reader: jspb.BinaryReader): D_RemoteMedia;
-}
-
-export namespace D_RemoteMedia {
-  export type AsObject = {
-    id: number,
-    title: string,
-    type: string,
-    projectid: number,
-    blobdata: Uint8Array | string,
-  }
-}
-
 export class D_Subject extends jspb.Message {
   hasUser(): boolean;
   clearUser(): void;
