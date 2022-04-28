@@ -52,7 +52,7 @@ RemoteMediaService.GetVideos = {
   requestStream: false,
   responseStream: false,
   requestType: src_app_protos_RemoteMediaProto_pb.UserDbInformation,
-  responseType: src_app_protos_RemoteMediaProto_pb.VideoRequests
+  responseType: src_app_protos_RemoteMediaProto_pb.VideosReply
 };
 
 exports.RemoteMediaService = RemoteMediaService;

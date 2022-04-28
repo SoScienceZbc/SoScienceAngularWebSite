@@ -26,13 +26,6 @@ rpc UpdateRemoteFile(D_RemoteFile) returns (D_RemoteFile);
 rpc RemoveRemoteFile(UserDbInfomation) returns (intger);
 rpc GetRemoteFiles(UserDbInfomation) returns (D_RemoteFiles);
 
-// RemoteMedia
-//  rpc AddRemoteMedia(D_RemoteMedia) returns (intger);
-// rpc GetRemoteMedia(UserDbInfomation) returns (D_RemoteMedia);
-// rpc UpdateRemoteMedia(D_RemoteMedia) returns (D_RemoteMedia);
-// rpc RemoteRemoteMedia(UserDbInfomation) returns (intger);
-// rpc GetRemoteMedias(UserDbInfomation) returns (D_RemoteMedia);
-
 // Subject
 rpc AddSubject(D_Subject) returns (intger);
 rpc GetSubjects(UserDbInfomation) returns (D_Subjects);
@@ -91,9 +84,7 @@ message D_Projects{
 message D_RemoteFiles{
     repeated D_RemoteFile D_RemoteFile = 1;
 }
-//message D_RemoteMedia{
-  //  repeated D_RemoteMedia D_RemoteMedia = 1;
-//}
+
 message D_Subjects{
     repeated D_Subject Subject = 1;
 }

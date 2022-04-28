@@ -21,19 +21,51 @@ export class MediaServiceService {
       onMessage: (successfull: VideoReply) => {
         console.log("Video added to db: " + successfull);
       },
-      onEnd: (res) => {}
+      onEnd: () => {}
     })
   }
 
-  public GetVideo() {
-
+  public GetVideo(videoId: number) {
+    const getVideoRequest = new RetrieveVideoRequest();
+    getVideoRequest.setId(videoId);
+    grpc.invoke(RemoteMediaService.RetrieveVideo, {
+      request: getVideoRequest,
+      host: this.hostAddress,
+      onMessage: (videoElement: RetrieveVideoReply) => {
+        //TODO: Display retrieved video in the popup window
+      },
+      onEnd: () => {}
+    })
   }
 
-  public UpdateVideo() {
-
+  public UpdateVideo(videoId: number, titleToChange: string) {
+    const changeTitle = new ChangeTitleRequest();
+    changeTitle.setId(videoId);
+    changeTitle.setTitle(titleToChange);
+    grpc.invoke(RemoteMediaService.UpdateVideo, {
+      request: changeTitle,
+      host: this.hostAddress,
+      onMessage: (successfull: VideoReply) => {
+        console.log("video name changed: " + successfull)
+      },
+      onEnd: () => {}
+    })
   }
 
-  public DeleteVideo() {
+  public DeleteVideo(videoId: number) {
+    const videoToDelete = new RetrieveVideoRequest();
+    videoToDelete.setId(videoId);
+    grpc.invoke(RemoteMediaService.DeleteVideo, {
+      request: videoToDelete,
+      host: this.hostAddress,
+      onMessage: (successfull: VideoReply) => {
+        console.log("video deleted successfully: " + successfull)
+      },
+      onEnd: () => {}
+    })
+  }
+
+  public GetVideos(id: number) {
 
   }
 }

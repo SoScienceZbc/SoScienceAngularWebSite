@@ -8,13 +8,14 @@ service RemoteMediaService {
     rpc RetrieveVideo(RetrieveVideoRequest) returns (RetrieveVideoReply);
     rpc UpdateVideo(ChangeTitleRequest) returns (VideoReply);
     rpc DeleteVideo(RetrieveVideoRequest) returns (VideoReply);
-    rpc GetVideos(UserDbInformation) returns (VideoRequests);
+    rpc GetVideos(UserDbInformation) returns (VideosReply);
 }
 
 message VideoRequest {
     int32 ID = 1;
     int32 projectID = 2;
     string title = 3;
+    //video type (audio, video)
     string type = 4;
     bytes blobdata = 5;
 }
@@ -44,4 +45,9 @@ message RetrieveVideoReply {
 
 message VideoRequests {
   repeated VideoRequest VideoRequests = 1;
+}
+
+message VideosReply {
+  string title = 1;
+  string type = 2;
 }

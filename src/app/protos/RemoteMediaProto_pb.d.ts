@@ -177,3 +177,27 @@ export namespace VideoRequests {
   }
 }
 
+export class VideosReply extends jspb.Message {
+  getTitle(): string;
+  setTitle(value: string): void;
+
+  getType(): string;
+  setType(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): VideosReply.AsObject;
+  static toObject(includeInstance: boolean, msg: VideosReply): VideosReply.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: VideosReply, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): VideosReply;
+  static deserializeBinaryFromReader(message: VideosReply, reader: jspb.BinaryReader): VideosReply;
+}
+
+export namespace VideosReply {
+  export type AsObject = {
+    title: string,
+    type: string,
+  }
+}
+
