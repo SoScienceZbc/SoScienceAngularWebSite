@@ -9,7 +9,7 @@
     Optag ny video
   </mat-card-title>
 
-  <ng-container *ngIf="!videoSrc;">
+  <ng-container *ngIf="!videoSrc">
   <video class="video" playsinline [mediaStream]="{video: true}" (videoRecorded)="onVideo($event)"></video>
   </ng-container>
   <ng-container *ngIf="videoSrc">
@@ -18,11 +18,11 @@
 
 
     <mat-card-footer style="text-align: center;">
-      <button mat-raised-button (click)="startCamera()"><mat-icon>videocam</mat-icon></button>
-      <button mat-raised-button (click)="startRecord()"><mat-icon style="color: red;">fiber_manual_record</mat-icon></button>
-      <button mat-raised-button (click)="stopRecord()"><mat-icon>stop</mat-icon></button>
-      <button mat-raised-button (click)="clearRecording()"><mat-icon>replay</mat-icon></button>
-      <button mat-raised-button (click)="save()"><mat-icon>save</mat-icon></button>
+      <button mat-raised-button class="button" (click)="startCamera()"><mat-icon>videocam</mat-icon></button>
+      <button mat-raised-button class="button" (click)="startRecord()"><mat-icon style="color: red;">fiber_manual_record</mat-icon></button>
+      <button mat-raised-button class="button" (click)="stopRecord()"><mat-icon>stop</mat-icon></button>
+      <button mat-raised-button class="button" (click)="clearRecording()"><mat-icon>replay</mat-icon></button>
+      <button mat-raised-button class="button" (click)="save()"><mat-icon>save</mat-icon></button>
 
     </mat-card-footer>
 </mat-card>
