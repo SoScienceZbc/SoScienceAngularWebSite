@@ -5,6 +5,10 @@
 }
 .button{
   background-color: #3f51b5;
-  padding-left: 1px;
-  padding-right: 1px;
+  margin-left: 2px;
+  margin-right: 2px;
+  color: white;
+}
+.button:hover{
+  background-color: transparent;
 }
