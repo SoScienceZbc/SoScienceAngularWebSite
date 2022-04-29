@@ -10,49 +10,49 @@ var RemoteMediaService = (function () {
   return RemoteMediaService;
 }());
 
-RemoteMediaService.SendVideo = {
-  methodName: "SendVideo",
+RemoteMediaService.SendMedia = {
+  methodName: "SendMedia",
   service: RemoteMediaService,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_RemoteMediaProto_pb.VideoRequest,
-  responseType: src_app_protos_RemoteMediaProto_pb.VideoReply
+  requestType: src_app_protos_RemoteMediaProto_pb.MediaRequest,
+  responseType: src_app_protos_RemoteMediaProto_pb.MediaReply
 };
 
-RemoteMediaService.RetrieveVideo = {
-  methodName: "RetrieveVideo",
+RemoteMediaService.RetrieveMedia = {
+  methodName: "RetrieveMedia",
   service: RemoteMediaService,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_RemoteMediaProto_pb.RetrieveVideoRequest,
-  responseType: src_app_protos_RemoteMediaProto_pb.RetrieveVideoReply
+  requestType: src_app_protos_RemoteMediaProto_pb.RetrieveMediaRequest,
+  responseType: src_app_protos_RemoteMediaProto_pb.RetrieveMediaReply
 };
 
-RemoteMediaService.UpdateVideo = {
-  methodName: "UpdateVideo",
+RemoteMediaService.UpdateMedia = {
+  methodName: "UpdateMedia",
   service: RemoteMediaService,
   requestStream: false,
   responseStream: false,
   requestType: src_app_protos_RemoteMediaProto_pb.ChangeTitleRequest,
-  responseType: src_app_protos_RemoteMediaProto_pb.VideoReply
+  responseType: src_app_protos_RemoteMediaProto_pb.MediaReply
 };
 
-RemoteMediaService.DeleteVideo = {
-  methodName: "DeleteVideo",
+RemoteMediaService.DeleteMedia = {
+  methodName: "DeleteMedia",
   service: RemoteMediaService,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_RemoteMediaProto_pb.RetrieveVideoRequest,
-  responseType: src_app_protos_RemoteMediaProto_pb.VideoReply
+  requestType: src_app_protos_RemoteMediaProto_pb.RetrieveMediaRequest,
+  responseType: src_app_protos_RemoteMediaProto_pb.MediaReply
 };
 
-RemoteMediaService.GetVideos = {
-  methodName: "GetVideos",
+RemoteMediaService.GetMedias = {
+  methodName: "GetMedias",
   service: RemoteMediaService,
   requestStream: false,
   responseStream: false,
   requestType: src_app_protos_RemoteMediaProto_pb.UserDbInformation,
-  responseType: src_app_protos_RemoteMediaProto_pb.VideosReply
+  responseType: src_app_protos_RemoteMediaProto_pb.MediaRequests
 };
 
 exports.RemoteMediaService = RemoteMediaService;
@@ -62,11 +62,11 @@ function RemoteMediaServiceClient(serviceHost, options) {
   this.options = options || {};
 }
 
-RemoteMediaServiceClient.prototype.sendVideo = function sendVideo(requestMessage, metadata, callback) {
+RemoteMediaServiceClient.prototype.sendMedia = function sendMedia(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(RemoteMediaService.SendVideo, {
+  var client = grpc.unary(RemoteMediaService.SendMedia, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -93,11 +93,11 @@ RemoteMediaServiceClient.prototype.sendVideo = function sendVideo(requestMessage
   };
 };
 
-RemoteMediaServiceClient.prototype.retrieveVideo = function retrieveVideo(requestMessage, metadata, callback) {
+RemoteMediaServiceClient.prototype.retrieveMedia = function retrieveMedia(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(RemoteMediaService.RetrieveVideo, {
+  var client = grpc.unary(RemoteMediaService.RetrieveMedia, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -124,11 +124,11 @@ RemoteMediaServiceClient.prototype.retrieveVideo = function retrieveVideo(reques
   };
 };
 
-RemoteMediaServiceClient.prototype.updateVideo = function updateVideo(requestMessage, metadata, callback) {
+RemoteMediaServiceClient.prototype.updateMedia = function updateMedia(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(RemoteMediaService.UpdateVideo, {
+  var client = grpc.unary(RemoteMediaService.UpdateMedia, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -155,11 +155,11 @@ RemoteMediaServiceClient.prototype.updateVideo = function updateVideo(requestMes
   };
 };
 
-RemoteMediaServiceClient.prototype.deleteVideo = function deleteVideo(requestMessage, metadata, callback) {
+RemoteMediaServiceClient.prototype.deleteMedia = function deleteMedia(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(RemoteMediaService.DeleteVideo, {
+  var client = grpc.unary(RemoteMediaService.DeleteMedia, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,
@@ -186,11 +186,11 @@ RemoteMediaServiceClient.prototype.deleteVideo = function deleteVideo(requestMes
   };
 };
 
-RemoteMediaServiceClient.prototype.getVideos = function getVideos(requestMessage, metadata, callback) {
+RemoteMediaServiceClient.prototype.getMedias = function getMedias(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(RemoteMediaService.GetVideos, {
+  var client = grpc.unary(RemoteMediaService.GetMedias, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

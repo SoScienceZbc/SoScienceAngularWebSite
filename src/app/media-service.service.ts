@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {grpc} from '@improbable-eng/grpc-web';
 import {RemoteMediaService} from './protos/RemoteMediaProto_pb_service';
-import { VideoRequest, VideoReply, UserDbInformation, RetrieveVideoRequest, RetrieveVideoReply, ChangeTitleRequest, VideoRequests } from './protos/RemoteMediaProto_pb';
+import { MediaRequest, MediaReply, UserDbInformation, RetrieveMediaRequest, RetrieveMediaReply, ChangeTitleRequest, MediaRequests, MediasReply } from './protos/RemoteMediaProto_pb';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
 @Injectable({
@@ -13,25 +13,26 @@ export class MediaServiceService {
 
   constructor() { }
 
-  public AddRecordedVideo(video: VideoRequest ) {
+  public AddRecordedVideo(video: MediaRequest) {
     const videoToAdd = video;
-    grpc.invoke(RemoteMediaService.SendVideo, {
+    grpc.invoke(RemoteMediaService.SendMedia, {
       request: videoToAdd,
       host: this.hostAddress,
-      onMessage: (successfull: VideoReply) => {
+      onMessage: (successfull: MediaReply) => {
+        console.log("AddVideo Message");
         console.log("Video added to db: " + successfull);
       },
-      onEnd: () => {}
+      onEnd: res => {console.log("On End AddVideo: " + res)}
     })
   }
 
   public GetVideo(videoId: number) {
-    const getVideoRequest = new RetrieveVideoRequest();
+    const getVideoRequest = new RetrieveMediaRequest();
     getVideoRequest.setId(videoId);
-    grpc.invoke(RemoteMediaService.RetrieveVideo, {
+    grpc.invoke(RemoteMediaService.RetrieveMedia, {
       request: getVideoRequest,
       host: this.hostAddress,
-      onMessage: (videoElement: RetrieveVideoReply) => {
+      onMessage: (videoElement: RetrieveMediaReply) => {
         //TODO: Display retrieved video in the popup window
       },
       onEnd: () => {}
@@ -42,10 +43,10 @@ export class MediaServiceService {
     const changeTitle = new ChangeTitleRequest();
     changeTitle.setId(videoId);
     changeTitle.setTitle(titleToChange);
-    grpc.invoke(RemoteMediaService.UpdateVideo, {
+    grpc.invoke(RemoteMediaService.UpdateMedia, {
       request: changeTitle,
       host: this.hostAddress,
-      onMessage: (successfull: VideoReply) => {
+      onMessage: (successfull: MediaReply) => {
         console.log("video name changed: " + successfull)
       },
       onEnd: () => {}
@@ -53,19 +54,32 @@ export class MediaServiceService {
   }
 
   public DeleteVideo(videoId: number) {
-    const videoToDelete = new RetrieveVideoRequest();
+    const videoToDelete = new RetrieveMediaRequest();
     videoToDelete.setId(videoId);
-    grpc.invoke(RemoteMediaService.DeleteVideo, {
+    grpc.invoke(RemoteMediaService.DeleteMedia, {
       request: videoToDelete,
       host: this.hostAddress,
-      onMessage: (successfull: VideoReply) => {
+      onMessage: (successfull: MediaReply) => {
         console.log("video deleted successfully: " + successfull)
       },
       onEnd: () => {}
     })
+
   }
 
-  public GetVideos(id: number) {
-
+  public GetAllVideos(id: number): Observable<MediaRequests> {
+    const userInformation = new UserDbInformation();
+    userInformation.setUsername(sessionStorage.getItem("Token")!);
+    userInformation.setId(id);
+    const medias: BehaviorSubject<MediaRequests> = new BehaviorSubject<MediaRequests>(new MediaRequests);
+    grpc.invoke(RemoteMediaService.GetMedias, {
+      request: userInformation,
+      host: this.hostAddress,
+      onMessage: (message: MediaRequests) => {
+        medias.next(message);
+      },
+      onEnd: () => {}
+    })
+    return medias;
   }
 }
