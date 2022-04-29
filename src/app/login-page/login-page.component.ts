@@ -5,6 +5,8 @@ import { Console } from 'console';
 import { CookieService } from 'ngx-cookie-service';
 import { LoadingService } from '../loading.service';
 import { LoginService } from '../login.service';
+import { MediaServiceService } from '../media-service.service';
+import { VideoRequest } from '../protos/RemoteMediaProto_pb';
 
 @Component({
   selector: 'app-login-page',
@@ -23,7 +25,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     Validators.required,
     Validators.minLength(5),
   ]);
-  
+
   rememberMeFormControl = new FormControl(false);
 
   LoginFormGroup = new FormGroup({
@@ -39,9 +41,10 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private login: LoginService,
     public spinner: LoadingService,
     private route: Router,
-    private cookie : CookieService) 
+    private cookie : CookieService,
+    private mediaService: MediaServiceService)
   {
-    if((cookie.get("Token") != null && cookie.get("Token") != "") || 
+    if((cookie.get("Token") != null && cookie.get("Token") != "") ||
     (sessionStorage.getItem("Token") != null && sessionStorage.getItem("Token") != "")) {
       route.navigate(["/forside"]);
     }
@@ -64,8 +67,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
           sessionStorage.setItem('Admin', '' + x.getAdmin() + '');
         }
 
-        if(cookie.check("IsCookieAllowed") && 
-        cookie.get("IsCookieAllowed") == "True" && 
+        if(cookie.check("IsCookieAllowed") &&
+        cookie.get("IsCookieAllowed") == "True" &&
         this.LoginFormGroup.get('rememberMe')?.value == true) {
 
           this.createCookie(x.getToken(), x.getAdmin(), true);
@@ -105,9 +108,12 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    
+
    }
 
+   newMethod() {
+    this.mediaService.AddRecordedVideo(new VideoRequest);
+   }
   /**
    * this checks if the user can login and emits a boolian.
    * @param name the unilogin

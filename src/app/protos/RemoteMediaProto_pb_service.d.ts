@@ -4,58 +4,58 @@
 import * as src_app_protos_RemoteMediaProto_pb from "../../../src/app/protos/RemoteMediaProto_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
-type RemoteMediaServiceSendVideo = {
+type RemoteMediaServiceSendMedia = {
   readonly methodName: string;
   readonly service: typeof RemoteMediaService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_RemoteMediaProto_pb.VideoRequest;
-  readonly responseType: typeof src_app_protos_RemoteMediaProto_pb.VideoReply;
+  readonly requestType: typeof src_app_protos_RemoteMediaProto_pb.MediaRequest;
+  readonly responseType: typeof src_app_protos_RemoteMediaProto_pb.MediaReply;
 };
 
-type RemoteMediaServiceRetrieveVideo = {
+type RemoteMediaServiceRetrieveMedia = {
   readonly methodName: string;
   readonly service: typeof RemoteMediaService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_RemoteMediaProto_pb.RetrieveVideoRequest;
-  readonly responseType: typeof src_app_protos_RemoteMediaProto_pb.RetrieveVideoReply;
+  readonly requestType: typeof src_app_protos_RemoteMediaProto_pb.RetrieveMediaRequest;
+  readonly responseType: typeof src_app_protos_RemoteMediaProto_pb.RetrieveMediaReply;
 };
 
-type RemoteMediaServiceUpdateVideo = {
+type RemoteMediaServiceUpdateMedia = {
   readonly methodName: string;
   readonly service: typeof RemoteMediaService;
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof src_app_protos_RemoteMediaProto_pb.ChangeTitleRequest;
-  readonly responseType: typeof src_app_protos_RemoteMediaProto_pb.VideoReply;
+  readonly responseType: typeof src_app_protos_RemoteMediaProto_pb.MediaReply;
 };
 
-type RemoteMediaServiceDeleteVideo = {
+type RemoteMediaServiceDeleteMedia = {
   readonly methodName: string;
   readonly service: typeof RemoteMediaService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_RemoteMediaProto_pb.RetrieveVideoRequest;
-  readonly responseType: typeof src_app_protos_RemoteMediaProto_pb.VideoReply;
+  readonly requestType: typeof src_app_protos_RemoteMediaProto_pb.RetrieveMediaRequest;
+  readonly responseType: typeof src_app_protos_RemoteMediaProto_pb.MediaReply;
 };
 
-type RemoteMediaServiceGetVideos = {
+type RemoteMediaServiceGetMedias = {
   readonly methodName: string;
   readonly service: typeof RemoteMediaService;
   readonly requestStream: false;
   readonly responseStream: false;
   readonly requestType: typeof src_app_protos_RemoteMediaProto_pb.UserDbInformation;
-  readonly responseType: typeof src_app_protos_RemoteMediaProto_pb.VideoRequests;
+  readonly responseType: typeof src_app_protos_RemoteMediaProto_pb.MediaRequests;
 };
 
 export class RemoteMediaService {
   static readonly serviceName: string;
-  static readonly SendVideo: RemoteMediaServiceSendVideo;
-  static readonly RetrieveVideo: RemoteMediaServiceRetrieveVideo;
-  static readonly UpdateVideo: RemoteMediaServiceUpdateVideo;
-  static readonly DeleteVideo: RemoteMediaServiceDeleteVideo;
-  static readonly GetVideos: RemoteMediaServiceGetVideos;
+  static readonly SendMedia: RemoteMediaServiceSendMedia;
+  static readonly RetrieveMedia: RemoteMediaServiceRetrieveMedia;
+  static readonly UpdateMedia: RemoteMediaServiceUpdateMedia;
+  static readonly DeleteMedia: RemoteMediaServiceDeleteMedia;
+  static readonly GetMedias: RemoteMediaServiceGetMedias;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -90,50 +90,50 @@ export class RemoteMediaServiceClient {
   readonly serviceHost: string;
 
   constructor(serviceHost: string, options?: grpc.RpcOptions);
-  sendVideo(
-    requestMessage: src_app_protos_RemoteMediaProto_pb.VideoRequest,
+  sendMedia(
+    requestMessage: src_app_protos_RemoteMediaProto_pb.MediaRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.VideoReply|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.MediaReply|null) => void
   ): UnaryResponse;
-  sendVideo(
-    requestMessage: src_app_protos_RemoteMediaProto_pb.VideoRequest,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.VideoReply|null) => void
+  sendMedia(
+    requestMessage: src_app_protos_RemoteMediaProto_pb.MediaRequest,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.MediaReply|null) => void
   ): UnaryResponse;
-  retrieveVideo(
-    requestMessage: src_app_protos_RemoteMediaProto_pb.RetrieveVideoRequest,
+  retrieveMedia(
+    requestMessage: src_app_protos_RemoteMediaProto_pb.RetrieveMediaRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.RetrieveVideoReply|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.RetrieveMediaReply|null) => void
   ): UnaryResponse;
-  retrieveVideo(
-    requestMessage: src_app_protos_RemoteMediaProto_pb.RetrieveVideoRequest,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.RetrieveVideoReply|null) => void
+  retrieveMedia(
+    requestMessage: src_app_protos_RemoteMediaProto_pb.RetrieveMediaRequest,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.RetrieveMediaReply|null) => void
   ): UnaryResponse;
-  updateVideo(
+  updateMedia(
     requestMessage: src_app_protos_RemoteMediaProto_pb.ChangeTitleRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.VideoReply|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.MediaReply|null) => void
   ): UnaryResponse;
-  updateVideo(
+  updateMedia(
     requestMessage: src_app_protos_RemoteMediaProto_pb.ChangeTitleRequest,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.VideoReply|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.MediaReply|null) => void
   ): UnaryResponse;
-  deleteVideo(
-    requestMessage: src_app_protos_RemoteMediaProto_pb.RetrieveVideoRequest,
+  deleteMedia(
+    requestMessage: src_app_protos_RemoteMediaProto_pb.RetrieveMediaRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.VideoReply|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.MediaReply|null) => void
   ): UnaryResponse;
-  deleteVideo(
-    requestMessage: src_app_protos_RemoteMediaProto_pb.RetrieveVideoRequest,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.VideoReply|null) => void
+  deleteMedia(
+    requestMessage: src_app_protos_RemoteMediaProto_pb.RetrieveMediaRequest,
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.MediaReply|null) => void
   ): UnaryResponse;
-  getVideos(
+  getMedias(
     requestMessage: src_app_protos_RemoteMediaProto_pb.UserDbInformation,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.VideoRequests|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.MediaRequests|null) => void
   ): UnaryResponse;
-  getVideos(
+  getMedias(
     requestMessage: src_app_protos_RemoteMediaProto_pb.UserDbInformation,
-    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.VideoRequests|null) => void
+    callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.MediaRequests|null) => void
   ): UnaryResponse;
 }
 
