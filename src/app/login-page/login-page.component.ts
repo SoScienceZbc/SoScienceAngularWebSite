@@ -6,7 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { LoadingService } from '../loading.service';
 import { LoginService } from '../login.service';
 import { MediaServiceService } from '../media-service.service';
-import { VideoRequest } from '../protos/RemoteMediaProto_pb';
+import { MediaRequest } from '../protos/RemoteMediaProto_pb';
 
 @Component({
   selector: 'app-login-page',
@@ -112,7 +112,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
    }
 
    newMethod() {
-    this.mediaService.AddRecordedVideo(new VideoRequest);
+    this.mediaService.AddRecordedMedia(new MediaRequest);
    }
   /**
    * this checks if the user can login and emits a boolian.
