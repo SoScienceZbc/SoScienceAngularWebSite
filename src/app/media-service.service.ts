@@ -13,7 +13,7 @@ export class MediaServiceService {
 
   constructor() { }
 
-  public AddRecordedVideo(video: MediaRequest) {
+  public AddRecordedMedia(video: MediaRequest) {
     const videoToAdd = video;
     grpc.invoke(RemoteMediaService.SendMedia, {
       request: videoToAdd,
@@ -26,7 +26,7 @@ export class MediaServiceService {
     })
   }
 
-  public GetVideo(videoId: number) {
+  public GetMedia(videoId: number) {
     const getVideoRequest = new RetrieveMediaRequest();
     getVideoRequest.setId(videoId);
     grpc.invoke(RemoteMediaService.RetrieveMedia, {
@@ -39,7 +39,7 @@ export class MediaServiceService {
     })
   }
 
-  public UpdateVideo(videoId: number, titleToChange: string) {
+  public UpdateMedia(videoId: number, titleToChange: string) {
     const changeTitle = new ChangeTitleRequest();
     changeTitle.setId(videoId);
     changeTitle.setTitle(titleToChange);
@@ -53,7 +53,7 @@ export class MediaServiceService {
     })
   }
 
-  public DeleteVideo(videoId: number) {
+  public DeleteMedia(videoId: number) {
     const videoToDelete = new RetrieveMediaRequest();
     videoToDelete.setId(videoId);
     grpc.invoke(RemoteMediaService.DeleteMedia, {
@@ -67,7 +67,7 @@ export class MediaServiceService {
 
   }
 
-  public GetAllVideos(id: number): Observable<MediaRequests> {
+  public GetAllMedias(id: number): Observable<MediaRequests> {
     const userInformation = new UserDbInformation();
     userInformation.setUsername(sessionStorage.getItem("Token")!);
     userInformation.setId(id);
