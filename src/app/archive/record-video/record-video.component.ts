@@ -4,6 +4,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { delay } from 'rxjs/operators';
 import { MediaStreamDirective } from './mediastreamDirective/media-stream.directive';
 import { DatabaseService } from 'src/app/database.service';
+import { RemoteMediaService } from 'src/app/protos/RemoteMediaProto_pb_service';
 
 @Component({
   selector: 'app-record-video',
@@ -16,6 +17,7 @@ export class RecordVideoComponent implements AfterViewInit{
   public mediaStream!: MediaStreamDirective;
 
   public videoSrc!: SafeUrl;
+  public videoBlob = {} as Blob;
   constructor(private dialog: MatDialog, private sanitizer: DomSanitizer) { }
 
   ngAfterViewInit(): void {
@@ -23,6 +25,7 @@ export class RecordVideoComponent implements AfterViewInit{
   }
   public onVideo(data: Blob): void {
     this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
+    this.videoBlob = data;
   }
   startCamera(){
     this.mediaStream.play();
@@ -33,13 +36,17 @@ export class RecordVideoComponent implements AfterViewInit{
   stopRecord(){
     this.mediaStream.recordStop();
     this.mediaStream.stop();
-    console.log(this.videoSrc)
+
   }
   clearRecording(){
     this.videoSrc = "";
   }
   save(){
-
+    console.log(this.videoBlob)
+    console.log(this.videoBlob.size)
+    if(this.videoBlob) {
+      console.log("hello world")
+    }
   }
   CloseDialog(){
     this.dialog.closeAll();
