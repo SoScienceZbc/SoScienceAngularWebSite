@@ -188,8 +188,11 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dialog.open(RecordAudioComponent, { data:{ } })
   }
 
-  openRecordVideo() {
-    this.dialog.open(RecordVideoComponent, { data: { } })
+  openRecordVideo(id:number) {
+    this.dialog.open(RecordVideoComponent, { data: {
+      projectid: id
+     }
+    });
   }
 
   GetText(item:string){
