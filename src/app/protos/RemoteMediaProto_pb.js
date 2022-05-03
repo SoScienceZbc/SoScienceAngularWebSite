@@ -220,10 +220,9 @@ proto.RemoteMediaGRPC.MediaRequest.prototype.toObject = function(opt_includeInst
  */
 proto.RemoteMediaGRPC.MediaRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    projectid: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    title: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    projectid: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    title: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    type: jspb.Message.getFieldWithDefault(msg, 3, ""),
     blobdata: msg.getBlobdata_asB64()
   };
 
@@ -263,21 +262,17 @@ proto.RemoteMediaGRPC.MediaRequest.deserializeBinaryFromReader = function(msg, r
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt32());
-      msg.setId(value);
-      break;
-    case 2:
-      var value = /** @type {number} */ (reader.readInt32());
       msg.setProjectid(value);
       break;
-    case 3:
+    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setTitle(value);
       break;
-    case 4:
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setType(value);
       break;
-    case 5:
+    case 4:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setBlobdata(value);
       break;
@@ -310,38 +305,31 @@ proto.RemoteMediaGRPC.MediaRequest.prototype.serializeBinary = function() {
  */
 proto.RemoteMediaGRPC.MediaRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getId();
+  f = message.getProjectid();
   if (f !== 0) {
     writer.writeInt32(
       1,
       f
     );
   }
-  f = message.getProjectid();
-  if (f !== 0) {
-    writer.writeInt32(
-      2,
-      f
-    );
-  }
   f = message.getTitle();
   if (f.length > 0) {
     writer.writeString(
-      3,
+      2,
       f
     );
   }
   f = message.getType();
   if (f.length > 0) {
     writer.writeString(
-      4,
+      3,
       f
     );
   }
   f = message.getBlobdata_asU8();
   if (f.length > 0) {
     writer.writeBytes(
-      5,
+      4,
       f
     );
   }
@@ -349,10 +337,10 @@ proto.RemoteMediaGRPC.MediaRequest.serializeBinaryToWriter = function(message, w
 
 
 /**
- * optional int32 ID = 1;
+ * optional int32 projectID = 1;
  * @return {number}
  */
-proto.RemoteMediaGRPC.MediaRequest.prototype.getId = function() {
+proto.RemoteMediaGRPC.MediaRequest.prototype.getProjectid = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
@@ -361,35 +349,17 @@ proto.RemoteMediaGRPC.MediaRequest.prototype.getId = function() {
  * @param {number} value
  * @return {!proto.RemoteMediaGRPC.MediaRequest} returns this
  */
-proto.RemoteMediaGRPC.MediaRequest.prototype.setId = function(value) {
+proto.RemoteMediaGRPC.MediaRequest.prototype.setProjectid = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * optional int32 projectID = 2;
- * @return {number}
- */
-proto.RemoteMediaGRPC.MediaRequest.prototype.getProjectid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.RemoteMediaGRPC.MediaRequest} returns this
- */
-proto.RemoteMediaGRPC.MediaRequest.prototype.setProjectid = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
-};
-
-
-/**
- * optional string title = 3;
+ * optional string title = 2;
  * @return {string}
  */
 proto.RemoteMediaGRPC.MediaRequest.prototype.getTitle = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
@@ -398,16 +368,16 @@ proto.RemoteMediaGRPC.MediaRequest.prototype.getTitle = function() {
  * @return {!proto.RemoteMediaGRPC.MediaRequest} returns this
  */
 proto.RemoteMediaGRPC.MediaRequest.prototype.setTitle = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string type = 4;
+ * optional string type = 3;
  * @return {string}
  */
 proto.RemoteMediaGRPC.MediaRequest.prototype.getType = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
@@ -416,21 +386,21 @@ proto.RemoteMediaGRPC.MediaRequest.prototype.getType = function() {
  * @return {!proto.RemoteMediaGRPC.MediaRequest} returns this
  */
 proto.RemoteMediaGRPC.MediaRequest.prototype.setType = function(value) {
-  return jspb.Message.setProto3StringField(this, 4, value);
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional bytes blobdata = 5;
+ * optional bytes blobdata = 4;
  * @return {!(string|Uint8Array)}
  */
 proto.RemoteMediaGRPC.MediaRequest.prototype.getBlobdata = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
 
 /**
- * optional bytes blobdata = 5;
+ * optional bytes blobdata = 4;
  * This is a type-conversion wrapper around `getBlobdata()`
  * @return {string}
  */
@@ -441,7 +411,7 @@ proto.RemoteMediaGRPC.MediaRequest.prototype.getBlobdata_asB64 = function() {
 
 
 /**
- * optional bytes blobdata = 5;
+ * optional bytes blobdata = 4;
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
  * This is a type-conversion wrapper around `getBlobdata()`
@@ -458,7 +428,7 @@ proto.RemoteMediaGRPC.MediaRequest.prototype.getBlobdata_asU8 = function() {
  * @return {!proto.RemoteMediaGRPC.MediaRequest} returns this
  */
 proto.RemoteMediaGRPC.MediaRequest.prototype.setBlobdata = function(value) {
-  return jspb.Message.setProto3BytesField(this, 5, value);
+  return jspb.Message.setProto3BytesField(this, 4, value);
 };
 
 
@@ -1418,8 +1388,9 @@ proto.RemoteMediaGRPC.MediasReply.prototype.toObject = function(opt_includeInsta
  */
 proto.RemoteMediaGRPC.MediasReply.toObject = function(includeInstance, msg) {
   var f, obj = {
-    title: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 2, "")
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    title: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    type: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -1457,10 +1428,14 @@ proto.RemoteMediaGRPC.MediasReply.deserializeBinaryFromReader = function(msg, re
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setId(value);
+      break;
+    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setTitle(value);
       break;
-    case 2:
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setType(value);
       break;
@@ -1493,46 +1468,53 @@ proto.RemoteMediaGRPC.MediasReply.prototype.serializeBinary = function() {
  */
 proto.RemoteMediaGRPC.MediasReply.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getTitle();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getId();
+  if (f !== 0) {
+    writer.writeInt32(
       1,
       f
     );
   }
-  f = message.getType();
+  f = message.getTitle();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
+  f = message.getType();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
 /**
- * optional string title = 1;
+ * optional int32 ID = 1;
+ * @return {number}
+ */
+proto.RemoteMediaGRPC.MediasReply.prototype.getId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.RemoteMediaGRPC.MediasReply} returns this
+ */
+proto.RemoteMediaGRPC.MediasReply.prototype.setId = function(value) {
+  return jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional string title = 2;
  * @return {string}
  */
 proto.RemoteMediaGRPC.MediasReply.prototype.getTitle = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.RemoteMediaGRPC.MediasReply} returns this
- */
-proto.RemoteMediaGRPC.MediasReply.prototype.setTitle = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional string type = 2;
- * @return {string}
- */
-proto.RemoteMediaGRPC.MediasReply.prototype.getType = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1541,8 +1523,26 @@ proto.RemoteMediaGRPC.MediasReply.prototype.getType = function() {
  * @param {string} value
  * @return {!proto.RemoteMediaGRPC.MediasReply} returns this
  */
-proto.RemoteMediaGRPC.MediasReply.prototype.setType = function(value) {
+proto.RemoteMediaGRPC.MediasReply.prototype.setTitle = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string type = 3;
+ * @return {string}
+ */
+proto.RemoteMediaGRPC.MediasReply.prototype.getType = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.RemoteMediaGRPC.MediasReply} returns this
+ */
+proto.RemoteMediaGRPC.MediasReply.prototype.setType = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

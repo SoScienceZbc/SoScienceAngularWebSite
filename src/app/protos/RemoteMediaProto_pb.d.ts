@@ -4,9 +4,6 @@
 import * as jspb from "google-protobuf";
 
 export class MediaRequest extends jspb.Message {
-  getId(): number;
-  setId(value: number): void;
-
   getProjectid(): number;
   setProjectid(value: number): void;
 
@@ -33,7 +30,6 @@ export class MediaRequest extends jspb.Message {
 
 export namespace MediaRequest {
   export type AsObject = {
-    id: number,
     projectid: number,
     title: string,
     type: string,
@@ -178,6 +174,9 @@ export namespace MediaRequests {
 }
 
 export class MediasReply extends jspb.Message {
+  getId(): number;
+  setId(value: number): void;
+
   getTitle(): string;
   setTitle(value: string): void;
 
@@ -196,6 +195,7 @@ export class MediasReply extends jspb.Message {
 
 export namespace MediasReply {
   export type AsObject = {
+    id: number,
     title: string,
     type: string,
   }
