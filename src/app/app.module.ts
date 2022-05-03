@@ -48,6 +48,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
 import { LoginService } from './login.service';
+import { MediaServiceService } from './media-service.service';
 import { ImprobableEngGrpcWebClientModule } from '@ngx-grpc/improbable-eng-grpc-web-client';
 import { LoadingService } from './loading.service';
 /*-----------------Quill Editor-----------------*/
@@ -193,6 +194,7 @@ import { MediaStreamDirective } from './archive/record-video/mediastreamDirectiv
     DatabaseService,
     LoginService,
     LoadingService,
+    MediaServiceService,
     AuthGuardGuard,
     MatSidenav,
     CustomMatPaginatorIntl,
