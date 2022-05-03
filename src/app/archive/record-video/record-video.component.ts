@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { delay } from 'rxjs/operators';
 import { MediaStreamDirective } from './mediastreamDirective/media-stream.directive';
@@ -21,7 +21,7 @@ export class RecordVideoComponent implements AfterViewInit{
   public recMedia!: Blob;
 
 
-  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer,@Inject(MAT_DIALOG_DATA) public projectid: any) { }
+  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer,@Inject(MAT_DIALOG_DATA) private projectid: any, private mediaService:MediaServiceService) { }
 
   ngAfterViewInit(): void {
     this.mediaStream.play();
@@ -48,7 +48,13 @@ export class RecordVideoComponent implements AfterViewInit{
     //Skal bruges i save: projectid, titel, type, dataen
 
     var newVideo = new MediaRequest()
-    newVideo.set
+
+    newVideo.setProjectid(this.projectid.projectid)
+    newVideo.setTitle('banan')
+    newVideo.setType('video')
+    //newVideo.setBlobdata()
+    this.mediaService.AddRecordedMedia(newVideo);
+
 
     console.log(this.projectid.projectid)
   }
