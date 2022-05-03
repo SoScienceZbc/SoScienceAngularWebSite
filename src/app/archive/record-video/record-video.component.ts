@@ -45,18 +45,7 @@ export class RecordVideoComponent implements AfterViewInit{
     this.videoSrc = "";
   }
   save(){
-    //Skal bruges i save: projectid, titel, type, dataen
 
-    var newVideo = new MediaRequest()
-
-    newVideo.setProjectid(this.projectid.projectid)
-    newVideo.setTitle('banan')
-    newVideo.setType('video')
-    //newVideo.setBlobdata()
-    this.mediaService.AddRecordedMedia(newVideo);
-
-
-    console.log(this.projectid.projectid)
   }
   CloseDialog(){
     this.mediaStream.stop();
