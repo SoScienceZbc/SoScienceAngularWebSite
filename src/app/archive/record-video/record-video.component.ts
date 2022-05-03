@@ -69,6 +69,9 @@ export class RecordVideoComponent implements AfterViewInit{
     }
   }
   CloseDialog(){
+    if(this.mediaStream){
+      this.mediaStream.stop();
+    }
     this.dialog.closeAll();
   }
 
