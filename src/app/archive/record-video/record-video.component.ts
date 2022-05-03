@@ -19,13 +19,33 @@ export class RecordVideoComponent implements AfterViewInit{
   // @Input('projectid') projectid!:number;
 
   public videoSrc!: SafeUrl;
+  public videoBlob = {} as Blob;
+  constructor(@Inject(MAT_DIALOG_DATA) public projectid: any, private dialog: MatDialog, private sanitizer: DomSanitizer, private mediaService: MediaServiceService) { }
 
-  public recMedia!: Blob;
+  ngAfterViewInit(): void {
+    this.mediaStream.play();
 
-
-  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer,@Inject(MAT_DIALOG_DATA) private projectid: any, private mediaService:MediaServiceService) { }
+  }
+  public onVideo(data: Blob): void {
+    this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
+    this.videoBlob = data;
+  }
+  startCamera(){
+    this.mediaStream.play();
+  }
+  startRecord(){
+    this.mediaStream.recordStart();
+  }
+  stopRecord(){
+    this.mediaStream.recordStop();
+    this.mediaStream.stop();
+    console.log(this.videoSrc)
+    console.log("projectid" + this.projectid.projectid);
+  }
+  clearRecording(){
     this.videoSrc = "";
   }
+  async save(){
     if(this.videoBlob) {
       let newVid = new MediaRequest();
       newVid.setProjectid(this.projectid.projectid)
@@ -49,7 +69,6 @@ export class RecordVideoComponent implements AfterViewInit{
     }
   }
   CloseDialog(){
-    this.mediaStream.stop();
     this.dialog.closeAll();
   }
 
