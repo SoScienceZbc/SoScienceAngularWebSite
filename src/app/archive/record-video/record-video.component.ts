@@ -38,7 +38,14 @@ export class RecordVideoComponent implements AfterViewInit{
   clearRecording(){
     this.videoSrc = "";
   }
-  save(){
+  save(videoSrc:any){
+    let srcLength = videoSrc.size;
+    if(srcLength > 0){
+      console.log("over")
+    }
+    else{
+      console.log("under")
+    }
 
   }
   CloseDialog(){
