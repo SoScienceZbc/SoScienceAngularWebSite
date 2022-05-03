@@ -4,6 +4,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { delay } from 'rxjs/operators';
 import { MediaStreamDirective } from './mediastreamDirective/media-stream.directive';
 import { DatabaseService } from 'src/app/database.service';
+import { MediaServiceService } from 'src/app/media-service.service';
+import { MediaRequest } from 'src/app/protos/RemoteMediaProto_pb';
 
 @Component({
   selector: 'app-record-video',
@@ -16,13 +18,17 @@ export class RecordVideoComponent implements AfterViewInit{
   public mediaStream!: MediaStreamDirective;
 
   public videoSrc!: SafeUrl;
-  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer) { }
+  public recMedia!: Blob;
+
+
+  constructor(private dialog: MatDialog, private sanitizer: DomSanitizer,@Inject(MAT_DIALOG_DATA) public projectid: any) { }
 
   ngAfterViewInit(): void {
     this.mediaStream.play();
   }
   public onVideo(data: Blob): void {
     this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
+    this.recMedia = data;
   }
   startCamera(){
     this.mediaStream.play();
@@ -33,22 +39,21 @@ export class RecordVideoComponent implements AfterViewInit{
   stopRecord(){
     this.mediaStream.recordStop();
     this.mediaStream.stop();
-    console.log(this.videoSrc)
+    console.log()
   }
   clearRecording(){
     this.videoSrc = "";
   }
-  save(videoSrc:any){
-    let srcLength = videoSrc.size;
-    if(srcLength > 0){
-      console.log("over")
-    }
-    else{
-      console.log("under")
-    }
+  save(){
+    //Skal bruges i save: projectid, titel, type, dataen
 
+    var newVideo = new MediaRequest()
+    newVideo.set
+
+    console.log(this.projectid.projectid)
   }
   CloseDialog(){
+    this.mediaStream.stop();
     this.dialog.closeAll();
   }
 
