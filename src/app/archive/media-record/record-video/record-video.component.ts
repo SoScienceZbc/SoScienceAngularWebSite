@@ -2,10 +2,11 @@ import { AfterViewInit, Component, Inject, Input, OnInit, ViewChild } from '@ang
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { delay } from 'rxjs/operators';
-import { MediaStreamDirective } from './mediastreamDirective/media-stream.directive';
+import { MediaStreamDirective } from '../mediastreamDirective/media-stream.directive';
 import { DatabaseService } from 'src/app/database.service';
 import { MediaServiceService } from 'src/app/media-service.service';
 import { MediaRequest } from 'src/app/protos/RemoteMediaProto_pb';
+import internal from 'stream';
 
 @Component({
   selector: 'app-record-video',
@@ -16,14 +17,15 @@ export class RecordVideoComponent implements AfterViewInit{
 
   @ViewChild(MediaStreamDirective)
   public mediaStream!: MediaStreamDirective;
-  // @Input('projectid') projectid!:number;
 
   public videoSrc!: SafeUrl;
   public videoBlob = {} as Blob;
+  public saved = {} as boolean;
   constructor(@Inject(MAT_DIALOG_DATA) public projectid: any, private dialog: MatDialog, private sanitizer: DomSanitizer, private mediaService: MediaServiceService) { }
 
   ngAfterViewInit(): void {
     this.mediaStream.play();
+    this.saved = true;
 
   }
   public onVideo(data: Blob): void {
@@ -41,9 +43,11 @@ export class RecordVideoComponent implements AfterViewInit{
     this.mediaStream.stop();
     console.log(this.videoSrc)
     console.log("projectid" + this.projectid.projectid);
+    this.saved = false;
   }
   clearRecording(){
     this.videoSrc = "";
+    this.saved = true;
   }
   async save(){
     if(this.videoBlob) {
@@ -57,7 +61,6 @@ export class RecordVideoComponent implements AfterViewInit{
       const array = new Uint8Array(buffer);
       newVid.setBlobdata(array);
 
-
       //Simulated retrieved blob from DB
       var tempArray = array.subarray(0, array.length)
       var newBuffer = tempArray.buffer
@@ -66,12 +69,13 @@ export class RecordVideoComponent implements AfterViewInit{
       this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))
 
       this.mediaService.AddRecordedMedia(newVid);
+      this.saved = true;
     }
   }
   CloseDialog(){
+    if(this.mediaStream){
+      this.mediaStream.stop();
+    }
     this.dialog.closeAll();
   }
-
-
-
 }

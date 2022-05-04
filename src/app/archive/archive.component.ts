@@ -15,8 +15,8 @@ import { AddRemoveMemberComponent } from './add-remove-member/add-remove-member.
 import * as quillToWord from 'quill-to-word';
 import { saveAs } from 'file-saver';
 import { pdfExporter } from 'quill-to-pdf';
-import { RecordAudioComponent } from './record-audio/record-audio.component';
-import { RecordVideoComponent } from './record-video/record-video.component';
+import { RecordAudioComponent } from './media-record/record-audio/record-audio.component';
+import { RecordVideoComponent } from './media-record/record-video/record-video.component';
 
 /**
  * @title Table with expandable rows

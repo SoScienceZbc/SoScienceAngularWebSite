@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MediaStreamDirective } from '../mediastreamDirective/media-stream.directive';
 
 @Component({
   selector: 'app-record-audio',

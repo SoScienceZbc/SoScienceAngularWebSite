@@ -79,9 +79,9 @@ import { AddRemoveUserComponent } from './settings/add-remove-user/add-remove-us
 import { AddRemoveMemberComponent } from './archive/add-remove-member/add-remove-member.component';
 import { ProjectOverviewComponent } from './settings/project-overview/project-overview.component';
 import { CookieComponent } from './cookie/cookie.component';
-import { RecordVideoComponent } from './archive/record-video/record-video.component';
-import { RecordAudioComponent } from './archive/record-audio/record-audio.component';
-import { MediaStreamDirective } from './archive/record-video/mediastreamDirective/media-stream.directive';
+import { RecordVideoComponent } from './archive/media-record/record-video/record-video.component';
+import { RecordAudioComponent } from './archive/media-record/record-audio/record-audio.component';
+import { MediaStreamDirective } from './archive/media-record/mediastreamDirective/media-stream.directive';
 
 @NgModule({
   declarations: [
