@@ -61,7 +61,6 @@ export class RecordVideoComponent implements AfterViewInit{
       const array = new Uint8Array(buffer);
       newVid.setBlobdata(array);
 
-
       //Simulated retrieved blob from DB
       var tempArray = array.subarray(0, array.length)
       var newBuffer = tempArray.buffer
@@ -71,7 +70,6 @@ export class RecordVideoComponent implements AfterViewInit{
 
       this.mediaService.AddRecordedMedia(newVid);
       this.saved = true;
-
     }
   }
   CloseDialog(){
@@ -80,7 +78,4 @@ export class RecordVideoComponent implements AfterViewInit{
     }
     this.dialog.closeAll();
   }
-
-
-
 }
