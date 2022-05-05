@@ -60,6 +60,7 @@ export class RecordVideoComponent implements AfterViewInit{
       var buffer = await new Response(this.videoBlob).arrayBuffer();
       const array = new Uint8Array(buffer);
       newVid.setBlobdata(array);
+      console.log(this.videoBlob.size)
 
       //Simulated retrieved blob from DB
       var tempArray = array.subarray(0, array.length)
