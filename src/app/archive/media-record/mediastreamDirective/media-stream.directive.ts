@@ -10,10 +10,10 @@ declare const MediaRecorder: any;
 })
 export class HtmlVideoDirective {
 
-  public element: HTMLVideoElement;
+  public mediaElement: HTMLMediaElement;
 
   constructor(elRef: ElementRef) {
-    this.element = elRef.nativeElement;
+    this.mediaElement = elRef.nativeElement;
   }
 }
 
@@ -30,8 +30,14 @@ public intitError: EventEmitter<DOMException | ReferenceError> = new EventEmitte
 @Output()
 public mediaStreamRef: EventEmitter<MediaStream> = new EventEmitter();
 
+// @Output()
+// public videoRecorded: EventEmitter<Blob> = new EventEmitter();
+
+// @Output()
+// public audioRecorded: EventEmitter<Blob> = new EventEmitter();
+
 @Output()
-public videoRecorded: EventEmitter<Blob> = new EventEmitter();
+public mediaRecorded: EventEmitter<Blob> = new EventEmitter();
 
 private readonly mediaDevices: MediaDevices = navigator.mediaDevices;
 private readonly document: Document = document;
@@ -43,14 +49,16 @@ constructor(ref: ElementRef, private ngZone: NgZone) {
 }
 
 ngAfterViewInit(): void {
-  if (this.element.autoplay) {
-    this.play();
+  if (this.mediaElement.autoplay) {
+    this.videoPlay();
   }
 }
 
-public play(): void {
+
+/*---------------Video-----------------*/
+public videoPlay(): void {
   if (!this.mediaStream) {
-    this.userMediaObs(this.config)
+    this.videoUserMediaObs(this.config)
       .pipe(
         catchError((err) => {
           this.intitError.emit(err);
@@ -61,22 +69,76 @@ public play(): void {
         // No need to cancel subscription because will complete
         this.mediaStream = stream;
         this.mediaStreamRef.emit(this.mediaStream);
-        this.play(); // Recursive call to assing video stream
+        this.videoPlay(); // Recursive call to assing video stream
       });
     return;
   }
-  if (!this.element.srcObject) {
-    this.element.srcObject = this.mediaStream;
+  if (!this.mediaElement.srcObject) {
+    this.mediaElement.srcObject = this.mediaStream;
   }
-  this.element.play();
+  this.mediaElement.play();
 }
 
+private videoUserMediaObs(
+  config: MediaStreamConstraints
+): Observable<MediaStream> {
+  return from(
+    this.mediaDevices.getUserMedia({
+      ...{ video: true, audio: true }, // Default config
+      ...config,
+    })
+  );
+}
+
+/*---------------Video-----------------*/
+audioPlay() {
+  if (!this.mediaStream) {
+    this.audioUserMediaObs(this.config)
+      .pipe(
+        catchError((err) => {
+          this.intitError.emit(err);
+          return EMPTY;
+        })
+      )
+      .subscribe((stream) => {
+        // No need to cancel subscription because will complete
+        this.mediaStream = stream;
+        this.mediaStreamRef.emit(this.mediaStream);
+        this.videoPlay(); // Recursive call to assing video stream
+      });
+    return;
+  }
+  if (!this.mediaElement.srcObject) {
+    this.mediaElement.srcObject = this.mediaStream;
+  }
+  this.mediaElement.play();
+}
+
+audioUserMediaObs(
+  config: MediaStreamConstraints
+  ): Observable<MediaStream> {
+  return from(
+    this.mediaDevices.getUserMedia({
+      ...{ video: false, audio: true }, // Default config
+      ...config,
+    })
+  );
+}
+
+/*------------Audio and video methods-------------  */
 public stop(): void {
-  // Stop camera devices streaming
+  // Stop camera/microphone devices streaming
   this.mediaStream?.getTracks().forEach((track) => track.stop());
   this.mediaStream = undefined;
-  this.element.pause();
-  this.element.srcObject = null;
+  this.mediaElement.pause();
+  this.mediaElement.srcObject = null;
+}
+
+public recordStop(): void {
+  if (!this.mediaRecorder || this.mediaRecorder.state === 'inactive') {
+    return;
+  }
+  this.mediaRecorder.stop(); // Fires ondataavailable's event
 }
 
 public recordStart(): void {
@@ -91,28 +153,12 @@ public recordStart(): void {
   this.mediaRecorder.ondataavailable = (event: any) => {
     const blob = event.data;
     if (blob?.size > 0) {
-      this.ngZone.run(() => this.videoRecorded.emit(blob));
+      this.ngZone.run(() => this.mediaRecorded.emit(blob));
     }
   };
   this.mediaRecorder.start();
 }
 
-public recordStop(): void {
-  if (!this.mediaRecorder || this.mediaRecorder.state === 'inactive') {
-    return;
-  }
-  this.mediaRecorder.stop(); // Fires ondataavailable's event
 }
 
-private userMediaObs(
-  config: MediaStreamConstraints
-): Observable<MediaStream> {
-  return from(
-    this.mediaDevices.getUserMedia({
-      ...{ video: true, audio: false }, // Default config
-      ...config,
-    })
-  );
-}
-}
 

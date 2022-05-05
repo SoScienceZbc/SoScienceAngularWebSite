@@ -57,27 +57,23 @@ export namespace MediaReply {
   }
 }
 
-export class UserDbInformation extends jspb.Message {
+export class ProjectInformation extends jspb.Message {
   getId(): number;
   setId(value: number): void;
 
-  getUsername(): string;
-  setUsername(value: string): void;
-
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): UserDbInformation.AsObject;
-  static toObject(includeInstance: boolean, msg: UserDbInformation): UserDbInformation.AsObject;
+  toObject(includeInstance?: boolean): ProjectInformation.AsObject;
+  static toObject(includeInstance: boolean, msg: ProjectInformation): ProjectInformation.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: UserDbInformation, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): UserDbInformation;
-  static deserializeBinaryFromReader(message: UserDbInformation, reader: jspb.BinaryReader): UserDbInformation;
+  static serializeBinaryToWriter(message: ProjectInformation, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ProjectInformation;
+  static deserializeBinaryFromReader(message: ProjectInformation, reader: jspb.BinaryReader): ProjectInformation;
 }
 
-export namespace UserDbInformation {
+export namespace ProjectInformation {
   export type AsObject = {
     id: number,
-    username: string,
   }
 }
 

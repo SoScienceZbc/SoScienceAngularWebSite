@@ -10,7 +10,7 @@
   </mat-card-title>
 
   <ng-container *ngIf="!videoSrc">
-  <video class="video" playsinline [mediaStream]="{video: true}" (videoRecorded)="onVideo($event)"></video>
+  <video class="video" playsinline [mediaStream]="{video: true, audio: true}" (mediaRecorded)="onVideo($event)"></video>
   </ng-container>
   <ng-container *ngIf="videoSrc">
     <video class="video" controls [src]="videoSrc"></video>

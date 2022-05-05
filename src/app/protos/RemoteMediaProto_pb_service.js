@@ -51,7 +51,7 @@ RemoteMediaService.GetMedias = {
   service: RemoteMediaService,
   requestStream: false,
   responseStream: false,
-  requestType: src_app_protos_RemoteMediaProto_pb.UserDbInformation,
+  requestType: src_app_protos_RemoteMediaProto_pb.ProjectInformation,
   responseType: src_app_protos_RemoteMediaProto_pb.MediaRequests
 };
 

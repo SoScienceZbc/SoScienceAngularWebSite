@@ -24,7 +24,7 @@ export class RecordVideoComponent implements AfterViewInit{
   constructor(@Inject(MAT_DIALOG_DATA) public projectid: any, private dialog: MatDialog, private sanitizer: DomSanitizer, private mediaService: MediaServiceService) { }
 
   ngAfterViewInit(): void {
-    this.mediaStream.play();
+    this.mediaStream.videoPlay();
     this.saved = true;
 
   }
@@ -33,7 +33,7 @@ export class RecordVideoComponent implements AfterViewInit{
     this.videoBlob = data;
   }
   startCamera(){
-    this.mediaStream.play();
+    this.mediaStream.videoPlay();
   }
   startRecord(){
     this.mediaStream.recordStart();

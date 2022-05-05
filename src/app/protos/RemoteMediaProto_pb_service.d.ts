@@ -45,7 +45,7 @@ type RemoteMediaServiceGetMedias = {
   readonly service: typeof RemoteMediaService;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof src_app_protos_RemoteMediaProto_pb.UserDbInformation;
+  readonly requestType: typeof src_app_protos_RemoteMediaProto_pb.ProjectInformation;
   readonly responseType: typeof src_app_protos_RemoteMediaProto_pb.MediaRequests;
 };
 
@@ -127,12 +127,12 @@ export class RemoteMediaServiceClient {
     callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.MediaReply|null) => void
   ): UnaryResponse;
   getMedias(
-    requestMessage: src_app_protos_RemoteMediaProto_pb.UserDbInformation,
+    requestMessage: src_app_protos_RemoteMediaProto_pb.ProjectInformation,
     metadata: grpc.Metadata,
     callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.MediaRequests|null) => void
   ): UnaryResponse;
   getMedias(
-    requestMessage: src_app_protos_RemoteMediaProto_pb.UserDbInformation,
+    requestMessage: src_app_protos_RemoteMediaProto_pb.ProjectInformation,
     callback: (error: ServiceError|null, responseMessage: src_app_protos_RemoteMediaProto_pb.MediaRequests|null) => void
   ): UnaryResponse;
 }
