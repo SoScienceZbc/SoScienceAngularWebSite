@@ -30,11 +30,11 @@ public intitError: EventEmitter<DOMException | ReferenceError> = new EventEmitte
 @Output()
 public mediaStreamRef: EventEmitter<MediaStream> = new EventEmitter();
 
-// @Output()
-// public videoRecorded: EventEmitter<Blob> = new EventEmitter();
+@Output()
+public videoRecorded: EventEmitter<Blob> = new EventEmitter();
 
-// @Output()
-// public audioRecorded: EventEmitter<Blob> = new EventEmitter();
+@Output()
+public audioRecorded: EventEmitter<Blob> = new EventEmitter();
 
 @Output()
 public mediaRecorded: EventEmitter<Blob> = new EventEmitter();
@@ -50,13 +50,14 @@ constructor(ref: ElementRef, private ngZone: NgZone) {
 
 ngAfterViewInit(): void {
   if (this.mediaElement.autoplay) {
-    this.videoPlay();
+    this.startVideo();
+    this.startAudio();
   }
 }
 
 
 /*---------------Video-----------------*/
-public videoPlay(): void {
+public startVideo(): void {
   if (!this.mediaStream) {
     this.videoUserMediaObs(this.config)
       .pipe(
@@ -69,7 +70,7 @@ public videoPlay(): void {
         // No need to cancel subscription because will complete
         this.mediaStream = stream;
         this.mediaStreamRef.emit(this.mediaStream);
-        this.videoPlay(); // Recursive call to assing video stream
+        this.startVideo(); // Recursive call to assing video stream
       });
     return;
   }
@@ -91,7 +92,7 @@ private videoUserMediaObs(
 }
 
 /*---------------Video-----------------*/
-audioPlay() {
+startAudio() {
   if (!this.mediaStream) {
     this.audioUserMediaObs(this.config)
       .pipe(
@@ -104,7 +105,7 @@ audioPlay() {
         // No need to cancel subscription because will complete
         this.mediaStream = stream;
         this.mediaStreamRef.emit(this.mediaStream);
-        this.videoPlay(); // Recursive call to assing video stream
+        this.startAudio(); // Recursive call to assing video stream
       });
     return;
   }

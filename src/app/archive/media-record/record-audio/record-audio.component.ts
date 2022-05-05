@@ -22,7 +22,7 @@ export class RecordAudioComponent implements AfterViewInit {
   constructor(@Inject(MAT_DIALOG_DATA) public projectid: any,private dialog: MatDialog, private mediaService: MediaServiceService) { }
 
   ngAfterViewInit(): void {
-    this.mediaStream.audioPlay();
+    this.mediaStream.startAudio();
   }
 
   public onAudio(data: Blob): void {

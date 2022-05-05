@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {grpc} from '@improbable-eng/grpc-web';
 import {RemoteMediaService} from './protos/RemoteMediaProto_pb_service';
-import { MediaRequest, MediaReply, UserDbInformation, RetrieveMediaRequest, RetrieveMediaReply, ChangeTitleRequest, MediaRequests, MediasReply } from './protos/RemoteMediaProto_pb';
+import { MediaRequest, MediaReply, ProjectInformation, RetrieveMediaRequest, RetrieveMediaReply, ChangeTitleRequest, MediaRequests, MediasReply } from './protos/RemoteMediaProto_pb';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
 @Injectable({
@@ -68,8 +68,7 @@ export class MediaServiceService {
   }
 
   public GetAllMedias(id: number): Observable<MediaRequests> {
-    const userInformation = new UserDbInformation();
-    userInformation.setUsername(sessionStorage.getItem("Token")!);
+    const userInformation = new ProjectInformation();
     userInformation.setId(id);
     const medias: BehaviorSubject<MediaRequests> = new BehaviorSubject<MediaRequests>(new MediaRequests);
     grpc.invoke(RemoteMediaService.GetMedias, {
