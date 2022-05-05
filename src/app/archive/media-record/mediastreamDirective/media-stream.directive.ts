@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators'
 declare const MediaRecorder: any;
 
 @Directive({
-  selector: 'video',
+  selector: "[video] , [audio]",
 })
 export class HtmlVideoDirective {
 
@@ -18,7 +18,7 @@ export class HtmlVideoDirective {
 }
 
 @Directive({
-  selector: 'video[mediaStream]',
+  selector: '[video[mediaStream]], [audio[mediaStream]]',
 })
 export class MediaStreamDirective extends HtmlVideoDirective implements AfterViewInit{
 @Input('mediaStream')
@@ -50,8 +50,8 @@ constructor(ref: ElementRef, private ngZone: NgZone) {
 
 ngAfterViewInit(): void {
   if (this.mediaElement.autoplay) {
-    this.startVideo();
     this.startAudio();
+    this.startVideo();
   }
 }
 
