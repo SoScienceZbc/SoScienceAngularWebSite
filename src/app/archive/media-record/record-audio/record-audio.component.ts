@@ -40,8 +40,6 @@ export class RecordAudioComponent implements AfterViewInit {
   stopRecord() {
     this.mediaStream.recordStop();
     this.mediaStream.stop();
-    console.log("src: " + this.audioSrc)
-    console.log("audio blob: " + this.audioBlob)
 
   }
 
@@ -51,7 +49,8 @@ export class RecordAudioComponent implements AfterViewInit {
 
   save() {
     console.log("src: " + this.audioSrc)
-    console.log("audio blob: " + this.audioBlob)
+    console.log("audio blob: " + this.audioBlob.size)
+    console.log("id: " + this.projectid.projectid)
   }
   CloseDialog(){
     if(this.mediaStream){

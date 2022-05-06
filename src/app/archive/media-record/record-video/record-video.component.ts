@@ -41,8 +41,6 @@ export class RecordVideoComponent implements AfterViewInit{
   stopRecord(){
     this.mediaStream.recordStop();
     this.mediaStream.stop();
-    console.log(this.videoSrc)
-    console.log("projectid" + this.projectid.projectid);
     this.saved = false;
   }
   clearRecording(){
@@ -50,6 +48,9 @@ export class RecordVideoComponent implements AfterViewInit{
     this.saved = true;
   }
   async save(){
+    console.log(this.videoSrc)
+    console.log(this.videoBlob.size)
+    console.log("projectid" + this.projectid.projectid);
     if(this.videoBlob) {
       let newVid = new MediaRequest();
       newVid.setProjectid(this.projectid.projectid)
