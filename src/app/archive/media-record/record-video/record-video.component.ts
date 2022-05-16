@@ -21,11 +21,13 @@ export class RecordVideoComponent implements AfterViewInit{
   public videoSrc!: SafeUrl;
   public videoBlob = {} as Blob;
   public saved = {} as boolean;
+  public timer = {} as boolean;
   constructor(@Inject(MAT_DIALOG_DATA) public projectid: any, private dialog: MatDialog, private sanitizer: DomSanitizer, private mediaService: MediaServiceService) { }
 
   ngAfterViewInit(): void {
     this.mediaStream.startVideo();
     this.saved = true;
+    this.timer = false;
 
   }
   public onVideo(data: Blob): void {
@@ -37,6 +39,7 @@ export class RecordVideoComponent implements AfterViewInit{
   }
   startRecord(){
     this.mediaStream.recordStart();
+    this.timer = true;
   }
   stopRecord(){
     this.mediaStream.recordStop();
@@ -44,6 +47,7 @@ export class RecordVideoComponent implements AfterViewInit{
     console.log(this.videoSrc)
     console.log("projectid" + this.projectid.projectid);
     this.saved = false;
+    this.timer = false;
   }
   clearRecording(){
     this.videoSrc = "";
