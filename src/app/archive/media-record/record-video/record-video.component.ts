@@ -6,7 +6,7 @@ import { MediaStreamDirective } from '../mediastreamDirective/media-stream.direc
 import { DatabaseService } from 'src/app/database.service';
 import { MediaServiceService } from 'src/app/media-service.service';
 import { MediaRequest } from 'src/app/protos/RemoteMediaProto_pb';
-import internal from 'stream';
+import { AddTitelComponent } from 'src/app/archive/media-record/add-titel/add-titel.component'
 
 @Component({
   selector: 'app-record-video',
@@ -22,6 +22,9 @@ export class RecordVideoComponent implements AfterViewInit{
   public videoBlob = {} as Blob;
   public saved = {} as boolean;
   public timer = {} as boolean;
+  public title:any;
+
+
   constructor(@Inject(MAT_DIALOG_DATA) public projectid: any, private dialog: MatDialog, private sanitizer: DomSanitizer, private mediaService: MediaServiceService) { }
 
   ngAfterViewInit(): void {
@@ -54,6 +57,16 @@ export class RecordVideoComponent implements AfterViewInit{
     this.saved = true;
   }
   async save(){
+
+    let titleDialog = this.dialog.open(AddTitelComponent);
+
+    console.log(titleDialog.componentInstance.titleInput)
+    // titleDialog.afterClosed().subscribe(result => {
+    //   if (result != '' && result != null) {
+    //     this.title = result;
+    //   }
+    // })
+
     if(this.videoBlob) {
       let newVid = new MediaRequest();
       newVid.setProjectid(this.projectid.projectid)
