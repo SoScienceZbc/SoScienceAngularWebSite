@@ -6,7 +6,6 @@ import { MediaStreamDirective } from '../mediastreamDirective/media-stream.direc
 import { DatabaseService } from 'src/app/database.service';
 import { MediaServiceService } from 'src/app/media-service.service';
 import { MediaRequest } from 'src/app/protos/RemoteMediaProto_pb';
-import { AddTitelComponent } from 'src/app/archive/media-record/add-titel/add-titel.component'
 
 @Component({
   selector: 'app-record-video',

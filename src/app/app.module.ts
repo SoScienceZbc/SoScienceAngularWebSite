@@ -83,7 +83,6 @@ import { CookieComponent } from './cookie/cookie.component';
 import { RecordVideoComponent } from './archive/media-record/record-video/record-video.component';
 import { RecordAudioComponent } from './archive/media-record/record-audio/record-audio.component';
 import { MediaStreamDirective } from './archive/media-record/mediastreamDirective/media-stream.directive';
-import { AddTitelComponent } from './archive/media-record/add-titel/add-titel.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +110,6 @@ import { AddTitelComponent } from './archive/media-record/add-titel/add-titel.co
     CookieComponent,
     RecordVideoComponent,
     RecordAudioComponent,
-    AddTitelComponent,
   ],
   imports: [
     BrowserModule,
