@@ -57,17 +57,8 @@ export class RecordVideoComponent implements AfterViewInit{
     this.saved = true;
   }
   async save(){
-
-    let titleDialog = this.dialog.open(AddTitelComponent);
-
-    console.log(titleDialog.componentInstance.titleInput)
-    // titleDialog.afterClosed().subscribe(result => {
-    //   if (result != '' && result != null) {
-    //     this.title = result;
-    //   }
-    // })
-
     if(this.videoBlob) {
+      console.log(this.title)
       let newVid = new MediaRequest();
       newVid.setProjectid(this.projectid.projectid)
       newVid.setTitle("New recorded video")
@@ -90,6 +81,10 @@ export class RecordVideoComponent implements AfterViewInit{
       this.saved = true;
     }
   }
+  OpenAddTitleComponent(){
+
+  }
+
   CloseDialog(){
     if(this.mediaStream){
       this.mediaStream.stop();
