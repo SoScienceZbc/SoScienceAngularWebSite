@@ -46,6 +46,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { CdTimerModule } from 'angular-cd-timer';
+
 /*-----------------Services-----------------*/
 import { DatabaseService } from './database.service';
 import { LoginService } from './login.service';
