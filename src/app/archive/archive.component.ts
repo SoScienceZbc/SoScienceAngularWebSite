@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DatabaseService } from '../database.service';
 import { D_Document, D_Documents, D_Project } from '../protos/DatabaseProto_pb';
+import { MediaRequests, MediasReply, RetrieveMediaReply } from '../protos/RemoteMediaProto_pb';
 import { LoadingService } from '../loading.service';
 import { TextEditorComponent } from '../TextEditor/TextEditor.component';
 import quill, { Quill } from 'quill';
@@ -61,12 +62,14 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   public dataSource: Array<expandingD_Project> = new Array<expandingD_Project>();
   /*--------------DataTable Values--------------*/
   displayedColumns = ["Id", "name", "completed", "lastedited", "endDate"];
+  mediaDisplayedColumns = ["title", "type"]
   matdatasource = new MatTableDataSource<expandingD_Project>(this.dataSource);
 
   dataSourceDoneProjjects: Array<expandingD_Project> = new Array<expandingD_Project>();
   matdatasourceDoneProjects = new MatTableDataSource<expandingD_Project>(this.dataSourceDoneProjjects);
 
   Documents: expandingD_Docs = new expandingD_Docs();
+  Media: expandingMediaRequests = new expandingMediaRequests();
   expandingelement: expandingD_Docs = new expandingD_Docs();
   isExpansionDetailRow = (id: number, row: any | expandingD_Docs) => this.isExpansionDetailRows(id, row);
 
@@ -184,8 +187,10 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     };
   }
 
-  openRecordAudio() {
-    this.dialog.open(RecordAudioComponent, { data:{ } })
+  openRecordAudio(id: number) {
+    this.dialog.open(RecordAudioComponent, { data:{
+      projectid: id
+    } })
   }
 
   openRecordVideo(id:number) {
@@ -208,6 +213,20 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   isExpansionDetailRows(i: number, row: expandingD_Project): boolean {
     // console.log("Cheaking if row can be expanded");
     return true;
+  }
+
+  GetMediaFilesAsObject(media: expandingMediaRequests) {
+    let mockup = media.clone();
+    if(mockup.getAllmediasList().length > 0) {
+      return mockup;
+    }
+    mockup.clearAllmediasList();
+    mockup.addAllmedias(new MediasReply());
+    return mockup;
+  }
+
+  OpenDialogAreYouSureVideo(event: any){
+
   }
 
   /**
@@ -324,4 +343,11 @@ export class expandingD_Project extends D_Project {
     super();
   }
 
+}
+
+export class expandingMediaRequests extends MediaRequests {
+  public loading: boolean = false;
+  constructor() {
+    super()
+  }
 }

@@ -47,10 +47,19 @@ export class RecordAudioComponent implements AfterViewInit {
     this.audioSrc = "";
   }
 
-  save() {
+  async save() {
     console.log("src: " + this.audioSrc)
     console.log("audio blob: " + this.audioBlob.size)
     console.log("id: " + this.projectid.projectid)
+    if(this.audioBlob) {
+      let newRequest = new MediaRequest();
+      newRequest.setProjectid(this.projectid.projectid)
+      newRequest.setTitle("audioTitle");
+      newRequest.setType("audio");
+      var buffer = await new Response(this.audioBlob).arrayBuffer();
+      const audioArray = new Uint8Array(buffer);
+      newRequest.setBlobdata(audioArray)
+    }
   }
   CloseDialog(){
     if(this.mediaStream){

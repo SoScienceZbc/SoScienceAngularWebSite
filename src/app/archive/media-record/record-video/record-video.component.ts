@@ -46,6 +46,7 @@ export class RecordVideoComponent implements AfterViewInit{
   clearRecording(){
     this.videoSrc = "";
     this.saved = true;
+    this.startCamera();
   }
   async save(){
     console.log(this.videoSrc)
@@ -57,14 +58,15 @@ export class RecordVideoComponent implements AfterViewInit{
       newVid.setTitle("New recorded video")
       newVid.setType("video");
 
+
       //Make Uint8array
       var buffer = await new Response(this.videoBlob).arrayBuffer();
-      const array = new Uint8Array(buffer);
-      newVid.setBlobdata(array);
+      const videoArray = new Uint8Array(buffer);
+      newVid.setBlobdata(videoArray);
       console.log(this.videoBlob.size)
 
       //Simulated retrieved blob from DB
-      var tempArray = array.subarray(0, array.length)
+      var tempArray = videoArray.subarray(0, videoArray.length)
       var newBuffer = tempArray.buffer
       var dataView = new DataView(newBuffer);
       var blob = new Blob([dataView], { })
