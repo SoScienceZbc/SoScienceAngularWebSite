@@ -37,9 +37,7 @@ export class DatabaseService {
   behavProject$: BehaviorSubject<D_Projects> = new BehaviorSubject<D_Projects>(
     new D_Projects()
   );
-  listOfProjects$: BehaviorSubject<D_Project[]> = new BehaviorSubject<
-    D_Project[]
-  >([]);
+  listOfProjects$: BehaviorSubject<D_Project[]> = new BehaviorSubject<D_Project[]>([]);
   listOfProjectThemes$: BehaviorSubject<D_ProjectTheme[]> = new BehaviorSubject<
   D_ProjectTheme[]
 >([]);

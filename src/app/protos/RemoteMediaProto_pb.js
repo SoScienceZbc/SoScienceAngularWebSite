@@ -1360,7 +1360,8 @@ proto.RemoteMediaGRPC.MediasReply.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     title: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 3, "")
+    type: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    projectid: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -1409,6 +1410,10 @@ proto.RemoteMediaGRPC.MediasReply.deserializeBinaryFromReader = function(msg, re
       var value = /** @type {string} */ (reader.readString());
       msg.setType(value);
       break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setProjectid(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1456,6 +1461,13 @@ proto.RemoteMediaGRPC.MediasReply.serializeBinaryToWriter = function(message, wr
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = message.getProjectid();
+  if (f !== 0) {
+    writer.writeInt32(
+      4,
       f
     );
   }
@@ -1513,6 +1525,24 @@ proto.RemoteMediaGRPC.MediasReply.prototype.getType = function() {
  */
 proto.RemoteMediaGRPC.MediasReply.prototype.setType = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional int32 ProjectID = 4;
+ * @return {number}
+ */
+proto.RemoteMediaGRPC.MediasReply.prototype.getProjectid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.RemoteMediaGRPC.MediasReply} returns this
+ */
+proto.RemoteMediaGRPC.MediasReply.prototype.setProjectid = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 

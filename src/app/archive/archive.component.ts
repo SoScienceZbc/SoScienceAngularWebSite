@@ -6,7 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DatabaseService } from '../database.service';
 import { D_Document, D_Documents, D_Project } from '../protos/DatabaseProto_pb';
-import { MediaRequests, MediasReply, RetrieveMediaReply } from '../protos/RemoteMediaProto_pb';
+import { MediaReply, MediaRequests, MediasReply, RetrieveMediaReply } from '../protos/RemoteMediaProto_pb';
 import { LoadingService } from '../loading.service';
 import { TextEditorComponent } from '../TextEditor/TextEditor.component';
 import quill, { Quill } from 'quill';
@@ -18,6 +18,7 @@ import { saveAs } from 'file-saver';
 import { pdfExporter } from 'quill-to-pdf';
 import { RecordAudioComponent } from './media-record/record-audio/record-audio.component';
 import { RecordVideoComponent } from './media-record/record-video/record-video.component';
+import { MediaServiceService } from '../media-service.service';
 
 /**
  * @title Table with expandable rows
@@ -64,6 +65,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns = ["Id", "name", "completed", "lastedited", "endDate"];
   mediaDisplayedColumns = ["title", "type"]
   matdatasource = new MatTableDataSource<expandingD_Project>(this.dataSource);
+  mediaList: Array<MediasReply[]> = new Array<MediasReply[]>();
 
   dataSourceDoneProjjects: Array<expandingD_Project> = new Array<expandingD_Project>();
   matdatasourceDoneProjects = new MatTableDataSource<expandingD_Project>(this.dataSourceDoneProjjects);
@@ -74,7 +76,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   isExpansionDetailRow = (id: number, row: any | expandingD_Docs) => this.isExpansionDetailRows(id, row);
 
 
-  constructor(private dataserve: DatabaseService, private spinner: LoadingService, private dialog: MatDialog) {
+  constructor(private dataserve: DatabaseService, private mediaService: MediaServiceService, private spinner: LoadingService, private dialog: MatDialog) {
     this.dataserve.GetProjectsTheRigthWay();
 
     this.dataserve.listOfProjects$.subscribe(x => {
@@ -88,6 +90,14 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
           this.matdatasource.data.push((data as expandingD_Project));
           this.matdatasource._updateChangeSubscription();
         }
+        console.log(data.getId());
+        mediaService.GetAllMedias(data.getId()).subscribe(media => {
+          if(media.getAllmediasList().length > 0) {
+            this.mediaList.push(media.getAllmediasList());
+          }
+          console.log("medialist: " + this.mediaList);
+
+        })
       })
       this.spinner.hide();
     });
@@ -215,14 +225,26 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     return true;
   }
 
-  GetMediaFilesAsObject(media: expandingMediaRequests) {
-    let mockup = media.clone();
-    if(mockup.getAllmediasList().length > 0) {
-      return mockup;
-    }
-    mockup.clearAllmediasList();
-    mockup.addAllmedias(new MediasReply());
-    return mockup;
+  // GetMediaFilesAsObject(media: expandingMediaRequests) {
+  //   let mockup = media.clone();
+  //   if(mockup.getAllmediasList().length > 0) {
+  //     return mockup;
+  //   }
+  //   mockup.clearAllmediasList();
+  //   mockup.addAllmedias(new MediasReply());
+  //   return mockup;
+  // }
+
+  GetMediaFilesByID(id: number) {
+    console.log(id);
+    this.mediaList.forEach(x => {
+      console.log("x: " + x.length);
+      if(x[0].getProjectid() == id){
+        return x;
+      }
+      return;
+    })
+    return null;
   }
 
   OpenDialogAreYouSureVideo(event: any){
@@ -235,6 +257,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
    * @returns void
    */
   GetDocumentsAsObject(element: expandingD_Project) {
+    console.log("ello");
     let mockup = element.clone();
     if (mockup.getDocumentsList().length > 0) {
       return mockup;

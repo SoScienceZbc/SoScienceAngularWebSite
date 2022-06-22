@@ -179,6 +179,9 @@ export class MediasReply extends jspb.Message {
   getType(): string;
   setType(value: string): void;
 
+  getProjectid(): number;
+  setProjectid(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): MediasReply.AsObject;
   static toObject(includeInstance: boolean, msg: MediasReply): MediasReply.AsObject;
@@ -194,6 +197,7 @@ export namespace MediasReply {
     id: number,
     title: string,
     type: string,
+    projectid: number,
   }
 }
 
