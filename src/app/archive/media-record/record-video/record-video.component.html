@@ -7,10 +7,9 @@
 
   <mat-card-title>
 
-<form class="example-form">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Titel</mat-label>
-    <input matInput placeholder="Indsæt titel">
+<form class="">
+  <mat-form-field class="" appearance="fill">
+    <input matInput placeholder="Indsæt titel" [(ngModel)]="title" >
   </mat-form-field>
   </form>
   </mat-card-title>
@@ -28,7 +27,7 @@
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Start optagelse" (click)="startRecord()"><mat-icon style="color: red !important;">fiber_manual_record</mat-icon></button>
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Stop optagelse" (click)="stopRecord()"><mat-icon>stop</mat-icon></button>
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Ryd optagelse" (click)="clearRecording()"><mat-icon>replay</mat-icon></button>
-      <button disabled={{saved}} mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Gem video" (click)="save()"><mat-icon>save</mat-icon></button>
+      <button [disabled]="saved || titleSet()" mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Gem video" (click)="save()"><mat-icon>save</mat-icon></button>
       <br>
       <ng-container *ngIf="timer">
         <cd-timer format="ms" [endTime]="5" (onComplete)="stopRecord()"></cd-timer>

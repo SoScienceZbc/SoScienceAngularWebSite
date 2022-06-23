@@ -6,6 +6,7 @@ import { MediaStreamDirective } from '../mediastreamDirective/media-stream.direc
 import { DatabaseService } from 'src/app/database.service';
 import { MediaServiceService } from 'src/app/media-service.service';
 import { MediaRequest } from 'src/app/protos/RemoteMediaProto_pb';
+import { truncate } from 'fs';
 
 @Component({
   selector: 'app-record-video',
@@ -21,7 +22,7 @@ export class RecordVideoComponent implements AfterViewInit{
   public videoBlob = {} as Blob;
   public saved = {} as boolean;
   public timer = {} as boolean;
-  public title:any;
+  public title = "";
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public projectid: any, private dialog: MatDialog, private sanitizer: DomSanitizer, private mediaService: MediaServiceService) { }
@@ -80,8 +81,13 @@ export class RecordVideoComponent implements AfterViewInit{
       this.saved = true;
     }
   }
-  OpenAddTitleComponent(){
-
+  titleSet(){
+    if(this.title.length < 4 || this.title.length > 40){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   CloseDialog(){

@@ -12,3 +12,6 @@
 .button:hover{
   background-color: transparent;
 }
+.input{
+  height: 10px !important;
+}
