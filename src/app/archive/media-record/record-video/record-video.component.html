@@ -3,10 +3,15 @@
     <button mat-icon-button (click)="CloseDialog()">
       <mat-icon>close</mat-icon>
     </button>
-
   </mat-card-header>
+
   <mat-card-title>
-    Optag ny video
+
+<form class="">
+  <mat-form-field class="" appearance="fill">
+    <input matInput placeholder="Indsæt titel" [(ngModel)]="title" >
+  </mat-form-field>
+  </form>
   </mat-card-title>
 
   <ng-container *ngIf="!videoSrc">
@@ -22,7 +27,11 @@
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Start optagelse" (click)="startRecord()"><mat-icon style="color: red !important;">fiber_manual_record</mat-icon></button>
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Stop optagelse" (click)="stopRecord()"><mat-icon>stop</mat-icon></button>
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Ryd optagelse" (click)="clearRecording()"><mat-icon>replay</mat-icon></button>
-      <button disabled={{saved}} mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Gem video" (click)="save()"><mat-icon>save</mat-icon></button>
-
+      <button [disabled]="saved || titleSet()" mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Gem video" (click)="save()"><mat-icon>save</mat-icon></button>
+      <br>
+      <ng-container *ngIf="timer">
+        <cd-timer format="ms" [endTime]="5" (onComplete)="stopRecord()"></cd-timer>
+      </ng-container>
     </mat-card-footer>
+
 </mat-card>

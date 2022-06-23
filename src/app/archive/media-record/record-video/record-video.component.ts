@@ -6,7 +6,7 @@ import { MediaStreamDirective } from '../mediastreamDirective/media-stream.direc
 import { DatabaseService } from 'src/app/database.service';
 import { MediaServiceService } from 'src/app/media-service.service';
 import { MediaRequest } from 'src/app/protos/RemoteMediaProto_pb';
-import internal from 'stream';
+import { truncate } from 'fs';
 
 @Component({
   selector: 'app-record-video',
@@ -21,11 +21,16 @@ export class RecordVideoComponent implements AfterViewInit{
   public videoSrc!: SafeUrl;
   public videoBlob = {} as Blob;
   public saved = {} as boolean;
+  public timer = {} as boolean;
+  public title = "";
+
+
   constructor(@Inject(MAT_DIALOG_DATA) public projectid: any, private dialog: MatDialog, private sanitizer: DomSanitizer, private mediaService: MediaServiceService) { }
 
   ngAfterViewInit(): void {
     this.mediaStream.startVideo();
     this.saved = true;
+    this.timer = false;
 
   }
   public onVideo(data: Blob): void {
@@ -37,11 +42,13 @@ export class RecordVideoComponent implements AfterViewInit{
   }
   startRecord(){
     this.mediaStream.recordStart();
+    this.timer = true;
   }
   stopRecord(){
     this.mediaStream.recordStop();
     this.mediaStream.stop();
     this.saved = false;
+    this.timer = false;
   }
   clearRecording(){
     this.videoSrc = "";
@@ -53,6 +60,7 @@ export class RecordVideoComponent implements AfterViewInit{
     console.log(this.videoBlob.size)
     console.log("projectid" + this.projectid.projectid);
     if(this.videoBlob) {
+      console.log(this.title)
       let newVid = new MediaRequest();
       newVid.setProjectid(this.projectid.projectid)
       newVid.setTitle("New recorded video")
@@ -76,6 +84,15 @@ export class RecordVideoComponent implements AfterViewInit{
       this.saved = true;
     }
   }
+  titleSet(){
+    if(this.title.length < 4 || this.title.length > 40){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   CloseDialog(){
     if(this.mediaStream){
       this.mediaStream.stop();
