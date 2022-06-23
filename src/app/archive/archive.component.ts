@@ -236,7 +236,9 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   OpenDialogAreYouSureVideo(event: any){
-
+    this.dialog.open(DialogAreYouSureComponent, {
+      data: {  }
+    })
   }
 
   /**
