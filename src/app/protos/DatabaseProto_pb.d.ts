@@ -298,6 +298,11 @@ export class D_Project extends jspb.Message {
   getClosetodeletion(): boolean;
   setClosetodeletion(value: boolean): void;
 
+  clearMediainfosList(): void;
+  getMediainfosList(): Array<D_MediaInfo>;
+  setMediainfosList(value: Array<D_MediaInfo>): void;
+  addMediainfos(value?: D_MediaInfo, index?: number): D_MediaInfo;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): D_Project.AsObject;
   static toObject(includeInstance: boolean, msg: D_Project): D_Project.AsObject;
@@ -318,6 +323,39 @@ export namespace D_Project {
     documentsList: Array<D_Document.AsObject>,
     projectthemeid: number,
     closetodeletion: boolean,
+    mediainfosList: Array<D_MediaInfo.AsObject>,
+  }
+}
+
+export class D_MediaInfo extends jspb.Message {
+  getId(): number;
+  setId(value: number): void;
+
+  getTitle(): string;
+  setTitle(value: string): void;
+
+  getType(): string;
+  setType(value: string): void;
+
+  getProjectid(): number;
+  setProjectid(value: number): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): D_MediaInfo.AsObject;
+  static toObject(includeInstance: boolean, msg: D_MediaInfo): D_MediaInfo.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: D_MediaInfo, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): D_MediaInfo;
+  static deserializeBinaryFromReader(message: D_MediaInfo, reader: jspb.BinaryReader): D_MediaInfo;
+}
+
+export namespace D_MediaInfo {
+  export type AsObject = {
+    id: number,
+    title: string,
+    type: string,
+    projectid: number,
   }
 }
 

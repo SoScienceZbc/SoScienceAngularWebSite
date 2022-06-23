@@ -142,7 +142,49 @@
 
               <!-- Video/Audio table for showing all media files associated with the project -->
 
-                    <table >
+              <table *ngIf="GetMediaFilesAsObject(element).getMediainfosList()[0].getId() != 0">
+                <thead style="border-bottom: 1px solid #494949;">
+                  <tr >
+                    <th style="border-bottom: 1px solid #757575; width: 35%; text-align: left; padding: 0px;">Navn/Titel</th>
+                    <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Rediger</th>
+                    <th style="border-bottom: 1px solid #757575; width: 50%; text-align: center; padding: 0px;"></th>
+                  </tr>
+                </thead>
+                <tbody >
+                  <tr *ngFor="let item of GetMediaFilesAsObject(element).getMediainfosList()" >
+                    <!-- <td>{{item.getId()}}</td> -->
+                    <td style="overflow: hidden;
+                    text-overflow: clip;
+                    max-width: 0px;" class="hoverme" > {{item.getTitle()}}
+                  </td>
+                    <td style="text-align: center;">
+                      <button mat-ripple style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button mat-ripple style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+
+                    <td>
+                    </td>
+                  </tr>
+                </tbody>
+
+              </table>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- <table >
                       <thead>
                         <th style="border-bottom: 1px solid #757575; width: 35%; text-align: left; padding: 0px;">Navn/Titel</th>
                         <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Rediger</th>
@@ -164,7 +206,7 @@
                     </td>
                   </tr>
                 </tbody>
-              </table>
+              </table> -->
 
 
 
@@ -202,32 +244,6 @@
       <tr style="overflow: hidden;" mat-row *matRowDef="let row; columns: ['expandedDetail']"
         class="example-detail-row"></tr>
     </table>
-
-    <table >
-      <thead>
-        <th style="border-bottom: 1px solid #757575; width: 35%; text-align: left; padding: 0px;">Navn/Titel</th>
-        <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Rediger</th>
-        <th style="border-bottom: 1px solid #757575; width: 50%; text-align: center; padding: 0px;">Fremskridt</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of GetMediaFilesByID(59)">
-          <td style="overflow: hidden;
-    text-overflow: clip;
-    max-width: 0px;" class="hoverme" > {{item.getTitle()}}
-    </td>
-    <td>
-      <button mat-ripple>
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-ripple >
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </tr>
-</tbody>
-</table>
-
-
 
 
 

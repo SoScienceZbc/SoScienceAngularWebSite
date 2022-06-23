@@ -5,8 +5,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DatabaseService } from '../database.service';
-import { D_Document, D_Documents, D_Project } from '../protos/DatabaseProto_pb';
-import { MediaReply, MediaRequests, MediasReply, RetrieveMediaReply } from '../protos/RemoteMediaProto_pb';
+import { D_Document, D_Documents, D_MediaInfo, D_Project } from '../protos/DatabaseProto_pb';
+import { MediaReply, MediaRequests, RetrieveMediaReply } from '../protos/RemoteMediaProto_pb';
 import { LoadingService } from '../loading.service';
 import { TextEditorComponent } from '../TextEditor/TextEditor.component';
 import quill, { Quill } from 'quill';
@@ -65,7 +65,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns = ["Id", "name", "completed", "lastedited", "endDate"];
   mediaDisplayedColumns = ["title", "type"]
   matdatasource = new MatTableDataSource<expandingD_Project>(this.dataSource);
-  mediaList: Array<MediasReply[]> = new Array<MediasReply[]>();
 
   dataSourceDoneProjjects: Array<expandingD_Project> = new Array<expandingD_Project>();
   matdatasourceDoneProjects = new MatTableDataSource<expandingD_Project>(this.dataSourceDoneProjjects);
@@ -90,14 +89,14 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
           this.matdatasource.data.push((data as expandingD_Project));
           this.matdatasource._updateChangeSubscription();
         }
-        console.log(data.getId());
-        mediaService.GetAllMedias(data.getId()).subscribe(media => {
-          if(media.getAllmediasList().length > 0) {
-            this.mediaList.push(media.getAllmediasList());
-          }
-          console.log("medialist: " + this.mediaList);
+        // console.log(data.getId());
+        // mediaService.GetAllMedias(data.getId()).subscribe(media => {
+        //   if(media.getAllmediasList().length > 0) {
+        //     this.mediaList.push(media.getAllmediasList());
+        //   }
+        //   console.log("medialist: " + this.mediaList);
 
-        })
+        // })
       })
       this.spinner.hide();
     });
@@ -225,27 +224,16 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     return true;
   }
 
-  // GetMediaFilesAsObject(media: expandingMediaRequests) {
-  //   let mockup = media.clone();
-  //   if(mockup.getAllmediasList().length > 0) {
-  //     return mockup;
-  //   }
-  //   mockup.clearAllmediasList();
-  //   mockup.addAllmedias(new MediasReply());
-  //   return mockup;
-  // }
-
-  GetMediaFilesByID(id: number) {
-    console.log(id);
-    this.mediaList.forEach(x => {
-      console.log("x: " + x.length);
-      if(x[0].getProjectid() == id){
-        return x;
-      }
-      return;
-    })
-    return null;
+  GetMediaFilesAsObject(element: expandingD_Project) {
+    let mockup = element.clone();
+    if(mockup.getMediainfosList().length > 0) {
+      return mockup;
+    }
+    mockup.clearMediainfosList();
+    mockup.addMediainfos(new D_MediaInfo());
+    return mockup;
   }
+
 
   OpenDialogAreYouSureVideo(event: any){
 

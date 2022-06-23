@@ -102,7 +102,17 @@ message D_Project{
     repeated D_Document documents = 6;
     int32 ProjectThemeID = 7;
     bool CloseToDeletion = 8;
+    repeated D_MediaInfo mediaInfos = 9;
 }
+
+// MediaInfo
+message D_MediaInfo {
+  int32 ID = 1;
+  string title = 2;
+  string type = 3;
+  int32 ProjectID = 4;
+}
+
 // document
 message D_Document{
         int32 ID = 1;
@@ -121,15 +131,6 @@ message D_RemoteFile{
      int32 projectID = 4;
      string path = 5;
 }
-
-// RemoteMedia
-// message D_RemoteMedia{
-  //int32 ID = 1;
-  //string title = 2;
-  //string type = 3;
-  //int32 projectID = 4;
-  //bytes blobData = 5;
-//}
 
 // Subject
 message D_Subject {

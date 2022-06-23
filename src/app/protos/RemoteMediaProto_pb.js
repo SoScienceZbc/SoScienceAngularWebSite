@@ -13,10 +13,10 @@ var goog = jspb;
 var global = Function('return this')();
 
 goog.exportSymbol('proto.RemoteMediaGRPC.ChangeTitleRequest', null, global);
+goog.exportSymbol('proto.RemoteMediaGRPC.D_MediaInfo', null, global);
 goog.exportSymbol('proto.RemoteMediaGRPC.MediaReply', null, global);
 goog.exportSymbol('proto.RemoteMediaGRPC.MediaRequest', null, global);
 goog.exportSymbol('proto.RemoteMediaGRPC.MediaRequests', null, global);
-goog.exportSymbol('proto.RemoteMediaGRPC.MediasReply', null, global);
 goog.exportSymbol('proto.RemoteMediaGRPC.ProjectInformation', null, global);
 goog.exportSymbol('proto.RemoteMediaGRPC.RetrieveMediaReply', null, global);
 goog.exportSymbol('proto.RemoteMediaGRPC.RetrieveMediaRequest', null, global);
@@ -177,16 +177,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.RemoteMediaGRPC.MediasReply = function(opt_data) {
+proto.RemoteMediaGRPC.D_MediaInfo = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.RemoteMediaGRPC.MediasReply, jspb.Message);
+goog.inherits(proto.RemoteMediaGRPC.D_MediaInfo, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.RemoteMediaGRPC.MediasReply.displayName = 'proto.RemoteMediaGRPC.MediasReply';
+  proto.RemoteMediaGRPC.D_MediaInfo.displayName = 'proto.RemoteMediaGRPC.D_MediaInfo';
 }
 
 
@@ -1205,8 +1205,8 @@ proto.RemoteMediaGRPC.MediaRequests.prototype.toObject = function(opt_includeIns
  */
 proto.RemoteMediaGRPC.MediaRequests.toObject = function(includeInstance, msg) {
   var f, obj = {
-    allmediasList: jspb.Message.toObjectList(msg.getAllmediasList(),
-    proto.RemoteMediaGRPC.MediasReply.toObject, includeInstance)
+    mediainfosList: jspb.Message.toObjectList(msg.getMediainfosList(),
+    proto.RemoteMediaGRPC.D_MediaInfo.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -1244,9 +1244,9 @@ proto.RemoteMediaGRPC.MediaRequests.deserializeBinaryFromReader = function(msg, 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.RemoteMediaGRPC.MediasReply;
-      reader.readMessage(value,proto.RemoteMediaGRPC.MediasReply.deserializeBinaryFromReader);
-      msg.addAllmedias(value);
+      var value = new proto.RemoteMediaGRPC.D_MediaInfo;
+      reader.readMessage(value,proto.RemoteMediaGRPC.D_MediaInfo.deserializeBinaryFromReader);
+      msg.addMediainfos(value);
       break;
     default:
       reader.skipField();
@@ -1277,43 +1277,43 @@ proto.RemoteMediaGRPC.MediaRequests.prototype.serializeBinary = function() {
  */
 proto.RemoteMediaGRPC.MediaRequests.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getAllmediasList();
+  f = message.getMediainfosList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
       1,
       f,
-      proto.RemoteMediaGRPC.MediasReply.serializeBinaryToWriter
+      proto.RemoteMediaGRPC.D_MediaInfo.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * repeated MediasReply AllMedias = 1;
- * @return {!Array<!proto.RemoteMediaGRPC.MediasReply>}
+ * repeated D_MediaInfo mediaInfos = 1;
+ * @return {!Array<!proto.RemoteMediaGRPC.D_MediaInfo>}
  */
-proto.RemoteMediaGRPC.MediaRequests.prototype.getAllmediasList = function() {
-  return /** @type{!Array<!proto.RemoteMediaGRPC.MediasReply>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.RemoteMediaGRPC.MediasReply, 1));
+proto.RemoteMediaGRPC.MediaRequests.prototype.getMediainfosList = function() {
+  return /** @type{!Array<!proto.RemoteMediaGRPC.D_MediaInfo>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.RemoteMediaGRPC.D_MediaInfo, 1));
 };
 
 
 /**
- * @param {!Array<!proto.RemoteMediaGRPC.MediasReply>} value
+ * @param {!Array<!proto.RemoteMediaGRPC.D_MediaInfo>} value
  * @return {!proto.RemoteMediaGRPC.MediaRequests} returns this
 */
-proto.RemoteMediaGRPC.MediaRequests.prototype.setAllmediasList = function(value) {
+proto.RemoteMediaGRPC.MediaRequests.prototype.setMediainfosList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
 /**
- * @param {!proto.RemoteMediaGRPC.MediasReply=} opt_value
+ * @param {!proto.RemoteMediaGRPC.D_MediaInfo=} opt_value
  * @param {number=} opt_index
- * @return {!proto.RemoteMediaGRPC.MediasReply}
+ * @return {!proto.RemoteMediaGRPC.D_MediaInfo}
  */
-proto.RemoteMediaGRPC.MediaRequests.prototype.addAllmedias = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.RemoteMediaGRPC.MediasReply, opt_index);
+proto.RemoteMediaGRPC.MediaRequests.prototype.addMediainfos = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.RemoteMediaGRPC.D_MediaInfo, opt_index);
 };
 
 
@@ -1321,8 +1321,8 @@ proto.RemoteMediaGRPC.MediaRequests.prototype.addAllmedias = function(opt_value,
  * Clears the list making it empty but non-null.
  * @return {!proto.RemoteMediaGRPC.MediaRequests} returns this
  */
-proto.RemoteMediaGRPC.MediaRequests.prototype.clearAllmediasList = function() {
-  return this.setAllmediasList([]);
+proto.RemoteMediaGRPC.MediaRequests.prototype.clearMediainfosList = function() {
+  return this.setMediainfosList([]);
 };
 
 
@@ -1342,8 +1342,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.RemoteMediaGRPC.MediasReply.prototype.toObject = function(opt_includeInstance) {
-  return proto.RemoteMediaGRPC.MediasReply.toObject(opt_includeInstance, this);
+proto.RemoteMediaGRPC.D_MediaInfo.prototype.toObject = function(opt_includeInstance) {
+  return proto.RemoteMediaGRPC.D_MediaInfo.toObject(opt_includeInstance, this);
 };
 
 
@@ -1352,11 +1352,11 @@ proto.RemoteMediaGRPC.MediasReply.prototype.toObject = function(opt_includeInsta
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.RemoteMediaGRPC.MediasReply} msg The msg instance to transform.
+ * @param {!proto.RemoteMediaGRPC.D_MediaInfo} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.RemoteMediaGRPC.MediasReply.toObject = function(includeInstance, msg) {
+proto.RemoteMediaGRPC.D_MediaInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, 0),
     title: jspb.Message.getFieldWithDefault(msg, 2, ""),
@@ -1375,23 +1375,23 @@ proto.RemoteMediaGRPC.MediasReply.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.RemoteMediaGRPC.MediasReply}
+ * @return {!proto.RemoteMediaGRPC.D_MediaInfo}
  */
-proto.RemoteMediaGRPC.MediasReply.deserializeBinary = function(bytes) {
+proto.RemoteMediaGRPC.D_MediaInfo.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.RemoteMediaGRPC.MediasReply;
-  return proto.RemoteMediaGRPC.MediasReply.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.RemoteMediaGRPC.D_MediaInfo;
+  return proto.RemoteMediaGRPC.D_MediaInfo.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.RemoteMediaGRPC.MediasReply} msg The message object to deserialize into.
+ * @param {!proto.RemoteMediaGRPC.D_MediaInfo} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.RemoteMediaGRPC.MediasReply}
+ * @return {!proto.RemoteMediaGRPC.D_MediaInfo}
  */
-proto.RemoteMediaGRPC.MediasReply.deserializeBinaryFromReader = function(msg, reader) {
+proto.RemoteMediaGRPC.D_MediaInfo.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -1427,9 +1427,9 @@ proto.RemoteMediaGRPC.MediasReply.deserializeBinaryFromReader = function(msg, re
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.RemoteMediaGRPC.MediasReply.prototype.serializeBinary = function() {
+proto.RemoteMediaGRPC.D_MediaInfo.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.RemoteMediaGRPC.MediasReply.serializeBinaryToWriter(this, writer);
+  proto.RemoteMediaGRPC.D_MediaInfo.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -1437,11 +1437,11 @@ proto.RemoteMediaGRPC.MediasReply.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.RemoteMediaGRPC.MediasReply} message
+ * @param {!proto.RemoteMediaGRPC.D_MediaInfo} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.RemoteMediaGRPC.MediasReply.serializeBinaryToWriter = function(message, writer) {
+proto.RemoteMediaGRPC.D_MediaInfo.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getId();
   if (f !== 0) {
@@ -1478,16 +1478,16 @@ proto.RemoteMediaGRPC.MediasReply.serializeBinaryToWriter = function(message, wr
  * optional int32 ID = 1;
  * @return {number}
  */
-proto.RemoteMediaGRPC.MediasReply.prototype.getId = function() {
+proto.RemoteMediaGRPC.D_MediaInfo.prototype.getId = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
  * @param {number} value
- * @return {!proto.RemoteMediaGRPC.MediasReply} returns this
+ * @return {!proto.RemoteMediaGRPC.D_MediaInfo} returns this
  */
-proto.RemoteMediaGRPC.MediasReply.prototype.setId = function(value) {
+proto.RemoteMediaGRPC.D_MediaInfo.prototype.setId = function(value) {
   return jspb.Message.setProto3IntField(this, 1, value);
 };
 
@@ -1496,16 +1496,16 @@ proto.RemoteMediaGRPC.MediasReply.prototype.setId = function(value) {
  * optional string title = 2;
  * @return {string}
  */
-proto.RemoteMediaGRPC.MediasReply.prototype.getTitle = function() {
+proto.RemoteMediaGRPC.D_MediaInfo.prototype.getTitle = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.RemoteMediaGRPC.MediasReply} returns this
+ * @return {!proto.RemoteMediaGRPC.D_MediaInfo} returns this
  */
-proto.RemoteMediaGRPC.MediasReply.prototype.setTitle = function(value) {
+proto.RemoteMediaGRPC.D_MediaInfo.prototype.setTitle = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -1514,16 +1514,16 @@ proto.RemoteMediaGRPC.MediasReply.prototype.setTitle = function(value) {
  * optional string type = 3;
  * @return {string}
  */
-proto.RemoteMediaGRPC.MediasReply.prototype.getType = function() {
+proto.RemoteMediaGRPC.D_MediaInfo.prototype.getType = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.RemoteMediaGRPC.MediasReply} returns this
+ * @return {!proto.RemoteMediaGRPC.D_MediaInfo} returns this
  */
-proto.RemoteMediaGRPC.MediasReply.prototype.setType = function(value) {
+proto.RemoteMediaGRPC.D_MediaInfo.prototype.setType = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
@@ -1532,16 +1532,16 @@ proto.RemoteMediaGRPC.MediasReply.prototype.setType = function(value) {
  * optional int32 ProjectID = 4;
  * @return {number}
  */
-proto.RemoteMediaGRPC.MediasReply.prototype.getProjectid = function() {
+proto.RemoteMediaGRPC.D_MediaInfo.prototype.getProjectid = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
 /**
  * @param {number} value
- * @return {!proto.RemoteMediaGRPC.MediasReply} returns this
+ * @return {!proto.RemoteMediaGRPC.D_MediaInfo} returns this
  */
-proto.RemoteMediaGRPC.MediasReply.prototype.setProjectid = function(value) {
+proto.RemoteMediaGRPC.D_MediaInfo.prototype.setProjectid = function(value) {
   return jspb.Message.setProto3IntField(this, 4, value);
 };
 
