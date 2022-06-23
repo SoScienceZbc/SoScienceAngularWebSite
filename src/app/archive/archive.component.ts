@@ -247,7 +247,6 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
    * @returns void
    */
   GetDocumentsAsObject(element: expandingD_Project) {
-    console.log("ello");
     let mockup = element.clone();
     if (mockup.getDocumentsList().length > 0) {
       return mockup;
