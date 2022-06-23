@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
 import { DatePipe } from '@angular/common';
@@ -20,18 +20,18 @@ interface Subject {
 })
 
 export class ProjectThemeFormComponent implements OnInit {
-  nameFormControl = new FormControl('', [
+  nameFormControl = new UntypedFormControl('', [
     Validators.required,
     Validators.minLength(4),
     Validators.maxLength(25)
   ]);  
-  myControl = new FormControl("", [
+  myControl = new UntypedFormControl("", [
     Validators.required,
   ]);
-  datetimeFormControl =  new FormControl(this.datePipe.transform(new Date(),"yyyy-MM-ddThh:mm"),[
+  datetimeFormControl =  new UntypedFormControl(this.datePipe.transform(new Date(),"yyyy-MM-ddThh:mm"),[
     Validators.required,
   ])
-  projectthemeGroup = new FormGroup({
+  projectthemeGroup = new UntypedFormGroup({
     'projectThemeName' : this.nameFormControl,
     'subjectSelect' : this.myControl,
     'datetimeSelect' : this.datetimeFormControl

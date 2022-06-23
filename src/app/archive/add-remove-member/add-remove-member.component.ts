@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
 import { LoadingService } from 'src/app/loading.service';
@@ -10,12 +10,12 @@ import { LoadingService } from 'src/app/loading.service';
   styleUrls: ['./add-remove-member.component.css']
 })
 export class AddRemoveMemberComponent implements OnInit {
-  usernameFormControl = new FormControl('', [
+  usernameFormControl = new UntypedFormControl('', [
     Validators.required,
     Validators.minLength(3),
     Validators.maxLength(25)
   ]);  
-  formGroup = new FormGroup({
+  formGroup = new UntypedFormGroup({
     'Username' : this.usernameFormControl,
   })
   addMemberStyle : Boolean
