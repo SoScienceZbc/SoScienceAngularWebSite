@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {grpc} from '@improbable-eng/grpc-web';
 import {RemoteMediaService} from './protos/RemoteMediaProto_pb_service';
-import { MediaRequest, MediaReply, ProjectInformation, RetrieveMediaRequest, RetrieveMediaReply, ChangeTitleRequest, MediaRequests, MediasReply } from './protos/RemoteMediaProto_pb';
+import { MediaRequest, MediaReply, ProjectInformation, RetrieveMediaRequest, RetrieveMediaReply, ChangeTitleRequest, MediaRequests, D_MediaInfo } from './protos/RemoteMediaProto_pb';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 
 @Injectable({

@@ -16,7 +16,7 @@ export class CookieComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if(!this.cookie.check("IsCookieAllowed")){
-      this.cookie.set("IsCookieAllowed", "False");
+      this.cookie.set("IsCookieAllowed", "False", 30);
     }
   }
 

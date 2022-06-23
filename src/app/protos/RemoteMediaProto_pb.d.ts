@@ -148,10 +148,10 @@ export namespace RetrieveMediaReply {
 }
 
 export class MediaRequests extends jspb.Message {
-  clearAllmediasList(): void;
-  getAllmediasList(): Array<MediasReply>;
-  setAllmediasList(value: Array<MediasReply>): void;
-  addAllmedias(value?: MediasReply, index?: number): MediasReply;
+  clearMediainfosList(): void;
+  getMediainfosList(): Array<D_MediaInfo>;
+  setMediainfosList(value: Array<D_MediaInfo>): void;
+  addMediainfos(value?: D_MediaInfo, index?: number): D_MediaInfo;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): MediaRequests.AsObject;
@@ -165,11 +165,11 @@ export class MediaRequests extends jspb.Message {
 
 export namespace MediaRequests {
   export type AsObject = {
-    allmediasList: Array<MediasReply.AsObject>,
+    mediainfosList: Array<D_MediaInfo.AsObject>,
   }
 }
 
-export class MediasReply extends jspb.Message {
+export class D_MediaInfo extends jspb.Message {
   getId(): number;
   setId(value: number): void;
 
@@ -179,21 +179,25 @@ export class MediasReply extends jspb.Message {
   getType(): string;
   setType(value: string): void;
 
+  getProjectid(): number;
+  setProjectid(value: number): void;
+
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): MediasReply.AsObject;
-  static toObject(includeInstance: boolean, msg: MediasReply): MediasReply.AsObject;
+  toObject(includeInstance?: boolean): D_MediaInfo.AsObject;
+  static toObject(includeInstance: boolean, msg: D_MediaInfo): D_MediaInfo.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: MediasReply, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): MediasReply;
-  static deserializeBinaryFromReader(message: MediasReply, reader: jspb.BinaryReader): MediasReply;
+  static serializeBinaryToWriter(message: D_MediaInfo, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): D_MediaInfo;
+  static deserializeBinaryFromReader(message: D_MediaInfo, reader: jspb.BinaryReader): D_MediaInfo;
 }
 
-export namespace MediasReply {
+export namespace D_MediaInfo {
   export type AsObject = {
     id: number,
     title: string,
     type: string,
+    projectid: number,
   }
 }
 

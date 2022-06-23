@@ -5,7 +5,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DatabaseService } from '../database.service';
-import { D_Document, D_Documents, D_Project } from '../protos/DatabaseProto_pb';
+import { D_Document, D_Documents, D_MediaInfo, D_Project } from '../protos/DatabaseProto_pb';
+import { MediaReply, MediaRequests, RetrieveMediaReply } from '../protos/RemoteMediaProto_pb';
 import { LoadingService } from '../loading.service';
 import { TextEditorComponent } from '../TextEditor/TextEditor.component';
 import quill, { Quill } from 'quill';
@@ -17,6 +18,7 @@ import { saveAs } from 'file-saver';
 import { pdfExporter } from 'quill-to-pdf';
 import { RecordAudioComponent } from './media-record/record-audio/record-audio.component';
 import { RecordVideoComponent } from './media-record/record-video/record-video.component';
+import { MediaServiceService } from '../media-service.service';
 
 /**
  * @title Table with expandable rows
@@ -61,17 +63,19 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   public dataSource: Array<expandingD_Project> = new Array<expandingD_Project>();
   /*--------------DataTable Values--------------*/
   displayedColumns = ["Id", "name", "completed", "lastedited", "endDate"];
+  mediaDisplayedColumns = ["title", "type"]
   matdatasource = new MatTableDataSource<expandingD_Project>(this.dataSource);
 
   dataSourceDoneProjjects: Array<expandingD_Project> = new Array<expandingD_Project>();
   matdatasourceDoneProjects = new MatTableDataSource<expandingD_Project>(this.dataSourceDoneProjjects);
 
   Documents: expandingD_Docs = new expandingD_Docs();
+  Media: expandingMediaRequests = new expandingMediaRequests();
   expandingelement: expandingD_Docs = new expandingD_Docs();
   isExpansionDetailRow = (id: number, row: any | expandingD_Docs) => this.isExpansionDetailRows(id, row);
 
 
-  constructor(private dataserve: DatabaseService, private spinner: LoadingService, private dialog: MatDialog) {
+  constructor(private dataserve: DatabaseService, private mediaService: MediaServiceService, private spinner: LoadingService, private dialog: MatDialog) {
     this.dataserve.GetProjectsTheRigthWay();
 
     this.dataserve.listOfProjects$.subscribe(x => {
@@ -85,6 +89,14 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
           this.matdatasource.data.push((data as expandingD_Project));
           this.matdatasource._updateChangeSubscription();
         }
+        // console.log(data.getId());
+        // mediaService.GetAllMedias(data.getId()).subscribe(media => {
+        //   if(media.getAllmediasList().length > 0) {
+        //     this.mediaList.push(media.getAllmediasList());
+        //   }
+        //   console.log("medialist: " + this.mediaList);
+
+        // })
       })
       this.spinner.hide();
     });
@@ -184,8 +196,10 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     };
   }
 
-  openRecordAudio() {
-    this.dialog.open(RecordAudioComponent, { data:{ } })
+  openRecordAudio(id: number) {
+    this.dialog.open(RecordAudioComponent, { data:{
+      projectid: id
+    } })
   }
 
   openRecordVideo(id:number) {
@@ -210,12 +224,30 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
     return true;
   }
 
+  GetMediaFilesAsObject(element: expandingD_Project) {
+    let mockup = element.clone();
+    if(mockup.getMediainfosList().length > 0) {
+      return mockup;
+    }
+    mockup.clearMediainfosList();
+    mockup.addMediainfos(new D_MediaInfo());
+    return mockup;
+  }
+
+
+  OpenDialogAreYouSureVideo(event: any){
+    this.dialog.open(DialogAreYouSureComponent, {
+      data: {  }
+    })
+  }
+
   /**
    * This is false data(mockup) in the case that the Documentslist is empty or null
    * @param element the elemen to fetch Documents for.
    * @returns void
    */
   GetDocumentsAsObject(element: expandingD_Project) {
+    console.log("ello");
     let mockup = element.clone();
     if (mockup.getDocumentsList().length > 0) {
       return mockup;
@@ -324,4 +356,11 @@ export class expandingD_Project extends D_Project {
     super();
   }
 
+}
+
+export class expandingMediaRequests extends MediaRequests {
+  public loading: boolean = false;
+  constructor() {
+    super()
+  }
 }

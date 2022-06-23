@@ -8,7 +8,7 @@ declare const MediaRecorder: any;
 @Directive({
   selector: "[video] , [audio]",
 })
-export class HtmlVideoDirective {
+export class HtmlMediaDirective {
 
   public mediaElement: HTMLMediaElement;
 
@@ -20,7 +20,7 @@ export class HtmlVideoDirective {
 @Directive({
   selector: '[video[mediaStream]], [audio[mediaStream]]',
 })
-export class MediaStreamDirective extends HtmlVideoDirective implements AfterViewInit{
+export class MediaStreamDirective extends HtmlMediaDirective implements AfterViewInit{
 @Input('mediaStream')
 public config!: MediaStreamConstraints
 
