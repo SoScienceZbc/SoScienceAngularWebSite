@@ -60,8 +60,8 @@ export class RecordVideoComponent implements AfterViewInit{
     if(this.videoBlob) {
       console.log(this.title)
       let newVid = new MediaRequest();
-      newVid.setProjectid(this.projectid.projectid)
-      newVid.setTitle("New recorded video")
+      newVid.setProjectid(this.projectid.projectid);
+      newVid.setTitle(this.title);
       newVid.setType("video");
 
       //Make Uint8array
