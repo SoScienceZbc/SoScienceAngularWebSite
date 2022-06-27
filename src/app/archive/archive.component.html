@@ -1,259 +1,240 @@
 <mat-tab-group>
   <!-- Projects that are not done and in process is shown under this tab -->
   <mat-tab label="Igangværende projekter">
-<mat-card style="border-radius: 0px 0px 5px 5px;">
-  <div>
-    <div style="display: flex;;">
-      <!-- <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button> -->
+    <mat-card style="border-radius: 0px 0px 5px 5px;">
+      <div>
+        <div style="display: flex;;">
+        <!-- <button (click)="AddNewProject()" class="maticonBounten" mat-icon-button> -->
 
-      <app-add-project-dialog-box #tooltip="matTooltip" matTooltip="Tilføj nyt projekt" matTooltipHideDelay="100">
-      </app-add-project-dialog-box>
-      <!-- <h4>Tilføj nyt projekt</h4> -->
-    </div>
-    <br />
-    <br />
-    <mat-form-field>
-      <mat-label style="font-size: large">
-        <mat-icon>search</mat-icon>
-      </mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Filter/Søg" #input />
-    </mat-form-field>
-    <table #mattable mat-table [dataSource]="matdatasource" multiTemplateDataRows class="mat-elevation-z8" matSort>
+          <app-add-project-dialog-box #tooltip="matTooltip" matTooltip="Tilføj nyt projekt" matTooltipHideDelay="100">
+          </app-add-project-dialog-box>
+          <!-- <h4>Tilføj nyt projekt</h4> -->
+        </div>
+        <br />
+        <br />
+        <mat-form-field>
+          <mat-label style="font-size: large">
+            <mat-icon>search</mat-icon>
+          </mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filter/Søg" #input />
+        </mat-form-field>
+        <table #mattable mat-table [dataSource]="matdatasource" multiTemplateDataRows class="mat-elevation-z8" matSort>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="Id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-        <td mat-cell *matCellDef="let element">{{ element.getId() }}</td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Navn/Titel</th>
-        <td mat-cell *matCellDef="let element">{{ element.getName() }}</td>
-      </ng-container>
-
-      <!-- completed Column -->
-      <ng-container matColumnDef="completed">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Færdiggjort</th>
-        <td mat-cell *matCellDef="let element">{{ element.getCompleted() ? "Ja" : "Nej" }}
-          <a style="z-index: 10;">
-            <button mat-ripple (click)="updateProject(element)"
-              style="cursor: pointer; z-index: 1;"
-              mat-icon-button>
-              <mat-icon>done</mat-icon>
-            </button>
-          </a>
-        </td>
-      </ng-container>
-
-      <!-- lastedited Column -->
-      <ng-container matColumnDef="lastedited">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sidst redigeret</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.getLastedited() }}
-        </td>
-      </ng-container>
-      <!-- endDate Column -->
-      <ng-container matColumnDef="endDate">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Slut Dato</th>
-        <td mat-cell *matCellDef="let element">{{ element.getEnddate() }}
-            <button
-              mat-ripple
-              (click)="DeleteProject(element)"
-              style="cursor: pointer; z-index: 1;"
-              mat-icon-button
-              [disabled]="element.getDocumentsList().length > 0"
-              color="warn">
-            <mat-icon>delete_forever</mat-icon>
-            </button>
-            <button (click)="addMember(element.getId())" mat-icon-button #tooltip="matTooltip"
-              color="accent"
-              matTooltip="Tilføj projektmedlem" matTooltipHideDelay="100">
-              <mat-icon>person_add_alt_1</mat-icon>
-            </button>
-            <button
-              (click)="removeMember(element.getId())"
-              mat-icon-button #tooltip="matTooltip"
-              color="warn"
-              matTooltip="Fjern projektmedlem"
-              matTooltipHideDelay="100">
-              <mat-icon>person_remove_alt_1</mat-icon>
-            </button>
-
-            <button
-              (click)="downloadData(element)"
-              mat-icon-button #tooltip="matTooltip"
-              matTooltip="Download Filer"
-              [disabled]="element.getDocumentsList().length == 0"
-              matTooltipHideDelay="100">
-              <mat-icon>download</mat-icon>
-            </button>
-
-
-            <mat-progress-bar *ngIf="(download.Downloaded < 99 && download.id == element.getId())" style="width: 100%;" color="accent" mode="buffer"
-            [value]='(download.Downloaded)'
-            [bufferValue]='(download.ReadyToDownload)'>
-          </mat-progress-bar>
-        </td>
-      </ng-container>
-
-      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-      <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-          <div class="example-element-detail" [@detailExpand]="(element === Documents) ? 'expanded' : 'collapsed'">
-              <table *ngIf="GetDocumentsAsObject(element).getDocumentsList()[0].getId() != 0">
-                <thead style="border-bottom: 1px solid #494949;">
-                  <tr >
-                    <th style="border-bottom: 1px solid #757575; width: 35%; text-align: left; padding: 0px;">Navn/Titel</th>
-                    <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Rediger</th>
-                    <th style="border-bottom: 1px solid #757575; width: 50%; text-align: center; padding: 0px;">Fremdrift</th>
-                  </tr>
-                </thead>
-                <tbody >
-                  <tr *ngFor="let item of GetDocumentsAsObject(element).getDocumentsList()" >
-                    <!-- <td>{{item.getId()}}</td> -->
-                    <td style="overflow: hidden;
-                    text-overflow: clip;
-                    max-width: 0px;" class="hoverme" > {{item.getTitle()}}
-                  </td>
-                    <td style="text-align: center;">
-                      <button mat-ripple (click)="OpenQuilEditor(item)"style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;"  class="TextColor">
-                        <mat-icon>edit</mat-icon>
-                      </button>
-                      <button mat-ripple (click)="OpenDialogAreYouSureDocument(item)"style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </td>
-
-                    <td>
-                      <mat-progress-bar color="accent" style="min-width: 150px;" mode="buffer"
-                        [value]='((item.getCompletedcount() /11)*100)'>
-                      </mat-progress-bar>
-                    </td>
-                  </tr>
-                </tbody>
-
-              </table>
-
-
-
-
-              <br>
-
-              <!-- Video/Audio table for showing all media files associated with the project -->
-
-              <table *ngIf="GetMediaFilesAsObject(element).getMediainfosList()[0].getId() != 0">
-                <thead style="border-bottom: 1px solid #494949;">
-                  <tr >
-                    <th style="border-bottom: 1px solid #757575; width: 35%; text-align: left; padding: 0px;">Navn/Titel</th>
-                    <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Rediger</th>
-                    <th style="border-bottom: 1px solid #757575; width: 50%; text-align: center; padding: 0px;"></th>
-                  </tr>
-                </thead>
-                <tbody >
-                  <tr *ngFor="let item of GetMediaFilesAsObject(element).getMediainfosList()" >
-                    <!-- <td>{{item.getId()}}</td> -->
-                    <td style="overflow: hidden;
-                    text-overflow: clip;
-                    max-width: 0px;" class="hoverme" > {{item.getTitle()}}
-                  </td>
-                    <td style="text-align: center;">
-                      <button mat-ripple style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
-                        <mat-icon>edit</mat-icon>
-                      </button>
-                      <button mat-ripple style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </td>
-
-                    <td>
-                    </td>
-                  </tr>
-                </tbody>
-
-              </table>
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!-- <table >
-                      <thead>
+          <!-- Name Column -->
+          <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+            <td mat-cell *matCellDef="let element">{{ element.getId() }}</td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Navn/Titel</th>
+            <td mat-cell *matCellDef="let element">{{ element.getName() }}</td>
+          </ng-container>
+        
+          <!-- completed Column -->
+          <ng-container matColumnDef="completed">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Færdiggjort</th>
+            <td mat-cell *matCellDef="let element">{{ element.getCompleted() ? "Ja" : "Nej" }}
+              <a style="z-index: 10;">
+                <button mat-ripple (click)="updateProject(element)"
+                  style="cursor: pointer; z-index: 1;"
+                  mat-icon-button>
+                  <mat-icon>done</mat-icon>
+                </button>
+              </a>
+            </td>
+          </ng-container>
+        
+          <!-- lastedited Column -->
+          <ng-container matColumnDef="lastedited">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Sidst redigeret</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.getLastedited() }}
+            </td>
+          </ng-container>
+          <!-- endDate Column -->
+          <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Slut Dato</th>
+            <td mat-cell *matCellDef="let element">{{ element.getEnddate() }}
+                <button
+                  mat-ripple
+                  (click)="DeleteProject(element)"
+                  style="cursor: pointer; z-index: 1;"
+                  mat-icon-button
+                  [disabled]="element.getDocumentsList().length > 0 || element.getMediainfosList().length > 0"
+                  color="warn">
+                <mat-icon>delete_forever</mat-icon>
+                </button>
+                <button (click)="addMember(element.getId())" mat-icon-button #tooltip="matTooltip"
+                  color="accent"
+                  matTooltip="Tilføj projektmedlem" matTooltipHideDelay="100">
+                  <mat-icon>person_add_alt_1</mat-icon>
+                </button>
+                <button
+                  (click)="removeMember(element.getId())"
+                  mat-icon-button #tooltip="matTooltip"
+                  color="warn"
+                  matTooltip="Fjern projektmedlem"
+                  matTooltipHideDelay="100">
+                  <mat-icon>person_remove_alt_1</mat-icon>
+                </button>
+              
+                <button
+                  (click)="downloadData(element)"
+                  mat-icon-button #tooltip="matTooltip"
+                  matTooltip="Download Filer"
+                  [disabled]="element.getDocumentsList().length == 0"
+                  matTooltipHideDelay="100">
+                  <mat-icon>download</mat-icon>
+                </button>
+              
+              
+                <mat-progress-bar *ngIf="(download.Downloaded < 99 && download.id == element.getId())" style="width: 100%;" color="accent" mode="buffer"
+                [value]='(download.Downloaded)'
+                [bufferValue]='(download.ReadyToDownload)'>
+              </mat-progress-bar>
+            </td>
+          </ng-container>
+        
+          <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+          <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+              <div class="example-element-detail" [@detailExpand]="(element === Documents) ? 'expanded' : 'collapsed'">
+                  <table *ngIf="GetDocumentsAsObject(element).getDocumentsList()[0].getId() != 0">
+                    <thead style="border-bottom: 1px solid #494949;">
+                      <tr>
                         <th style="border-bottom: 1px solid #757575; width: 35%; text-align: left; padding: 0px;">Navn/Titel</th>
                         <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Rediger</th>
-                        <th style="border-bottom: 1px solid #757575; width: 50%; text-align: center; padding: 0px;">Fremskridt</th>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let item of GetMediaFilesByID(element)">
-                          <td style="overflow: hidden;
-                    text-overflow: clip;
-                    max-width: 0px;" class="hoverme" > {{item.getTitle()}}
-                    </td>
-                    <td>
-                      <button mat-ripple>
-                        <mat-icon>edit</mat-icon>
-                      </button>
-                      <button mat-ripple >
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table> -->
+                        <th style="border-bottom: 1px solid #757575; width: 50%; text-align: center; padding: 0px;">Fremdrift</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of GetDocumentsAsObject(element).getDocumentsList()">
+                        <!-- <td>{{item.getId()}}</td> -->
+                        <td style="overflow: hidden;
+                        text-overflow: clip;
+                        max-width: 0px;" class="hoverme" > {{item.getTitle()}}
+                      </td>
+                        <td style="text-align: center;">
+                          <button mat-ripple (click)="OpenQuilEditor(item)"style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;"  class="TextColor">
+                            <mat-icon>edit</mat-icon>
+                          </button>
+                          <button mat-ripple (click)="OpenDialogAreYouSureDocument(item)"style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                      
+                        <td>
+                          <mat-progress-bar color="accent" style="min-width: 150px;" mode="buffer"
+                            [value]='((item.getCompletedcount() /11)*100)'>
+                          </mat-progress-bar>
+                        </td>
+                      </tr>
+                    </tbody>
+                  
+                  </table>
+                
+                
+                
+                
+                  <br>
+                
+                  <!-- Video/Audio table for showing all media files associated with the project -->
+                
+                  <table *ngIf="GetMediaFilesAsObject(element).getMediainfosList()[0].getId() != 0">
+                    <thead style="border-bottom: 1px solid #494949;">
+                      <tr >
+                        <th style="border-bottom: 1px solid #757575; width: 35%; text-align: left; padding: 0px;">Navn/Titel</th>
+                        <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Rediger</th>
+                        <th style="border-bottom: 1px solid #757575; width: 50%; text-align: center; padding: 0px;"></th>
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr *ngFor="let item of GetMediaFilesAsObject(element).getMediainfosList()" >
+                        <!-- <td>{{item.getId()}}</td> -->
+                        <td style="overflow: hidden;
+                        text-overflow: clip;
+                        max-width: 0px;" class="hoverme" > {{item.getTitle()}}
+                      </td>
+                        <td style="text-align: center;">
+                          <button mat-ripple style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
+                            <mat-icon>edit</mat-icon>
+                          </button>
+                          <button mat-ripple style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                      
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  
+                  </table>
+                
+                        <!-- <table >
+                          <thead>
+                            <th style="border-bottom: 1px solid #757575; width: 35%; text-align: left; padding: 0px;">Navn/Titel</th>
+                            <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Rediger</th>
+                            <th style="border-bottom: 1px solid #757575; width: 50%; text-align: center; padding: 0px;">Fremskridt</th>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of GetMediaFilesByID(element)">
+                              <td style="overflow: hidden;
+                        text-overflow: clip;
+                        max-width: 0px;" class="hoverme" > {{item.getTitle()}}
+                        </td>
+                        <td>
+                          <button mat-ripple>
+                            <mat-icon>edit</mat-icon>
+                          </button>
+                          <button mat-ripple >
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table> -->
+                
+                  <div style="padding-top: 1rem; z-index: 10; padding-bottom: 1rem;">
+                    <app-add-document-dialog-box [projectid]="element.getId()" #tooltip="matTooltip"
+                      matTooltip="Tilføj nyt dokument" matTooltipHideDelay="100" style="margin-left: 5px;">
+                    </app-add-document-dialog-box>
+                    <!-- <button mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button> -->
+                    <!-- <a style="margin: 5px;">Tilføj nyt dokument</a> -->
+                    <span></span>
+                    <button  mat-mini-fab style="margin-left: 5px;" #tooltip="matTooltip"
+                    color="primary"
+                    matTooltip="Optag lyd" matTooltipHideDelay="100" (click)="openRecordAudio(element.getId())">
+                    <mat-icon>mic</mat-icon>
+                    </button>
+                    <button mat-mini-fab style="margin-left: 5px;" #tooltip="matTooltip"
+                      color="primary"
+                      matTooltip="Optag Video" matTooltipHideDelay="100" (click)="openRecordVideo(element.getId())">
+                      <mat-icon>videocam</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+          
+          <!-- Expanded Content Column - The detail row is made up of this one column -->
+          
+          
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+            [class.example-expanded-row]="Documents == row" (click)="Documents = Documents  == row ? null: row"
+            style="overflow: hidden;">
+          </tr>
+          <tr style="overflow: hidden;" mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
 
-
-
-
-              <div style="padding-top: 1rem; z-index: 10; padding-bottom: 1rem;">
-                <app-add-document-dialog-box [projectid]="element.getId()" #tooltip="matTooltip"
-                  matTooltip="Tilføj nyt dokument" matTooltipHideDelay="100" style="margin-left: 5px;">
-                </app-add-document-dialog-box>
-                <!-- <button mat-ripple mat-mini-fab style="background-color:#3f51b5;"><mat-icon >add</mat-icon></button> -->
-                <!-- <a style="margin: 5px;">Tilføj nyt dokument</a> -->
-                <span></span>
-                <button  mat-mini-fab style="margin-left: 5px;" #tooltip="matTooltip"
-                color="primary"
-                matTooltip="Optag lyd" matTooltipHideDelay="100" (click)="openRecordAudio(element.getId())">
-                <mat-icon>mic</mat-icon>
-                </button>
-                <button mat-mini-fab style="margin-left: 5px;" #tooltip="matTooltip"
-                  color="primary"
-                  matTooltip="Optag Video" matTooltipHideDelay="100" (click)="openRecordVideo(element.getId())">
-                  <mat-icon>videocam</mat-icon>
-                </button>
-              </div>
-            </div>
-          </td>
-        </ng-container>
-
-      <!-- Expanded Content Column - The detail row is made up of this one column -->
-
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
-        [class.example-expanded-row]="Documents == row" (click)="Documents = Documents  == row ? null: row"
-        style="overflow: hidden;">
-      </tr>
-      <tr style="overflow: hidden;" mat-row *matRowDef="let row; columns: ['expandedDetail']"
-        class="example-detail-row"></tr>
-    </table>
-
-
-
-
-
-    <mat-paginator #paginator [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
-  </div>
-  <mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;"
-    [mode]="'indeterminate'" *ngIf="loading$ |async"></mat-progress-spinner>
-</mat-card>
+      	<mat-paginator #paginator [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
+      </div>
+      <mat-progress-spinner style="position: absolute; top: 50%; left: 50%; translate: -50%,-50%; z-index: 5;"
+      [mode]="'indeterminate'" *ngIf="loading$ |async"></mat-progress-spinner>
+    </mat-card>
   </mat-tab>
   <!-- Projects that are done is shown under this tab -->
   <mat-tab label="Færdiggjorte projekter"><mat-card style="border-radius: 0px 0px 5px 5px;">
