@@ -235,9 +235,11 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
 
-  OpenDialogAreYouSureVideo(event: any){
+  DeleteMedia(element: D_MediaInfo){
     this.dialog.open(DialogAreYouSureComponent, {
-      data: {  }
+      data: { media: element, type: "M" },
+      autoFocus: true,
+      restoreFocus: true
     })
   }
 

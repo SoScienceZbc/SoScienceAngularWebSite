@@ -120,7 +120,7 @@
                           <button mat-ripple (click)="OpenQuilEditor(item)"style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;"  class="TextColor">
                             <mat-icon>edit</mat-icon>
                           </button>
-                          <button mat-ripple (click)="OpenDialogAreYouSureDocument(item)"style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
+                          <button mat-ripple (click)="OpenDialogAreYouSureDocument(item)" style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
                             <mat-icon>delete</mat-icon>
                           </button>
                         </td>
@@ -145,7 +145,8 @@
                   <table *ngIf="GetMediaFilesAsObject(element).getMediainfosList()[0].getId() != 0">
                     <thead style="border-bottom: 1px solid #494949;">
                       <tr >
-                        <th style="border-bottom: 1px solid #757575; width: 35%; text-align: left; padding: 0px;">Navn/Titel</th>
+                        <th style="border-bottom: 1px solid #757575; width: 20%; text-align: left; padding: 0px;">Navn/Titel</th>
+                        <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Type</th>
                         <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Rediger</th>
                         <th style="border-bottom: 1px solid #757575; width: 50%; text-align: center; padding: 0px;"></th>
                       </tr>
@@ -157,45 +158,23 @@
                         text-overflow: clip;
                         max-width: 0px;" class="hoverme" > {{item.getTitle()}}
                       </td>
+                      <td style="text-align: center;">
+                        {{item.getType()}}
+                      </td>
                         <td style="text-align: center;">
                           <button mat-ripple style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
                             <mat-icon>edit</mat-icon>
                           </button>
-                          <button mat-ripple style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
+                          <button mat-ripple (click)="DeleteMedia(item)" style="background-color:transparent; border-color: transparent; cursor: pointer; z-index: 1;" class="TextColor">
                             <mat-icon>delete</mat-icon>
                           </button>
                         </td>
                       
-                        <td>
-                        </td>
                       </tr>
                     </tbody>
                   
                   </table>
-                
-                        <!-- <table >
-                          <thead>
-                            <th style="border-bottom: 1px solid #757575; width: 35%; text-align: left; padding: 0px;">Navn/Titel</th>
-                            <th style="border-bottom: 1px solid #757575; width: 15%; text-align: center; padding: 0px;">Rediger</th>
-                            <th style="border-bottom: 1px solid #757575; width: 50%; text-align: center; padding: 0px;">Fremskridt</th>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let item of GetMediaFilesByID(element)">
-                              <td style="overflow: hidden;
-                        text-overflow: clip;
-                        max-width: 0px;" class="hoverme" > {{item.getTitle()}}
-                        </td>
-                        <td>
-                          <button mat-ripple>
-                            <mat-icon>edit</mat-icon>
-                          </button>
-                          <button mat-ripple >
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table> -->
+                  
                 
                   <div style="padding-top: 1rem; z-index: 10; padding-bottom: 1rem;">
                     <app-add-document-dialog-box [projectid]="element.getId()" #tooltip="matTooltip"

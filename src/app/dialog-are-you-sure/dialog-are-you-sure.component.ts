@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatabaseService } from '../database.service';
 import { LoadingService } from '../loading.service';
+import { MediaServiceService } from '../media-service.service';
 
 @Component({
   selector: 'app-dialog-are-you-sure',
@@ -10,7 +11,7 @@ import { LoadingService } from '../loading.service';
 })
 export class DialogAreYouSureComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dataservice: DatabaseService, private spinner: LoadingService, private dialogbox: MatDialog) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dataservice: DatabaseService, private spinner: LoadingService, private dialogbox: MatDialog, private mediaservice: MediaServiceService) {
   }
 
   ngOnInit(): void {
@@ -48,6 +49,10 @@ export class DialogAreYouSureComponent implements OnInit {
         this.dataservice.RemoveProjectTheme(this.data.docoment)
         this.dialogbox.closeAll();
         break;
+      case "M":
+        this.spinner.show();
+        this.mediaservice.DeleteMedia(this.data.media.getId())
+      break;
     }
   }
   NonConfirmDelete() {
