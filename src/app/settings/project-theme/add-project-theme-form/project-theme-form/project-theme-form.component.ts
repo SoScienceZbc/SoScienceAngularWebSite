@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
 import { DatePipe } from '@angular/common';
 import { LoadingService } from 'src/app/loading.service';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { textChangeRangeIsUnchanged } from 'typescript';
 
 interface Subject {
   value: number;
@@ -20,18 +19,18 @@ interface Subject {
 })
 
 export class ProjectThemeFormComponent implements OnInit {
-  nameFormControl = new UntypedFormControl('', [
+  nameFormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(4),
     Validators.maxLength(25)
   ]);  
-  myControl = new UntypedFormControl("", [
+  myControl = new FormControl("", [
     Validators.required,
   ]);
-  datetimeFormControl =  new UntypedFormControl(this.datePipe.transform(new Date(),"yyyy-MM-ddThh:mm"),[
+  datetimeFormControl =  new FormControl(this.datePipe.transform(new Date(),"yyyy-MM-ddThh:mm"),[
     Validators.required,
   ])
-  projectthemeGroup = new UntypedFormGroup({
+  projectthemeGroup = new FormGroup({
     'projectThemeName' : this.nameFormControl,
     'subjectSelect' : this.myControl,
     'datetimeSelect' : this.datetimeFormControl

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Console } from 'console';
 import { CookieService } from 'ngx-cookie-service';
@@ -15,20 +15,20 @@ import { MediaRequest } from '../protos/RemoteMediaProto_pb';
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
 
-  LoginFormControl = new UntypedFormControl('', [
+  LoginFormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(4),
     Validators.maxLength(30)
   ]);
 
-  PasswordFormControl = new UntypedFormControl('', [
+  PasswordFormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(5),
   ]);
 
-  rememberMeFormControl = new UntypedFormControl(false);
+  rememberMeFormControl = new FormControl(false);
 
-  LoginFormGroup = new UntypedFormGroup({
+  LoginFormGroup = new FormGroup({
     username: this.LoginFormControl,
     password: this.PasswordFormControl,
     rememberMe: this.rememberMeFormControl,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
 import { D_Subject, D_Subjects } from 'src/app/protos/DatabaseProto_pb';
@@ -12,13 +12,13 @@ import { LoadingService } from 'src/app/loading.service';
 })
 export class SubjectFormComponent implements OnInit {
 
-  newSubjectFormControl = new UntypedFormControl('', [
+  newSubjectFormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(4),
     Validators.maxLength(25)
   ]);
 
-  newSubjectGroup = new UntypedFormGroup({
+  newSubjectGroup = new FormGroup({
     subjectName:this.newSubjectFormControl
   })
 

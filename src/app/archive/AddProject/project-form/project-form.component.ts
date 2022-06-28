@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DatabaseService } from 'src/app/database.service';
 import { LoadingService } from 'src/app/loading.service';
@@ -23,19 +23,19 @@ export class ProjectFormComponent implements OnInit {
   subjects: DropDownItemStrings[] = [];
   themes: DropDoneItem[] = [];
 
-  selectedSubjectFormControl = new UntypedFormControl(null, [
+  selectedSubjectFormControl = new FormControl(null, [
     Validators.required,
   ]);  
-  selectedThemeFormControl = new UntypedFormControl(null, [
+  selectedThemeFormControl = new FormControl(null, [
     Validators.required,
   ]);
-  ProjectNameFormControl = new UntypedFormControl('', [
+  ProjectNameFormControl = new FormControl('', [
     Validators.required,
     Validators.minLength(4),
     Validators.maxLength(25)
   ]);
 
-  newprojectFormgroup = new UntypedFormGroup({
+  newprojectFormgroup = new FormGroup({
     projectName:this.ProjectNameFormControl,
     projectTheme:this.selectedThemeFormControl,
     projectSubject:this.selectedSubjectFormControl
