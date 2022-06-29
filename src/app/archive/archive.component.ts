@@ -18,6 +18,7 @@ import { saveAs } from 'file-saver';
 import { pdfExporter } from 'quill-to-pdf';
 import { RecordAudioComponent } from './media-record/record-audio/record-audio.component';
 import { RecordVideoComponent } from './media-record/record-video/record-video.component';
+import { UpdateMediaFileTitleComponent } from './media-record/update-media-file-title/update-media-file-title.component';
 import { MediaServiceService } from '../media-service.service';
 
 /**
@@ -207,6 +208,19 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
       projectid: id
      }
     });
+  }
+
+  openUpdateMediaFileTitle(id: number) {
+    console.log("ID FROM HTML: " + id)
+this.dialog.open(UpdateMediaFileTitleComponent, { data: {
+  mediaid: id
+  }
+
+  })
+}
+
+  openDisplayMediaFile(id:number) {
+
   }
 
   GetText(item:string){

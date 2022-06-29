@@ -84,6 +84,8 @@ import { CookieComponent } from './cookie/cookie.component';
 import { RecordVideoComponent } from './archive/media-record/record-video/record-video.component';
 import { RecordAudioComponent } from './archive/media-record/record-audio/record-audio.component';
 import { MediaStreamDirective } from './archive/media-record/mediastreamDirective/media-stream.directive';
+import { UpdateMediaFileTitleComponent } from './archive/media-record/update-media-file-title/update-media-file-title.component';
+import { DisplayMediaFileComponent } from './archive/media-record/display-media-file/display-media-file.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +113,8 @@ import { MediaStreamDirective } from './archive/media-record/mediastreamDirectiv
     CookieComponent,
     RecordVideoComponent,
     RecordAudioComponent,
+    UpdateMediaFileTitleComponent,
+    DisplayMediaFileComponent,
   ],
   imports: [
     BrowserModule,

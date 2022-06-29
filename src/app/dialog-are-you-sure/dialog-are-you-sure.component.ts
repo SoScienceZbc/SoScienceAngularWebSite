@@ -52,6 +52,7 @@ export class DialogAreYouSureComponent implements OnInit {
       case "M":
         this.spinner.show();
         this.mediaservice.DeleteMedia(this.data.media.getId())
+        this.dialogbox.closeAll();
       break;
     }
   }
