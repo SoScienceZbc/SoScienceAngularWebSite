@@ -7,9 +7,16 @@
 
   <mat-card-title>{{title}}</mat-card-title>
 
-  <ng-container *ngIf="videoSrc">
-    <video controls [src]="videoSrc"></video>
+  <ng-container >
+
+    <ng-container *ngIf="videoSrc && mediaType=='video'">
+      <video controls [src]="videoSrc"></video>
+    </ng-container>
+    <button (click)="LoadContent()"></button>
+
+    <ng-container *ngIf="videoSrc && mediaType=='audio'">
+      <audio controls [src]=""></audio>
+    </ng-container>
   </ng-container>
-  <button (click)="LoadContent()"></button>
 
   </mat-card>
