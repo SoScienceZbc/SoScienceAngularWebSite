@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-header style="float: right;">
+    <button mat-icon-button (click)="CloseDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+
+<mat-card-title>
+  <form class="form">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Indtast ny titel" [(ngModel)]="title" >
+    </mat-form-field>
+    </form>
+    </mat-card-title>
+<button [disabled]="setTitle()" mat-raised-button #tooltip="matTooltip" matTooltip="Gem titel" (click)="saveTitle()">
+  <mat-icon>save</mat-icon>
+</button>
+</mat-card>

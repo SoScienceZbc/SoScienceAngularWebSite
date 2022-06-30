@@ -3,6 +3,8 @@ import {grpc} from '@improbable-eng/grpc-web';
 import {RemoteMediaService} from './protos/RemoteMediaProto_pb_service';
 import { MediaRequest, MediaReply, ProjectInformation, RetrieveMediaRequest, RetrieveMediaReply, ChangeTitleRequest, MediaRequests, D_MediaInfo } from './protos/RemoteMediaProto_pb';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { title } from 'process';
+import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class MediaServiceService {
 
   hostAddress = 'https://soscience.dk:27385';
 
-  constructor() { }
+  constructor(private databaseservice: DatabaseService) { }
 
   public AddRecordedMedia(video: MediaRequest) {
     const videoToAdd = video;
@@ -26,20 +28,26 @@ export class MediaServiceService {
     })
   }
 
-  public GetMedia(videoId: number) {
-    const getVideoRequest = new RetrieveMediaRequest();
-    getVideoRequest.setId(videoId);
+  public GetMedia(videoId: number): Observable<RetrieveMediaReply> {
+    const getMediaRequest = new RetrieveMediaRequest();
+    getMediaRequest.setId(videoId);
+    let mediaFileFromDB:  BehaviorSubject<RetrieveMediaReply> = new BehaviorSubject<RetrieveMediaReply>(new RetrieveMediaReply);
     grpc.invoke(RemoteMediaService.RetrieveMedia, {
-      request: getVideoRequest,
+      request: getMediaRequest,
       host: this.hostAddress,
       onMessage: (videoElement: RetrieveMediaReply) => {
         //TODO: Display retrieved video in the popup window
+        mediaFileFromDB.next(videoElement);
       },
-      onEnd: () => {}
+      onEnd: () => {
+        console.log("GetMedia ended")
+      }
     })
+    return mediaFileFromDB;
   }
 
   public UpdateMedia(videoId: number, titleToChange: string) {
+    console.log("entered UpdateMedia")
     const changeTitle = new ChangeTitleRequest();
     changeTitle.setId(videoId);
     changeTitle.setTitle(titleToChange);
@@ -48,8 +56,12 @@ export class MediaServiceService {
       host: this.hostAddress,
       onMessage: (successfull: MediaReply) => {
         console.log("video name changed: " + successfull)
+
       },
-      onEnd: () => {}
+      onEnd: () => {
+        console.log("vidId: " + videoId);
+        console.log("titletochange: " + titleToChange)
+      }
     })
   }
 
@@ -60,7 +72,8 @@ export class MediaServiceService {
       request: videoToDelete,
       host: this.hostAddress,
       onMessage: (successfull: MediaReply) => {
-        console.log("video deleted successfully: " + successfull)
+        console.log("video deleted successfully: " + successfull);
+        this.databaseservice.GetProjectsTheRigthWay();
       },
       onEnd: () => {}
     })

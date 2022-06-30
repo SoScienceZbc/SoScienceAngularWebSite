@@ -1,0 +1,15 @@
+<mat-card style="height: 80vh; margin: 0% !important;">
+  <mat-card-header style="float: right;">
+    <button mat-icon-button (click)="CloseDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <mat-card-title>{{title}}</mat-card-title>
+
+  <ng-container *ngIf="videoSrc">
+    <video controls [src]="videoSrc"></video>
+  </ng-container>
+  <button (click)="LoadContent()"></button>
+
+  </mat-card>

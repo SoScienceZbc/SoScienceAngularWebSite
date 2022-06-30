@@ -6,7 +6,6 @@ import { DatePipe } from '@angular/common';
 import { LoadingService } from 'src/app/loading.service';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { textChangeRangeIsUnchanged } from 'typescript';
 
 interface Subject {
   value: number;
