@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, SecurityContext } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BehaviorSubject, Observable, observable } from 'rxjs';
 import { MediaServiceService } from 'src/app/media-service.service';
@@ -30,17 +30,12 @@ export class DisplayMediaFileComponent implements AfterViewInit {
     this.title = this.data.mediatitle;
 
     let tempArray: Uint8Array;
-  this.mediaservice.GetMedia(this.data.mediaid).subscribe( x => {
-    tempArray = x.getRetrievedblobdata_asU8()
-    // console.log("tempArray: " + tempArray)
-    if(tempArray.length > 0) {
-      var newBuffer = tempArray.buffer
-      var dataView = new DataView(newBuffer);
-      var blob = new Blob([dataView], {type: 'video/x-matroska;codecs=avc1,opus'})
-      this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))
-      console.log("blob length: "+ blob.size)
-      console.log(this.videoSrc);
-    }
+    this.mediaservice.GetMedia(this.data.mediaid).subscribe( x => {
+      tempArray = x.getRetrievedblobdata_asU8()
+      if(tempArray.length > 0) {
+        var blob = new Blob([tempArray], {})
+        this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))
+      }
     })
   }
 

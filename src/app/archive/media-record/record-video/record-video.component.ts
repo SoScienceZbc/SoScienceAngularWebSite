@@ -73,13 +73,6 @@ export class RecordVideoComponent implements AfterViewInit{
       newVid.setBlobdata(videoArray);
       console.log(this.videoBlob.size)
 
-      //Simulated retrieved blob from DB
-      var tempArray = videoArray.subarray(0, videoArray.length)
-      var newBuffer = tempArray.buffer
-      var dataView = new DataView(newBuffer);
-      var blob = new Blob([dataView], { })
-      this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))
-
       this.mediaService.AddRecordedMedia(newVid);
       this.saved = true;
     }
