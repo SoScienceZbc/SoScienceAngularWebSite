@@ -28,17 +28,22 @@ export class MediaServiceService {
     })
   }
 
-  public GetMedia(videoId: number) {
-    const getVideoRequest = new RetrieveMediaRequest();
-    getVideoRequest.setId(videoId);
+  public GetMedia(videoId: number): Observable<RetrieveMediaReply> {
+    const getMediaRequest = new RetrieveMediaRequest();
+    getMediaRequest.setId(videoId);
+    let mediaFileFromDB:  BehaviorSubject<RetrieveMediaReply> = new BehaviorSubject<RetrieveMediaReply>(new RetrieveMediaReply);
     grpc.invoke(RemoteMediaService.RetrieveMedia, {
-      request: getVideoRequest,
+      request: getMediaRequest,
       host: this.hostAddress,
       onMessage: (videoElement: RetrieveMediaReply) => {
         //TODO: Display retrieved video in the popup window
+        mediaFileFromDB.next(videoElement);
       },
-      onEnd: () => {}
+      onEnd: () => {
+        console.log("GetMedia ended")
+      }
     })
+    return mediaFileFromDB;
   }
 
   public UpdateMedia(videoId: number, titleToChange: string) {

@@ -19,7 +19,7 @@ export class RecordVideoComponent implements AfterViewInit{
   public mediaStream!: MediaStreamDirective;
 
   public videoSrc!: SafeUrl;
-  public videoBlob = {} as Blob;
+  public videoBlob: Blob = new Blob;
   public saved = {} as boolean;
   public timer = {} as boolean;
   public title = "";
@@ -56,7 +56,7 @@ export class RecordVideoComponent implements AfterViewInit{
     this.startCamera();
   }
   async save(){
-    console.log(this.videoSrc)
+    console.log("savemedia: " + this.videoSrc)
     console.log(this.videoBlob.size)
     console.log("projectid" + this.projectid.projectid);
     if(this.videoBlob) {
