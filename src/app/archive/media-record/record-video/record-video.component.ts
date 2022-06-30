@@ -63,7 +63,11 @@ export class RecordVideoComponent implements AfterViewInit{
       console.log(this.title)
       let newVid = new MediaRequest();
       newVid.setProjectid(this.projectid.projectid);
-      newVid.setTitle(this.title);
+      if(this.title.length == 0 || this.title == null) {
+        newVid.setTitle("Unavngivet");
+      }else{
+        newVid.setTitle(this.title);
+      }
       newVid.setType("video");
 
 
@@ -78,7 +82,8 @@ export class RecordVideoComponent implements AfterViewInit{
     }
   }
   titleSet(){
-    if(this.title.length < 4 || this.title.length > 40){
+  
+    if((this.title.length < 4 && this.title.length != 0) || this.title.length > 40){
       return true;
     }
     else{
