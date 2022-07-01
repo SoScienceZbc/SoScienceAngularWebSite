@@ -23,11 +23,11 @@ export class RecordAudioComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.mediaStream.startAudio();
+    this.saved = true;
   }
 
   public onAudio(data: Blob): void {
     this.audioSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
-    this.saved = true;
     this.audioBlob = data;
   }
 
