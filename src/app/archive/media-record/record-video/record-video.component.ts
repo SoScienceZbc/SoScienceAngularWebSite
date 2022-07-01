@@ -81,8 +81,9 @@ export class RecordVideoComponent implements AfterViewInit{
       this.saved = true;
     }
   }
-  titleSet(){
-  
+
+  setTitle(){
+
     if((this.title.length < 4 && this.title.length != 0) || this.title.length > 40){
       return true;
     }

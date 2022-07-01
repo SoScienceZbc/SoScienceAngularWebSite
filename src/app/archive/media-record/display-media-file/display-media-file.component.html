@@ -1,21 +1,20 @@
-<mat-card style="height: 80vh; margin: 0% !important;">
+<mat-card>
   <mat-card-header style="float: right;">
     <button mat-icon-button (click)="CloseDialog()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-card-header>
 
-  <mat-card-title>{{title}}</mat-card-title>
 
   <ng-container >
-
-    <ng-container *ngIf="videoSrc && mediaType=='video'">
-      <video controls [src]="videoSrc"></video>
+    <mat-card-title>{{title}}</mat-card-title>
+    <br>
+    <ng-container *ngIf="mediaSrc && mediaType=='video'">
+      <video controls [src]="mediaSrc"></video>
     </ng-container>
-    <button (click)="LoadContent()"></button>
 
-    <ng-container *ngIf="videoSrc && mediaType=='audio'">
-      <audio controls [src]=""></audio>
+    <ng-container *ngIf="mediaSrc && mediaType=='audio'">
+      <audio controls [src]="mediaSrc"></audio>
     </ng-container>
   </ng-container>
 

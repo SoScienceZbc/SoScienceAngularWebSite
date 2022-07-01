@@ -23,13 +23,11 @@ export class UpdateMediaFileTitleComponent implements OnInit {
   }
 
   saveTitle() {
-    console.log("SAVETITLE ID: " + this.data.mediaid);
     this.mediaservice.UpdateMedia(this.data.mediaid, this.title);
     this.dialog.closeAll();
   }
 
   setTitle(){
-    console.log("title: " + this.title);
     if(this.title.length < 4 || this.title.length > 40){
       return true;
     }

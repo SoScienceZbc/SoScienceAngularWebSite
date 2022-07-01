@@ -14,23 +14,6 @@ export class DisplayMediaFileComponent implements AfterViewInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private mediaservice: MediaServiceService, private sanitizer: DomSanitizer)
   {
-
-  }
-
-  public title = "";
-  public videoSrc!: SafeUrl;
-  public mediaType = "";
-
-
-  ngAfterViewInit(): void {
-    //this.LoadContent();
-  }
-
-  /*
-    Loads the video from the database, sets the title to the video title in the database
-    And the video blob retrieved as a Uint8 Array, being made into a new blob as video source
-  */
-  async LoadContent(){
     console.log(this.data.mediatitle);
     this.title = this.data.mediatitle;
 
@@ -40,9 +23,17 @@ export class DisplayMediaFileComponent implements AfterViewInit {
       this.mediaType = x.getType();
       if(tempArray.length > 0) {
         var blob = new Blob([tempArray], {})
-        this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))
+        this.mediaSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))
       }
     })
+  }
+
+  public title = "";
+  public mediaSrc!: SafeUrl;
+  public mediaType = "";
+
+
+  ngAfterViewInit(): void {
   }
 
   CloseDialog() {

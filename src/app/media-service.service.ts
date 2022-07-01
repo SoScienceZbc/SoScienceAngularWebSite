@@ -21,10 +21,9 @@ export class MediaServiceService {
       request: videoToAdd,
       host: this.hostAddress,
       onMessage: (successfull: MediaReply) => {
-        console.log("AddVideo Message");
-        console.log("Video added to db: " + successfull);
+        console.log("Media added to db: " + successfull);
       },
-      onEnd: res => {console.log("On End AddVideo: " + res)}
+      onEnd: res => {console.log("On End AddMedia: " + res)}
     })
   }
 
@@ -39,8 +38,8 @@ export class MediaServiceService {
         //TODO: Display retrieved video in the popup window
         mediaFileFromDB.next(videoElement);
       },
-      onEnd: () => {
-        console.log("GetMedia ended")
+      onEnd: res => {
+        console.log("On end GetMedia: " + res)
       }
     })
     return mediaFileFromDB;
@@ -55,12 +54,10 @@ export class MediaServiceService {
       request: changeTitle,
       host: this.hostAddress,
       onMessage: (successfull: MediaReply) => {
-        console.log("video name changed: " + successfull)
+        console.log("UpdateMedia successfull: " + successfull)
 
       },
-      onEnd: () => {
-        console.log("vidId: " + videoId);
-        console.log("titletochange: " + titleToChange)
+      onEnd: res => {console.log("On end UpdateMedia: " + res)
       }
     })
   }
@@ -75,7 +72,7 @@ export class MediaServiceService {
         console.log("video deleted successfully: " + successfull);
         this.databaseservice.GetProjectsTheRigthWay();
       },
-      onEnd: () => {}
+      onEnd: res => {console.log("On end DeleteMedia: " + res)}
     })
 
   }
@@ -90,7 +87,7 @@ export class MediaServiceService {
       onMessage: (message: MediaRequests) => {
         medias.next(message);
       },
-      onEnd: () => {}
+      onEnd: res => {console.log("On end GetAllMedias: " + res)}
     })
     return medias;
   }
