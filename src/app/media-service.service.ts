@@ -21,7 +21,7 @@ export class MediaServiceService {
       request: videoToAdd,
       host: this.hostAddress,
       onMessage: (successfull: MediaReply) => {
-        console.log("Media added to db: " + successfull);
+        console.log("Media added to db: " + successfull); 
       },
       onEnd: res => {console.log("On End AddMedia: " + res)}
     })
@@ -55,7 +55,7 @@ export class MediaServiceService {
       host: this.hostAddress,
       onMessage: (successfull: MediaReply) => {
         console.log("UpdateMedia successfull: " + successfull)
-
+        this.databaseservice.GetProjectsTheRigthWay();
       },
       onEnd: res => {console.log("On end UpdateMedia: " + res)
       }

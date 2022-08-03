@@ -30,7 +30,7 @@
       <button [disabled]="saved || setTitle()" mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Gem video" (click)="save()"><mat-icon>save</mat-icon></button>
       <br>
       <ng-container *ngIf="timer">
-        <cd-timer format="ms" [endTime]="5" (onComplete)="stopRecord()"></cd-timer>
+        <cd-timer format="ms" [endTime]="90" (onComplete)="stopRecord()"></cd-timer>
       </ng-container>
     </mat-card-footer>
 

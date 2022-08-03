@@ -18,12 +18,14 @@ export class RecordAudioComponent implements AfterViewInit {
   public audioSrc!: SafeUrl;
   public audioBlob = {} as Blob;
   public saved = {} as boolean;
+  public timer = {} as boolean;
   public title = "";
   constructor(@Inject(MAT_DIALOG_DATA) public projectid: any,private dialog: MatDialog, private sanitizer: DomSanitizer, private mediaService: MediaServiceService) { }
 
   ngAfterViewInit(): void {
     this.mediaStream.startAudio();
     this.saved = true;
+    this.timer = false;
   }
 
   public onAudio(data: Blob): void {
@@ -37,12 +39,14 @@ export class RecordAudioComponent implements AfterViewInit {
 
   startRecord() {
     this.mediaStream.recordStart();
+    this.timer = true;
   }
 
   stopRecord() {
     this.mediaStream.recordStop();
     this.mediaStream.stop();
     this.saved = false;
+    this.timer = false;
   }
 
   clearRecording() {
