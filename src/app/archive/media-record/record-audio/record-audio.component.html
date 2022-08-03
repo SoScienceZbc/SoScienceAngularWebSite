@@ -15,11 +15,11 @@
   </mat-card-title>
 
   <ng-container *ngIf="!audioSrc">
+    <audio class="audio" playsinline [mediaStream]="{video: false, audio: true}" (mediaRecorded)="onAudio($event)"></audio>
   </ng-container>
   <ng-container *ngIf="audioSrc">
-  </ng-container>
-  <audio class="audio" playsinline [mediaStream]="{audio: true}" (mediaRecorded)="onAudio($event)"></audio>
     <audio class="audio" controls [src]="audioSrc"></audio>
+  </ng-container>
 
     <mat-card-footer style="text-align: center;">
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Start kamera" (click)="startMicrophone()"><mat-icon>mic</mat-icon></button>
