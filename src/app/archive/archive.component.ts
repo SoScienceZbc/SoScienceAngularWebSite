@@ -21,6 +21,9 @@ import { RecordVideoComponent } from './media-record/record-video/record-video.c
 import { UpdateMediaFileTitleComponent } from './media-record/update-media-file-title/update-media-file-title.component';
 import { MediaServiceService } from '../media-service.service';
 import { DisplayMediaFileComponent } from './media-record/display-media-file/display-media-file.component';
+import JSZip from 'jszip';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { zip } from 'rxjs';
 
 /**
  * @title Table with expandable rows
@@ -76,6 +79,12 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   expandingelement: expandingD_Docs = new expandingD_Docs();
   isExpansionDetailRow = (id: number, row: any | expandingD_Docs) => this.isExpansionDetailRows(id, row);
 
+  count:number = 0;
+  zip :JSZip = new JSZip();
+  docFolder = this.zip.folder("Documents");
+  mediaFolder = this.zip.folder("Media");
+  audioFolder = this.mediaFolder?.folder("Audio");
+  videoFolder = this.mediaFolder?.folder("Video");
 
   constructor(private dataserve: DatabaseService, private mediaService: MediaServiceService, private spinner: LoadingService, private dialog: MatDialog) {
     this.dataserve.GetProjectsTheRigthWay();
@@ -156,7 +165,7 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
           this.download.ReadyToDownload += 100/this.download.needToDownload;
           switch (x.getType()) {
             case 'Doc':
-              this.saveAsWordFile(x.getData(),x.getTitle(), project.getId());
+              this.saveAsWordFile(x.getData(),x.getTitle(), this.count,project.getDocumentsList.length, project.getName());
               break;
             }
           }
@@ -343,13 +352,25 @@ this.dialog.open(UpdateMediaFileTitleComponent, { data: {
     })
   }
 
-  async saveAsWordFile(doc : string, title : string, projectID : number) {
+  async saveAsWordFile(doc : string, title : string, currentCount: number, maxCount:number, projectTitle:string) {
+
     if (doc != ''){
       const data = await quillToWord.generateWord(JSON.parse(doc), {
-        exportAs: 'blob',
+        exportAs: 'base64',
       });
-      saveAs(data as any, title + '.docx');
+      this.docFolder?.file(title + ".docx", data.toString(), {base64: true});
     }
+
+      this.count++;
+      if(currentCount > maxCount){
+        this.zip.generateAsync({ type: "blob" })
+        .then(function (content) {
+          saveAs(content, projectTitle + ".zip");
+        });
+      // saveAs(data as any, title + '.docx');
+    }
+
+
     this.download.Downloaded += 100/this.download.needToDownload;
   }
 
