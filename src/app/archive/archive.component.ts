@@ -365,10 +365,10 @@ this.dialog.open(UpdateMediaFileTitleComponent, { data: {
           this.docFolder?.file(title + ".docx", data.toString(), {base64: true});
         }    
         break;
-      case "video":
+      case "Video":
 
         break;
-      case "audio":
+      case "Audio":
 
         break;
     }
