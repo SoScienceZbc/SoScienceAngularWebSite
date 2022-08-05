@@ -153,22 +153,22 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   downloadData(project : D_Project){
+    // Download bar initialize
     this.download = {
       id : project.getId(),
       needToDownload : project.getDocumentsList().length,
       ReadyToDownload : 0,
-      Downloaded : 0};
+      Downloaded : 0.
+    };
+    
     project.getDocumentsList().forEach(doc => {
       let localData$ = this.dataserve.GetDocomentHtml(sessionStorage.getItem("Token") as string, doc.getId());
       localData$.subscribe(x => {
-        if (x != new D_Document()){
-          this.download.ReadyToDownload += 100/this.download.needToDownload;
-          switch (x.getType()) {
-            case 'Doc':
-              this.saveAsWordFile(x.getData(),x.getTitle(), this.count,project.getDocumentsList.length, project.getName());
-              break;
-            }
-          }
+        this.download.ReadyToDownload += 100/this.download.needToDownload; // Download bar activation
+        if (x.getType()!='') {
+          console.log(x.getType());
+          this.ZipCompressFiles(x.getData(),x.getTitle(), this.count,project.getDocumentsList.length, project.getName(),x.getType());
+        }
       });
     });
   }
@@ -352,21 +352,35 @@ this.dialog.open(UpdateMediaFileTitleComponent, { data: {
     })
   }
 
-  async saveAsWordFile(doc : string, title : string, currentCount: number, maxCount:number, projectTitle:string) {
+  async ZipCompressFiles(doc : string, title : string, currentCount: number, maxCount:number, projectTitle:string, type:string) {
 
-    if (doc != ''){
-      const data = await quillToWord.generateWord(JSON.parse(doc), {
-        exportAs: 'base64',
-      });
-      this.docFolder?.file(title + ".docx", data.toString(), {base64: true});
+
+    
+    switch (type) {
+      case "Doc":
+        if (doc != ''){
+          const data = await quillToWord.generateWord(JSON.parse(doc), {
+            exportAs: 'base64',
+          });
+          this.docFolder?.file(title + ".docx", data.toString(), {base64: true});
+        }    
+        break;
+      case "video":
+
+        break;
+      case "audio":
+
+        break;
     }
+    
 
-      this.count++;
-      if(currentCount > maxCount){
-        this.zip.generateAsync({ type: "blob" })
-        .then(function (content) {
-          saveAs(content, projectTitle + ".zip");
-        });
+    this.count++;
+    if(currentCount > maxCount){
+      this.zip.generateAsync({ type: "blob" })
+      .then(function (content) {
+        saveAs(content, projectTitle + ".zip");
+      });
+      this.count = 0;
       // saveAs(data as any, title + '.docx');
     }
 
