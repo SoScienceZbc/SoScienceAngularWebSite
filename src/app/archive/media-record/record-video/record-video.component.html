@@ -10,6 +10,9 @@
 <form class="form">
   <mat-form-field class="full-width">
     <input matInput placeholder="Indtast titel" [(ngModel)]="title" >
+    <mat-error *ngIf="titleSet()">
+      Indtast en titel på mere end 3 tegn
+    </mat-error>
   </mat-form-field>
   </form>
   </mat-card-title>
@@ -20,8 +23,6 @@
   <ng-container *ngIf="videoSrc">
     <video class="video" controls [src]="videoSrc"></video>
   </ng-container>
-
-
     <mat-card-footer style="text-align: center;">
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Start kamera" (click)="startCamera()"><mat-icon>videocam</mat-icon></button>
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Start optagelse" (click)="startRecord()"><mat-icon style="color: red !important;">fiber_manual_record</mat-icon></button>
