@@ -67,7 +67,7 @@ export class RecordAudioComponent implements AfterViewInit {
       }else{
         newRequest.setTitle(this.title);
       }
-      newRequest.setType("audio");
+      newRequest.setType("Audio");
       var buffer = await new Response(this.audioBlob).arrayBuffer();
       const audioArray = new Uint8Array(buffer);
       newRequest.setBlobdata(audioArray)

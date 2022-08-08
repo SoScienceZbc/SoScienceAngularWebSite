@@ -68,7 +68,7 @@ export class RecordVideoComponent implements AfterViewInit{
       }else{
         newVid.setTitle(this.title);
       }
-      newVid.setType("video");
+      newVid.setType("Video");
 
 
       //Make Uint8array
