@@ -10,7 +10,7 @@
 <form class="form">
   <mat-form-field class="full-width">
     <input matInput placeholder="Indtast titel" [(ngModel)]="title" >
-    <mat-error *ngIf="titleSet()">
+    <mat-error *ngIf="setTitle()">
       Indtast en titel på mere end 3 tegn
     </mat-error>
   </mat-form-field>
