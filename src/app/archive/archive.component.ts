@@ -20,6 +20,7 @@ import { RecordAudioComponent } from './media-record/record-audio/record-audio.c
 import { RecordVideoComponent } from './media-record/record-video/record-video.component';
 import { UpdateMediaFileTitleComponent } from './media-record/update-media-file-title/update-media-file-title.component';
 import { MediaServiceService } from '../media-service.service';
+import { DisplayMediaFileComponent } from './media-record/display-media-file/display-media-file.component';
 
 /**
  * @title Table with expandable rows
@@ -215,12 +216,15 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 this.dialog.open(UpdateMediaFileTitleComponent, { data: {
   mediaid: id
   }
-
-  })
+})
 }
 
-  openDisplayMediaFile(id:number) {
-
+  openDisplayMediaFile(id:number, title: string) {
+    this.dialog.open(DisplayMediaFileComponent, { data: {
+      mediaid: id,
+      mediatitle: title
+    }
+  })
   }
 
   GetText(item:string){

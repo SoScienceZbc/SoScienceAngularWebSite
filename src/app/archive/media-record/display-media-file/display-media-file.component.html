@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header style="float: right;">
+    <button mat-icon-button (click)="CloseDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+
+
+  <ng-container >
+    <mat-card-title>{{title}}</mat-card-title>
+    <br>
+    <ng-container *ngIf="mediaSrc && mediaType=='video'">
+      <video controls [src]="mediaSrc"></video>
+    </ng-container>
+
+    <ng-container *ngIf="mediaSrc && mediaType=='audio'">
+      <audio controls [src]="mediaSrc"></audio>
+    </ng-container>
+  </ng-container>
+
+  </mat-card>

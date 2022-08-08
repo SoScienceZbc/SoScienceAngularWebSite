@@ -19,7 +19,7 @@ export class RecordVideoComponent implements AfterViewInit{
   public mediaStream!: MediaStreamDirective;
 
   public videoSrc!: SafeUrl;
-  public videoBlob = {} as Blob;
+  public videoBlob: Blob = new Blob;
   public saved = {} as boolean;
   public timer = {} as boolean;
   public title = "";
@@ -56,14 +56,18 @@ export class RecordVideoComponent implements AfterViewInit{
     this.startCamera();
   }
   async save(){
-    console.log(this.videoSrc)
+    console.log("savemedia: " + this.videoSrc)
     console.log(this.videoBlob.size)
     console.log("projectid" + this.projectid.projectid);
     if(this.videoBlob) {
       console.log(this.title)
       let newVid = new MediaRequest();
       newVid.setProjectid(this.projectid.projectid);
-      newVid.setTitle(this.title);
+      if(this.title.length == 0 || this.title == null) {
+        newVid.setTitle("Unavngivet");
+      }else{
+        newVid.setTitle(this.title);
+      }
       newVid.setType("video");
 
 
@@ -73,19 +77,14 @@ export class RecordVideoComponent implements AfterViewInit{
       newVid.setBlobdata(videoArray);
       console.log(this.videoBlob.size)
 
-      //Simulated retrieved blob from DB
-      var tempArray = videoArray.subarray(0, videoArray.length)
-      var newBuffer = tempArray.buffer
-      var dataView = new DataView(newBuffer);
-      var blob = new Blob([dataView], { })
-      this.videoSrc = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob))
-
       this.mediaService.AddRecordedMedia(newVid);
       this.saved = true;
     }
   }
-  titleSet(){
-    if(this.title.length < 4 || this.title.length > 40){
+
+  setTitle(){
+
+    if((this.title.length < 4 && this.title.length != 0) || this.title.length > 40){
       return true;
     }
     else{

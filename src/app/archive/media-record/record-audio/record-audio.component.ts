@@ -18,10 +18,14 @@ export class RecordAudioComponent implements AfterViewInit {
   public audioSrc!: SafeUrl;
   public audioBlob = {} as Blob;
   public saved = {} as boolean;
+  public timer = {} as boolean;
+  public title = "";
   constructor(@Inject(MAT_DIALOG_DATA) public projectid: any,private dialog: MatDialog, private sanitizer: DomSanitizer, private mediaService: MediaServiceService) { }
 
   ngAfterViewInit(): void {
     this.mediaStream.startAudio();
+    this.saved = true;
+    this.timer = false;
   }
 
   public onAudio(data: Blob): void {
@@ -35,16 +39,19 @@ export class RecordAudioComponent implements AfterViewInit {
 
   startRecord() {
     this.mediaStream.recordStart();
+    this.timer = true;
   }
 
   stopRecord() {
     this.mediaStream.recordStop();
     this.mediaStream.stop();
-
+    this.saved = false;
+    this.timer = false;
   }
 
   clearRecording() {
     this.audioSrc = "";
+    this.saved = true;
   }
 
   async save() {
@@ -52,15 +59,33 @@ export class RecordAudioComponent implements AfterViewInit {
     console.log("audio blob: " + this.audioBlob.size)
     console.log("id: " + this.projectid.projectid)
     if(this.audioBlob) {
+      console.log("entered save audio")
       let newRequest = new MediaRequest();
       newRequest.setProjectid(this.projectid.projectid)
-      newRequest.setTitle("audioTitle");
+      if(this.title.length == 0 || this.title == null) {
+        newRequest.setTitle("Unavngivet");
+      }else{
+        newRequest.setTitle(this.title);
+      }
       newRequest.setType("audio");
       var buffer = await new Response(this.audioBlob).arrayBuffer();
       const audioArray = new Uint8Array(buffer);
       newRequest.setBlobdata(audioArray)
+      this.mediaService.AddRecordedMedia(newRequest);
+      this.saved = true;
     }
   }
+
+  setTitle(){
+
+    if((this.title.length < 4 && this.title.length != 0) || this.title.length > 40){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   CloseDialog(){
     if(this.mediaStream){
       this.mediaStream.stop();

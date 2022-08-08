@@ -21,24 +21,28 @@ export class MediaServiceService {
       request: videoToAdd,
       host: this.hostAddress,
       onMessage: (successfull: MediaReply) => {
-        console.log("AddVideo Message");
-        console.log("Video added to db: " + successfull);
+        console.log("Media added to db: " + successfull); 
       },
-      onEnd: res => {console.log("On End AddVideo: " + res)}
+      onEnd: res => {console.log("On End AddMedia: " + res)}
     })
   }
 
-  public GetMedia(videoId: number) {
-    const getVideoRequest = new RetrieveMediaRequest();
-    getVideoRequest.setId(videoId);
+  public GetMedia(videoId: number): Observable<RetrieveMediaReply> {
+    const getMediaRequest = new RetrieveMediaRequest();
+    getMediaRequest.setId(videoId);
+    let mediaFileFromDB:  BehaviorSubject<RetrieveMediaReply> = new BehaviorSubject<RetrieveMediaReply>(new RetrieveMediaReply);
     grpc.invoke(RemoteMediaService.RetrieveMedia, {
-      request: getVideoRequest,
+      request: getMediaRequest,
       host: this.hostAddress,
       onMessage: (videoElement: RetrieveMediaReply) => {
         //TODO: Display retrieved video in the popup window
+        mediaFileFromDB.next(videoElement);
       },
-      onEnd: () => {}
+      onEnd: res => {
+        console.log("On end GetMedia: " + res)
+      }
     })
+    return mediaFileFromDB;
   }
 
   public UpdateMedia(videoId: number, titleToChange: string) {
@@ -50,12 +54,10 @@ export class MediaServiceService {
       request: changeTitle,
       host: this.hostAddress,
       onMessage: (successfull: MediaReply) => {
-        console.log("video name changed: " + successfull)
-
+        console.log("UpdateMedia successfull: " + successfull)
+        this.databaseservice.GetProjectsTheRigthWay();
       },
-      onEnd: () => {
-        console.log("vidId: " + videoId);
-        console.log("titletochange: " + titleToChange)
+      onEnd: res => {console.log("On end UpdateMedia: " + res)
       }
     })
   }
@@ -70,7 +72,7 @@ export class MediaServiceService {
         console.log("video deleted successfully: " + successfull);
         this.databaseservice.GetProjectsTheRigthWay();
       },
-      onEnd: () => {}
+      onEnd: res => {console.log("On end DeleteMedia: " + res)}
     })
 
   }
@@ -85,7 +87,7 @@ export class MediaServiceService {
       onMessage: (message: MediaRequests) => {
         medias.next(message);
       },
-      onEnd: () => {}
+      onEnd: res => {console.log("On end GetAllMedias: " + res)}
     })
     return medias;
   }

@@ -27,10 +27,10 @@
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Start optagelse" (click)="startRecord()"><mat-icon style="color: red !important;">fiber_manual_record</mat-icon></button>
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Stop optagelse" (click)="stopRecord()"><mat-icon>stop</mat-icon></button>
       <button mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Ryd optagelse" (click)="clearRecording()"><mat-icon>replay</mat-icon></button>
-      <button [disabled]="saved || titleSet()" mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Gem video" (click)="save()"><mat-icon>save</mat-icon></button>
+      <button [disabled]="saved || setTitle()" mat-raised-button class="button" #tooltip="matTooltip" matTooltip="Gem video" (click)="save()"><mat-icon>save</mat-icon></button>
       <br>
       <ng-container *ngIf="timer">
-        <cd-timer format="ms" [endTime]="5" (onComplete)="stopRecord()"></cd-timer>
+        <cd-timer format="ms" [endTime]="90" (onComplete)="stopRecord()"></cd-timer>
       </ng-container>
     </mat-card-footer>
 
