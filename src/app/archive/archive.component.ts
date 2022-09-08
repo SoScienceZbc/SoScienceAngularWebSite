@@ -222,18 +222,11 @@ export class ArchiveComponent implements OnInit, OnDestroy, AfterViewInit {
 
   openUpdateMediaFileTitle(id: number) {
     console.log("ID FROM HTML: " + id)
-this.dialog.open(UpdateMediaFileTitleComponent, { data: {
-  mediaid: id
-  }
-})
+    this.dialog.open(UpdateMediaFileTitleComponent, {data: {mediaid: id} })
 }
 
   openDisplayMediaFile(id:number, title: string) {
-    this.dialog.open(DisplayMediaFileComponent, { data: {
-      mediaid: id,
-      mediatitle: title
-    }
-  })
+    this.dialog.open(DisplayMediaFileComponent, {data: {mediaid: id, mediatitle: title} })
   }
 
   GetText(item:string){
@@ -352,10 +345,7 @@ this.dialog.open(UpdateMediaFileTitleComponent, { data: {
     })
   }
 
-  async ZipCompressFiles(doc : string, title : string, currentCount: number, maxCount:number, projectTitle:string, type:string) {
-
-
-    
+  async ZipCompressFiles(doc : string, title : string, currentCount: number, maxCount:number, projectTitle:string, type:string) {    
     switch (type) {
       case "Doc":
         if (doc != ''){
@@ -372,8 +362,6 @@ this.dialog.open(UpdateMediaFileTitleComponent, { data: {
 
         break;
     }
-    
-
     this.count++;
     if(currentCount > maxCount){
       this.zip.generateAsync({ type: "blob" })
